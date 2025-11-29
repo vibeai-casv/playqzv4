@@ -1,0 +1,64 @@
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { Header } from './Header';
+import { Footer } from './Footer';
+import { Sidebar } from './Sidebar';
+import { useAuth } from '../../hooks/useAuth';
+import { Menu } from 'lucide-react';
+
+interface LayoutProps {
+    children: React.ReactNode;
+}
+
+import { OfflineIndicator } from '../ui/OfflineIndicator';
+
+export function Layout({ children }: LayoutProps) {
+    const { isAuthenticated } = useAuth();
+    const location = useLocation();
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+
+    // Define public routes where we want the standard header/footer
+    const isPublicRoute = ['/login', '/signup', '/'].includes(location.pathname);
+    const showSidebar = isAuthenticated && !isPublicRoute;
+
+    if (showSidebar) {
+        return (
+            <div className="min-h-screen bg-slate-950 flex">
+                <a href="#main-content" className="skip-link">Skip to main content</a>
+                <OfflineIndicator />
+                <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+
+                <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+                    {/* Mobile Header */}
+                    <div className="lg:hidden flex items-center justify-between bg-slate-900 border-b border-white/10 px-4 py-3">
+                        <button
+                            onClick={() => setSidebarOpen(true)}
+                            className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 focus:outline-none"
+                            aria-label="Open sidebar"
+                        >
+                            <Menu className="h-6 w-6" />
+                        </button>
+                        <span className="font-bold text-lg text-white">AI Quiz</span>
+                        <div className="w-6" /> {/* Spacer for centering */}
+                    </div>
+
+                    <main id="main-content" className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8" tabIndex={-1}>
+                        {children}
+                    </main>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div className="min-h-screen flex flex-col bg-background">
+            <a href="#main-content" className="skip-link">Skip to main content</a>
+            <OfflineIndicator />
+            <Header />
+            <main id="main-content" className="flex-grow" tabIndex={-1}>
+                {children}
+            </main>
+            <Footer />
+        </div>
+    );
+}
