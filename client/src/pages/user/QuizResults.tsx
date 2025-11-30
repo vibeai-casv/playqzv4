@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CheckCircle, XCircle, Loader2, ArrowLeft, RefreshCw, Share2, X, Trophy, AlertCircle, BarChart2 } from 'lucide-react';
 import { useQuizStore } from '../../stores/quizStore';
 import { cn } from '../../lib/utils';
 import { toast } from 'sonner';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
-import confetti from 'canvas-confetti';
+// import confetti from 'canvas-confetti';
 
 // Simple modal for share link
 function ShareModal({ open, onClose, link }: { open: boolean; onClose: () => void; link: string }) {
@@ -62,7 +62,7 @@ export function QuizResults() {
     const passed = percentage >= 50;
 
     // Confetti on high score
-    useEffect(() => {
+    /* useEffect(() => {
         if (percentage > 80) {
             const duration = 3000;
             const end = Date.now() + duration;
@@ -89,7 +89,7 @@ export function QuizResults() {
             };
             frame();
         }
-    }, [percentage]);
+    }, [percentage]); */
 
     // Category breakdown data for recharts
     const categoryData = React.useMemo(() => {

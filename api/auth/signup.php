@@ -56,14 +56,16 @@ try {
     $stmt->execute([$userId]);
     $profile = $stmt->fetch();
 
+    // Merge profile data into user object
+    $userData = array_merge($profile ? $profile : [], [
+        'id' => $userId,
+        'email' => $email,
+        'role' => 'user'
+    ]);
+
     jsonResponse([
         'token' => $token,
-        'user' => [
-            'id' => $userId,
-            'email' => $email,
-            'role' => 'user',
-            'profile' => $profile
-        ]
+        'user' => $userData
     ]);
 
 } catch (Throwable $e) {

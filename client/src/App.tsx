@@ -18,6 +18,7 @@ const QuizConfig = lazy(() => import('./pages/user/QuizConfig').then(module => (
 const TakeQuiz = lazy(() => import('./pages/user/TakeQuiz').then(module => ({ default: module.TakeQuiz })));
 const History = lazy(() => import('./pages/user/History').then(module => ({ default: module.History })));
 const Profile = lazy(() => import('./pages/user/Profile').then(module => ({ default: module.Profile })));
+const QuizResults = lazy(() => import('./pages/user/QuizResults').then(module => ({ default: module.QuizResults })));
 
 // Admin
 const AdminDashboard = lazy(() => import('./pages/admin/Dashboard').then(module => ({ default: module.AdminDashboard })));
@@ -84,6 +85,22 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <Profile />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/quiz-results"
+                element={
+                  <ProtectedRoute>
+                    <QuizResults />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/quiz-results/:attemptId"
+                element={
+                  <ProtectedRoute>
+                    <QuizResults />
                   </ProtectedRoute>
                 }
               />

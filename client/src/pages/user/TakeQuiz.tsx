@@ -87,11 +87,24 @@ export function TakeQuiz() {
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [handleKeyDown]);
 
+    const [isNavigating, setIsNavigating] = useState(false);
+
     // Handle answer click
     const onSelectOption = useCallback((option: string) => {
+        if (isNavigating) return;
+
         const start = performance.now();
         submitAnswer(currentQuestion.id, option, Math.round(performance.now() - start) / 1000);
-    }, [currentQuestion, submitAnswer]);
+
+        // Auto-advance if not the last question
+        if (currentQuestionIndex < totalQuestions - 1) {
+            setIsNavigating(true);
+            setTimeout(() => {
+                nextQuestion();
+                setIsNavigating(false);
+            }, 800);
+        }
+    }, [currentQuestion, submitAnswer, currentQuestionIndex, totalQuestions, nextQuestion, isNavigating]);
 
     const openImage = (src: string) => {
         setImageSrc(src);
@@ -102,7 +115,7 @@ export function TakeQuiz() {
     const handleSubmitQuiz = async () => {
         try {
             await submitQuiz();
-            navigate('/dashboard');
+            navigate('/quiz-results');
         } catch (err) {
             console.error(err);
         }

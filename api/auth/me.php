@@ -12,12 +12,14 @@ $stmt = $pdo->prepare("SELECT * FROM profiles WHERE id = ?");
 $stmt->execute([$session['user_id']]);
 $profile = $stmt->fetch();
 
+// Merge profile data into user object
+$user = array_merge($profile ? $profile : [], [
+    'id' => $session['user_id'],
+    'email' => $session['email'],
+    'role' => $profile['role'] ?? 'user'
+]);
+
 jsonResponse([
-    'user' => [
-        'id' => $session['user_id'],
-        'email' => $session['email'],
-        'role' => $profile['role'] ?? 'user',
-        'profile' => $profile
-    ]
+    'user' => $user
 ]);
 ?>

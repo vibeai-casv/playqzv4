@@ -79,69 +79,69 @@ export function Profile() {
 
     return (
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-8">Profile Settings</h1>
+            <h1 className="text-3xl font-bold text-white mb-8">Profile Settings</h1>
 
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="bg-slate-900/50 backdrop-blur-sm rounded-xl shadow-xl border border-white/10 overflow-hidden">
                 <div className="p-6 sm:p-8">
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                         {/* Name */}
                         <div>
-                            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                            <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-1">
                                 Full Name
                             </label>
                             <div className="relative">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <User className="h-5 w-5 text-gray-400" />
+                                    <User className="h-5 w-5 text-slate-500" />
                                 </div>
                                 <input
                                     {...register('name')}
                                     type="text"
                                     className={cn(
-                                        "block w-full pl-10 pr-3 py-2 border rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm",
-                                        errors.name ? "border-red-300" : "border-gray-300"
+                                        "block w-full pl-10 pr-3 py-2 bg-black/20 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-white placeholder-slate-500 transition-colors",
+                                        errors.name ? "border-red-500/50" : "border-white/10"
                                     )}
                                     placeholder="Your full name"
                                 />
                             </div>
                             {errors.name && (
-                                <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
+                                <p className="mt-1 text-sm text-red-400">{errors.name.message}</p>
                             )}
                         </div>
 
                         {/* Phone */}
                         <div>
-                            <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                            <label htmlFor="phone" className="block text-sm font-medium text-slate-300 mb-1">
                                 Phone Number
                             </label>
                             <div className="relative">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <Phone className="h-5 w-5 text-gray-400" />
+                                    <Phone className="h-5 w-5 text-slate-500" />
                                 </div>
                                 <input
                                     {...register('phone')}
                                     type="tel"
-                                    className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                                    className="block w-full pl-10 pr-3 py-2 bg-black/20 border border-white/10 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-white placeholder-slate-500 transition-colors"
                                     placeholder="+91 9876543210"
                                 />
                             </div>
                             {errors.phone && (
-                                <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>
+                                <p className="mt-1 text-sm text-red-400">{errors.phone.message}</p>
                             )}
                         </div>
 
                         {/* Institution */}
                         <div>
-                            <label htmlFor="institution" className="block text-sm font-medium text-gray-700 mb-1">
+                            <label htmlFor="institution" className="block text-sm font-medium text-slate-300 mb-1">
                                 Institution / Organization
                             </label>
                             <div className="relative">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <Building className="h-5 w-5 text-gray-400" />
+                                    <Building className="h-5 w-5 text-slate-500" />
                                 </div>
                                 <input
                                     {...register('institution')}
                                     type="text"
-                                    className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                                    className="block w-full pl-10 pr-3 py-2 bg-black/20 border border-white/10 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-white placeholder-slate-500 transition-colors"
                                     placeholder="University or Company name"
                                 />
                             </div>
@@ -149,52 +149,52 @@ export function Profile() {
 
                         {/* Category */}
                         <div>
-                            <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1">
+                            <label htmlFor="category" className="block text-sm font-medium text-slate-300 mb-1">
                                 Category
                             </label>
                             <div className="relative">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <BookOpen className="h-5 w-5 text-gray-400" />
+                                    <BookOpen className="h-5 w-5 text-slate-500" />
                                 </div>
                                 <select
                                     {...register('category')}
-                                    className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                                    className="block w-full pl-10 pr-3 py-2 bg-black/20 border border-white/10 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-white transition-colors appearance-none"
                                 >
-                                    <option value="student">Student</option>
-                                    <option value="professional">Professional</option>
-                                    <option value="educator">Educator</option>
-                                    <option value="hobbyist">Hobbyist</option>
+                                    <option value="student" className="bg-slate-900">Student</option>
+                                    <option value="professional" className="bg-slate-900">Professional</option>
+                                    <option value="educator" className="bg-slate-900">Educator</option>
+                                    <option value="hobbyist" className="bg-slate-900">Hobbyist</option>
                                 </select>
                             </div>
                         </div>
 
                         {/* Bio */}
                         <div>
-                            <label htmlFor="bio" className="block text-sm font-medium text-gray-700 mb-1">
+                            <label htmlFor="bio" className="block text-sm font-medium text-slate-300 mb-1">
                                 Bio
                             </label>
                             <div className="relative">
                                 <div className="absolute top-3 left-3 pointer-events-none">
-                                    <FileText className="h-5 w-5 text-gray-400" />
+                                    <FileText className="h-5 w-5 text-slate-500" />
                                 </div>
                                 <textarea
                                     {...register('bio')}
                                     rows={4}
-                                    className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 sm:text-sm"
+                                    className="block w-full pl-10 pr-3 py-2 bg-black/20 border border-white/10 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-white placeholder-slate-500 transition-colors resize-none"
                                     placeholder="Tell us a bit about yourself..."
                                 />
                             </div>
                             {errors.bio && (
-                                <p className="mt-1 text-sm text-red-600">{errors.bio.message}</p>
+                                <p className="mt-1 text-sm text-red-400">{errors.bio.message}</p>
                             )}
                         </div>
 
                         {/* Submit Button */}
-                        <div className="pt-4 border-t border-gray-100 flex justify-end">
+                        <div className="pt-4 border-t border-white/10 flex justify-end">
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                                className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-lg shadow-lg shadow-indigo-500/20 text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                             >
                                 {loading ? (
                                     <>

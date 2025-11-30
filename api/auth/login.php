@@ -32,14 +32,16 @@ try {
         $stmt->execute([$user['id']]);
         $profile = $stmt->fetch();
 
+        // Merge profile data into user object
+        $userData = array_merge($profile ? $profile : [], [
+            'id' => $user['id'],
+            'email' => $user['email'],
+            'role' => $profile['role'] ?? 'user'
+        ]);
+
         jsonResponse([
             'token' => $token,
-            'user' => [
-                'id' => $user['id'],
-                'email' => $user['email'],
-                'role' => $profile['role'] ?? 'user',
-                'profile' => $profile
-            ]
+            'user' => $userData
         ]);
     } else {
         jsonResponse(['error' => 'Invalid credentials'], 401);

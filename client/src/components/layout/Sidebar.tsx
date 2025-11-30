@@ -13,7 +13,7 @@ interface SidebarProps {
 
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
     const location = useLocation();
-    const { logout, isAdmin } = useAuth();
+    const { logout, isAdmin, user } = useAuth();
 
     const userNavigation = [
         { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
@@ -111,6 +111,21 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
 
                 {/* User / Logout Section */}
                 <div className="p-4 border-t border-white/5 bg-slate-900/50">
+                    {user && (
+                        <div className="flex items-center gap-3 mb-4 px-2">
+                            <div className="w-10 h-10 bg-indigo-500/20 rounded-full flex items-center justify-center border border-indigo-500/30 text-indigo-400 font-bold shrink-0">
+                                {user.name?.charAt(0).toUpperCase()}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                                <p className="text-sm font-medium text-white truncate">{user.name}</p>
+                                <p className="text-xs text-slate-500 truncate capitalize flex items-center gap-1">
+                                    {user.role}
+                                    {isAdmin && <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />}
+                                </p>
+                            </div>
+                        </div>
+                    )}
+
                     <button
                         onClick={() => {
                             logout();
