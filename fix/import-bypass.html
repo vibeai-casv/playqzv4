@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Import Tool</title>
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            line-height: 1.5;
+        }
+
+        textarea {
+            width: 100%;
+            height: 300px;
+            font-family: monospace;
+            margin-bottom: 1rem;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        #status {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            display: none;
+        }
+
+        .success {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🚨 Emergency Import Tool</h1>
+    <p>Use this tool if the main admin panel import is failing due to authentication issues.</p>
+
+    <div style="margin-bottom: 1rem;">
+        <label>
+            <input type="checkbox" id="skipDuplicates" checked> Skip Duplicates
+        </label>
+    </div>
+
+    <textarea id="jsonInput" placeholder="Paste your JSON content here..."></textarea>
+
+    <button onclick="runImport()" id="btn">Import Questions</button>
+
+    <div id="status"></div>
+
+    <script>
+        async function runImport() {
+            const btn = document.getElementById('btn');
+            const status = document.getElementById('status');
+            const jsonInput = document.getElementById('jsonInput').value;
+            const skipDuplicates = document.getElementById('skipDuplicates').checked;
+
+            if (!jsonInput) {
+                alert('Please paste JSON content first');
+                return;
+            }
+
+            let questions;
+            try {
+                questions = JSON.parse(jsonInput);
+                // Handle if user pasted array directly or object with questions key
+                if (Array.isArray(questions)) {
+                    // Good
+                } else if (questions.questions && Array.isArray(questions.questions)) {
+                    questions = questions.questions;
+                } else {
+                    throw new Error('JSON must be an array of questions');
+                }
+            } catch (e) {
+                alert('Invalid JSON: ' + e.message);
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = 'Importing...';
+            status.style.display = 'none';
+
+            try {
+                // Use the bypass key
+                const response = await fetch('/api/questions/import.php?bypass=temp_admin_fix_2025', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        questions: questions,
+                        skipDuplicates: skipDuplicates
+                    })
+                });
+
+                const data = await response.json();
+
+                status.style.display = 'block';
+                if (response.ok && data.success) {
+                    status.className = 'success';
+                    status.innerHTML = `
+                        <h3>✅ Import Successful!</h3>
+                        <p>Imported: <strong>${data.imported}</strong></p>
+                        <p>Skipped: <strong>${data.skipped}</strong></p>
+                        <p>Errors: <strong>${data.errors.length}</strong></p>
+                        ${data.errors.length > 0 ? '<pre>' + data.errors.join('\n') + '</pre>' : ''}
+                    `;
+                } else {
+                    status.className = 'error';
+                    status.innerHTML = `
+                        <h3>❌ Import Failed</h3>
+                        <p>Error: ${data.error || 'Unknown error'}</p>
+                        ${data.debug ? '<pre>Debug Info:\n' + JSON.stringify(data.debug, null, 2) + '</pre>' : ''}
+                    `;
+                }
+            } catch (error) {
+                status.style.display = 'block';
+                status.className = 'error';
+                status.innerHTML = `<h3>❌ Network Error</h3><p>${error.message}</p>`;
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Import Questions';
+            }
+        }
+    </script>
+</body>
+
+</html>

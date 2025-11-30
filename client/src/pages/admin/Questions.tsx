@@ -1,16 +1,16 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useAdmin } from '../../hooks/useAdmin';
-
 import { Question } from '../../types';
 import { Modal } from '../../components/ui/Modal';
 import {
     Search, Plus, Sparkles, Trash2, CheckCircle, XCircle,
-    Edit, Loader2, ChevronLeft, ChevronRight, ArrowUpDown
+    Edit, Loader2, ChevronLeft, ChevronRight, ArrowUpDown, FileUp, RefreshCw
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { cn } from '../../lib/utils';
 import { QuestionEditor } from '../../components/admin/QuestionEditor';
 import { AIGenerator } from '../../components/admin/AIGenerator';
+import { JSONImporter } from '../../components/admin/JSONImporter';
 
 export function Questions() {
     const { fetchQuestions, deleteQuestion, updateQuestion, isLoading } = useAdmin();
@@ -33,6 +33,7 @@ export function Questions() {
     const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
     const [isEditorOpen, setIsEditorOpen] = useState(false);
     const [isGeneratorOpen, setIsGeneratorOpen] = useState(false);
+    const [isImportOpen, setIsImportOpen] = useState(false);
     const [editingQuestion, setEditingQuestion] = useState<Question | undefined>(undefined);
 
     const loadQuestions = useCallback(async () => {
@@ -73,28 +74,6 @@ export function Questions() {
             setSortOrder('asc');
         }
     };
-
-    // Real-time updates - Disabled for PHP API migration
-    // useEffect(() => {
-    //     const channel = supabase
-    //         .channel('questions-changes')
-    //         .on(
-    //             'postgres_changes',
-    //             {
-    //                 event: '*',
-    //                 schema: 'public',
-    //                 table: 'questions'
-    //             },
-    //             () => {
-    //                 loadQuestions();
-    //             }
-    //         )
-    //         .subscribe();
-
-    //     return () => {
-    //         supabase.removeChannel(channel);
-    //     };
-    // }, [loadQuestions]);
 
     const handleDelete = async (id: string) => {
         if (!confirm('Are you sure you want to delete this question?')) return;
@@ -145,6 +124,19 @@ export function Questions() {
             <div className="flex justify-between items-center">
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Question Bank</h1>
                 <div className="flex gap-2">
+                    <button
+                        onClick={() => loadQuestions()}
+                        className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
+                        title="Refresh List"
+                    >
+                        <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
+                    </button>
+                    <button
+                        onClick={() => setIsImportOpen(true)}
+                        className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+                    >
+                        <FileUp className="w-4 h-4" /> Import JSON
+                    </button>
                     <button
                         onClick={() => setIsGeneratorOpen(true)}
                         className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
@@ -430,6 +422,21 @@ export function Questions() {
                         loadQuestions();
                     }}
                     onCancel={() => setIsGeneratorOpen(false)}
+                />
+            </Modal>
+
+            <Modal
+                open={isImportOpen}
+                onClose={() => setIsImportOpen(false)}
+                title="Import Questions from JSON"
+                className="max-w-3xl"
+            >
+                <JSONImporter
+                    onImportComplete={() => {
+                        setIsImportOpen(false);
+                        loadQuestions();
+                    }}
+                    onCancel={() => setIsImportOpen(false)}
                 />
             </Modal>
         </div>

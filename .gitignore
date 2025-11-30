@@ -1,1 +1,39 @@
+# Vercel
 .vercel
+
+# Production Configuration
+api/config.production.php
+client/.env.production.local
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# Backups
+*.sql
+*.tar.gz
+*.zip
+backups/
+
+# Sensitive files
+.env.local
+.env.production.local
+config.local.php
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+tmp/
+temp/
+*.tmp

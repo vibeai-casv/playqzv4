@@ -44,10 +44,10 @@ export const LoginForm: React.FC = () => {
     return (
         <div className="w-full space-y-6">
             <div className="text-center space-y-2">
-                <h1 className="text-2xl font-bold tracking-tight text-white">
+                <h1 className="text-2xl font-bold tracking-tight text-foreground">
                     Welcome Back
                 </h1>
-                <p className="text-slate-400 text-sm">
+                <p className="text-muted-foreground text-sm">
                     Sign in to access your personalized AI learning path
                 </p>
             </div>
@@ -59,10 +59,10 @@ export const LoginForm: React.FC = () => {
                         <input
                             {...form.register('identifier')}
                             placeholder="Email or Mobile Number"
-                            className="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-slate-700 text-white placeholder:text-slate-500 focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 outline-none transition-all"
+                            className="input-vibeai"
                         />
                         {form.formState.errors.identifier && (
-                            <p className="text-xs text-red-400 mt-1 ml-1">{form.formState.errors.identifier.message}</p>
+                            <p className="text-xs text-destructive mt-1 ml-1">{form.formState.errors.identifier.message}</p>
                         )}
                     </div>
                     <div>
@@ -70,10 +70,10 @@ export const LoginForm: React.FC = () => {
                             {...form.register('password')}
                             type="password"
                             placeholder="Password"
-                            className="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-slate-700 text-white placeholder:text-slate-500 focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 outline-none transition-all"
+                            className="input-vibeai"
                         />
                         {form.formState.errors.password && (
-                            <p className="text-xs text-red-400 mt-1 ml-1">{form.formState.errors.password.message}</p>
+                            <p className="text-xs text-destructive mt-1 ml-1">{form.formState.errors.password.message}</p>
                         )}
                     </div>
                 </div>
@@ -83,17 +83,17 @@ export const LoginForm: React.FC = () => {
                         <input
                             type="checkbox"
                             {...form.register('rememberMe')}
-                            className="rounded border-slate-600 bg-slate-800 text-indigo-500 focus:ring-indigo-500/50 focus:ring-offset-0"
+                            className="rounded border-border bg-input text-primary focus:ring-primary/50 focus:ring-offset-0"
                         />
-                        <span className="text-sm text-slate-400 group-hover:text-slate-300 transition-colors">Remember me</span>
+                        <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">Remember me</span>
                     </label>
-                    <a href="#" className="text-sm text-indigo-400 hover:text-indigo-300 hover:underline transition-colors">Forgot password?</a>
+                    <a href="#" className="text-sm text-primary hover:text-primary/80 hover:underline transition-colors">Forgot password?</a>
                 </div>
 
                 <button
                     type="submit"
                     disabled={loading}
-                    className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white py-3.5 rounded-xl font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-[1.02] active:scale-[0.98]"
+                    className="btn-vibeai w-full flex items-center justify-center gap-2"
                 >
                     {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : (
                         <>

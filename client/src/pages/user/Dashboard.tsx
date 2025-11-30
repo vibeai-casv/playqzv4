@@ -96,22 +96,27 @@ function DashboardContent() {
     return (
         <div className="space-y-8">
             {/* Welcome Section */}
-            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-indigo-600 to-purple-600 p-8 md:p-12 shadow-2xl shadow-indigo-900/20">
+            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-primary via-cyan-500 to-blue-500 p-8 md:p-12 shadow-2xl shadow-primary/20">
                 <div className="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulse" />
                 <div className="absolute bottom-0 left-0 -mb-10 -ml-10 w-40 h-40 bg-black/10 rounded-full blur-2xl" />
 
                 <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                     <div>
-                        <h1 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
-                            {greeting}, {user?.name?.split(' ')[0] || 'User'}! 🚀
+                        <h1 className="text-3xl md:text-4xl font-bold text-white tracking-tight flex flex-wrap items-center gap-3">
+                            {greeting}, {user?.name || 'User'}! 🚀
+                            {user?.role === 'admin' && (
+                                <span className="text-sm font-bold bg-white/20 text-white px-3 py-1 rounded-full border border-white/30 backdrop-blur-sm">
+                                    [ ADMIN ]
+                                </span>
+                            )}
                         </h1>
-                        <p className="text-indigo-100 mt-2 text-lg max-w-xl">
+                        <p className="text-white/90 mt-2 text-lg whitespace-nowrap overflow-hidden text-ellipsis max-w-full">
                             Ready to expand your knowledge? Your AI learning assistant is prepped and waiting.
                         </p>
                     </div>
                     <Link
                         to="/quiz-config"
-                        className="inline-flex items-center justify-center px-8 py-4 bg-white text-indigo-600 font-bold rounded-xl shadow-lg hover:bg-indigo-50 hover:scale-105 transition-all duration-300 group"
+                        className="btn-vibeai-outline bg-white/10 backdrop-blur-sm border-white hover:bg-white hover:text-primary inline-flex items-center justify-center group"
                     >
                         <Play className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
                         Start New Quiz
@@ -125,7 +130,7 @@ function DashboardContent() {
                     title="Total Quizzes"
                     value={stats?.total_attempts || 0}
                     icon={Award}
-                    gradient="from-blue-500 to-cyan-500"
+                    gradient="from-primary to-cyan-400"
                     delay={0}
                 />
                 <StatCard
@@ -141,7 +146,7 @@ function DashboardContent() {
                     value={Math.round(stats?.completion_rate || 0)}
                     suffix="%"
                     icon={Clock}
-                    gradient="from-violet-500 to-purple-500"
+                    gradient="from-cyan-500 to-blue-500"
                     delay={200}
                 />
             </div>
@@ -155,7 +160,7 @@ function DashboardContent() {
                             <p className="text-sm text-slate-400">Your score progression over time</p>
                         </div>
                         <div className="p-2 bg-white/5 rounded-lg">
-                            <TrendingUp className="w-5 h-5 text-indigo-400" />
+                            <TrendingUp className="w-5 h-5 text-primary" />
                         </div>
                     </div>
                     <div className="h-80 w-full">
@@ -214,14 +219,14 @@ function DashboardContent() {
                 <div className="bg-slate-900/50 backdrop-blur-sm rounded-3xl border border-white/5 p-6 md:p-8 flex flex-col">
                     <h2 className="text-xl font-bold text-white mb-6">Quick Actions</h2>
                     <div className="space-y-4 flex-1">
-                        <Link to="/profile" className="block p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-indigo-500/30 transition-all group">
+                        <Link to="/profile" className="block p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-primary/30 transition-all group">
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center">
-                                    <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform">
+                                    <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
                                         <User className="w-6 h-6" />
                                     </div>
                                     <div className="ml-4">
-                                        <p className="font-bold text-white group-hover:text-blue-400 transition-colors">Update Profile</p>
+                                        <p className="font-bold text-white group-hover:text-primary transition-colors">Update Profile</p>
                                         <p className="text-xs text-slate-400">Manage your account</p>
                                     </div>
                                 </div>
@@ -254,7 +259,7 @@ function DashboardContent() {
                         <h2 className="text-xl font-bold text-white">Recent Quizzes</h2>
                         <p className="text-sm text-slate-400 mt-1">Your latest assessment sessions</p>
                     </div>
-                    <Link to="/history" className="text-sm font-medium text-indigo-400 hover:text-indigo-300 flex items-center transition-colors">
+                    <Link to="/history" className="text-sm font-medium text-primary hover:text-primary/80 flex items-center transition-colors">
                         View All <ArrowRight className="w-4 h-4 ml-1" />
                     </Link>
                 </div>
@@ -324,7 +329,7 @@ function DashboardContent() {
                         </p>
                         <Link
                             to="/quiz-config"
-                            className="mt-6 inline-flex items-center px-6 py-3 border border-transparent text-sm font-bold rounded-xl text-white bg-indigo-600 hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-500/20"
+                            className="btn-vibeai mt-6 inline-flex items-center"
                         >
                             Take a Quiz
                         </Link>

@@ -18,7 +18,7 @@ import {
 import { Skeleton } from '../../components/ui/Skeleton';
 import { cn } from '../../lib/utils';
 
-const COLORS = ['#6366f1', '#10b981', '#f59e0b', '#ec4899', '#8b5cf6', '#06b6d4'];
+const COLORS = ['#00d4ff', '#10b981', '#f59e0b', '#ec4899', '#8b5cf6', '#06b6d4'];
 
 export function AdminDashboard() {
     const { fetchAnalytics, fetchDailyStats, fetchCategoryStats, fetchRegistrationStats } = useAdmin();
@@ -90,7 +90,7 @@ export function AdminDashboard() {
                     icon={Users}
                     trend="+12%"
                     trendUp={true}
-                    gradient="from-blue-500 to-indigo-500"
+                    gradient="from-primary to-cyan-400"
                 />
                 <StatCard
                     title="Active Users"
@@ -106,7 +106,7 @@ export function AdminDashboard() {
                     icon={FileQuestion}
                     trend="+8%"
                     trendUp={true}
-                    gradient="from-violet-500 to-purple-500"
+                    gradient="from-cyan-500 to-blue-500"
                 />
                 <StatCard
                     title="Total Attempts"
@@ -123,7 +123,7 @@ export function AdminDashboard() {
                 {/* User Growth */}
                 <div className="bg-slate-900/50 backdrop-blur-sm p-6 rounded-3xl shadow-sm border border-white/5">
                     <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
-                        <Users className="w-5 h-5 text-indigo-400" /> User Registration Trend
+                        <Users className="w-5 h-5 text-primary" /> User Registration Trend
                     </h3>
                     <div className="h-80">
                         <ResponsiveContainer width="100%" height="100%">
@@ -151,9 +151,9 @@ export function AdminDashboard() {
                                 <Line
                                     type="monotone"
                                     dataKey="count"
-                                    stroke="#6366f1"
+                                    stroke="#00d4ff"
                                     strokeWidth={3}
-                                    dot={{ fill: '#6366f1', strokeWidth: 2, r: 4, stroke: '#1e293b' }}
+                                    dot={{ fill: '#00d4ff', strokeWidth: 2, r: 4, stroke: '#1e293b' }}
                                     activeDot={{ r: 6, strokeWidth: 0 }}
                                 />
                             </LineChart>

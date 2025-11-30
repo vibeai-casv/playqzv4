@@ -70,6 +70,37 @@ function authenticate($pdo) {
         }
     }
 
+
     jsonResponse(['error' => 'Unauthorized'], 401);
+}
+
+/**
+ * Verify authentication using session cookie
+ * Returns user data if authenticated, exits with 401 if not
+ */
+function verifyAuth() {
+    global $pdo;
+    
+    // Start session if not already started
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    
+    // Check if user is logged in via session
+    if (!isset($_SESSION['user_id'])) {
+        return null;
+    }
+    
+    // Get user data from database
+    $stmt = $pdo->prepare("
+        SELECT u.id, u.email, u.full_name, p.role, p.mobile, p.category, p.institution
+        FROM users u
+        LEFT JOIN profiles p ON u.id = p.id
+        WHERE u.id = ?
+    ");
+    $stmt->execute([$_SESSION['user_id']]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    return $user;
 }
 ?>

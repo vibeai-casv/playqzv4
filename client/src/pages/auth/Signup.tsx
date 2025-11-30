@@ -19,9 +19,9 @@ export const Signup: React.FC = () => {
     return (
         <AuthLayout>
             <SignupForm />
-            <div className="mt-6 text-center text-sm text-slate-400">
+            <div className="mt-6 text-center text-sm text-muted-foreground">
                 Already have an account?{' '}
-                <Link to="/login" className="font-medium text-indigo-400 hover:text-indigo-300 hover:underline transition-all">
+                <Link to="/login" className="font-medium text-primary hover:text-primary/80 hover:underline transition-all">
                     Sign in instead
                 </Link>
             </div>

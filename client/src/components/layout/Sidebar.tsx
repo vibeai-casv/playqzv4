@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import {
     LayoutDashboard, PlayCircle, History, User, LogOut, X,
-    Users, FileQuestion, Image as ImageIcon, Settings, Activity
+    Users, FileQuestion, Image as ImageIcon, Settings, Activity, Stethoscope
 } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import { cn } from '../../lib/utils';
@@ -29,6 +29,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         { name: 'Media Library', href: '/admin/media', icon: ImageIcon },
         { name: 'Activity Logs', href: '/admin/activity', icon: Activity },
         { name: 'System Tools', href: '/admin/system', icon: Settings },
+        { name: 'Diagnostics', href: '/admin/diagnostics', icon: Stethoscope },
     ];
 
     const navigation = isAdmin ? adminNavigation : userNavigation;

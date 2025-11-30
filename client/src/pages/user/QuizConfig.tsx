@@ -28,49 +28,27 @@ import { cn } from '../../lib/utils';
 const quizConfigSchema = z.object({
     numQuestions: z.enum(['5', '10', '20', '50']),
     difficulty: z.enum(['Easy', 'Medium', 'Hard', 'Mixed']),
-    categories: z
-        .array(
-            z.enum([
-                'Latest Developments',
-                'AI Safety',
-                'Robotics',
-                'Quantum Computing',
-                'Generative AI',
-                'Personalities',
-                'Brands',
-            ])
-        )
-        .min(1, { message: 'Select at least one category' }),
+    categories: z.array(z.string()).min(1, { message: 'Select at least one category' }),
 });
 
 type QuizConfig = z.infer<typeof quizConfigSchema>;
 
-// ----- Helper Types -----
-type CategoryName =
-    | 'Latest Developments'
-    | 'AI Safety'
-    | 'Robotics'
-    | 'Quantum Computing'
-    | 'Generative AI'
-    | 'Personalities'
-    | 'Brands';
-
 interface CategoryInfo {
-    name: CategoryName;
+    name: string;
     icon: React.ReactNode;
-    available: number; // number of questions available in DB
+    available: number;
     gradient: string;
 }
 
-const CATEGORY_DATA: CategoryInfo[] = [
-    { name: 'Latest Developments', icon: <BarChart2 className="w-5 h-5" />, available: 0, gradient: 'from-blue-500 to-cyan-500' },
-    { name: 'AI Safety', icon: <Shield className="w-5 h-5" />, available: 0, gradient: 'from-emerald-500 to-teal-500' },
-    { name: 'Robotics', icon: <Bot className="w-5 h-5" />, available: 0, gradient: 'from-orange-500 to-amber-500' },
-    { name: 'Quantum Computing', icon: <Cpu className="w-5 h-5" />, available: 0, gradient: 'from-violet-500 to-purple-500' },
-    { name: 'Generative AI', icon: <Brain className="w-5 h-5" />, available: 0, gradient: 'from-pink-500 to-rose-500' },
-    { name: 'Personalities', icon: <Users className="w-5 h-5" />, available: 0, gradient: 'from-indigo-500 to-blue-500' },
-    { name: 'Brands', icon: <BookOpen className="w-5 h-5" />, available: 0, gradient: 'from-yellow-500 to-orange-500' },
-];
+const STYLE_MAP: Record<string, { icon: React.ReactNode; gradient: string }> = {
+    'Latest Developments': { icon: <BarChart2 className="w-5 h-5" />, gradient: 'from-blue-500 to-cyan-500' },
+    'AI Safety': { icon: <Shield className="w-5 h-5" />, gradient: 'from-emerald-500 to-teal-500' },
+    'Robotics': { icon: <Bot className="w-5 h-5" />, gradient: 'from-orange-500 to-amber-500' },
+    'Quantum Computing': { icon: <Cpu className="w-5 h-5" />, gradient: 'from-violet-500 to-purple-500' },
+    'Generative AI': { icon: <Brain className="w-5 h-5" />, gradient: 'from-pink-500 to-rose-500' },
+    'Personalities': { icon: <Users className="w-5 h-5" />, gradient: 'from-indigo-500 to-blue-500' },
+    'Brands': { icon: <BookOpen className="w-5 h-5" />, gradient: 'from-yellow-500 to-orange-500' },
+};
 
 export function QuizConfig() {
     const {
@@ -89,7 +67,7 @@ export function QuizConfig() {
         },
     });
 
-    const [categoryInfo, setCategoryInfo] = useState<CategoryInfo[]>(CATEGORY_DATA);
+    const [categoryInfo, setCategoryInfo] = useState<CategoryInfo[]>([]);
     const [loadingCounts, setLoadingCounts] = useState(false);
     const [startLoading, setStartLoading] = useState(false);
     const [startError, setStartError] = useState<string | null>(null);
@@ -104,11 +82,40 @@ export function QuizConfig() {
             try {
                 const response = await api.get('/questions/stats.php');
                 const counts = response.data.stats;
-                setCategoryInfo((prev) =>
-                    prev.map((c) => ({ ...c, available: counts[c.name] ?? 0 }))
-                );
+
+                // Map API response to CategoryInfo
+                const categories: CategoryInfo[] = Object.entries(counts).map(([name, count]) => {
+                    const style = STYLE_MAP[name] || {
+                        icon: <BookOpen className="w-5 h-5" />,
+                        gradient: 'from-slate-500 to-gray-500'
+                    };
+                    return {
+                        name,
+                        available: Number(count),
+                        icon: style.icon,
+                        gradient: style.gradient
+                    };
+                });
+
+                // Sort categories: known styles first, then alphabetical
+                categories.sort((a, b) => {
+                    const aKnown = !!STYLE_MAP[a.name];
+                    const bKnown = !!STYLE_MAP[b.name];
+                    if (aKnown && !bKnown) return -1;
+                    if (!aKnown && bKnown) return 1;
+                    return a.name.localeCompare(b.name);
+                });
+
+                setCategoryInfo(categories);
             } catch (e) {
                 console.error('Failed to fetch category counts', e);
+                // Fallback to default categories if API fails
+                const defaults = Object.keys(STYLE_MAP).map(name => ({
+                    name,
+                    available: 0,
+                    ...STYLE_MAP[name]
+                }));
+                setCategoryInfo(defaults);
             } finally {
                 setLoadingCounts(false);
             }
@@ -123,7 +130,14 @@ export function QuizConfig() {
             try {
                 const parsed = JSON.parse(saved) as QuizConfig;
                 setValue('numQuestions', parsed.numQuestions);
-                setValue('difficulty', parsed.difficulty);
+
+                // Ensure difficulty is Title Case to match schema
+                const diff = parsed.difficulty || 'Mixed';
+                const normalizedDiff = diff.charAt(0).toUpperCase() + diff.slice(1).toLowerCase();
+                setValue('difficulty', normalizedDiff as any);
+
+                // Only set categories that actually exist in the loaded info (if loaded)
+                // But since info loads async, we might just set it and let the user adjust
                 setValue('categories', parsed.categories);
             } catch { }
         }
@@ -151,13 +165,25 @@ export function QuizConfig() {
     };
 
     const watched = watch();
-    const selectedCategories = watched.categories as CategoryName[];
-    const insufficient = selectedCategories.some((cat) => {
+    const selectedCategories = watched.categories as string[];
+
+    // Calculate total available questions across ALL selected categories
+    const totalAvailable = selectedCategories.reduce((sum, cat) => {
         const info = categoryInfo.find((c) => c.name === cat);
-        return info && info.available < Number(watched.numQuestions);
-    });
+        return sum + (info?.available || 0);
+    }, 0);
+
+    const insufficient = totalAvailable < Number(watched.numQuestions);
 
     const estimatedTime = Number(watched.numQuestions) * 30; // seconds
+
+    const toggleSelectAll = () => {
+        if (selectedCategories.length === categoryInfo.length) {
+            setValue('categories', []);
+        } else {
+            setValue('categories', categoryInfo.map(c => c.name));
+        }
+    };
 
     return (
         <div className="max-w-5xl mx-auto p-6 space-y-8">
@@ -167,8 +193,8 @@ export function QuizConfig() {
                     <p className="text-slate-400 mt-2">Customize your assessment parameters</p>
                 </div>
                 <div className="hidden md:block">
-                    <div className="p-3 bg-indigo-500/10 rounded-xl border border-indigo-500/20">
-                        <Zap className="w-6 h-6 text-indigo-400" />
+                    <div className="p-3 bg-primary/10 rounded-xl border border-primary/20">
+                        <Zap className="w-6 h-6 text-primary" />
                     </div>
                 </div>
             </div>
@@ -190,7 +216,7 @@ export function QuizConfig() {
                                         className={cn(
                                             'relative flex flex-col items-center justify-center p-4 rounded-2xl cursor-pointer transition-all duration-200 border-2',
                                             watched.numQuestions === val
-                                                ? 'bg-blue-500/10 border-blue-500 shadow-[0_0_20px_-5px_rgba(59,130,246,0.5)]'
+                                                ? 'bg-primary/10 border-primary shadow-[0_0_20px_-5px_rgba(0,212,255,0.5)]'
                                                 : 'bg-white/5 border-transparent hover:bg-white/10 hover:border-white/10'
                                         )}
                                     >
@@ -202,7 +228,7 @@ export function QuizConfig() {
                                         />
                                         <span className={cn(
                                             "text-2xl font-bold mb-1",
-                                            watched.numQuestions === val ? "text-blue-400" : "text-white"
+                                            watched.numQuestions === val ? "text-primary" : "text-white"
                                         )}>{val}</span>
                                         <span className="text-xs text-slate-400 uppercase tracking-wider font-medium">Questions</span>
                                     </label>
@@ -226,14 +252,14 @@ export function QuizConfig() {
                                         className={cn(
                                             'relative flex items-center justify-center p-4 rounded-2xl cursor-pointer transition-all duration-200 border-2',
                                             watched.difficulty === diff
-                                                ? 'bg-purple-500/10 border-purple-500 shadow-[0_0_20px_-5px_rgba(168,85,247,0.5)]'
+                                                ? 'bg-cyan-500/10 border-cyan-500 shadow-[0_0_20px_-5px_rgba(6,182,212,0.5)]'
                                                 : 'bg-white/5 border-transparent hover:bg-white/10 hover:border-white/10'
                                         )}
                                     >
                                         <input type="radio" value={diff} {...register('difficulty')} className="hidden" />
                                         <span className={cn(
                                             "font-bold",
-                                            watched.difficulty === diff ? "text-purple-400" : "text-slate-300"
+                                            watched.difficulty === diff ? "text-cyan-400" : "text-slate-300"
                                         )}>{diff}</span>
                                     </label>
                                 ))}
@@ -245,58 +271,78 @@ export function QuizConfig() {
 
                         {/* Categories */}
                         <section className="bg-slate-900/50 backdrop-blur-sm rounded-3xl border border-white/5 p-6 md:p-8">
-                            <h2 className="text-xl font-bold text-white mb-6 flex items-center">
-                                <span className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center mr-3 text-sm font-bold">3</span>
-                                Topics
-                            </h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {categoryInfo.map((cat) => {
-                                    const isSelected = selectedCategories.includes(cat.name);
-                                    return (
-                                        <label
-                                            key={cat.name}
-                                            className={cn(
-                                                'group relative flex items-center p-4 rounded-2xl cursor-pointer transition-all duration-200 border-2 overflow-hidden',
-                                                isSelected
-                                                    ? 'bg-emerald-500/10 border-emerald-500 shadow-[0_0_20px_-5px_rgba(16,185,129,0.3)]'
-                                                    : 'bg-white/5 border-transparent hover:bg-white/10 hover:border-white/10'
-                                            )}
-                                        >
-                                            <div className={cn(
-                                                "absolute inset-0 opacity-0 transition-opacity duration-300",
-                                                isSelected ? "opacity-100" : "group-hover:opacity-10"
-                                            )}>
-                                                <div className={`absolute inset-0 bg-gradient-to-r ${cat.gradient} opacity-5`} />
-                                            </div>
-
-                                            <input
-                                                type="checkbox"
-                                                value={cat.name}
-                                                {...register('categories')}
-                                                className="hidden"
-                                            />
-                                            <div className={cn(
-                                                "p-3 rounded-xl mr-4 transition-colors",
-                                                isSelected ? "bg-emerald-500/20 text-emerald-400" : "bg-white/5 text-slate-400 group-hover:text-white"
-                                            )}>
-                                                {cat.icon}
-                                            </div>
-                                            <div className="flex-1 relative z-10">
-                                                <p className={cn(
-                                                    "font-bold transition-colors",
-                                                    isSelected ? "text-white" : "text-slate-300 group-hover:text-white"
-                                                )}>{cat.name}</p>
-                                                <p className="text-xs text-slate-500 mt-1">
-                                                    {loadingCounts ? 'Loading...' : `${cat.available} questions`}
-                                                </p>
-                                            </div>
-                                            {isSelected && (
-                                                <CheckCircle className="w-6 h-6 text-emerald-500 animate-in zoom-in duration-200" />
-                                            )}
-                                        </label>
-                                    );
-                                })}
+                            <div className="flex justify-between items-center mb-6">
+                                <h2 className="text-xl font-bold text-white flex items-center">
+                                    <span className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center mr-3 text-sm font-bold">3</span>
+                                    Topics
+                                </h2>
+                                <button
+                                    type="button"
+                                    onClick={toggleSelectAll}
+                                    className="text-sm text-primary hover:text-primary/80 font-medium transition-colors"
+                                >
+                                    {selectedCategories.length === categoryInfo.length && categoryInfo.length > 0 ? 'Deselect All' : 'Select All'}
+                                </button>
                             </div>
+
+                            {loadingCounts ? (
+                                <div className="flex justify-center py-8">
+                                    <Loader2 className="w-8 h-8 animate-spin text-emerald-500" />
+                                </div>
+                            ) : categoryInfo.length === 0 ? (
+                                <div className="text-center py-8 text-slate-400">
+                                    No topics available.
+                                </div>
+                            ) : (
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    {categoryInfo.map((cat) => {
+                                        const isSelected = selectedCategories.includes(cat.name);
+                                        return (
+                                            <label
+                                                key={cat.name}
+                                                className={cn(
+                                                    'group relative flex items-center p-4 rounded-2xl cursor-pointer transition-all duration-200 border-2 overflow-hidden',
+                                                    isSelected
+                                                        ? 'bg-emerald-500/10 border-emerald-500 shadow-[0_0_20px_-5px_rgba(16,185,129,0.3)]'
+                                                        : 'bg-white/5 border-transparent hover:bg-white/10 hover:border-white/10'
+                                                )}
+                                            >
+                                                <div className={cn(
+                                                    "absolute inset-0 opacity-0 transition-opacity duration-300",
+                                                    isSelected ? "opacity-100" : "group-hover:opacity-10"
+                                                )}>
+                                                    <div className={`absolute inset-0 bg-gradient-to-r ${cat.gradient} opacity-5`} />
+                                                </div>
+
+                                                <input
+                                                    type="checkbox"
+                                                    value={cat.name}
+                                                    {...register('categories')}
+                                                    className="hidden"
+                                                />
+                                                <div className={cn(
+                                                    "p-3 rounded-xl mr-4 transition-colors",
+                                                    isSelected ? "bg-emerald-500/20 text-emerald-400" : "bg-white/5 text-slate-400 group-hover:text-white"
+                                                )}>
+                                                    {cat.icon}
+                                                </div>
+                                                <div className="flex-1 relative z-10">
+                                                    <p className={cn(
+                                                        "font-bold transition-colors",
+                                                        isSelected ? "text-white" : "text-slate-300 group-hover:text-white"
+                                                    )}>{cat.name}</p>
+                                                    <p className="text-xs text-slate-500 mt-1">
+                                                        {cat.available} questions
+                                                    </p>
+                                                </div>
+                                                {isSelected && (
+                                                    <CheckCircle className="w-6 h-6 text-emerald-500 animate-in zoom-in duration-200" />
+                                                )}
+                                            </label>
+                                        );
+                                    })}
+                                </div>
+                            )}
                             {errors.categories && (
                                 <p className="mt-2 text-sm text-red-400">{errors.categories.message}</p>
                             )}
@@ -336,7 +382,7 @@ export function QuizConfig() {
                                         <span className="text-slate-400 flex items-center">
                                             <Clock className="w-4 h-4 mr-2" /> Est. Time
                                         </span>
-                                        <span className="font-bold text-indigo-400">
+                                        <span className="font-bold text-primary">
                                             {Math.round(estimatedTime / 60)} min {estimatedTime % 60}s
                                         </span>
                                     </div>
@@ -346,7 +392,7 @@ export function QuizConfig() {
                                     <div className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 flex items-start">
                                         <XCircle className="w-5 h-5 text-red-400 mr-3 shrink-0 mt-0.5" />
                                         <p className="text-sm text-red-400">
-                                            Some selected categories do not have enough questions for the chosen amount.
+                                            Selected topics have {totalAvailable} questions, but you requested {watched.numQuestions}.
                                         </p>
                                     </div>
                                 )}
@@ -358,7 +404,7 @@ export function QuizConfig() {
                                         'w-full flex items-center justify-center px-8 py-4 text-base font-bold rounded-xl shadow-lg transition-all duration-300 transform hover:-translate-y-1',
                                         !isValid || insufficient || startLoading
                                             ? 'bg-slate-800 text-slate-500 cursor-not-allowed'
-                                            : 'bg-indigo-600 text-white hover:bg-indigo-500 hover:shadow-indigo-500/25'
+                                            : 'btn-vibeai'
                                     )}
                                 >
                                     {startLoading ? (

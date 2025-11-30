@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import api from '../lib/api';
 import { Question, MediaFile, AnalyticsData } from '../types';
 
@@ -84,7 +84,7 @@ export function useAdmin() {
     };
 
     // Question Management
-    const fetchQuestions = async (filters?: {
+    const fetchQuestions = useCallback(async (filters?: {
         category?: string;
         difficulty?: string;
         type?: string;
@@ -108,7 +108,7 @@ export function useAdmin() {
         } finally {
             setIsLoading(false);
         }
-    };
+    }, []);
 
     const createQuestion = async (question: Partial<Question>) => {
         setIsLoading(true);
