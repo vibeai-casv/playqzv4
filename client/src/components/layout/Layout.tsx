@@ -23,22 +23,22 @@ export function Layout({ children }: LayoutProps) {
 
     if (showSidebar) {
         return (
-            <div className="min-h-screen bg-slate-950 flex">
+            <div className="min-h-screen bg-background flex">
                 <a href="#main-content" className="skip-link">Skip to main content</a>
                 <OfflineIndicator />
                 <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
                 <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
                     {/* Mobile Header */}
-                    <div className="lg:hidden flex items-center justify-between bg-slate-900 border-b border-white/10 px-4 py-3">
+                    <div className="lg:hidden flex items-center justify-between bg-card border-b border-border px-4 py-3">
                         <button
                             onClick={() => setSidebarOpen(true)}
-                            className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 focus:outline-none"
+                            className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 focus:outline-none"
                             aria-label="Open sidebar"
                         >
                             <Menu className="h-6 w-6" />
                         </button>
-                        <span className="font-bold text-lg text-white">AI Quiz</span>
+                        <span className="font-bold text-lg text-foreground">AI Quizzer</span>
                         <div className="w-6" /> {/* Spacer for centering */}
                     </div>
 

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { ThemeToggle } from '../theme/ThemeToggle';
 
 interface AuthLayoutProps {
     children: React.ReactNode;
@@ -36,7 +36,7 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
                         </div>
                         <div className="text-center">
                             <h2 className="text-2xl font-bold gradient-text tracking-tight">
-                                AI Quiz Platform
+                                AI Quizzer
                             </h2>
                             <p className="text-sm text-primary/80 mt-1 font-medium">
                                 CAS Vattamkulam
@@ -50,8 +50,11 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
                 </div>
 
                 {/* Bottom Text with cyan accent */}
-                <div className="text-center mt-6 text-muted-foreground text-xs font-medium tracking-wide uppercase">
-                    Powered by Advanced AI <span className="text-primary">•</span> Secure <span className="text-primary">•</span> Intelligent
+                <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <div className="text-center text-muted-foreground text-xs font-medium tracking-wide uppercase">
+                        AI Powered <span className="text-primary">•</span> Secure <span className="text-primary">•</span> Intelligent
+                    </div>
+                    <ThemeToggle />
                 </div>
             </div>
         </div>
