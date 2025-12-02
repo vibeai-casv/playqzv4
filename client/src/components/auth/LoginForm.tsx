@@ -90,17 +90,26 @@ export const LoginForm: React.FC = () => {
                     <a href="#" className="text-sm text-primary hover:text-primary/80 hover:underline transition-colors">Forgot password?</a>
                 </div>
 
-                <button
-                    type="submit"
-                    disabled={loading}
-                    className="btn-vibeai w-full flex items-center justify-center gap-2"
-                >
-                    {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : (
-                        <>
-                            Sign In <ArrowRight className="w-4 h-4" />
-                        </>
-                    )}
-                </button>
+                <div className="flex w-full gap-2">
+                    <button
+                        type="button"
+                        onClick={() => navigate('/demo')}
+                        className="btn-vibeai w-1/2 flex items-center justify-center gap-2"
+                    >
+                        Demo
+                    </button>
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className="btn-vibeai w-1/2 flex items-center justify-center gap-2"
+                    >
+                        {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : (
+                            <>
+                                Sign In <ArrowRight className="w-4 h-4" />
+                            </>
+                        )}
+                    </button>
+                </div>
 
             </form>
         </div>

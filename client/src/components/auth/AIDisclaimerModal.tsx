@@ -26,7 +26,7 @@ export const AIDisclaimerModal: React.FC<AIDisclaimerModalProps> = ({
                             <AlertTriangle className="w-6 h-6" />
                         </div>
                         <h2 className="text-xl font-bold text-zinc-900 dark:text-white">
-                            AI Content Disclaimer
+                            Disclaimer
                         </h2>
                     </div>
                 </div>
@@ -36,6 +36,9 @@ export const AIDisclaimerModal: React.FC<AIDisclaimerModalProps> = ({
                     <p className="text-zinc-600 dark:text-zinc-300 leading-relaxed">
                         This platform uses advanced Artificial Intelligence to generate quiz content,
                         including questions, images, and explanations.
+                    </p>
+                    <p className="text-zinc-600 dark:text-zinc-300 leading-relaxed mt-2">
+                        IHRD and associated institutions may contact you for updates, news, or research purposes.
                     </p>
 
                     <div className="bg-zinc-50 dark:bg-zinc-800/50 p-4 rounded-xl space-y-3 text-sm text-zinc-600 dark:text-zinc-400">

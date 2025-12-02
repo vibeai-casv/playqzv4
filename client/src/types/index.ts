@@ -6,7 +6,7 @@ export interface User {
     name: string;
     institution?: string;
     category?: 'student' | 'professional' | 'educator' | 'hobbyist';
-    role: 'user' | 'admin';
+    role: 'user' | 'admin' | 'super_admin';
     bio?: string;
     avatar?: string;
     preferences?: UserPreferences;

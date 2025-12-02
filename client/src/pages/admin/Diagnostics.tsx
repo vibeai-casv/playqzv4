@@ -11,6 +11,15 @@ interface DiagnosticResult {
     [key: string]: any;
 }
 
+interface Tool {
+    id: string;
+    name: string;
+    description: string;
+    url: string;
+    icon: any;
+    color: string;
+}
+
 export function Diagnostics() {
     const [results, setResults] = useState<Record<string, DiagnosticResult>>({});
     const [loading, setLoading] = useState<Record<string, boolean>>({});
@@ -55,6 +64,17 @@ export function Diagnostics() {
             endpoint: '/fix/test-api-endpoints.php',
             icon: Activity,
             color: 'text-cyan-600'
+        }
+    ];
+
+    const tools: Tool[] = [
+        {
+            id: 'view_questions',
+            name: 'Raw Question Viewer',
+            description: 'Direct database view of all questions with pagination',
+            url: '/fix/view_questions.php',
+            icon: Database,
+            color: 'text-blue-600'
         }
     ];
 
@@ -225,6 +245,46 @@ export function Diagnostics() {
                                     </div>
                                 </div>
                             )}
+                        </div>
+                    );
+                })}
+            </div>
+
+            {/* Database Tools */}
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mt-8 mb-4">
+                Database Tools
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {tools.map(tool => {
+                    const Icon = tool.icon;
+                    return (
+                        <div
+                            key={tool.id}
+                            className="bg-white dark:bg-gray-800 rounded-lg shadow p-6 space-y-4"
+                        >
+                            <div className="flex items-start justify-between">
+                                <div className="flex items-center gap-3">
+                                    <Icon className={`w-6 h-6 ${tool.color}`} />
+                                    <div>
+                                        <h3 className="font-semibold text-gray-900 dark:text-white">
+                                            {tool.name}
+                                        </h3>
+                                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                                            {tool.description}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a
+                                href={`${import.meta.env.VITE_API_URL.replace('/api', '')}${tool.url}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors"
+                            >
+                                <ExternalLink className="w-4 h-4" />
+                                Open Tool
+                            </a>
                         </div>
                     );
                 })}

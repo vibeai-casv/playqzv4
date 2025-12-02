@@ -74,9 +74,9 @@ export function AdminDashboard() {
             <div className="flex justify-between items-center">
                 <div>
                     <h1 className="text-3xl font-bold text-white tracking-tight">Admin Dashboard</h1>
-                    <p className="text-slate-400 mt-1">System overview and analytics</p>
+                    <p className="text-slate-300 mt-1">System overview and analytics</p>
                 </div>
-                <div className="flex items-center space-x-2 text-sm text-slate-400 bg-slate-900/50 px-4 py-2 rounded-lg border border-white/5">
+                <div className="flex items-center space-x-2 text-sm text-slate-300 bg-slate-900/50 px-4 py-2 rounded-lg border border-white/5">
                     <Calendar className="w-4 h-4" />
                     <span>Last 30 Days</span>
                 </div>
@@ -277,7 +277,7 @@ function StatCard({ title, value, icon: Icon, trend, trendUp, gradient }: { titl
 
             <div className="relative flex justify-between items-start">
                 <div>
-                    <p className="text-sm font-medium text-slate-400">{title}</p>
+                    <p className="text-sm font-medium text-slate-300">{title}</p>
                     <h3 className="text-3xl font-bold text-white mt-2 tracking-tight">{value}</h3>
                 </div>
                 <div className="p-3 bg-white/5 rounded-xl border border-white/5 group-hover:scale-110 transition-transform duration-300">
@@ -288,7 +288,7 @@ function StatCard({ title, value, icon: Icon, trend, trendUp, gradient }: { titl
                 <span className={cn("font-bold", trendUp ? "text-emerald-400" : "text-red-400")}>
                     {trend}
                 </span>
-                <span className="text-slate-500 ml-2">vs last month</span>
+                <span className="text-slate-400 ml-2">vs last month</span>
             </div>
         </div>
     );

@@ -1,0 +1,452 @@
+[
+{
+"id": 11,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "medium",
+"question": "Which Chinese AI startup released the open-source reasoning model DeepSeek R1 in January 2025?",
+"options": ["Alibaba", "DeepSeek", "Moonshot AI", "Baidu"],
+"correct_answer": "DeepSeek"
+},
+{
+"id": 12,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "easy",
+"question": "What license is DeepSeek R1 released under?",
+"options": ["GPL License", "Apache 2.0", "MIT License", "BSD License"],
+"correct_answer": "MIT License"
+},
+{
+"id": 13,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "hard",
+"question": "According to DeepSeek, what was the approximate training cost for their V3 model?",
+"options": ["$1 million", "$6 million", "$50 million", "$100 million"],
+"correct_answer": "$6 million"
+},
+{
+"id": 14,
+"type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "medium",
+"question": "What unique capability did DeepSeek-R1-Zero demonstrate without supervised fine-tuning?",
+"options": ["Image generation", "Self-verification and reflection", "Voice synthesis", "Video editing"],
+"correct_answer": "Self-verification and reflection"
+},
+{
+"id": 15,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "easy",
+"question": "When was GPT-5 released by OpenAI?",
+"options": ["June 2025", "July 2025", "August 2025", "September 2025"],
+"correct_answer": "August 2025"
+},
+{
+"id": 16,
+"type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "medium",
+"question": "What is the key feature that distinguishes GPT-5 from previous GPT models?",
+"options": ["It only generates images", "It combines reasoning and non-reasoning under one interface", "It only works with code", "It requires less memory"],
+"correct_answer": "It combines reasoning and non-reasoning under one interface"
+},
+{
+"id": 17,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "hard",
+"question": "What is the input token price for GPT-5 per million tokens?",
+"options": ["$0.50", "$1.00", "$1.25", "$2.50"],
+"correct_answer": "$1.25"
+},
+{
+"id": 18,
+"type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "medium",
+"question": "What does GPT-5 automatically do when users submit queries?",
+"options": ["Translates to multiple languages", "Routes to fast or slow reasoning models", "Generates images", "Creates videos"],
+"correct_answer": "Routes to fast or slow reasoning models"
+},
+{
+"id": 19,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "easy",
+"question": "Which company developed the Gemini 2.5 model series?",
+"options": ["OpenAI", "Anthropic", "Google", "Microsoft"],
+"correct_answer": "Google"
+},
+{
+"id": 20,
+"type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "medium",
+"question": "What type of model is Gemini 2.5, designed to tackle complex problems?",
+"options": ["Language model", "Thinking model", "Vision model", "Audio model"],
+"correct_answer": "Thinking model"
+},
+{
+"id": 21,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "hard",
+"question": "What score did Gemini 2.5 Pro achieve on Humanity's Last Exam without tool use?",
+"options": ["12.5%", "15.3%", "18.8%", "22.1%"],
+"correct_answer": "18.8%"
+},
+{
+"id": 22,
+"type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "medium",
+"question": "What is the name of Google's image generation model released in August 2025?",
+"options": ["Gemini 2.5 Flash Image", "ImageGen Pro", "Pixel AI", "Visual Gemini"],
+"correct_answer": "Gemini 2.5 Flash Image"
+},
+{
+"id": 23,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "easy",
+"question": "What generation of Gemini models was introduced as Google's most intelligent AI?",
+"options": ["Gemini 2.0", "Gemini 2.5", "Gemini 3.0", "Gemini 4.0"],
+"correct_answer": "Gemini 3.0"
+},
+{
+"id": 24,
+"type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "hard",
+"question": "According to testing in VS Code, how much more accurate is Gemini 3 Pro compared to Gemini 2.5 Pro?",
+"options": ["15%", "25%", "35%", "45%"],
+"correct_answer": "35%"
+},
+{
+"id": 25,
+"type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "medium",
+"question": "What security threat has Gemini 2.5 significantly improved protection against?",
+"options": ["SQL injection", "Cross-site scripting", "Indirect prompt injection", "Buffer overflow"],
+"correct_answer": "Indirect prompt injection"
+},
+{
+"id": 26,
+"type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "easy",
+"question": "What does RLHF stand for in AI training?",
+"options": ["Rapid Learning from Humans", "Reinforcement Learning from Human Feedback", "Real-time Language Human Filtering", "Recursive Logic for High Fidelity"],
+"correct_answer": "Reinforcement Learning from Human Feedback"
+},
+{
+"id": 27,
+"type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "hard",
+"question": "According to CrowdStrike research, by how much can politically sensitive topics increase vulnerability likelihood in DeepSeek-R1 code?",
+"options": ["Up to 25%", "Up to 35%", "Up to 50%", "Up to 75%"],
+"correct_answer": "Up to 50%"
+},
+{
+"id": 28,
+"type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "medium",
+"question": "What percentage of developers were using AI coding assistants by 2025?",
+"options": ["50%", "70%", "80%", "90%"],
+"correct_answer": "90%"
+},
+{
+"id": 29,
+"type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "medium",
+"question": "What does RAG stand for in reducing AI hallucinations?",
+"options": ["Random Algorithm Generation", "Retrieval-Augmented Generation", "Recursive AI Grounding", "Rapid Access Gateway"],
+"correct_answer": "Retrieval-Augmented Generation"
+},
+{
+"id": 30,
+"type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "easy",
+"question": "What term describes when AI models generate plausible but incorrect information?",
+"options": ["Fabrication", "Hallucination", "Delusion", "Confusion"],
+"correct_answer": "Hallucination"
+},
+{
+"id": 31,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "medium",
+"question": "Which company manufactures the humanoid robot Optimus?",
+"options": ["Boston Dynamics", "Tesla", "Figure AI", "Agility Robotics"],
+"correct_answer": "Tesla"
+},
+{
+"id": 32,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "easy",
+"question": "What is the name of Agility Robotics' humanoid robot for logistics?",
+"options": ["Atlas", "Digit", "Optimus", "Apollo"],
+"correct_answer": "Digit"
+},
+{
+"id": 33,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "hard",
+"question": "According to reports, how many humanoid robots did Tesla plan to produce in 2025?",
+"options": ["1,000", "5,000", "10,000", "50,000"],
+"correct_answer": "10,000"
+},
+{
+"id": 34,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "medium",
+"question": "Which company's humanoid robot Figure 02 is working at BMW's manufacturing plant?",
+"options": ["Tesla", "Boston Dynamics", "Figure AI", "Apptronik"],
+"correct_answer": "Figure AI"
+},
+{
+"id": 35,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "easy",
+"question": "What type of power system does the new electric Atlas robot from Boston Dynamics use?",
+"options": ["Hydraulic", "Pneumatic", "Electric", "Solar"],
+"correct_answer": "Electric"
+},
+{
+"id": 36,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "medium",
+"question": "What is the starting price of Unitree's G1 humanoid robot?",
+"options": ["$8,000", "$16,000", "$25,000", "$50,000"],
+"correct_answer": "$16,000"
+},
+{
+"id": 37,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "hard",
+"question": "What is the projected global humanoid robot market value for 2035?",
+"options": ["$25 billion", "$38 billion", "$51 billion", "$75 billion"],
+"correct_answer": "$51 billion"
+},
+{
+"id": 38,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "medium",
+"question": "Which company developed the Apollo humanoid robot for industrial applications?",
+"options": ["Tesla", "Apptronik", "Boston Dynamics", "Figure AI"],
+"correct_answer": "Apptronik"
+},
+{
+"id": 39,
+"type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "easy",
+"question": "What is a qubit in quantum computing?",
+"options": ["A quantum byte", "A quantum bit", "A quantum processor", "A quantum circuit"],
+"correct_answer": "A quantum bit"
+},
+{
+"id": 40,
+"type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "medium",
+"question": "What quantum phenomenon allows qubits to exist in multiple states simultaneously?",
+"options": ["Entanglement", "Superposition", "Decoherence", "Tunneling"],
+"correct_answer": "Superposition"
+},
+{
+"id": 41,
+"type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "easy",
+"question": "What is quantum entanglement?",
+"options": ["When qubits get physically stuck", "A correlation between quantum particles", "A type of quantum error", "A cooling technique"],
+"correct_answer": "A correlation between quantum particles"
+},
+{
+"id": 42,
+"type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "medium",
+"question": "What is the main challenge that quantum error correction addresses?",
+"options": ["Speed limitations", "Qubit instability and errors", "Manufacturing costs", "Physical size"],
+"correct_answer": "Qubit instability and errors"
+},
+{
+"id": 43,
+"type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "hard",
+"question": "Which year did the United Nations designate as the International Year of Quantum Science and Technology?",
+"options": ["2024", "2025", "2026", "2027"],
+"correct_answer": "2025"
+},
+{
+"id": 44,
+"type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "medium",
+"question": "What is the name of Google's quantum chip announced in 2024?",
+"options": ["Sycamore", "Willow", "Bristlecone", "Foxtail"],
+"correct_answer": "Willow"
+},
+{
+"id": 45,
+"type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "easy",
+"question": "What is the primary advantage of topological qubits being developed by Microsoft?",
+"options": ["Higher speed", "Lower cost", "Inherent stability", "Smaller size"],
+"correct_answer": "Inherent stability"
+},
+{
+"id": 46,
+"type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "hard",
+"question": "How many qubits does IBM Quantum Nighthawk feature?",
+"options": ["84", "100", "120", "156"],
+"correct_answer": "120"
+},
+{
+"id": 47,
+"type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "easy",
+"question": "What does LLM stand for?",
+"options": ["Large Language Model", "Linear Learning Machine", "Logical Language Matrix", "Long Learning Memory"],
+"correct_answer": "Large Language Model"
+},
+{
+"id": 48,
+"type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "medium",
+"question": "What term describes AI models that can process text, images, audio, and video?",
+"options": ["Universal AI", "Multimodal AI", "Cross-platform AI", "Integrated AI"],
+"correct_answer": "Multimodal AI"
+},
+{
+"id": 49,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "medium",
+"question": "Which AI company terminated its partnership with OpenAI in favor of its self-developed Helix model?",
+"options": ["Tesla", "Figure AI", "Boston Dynamics", "Anthropic"],
+"correct_answer": "Figure AI"
+},
+{
+"id": 50,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "easy",
+"question": "What is the name of Google's AI system for designing protein binders?",
+"options": ["AlphaProteo", "ProteinAI", "BioDesign", "AlphaFold"],
+"correct_answer": "AlphaProteo"
+},
+{
+"id": 51,
+"type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "hard",
+"question": "What was DeepSeek R1's updated version performance improvement in May 2025?",
+"options": ["25% reduction in errors", "40% faster processing", "50% reduction in hallucinations", "60% better accuracy"],
+"correct_answer": "50% reduction in hallucinations"
+},
+{
+"id": 52,
+"type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "medium",
+"question": "What organization maintains the Top 10 Risk List for Large Language Models?",
+"options": ["NIST", "OWASP", "IEEE", "ISO"],
+"correct_answer": "OWASP"
+},
+{
+"id": 53,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "medium",
+"question": "According to reports, approximately how many users does ChatGPT reach weekly?",
+"options": ["200 million", "400 million", "700 million", "1 billion"],
+"correct_answer": "700 million"
+},
+{
+"id": 54,
+"type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "easy",
+"question": "What is the primary function of large language models?",
+"options": ["Image generation", "Text generation and understanding", "Video editing", "Audio synthesis"],
+"correct_answer": "Text generation and understanding"
+},
+{
+"id": 55,
+"type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "medium",
+"question": "What does the HHH principle stand for in AI safety?",
+"options": ["Helpful, Honest, Harmless", "Helpful, Harmless, Honest", "Human, Honest, Helpful", "Helpful, Honest, Humane"],
+"correct_answer": "Helpful, Honest, Harmless"
+},
+{
+"id": 56,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "hard",
+"question": "What was the valuation of Figure AI after its Series B funding round in March 2024?",
+"options": ["$1.2 billion", "$2.6 billion", "$5.0 billion", "$10.0 billion"],
+"correct_answer": "$2.6 billion"
+},
+{
+"id": 57,
+"type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "medium",
+"question": "What special capability does Gemini 2.5 Computer Use model enable?",
+"options": ["Voice recognition", "UI interaction and control", "Video generation", "Music composition"],
+"correct_answer": "UI interaction and control"
+},
+{
+"id": 58,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "easy",
+"question": "Which company developed Claude AI assistant?",
+"options": ["OpenAI", "Google", "Anthropic", "Microsoft"],
+"correct_answer": "Anthropic"
+},
+{
+"id": 59,
+"type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "hard",
+"question": "What is algorithmic bias in AI systems primarily caused by?",
+"options": ["Hardware limitations", "Unintentional discrimination in training data", "Slow processing speed", "Network connectivity issues"],
+"correct_answer": "Unintentional discrimination in training data"
+},
+{
+"id": 60,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "medium",
+"question": "What was the nickname for Google's image generation model before its official release?",
+"options": ["mini-banana", "nano-banana", "mega-banana", "super-banana"],
+"correct_answer": "nano-banana"
+}
+]

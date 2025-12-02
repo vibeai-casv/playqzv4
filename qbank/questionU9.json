@@ -1,0 +1,452 @@
+[
+{
+"id": 11,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "easy",
+"question": "Which company released Gemini 2.0 in 2024, designed for the 'agentic era'?",
+"options": ["Microsoft", "Google", "OpenAI", "Meta"],
+"correct_answer": "Google"
+},
+{
+"id": 12,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "medium",
+"question": "What is the name of Google's quantum chip announced in late 2024 that made significant progress in error suppression?",
+"options": ["Quantum Leap", "Willow", "Sycamore", "Bristlecone"],
+"correct_answer": "Willow"
+},
+{
+"id": 13,
+"type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "easy",
+"question": "Which AI system by Google predicts protein structures and molecular interactions?",
+"options": ["AlphaFold 3", "ProteinGPT", "MoleculeAI", "BioPredict"],
+"correct_answer": "AlphaFold 3"
+},
+{
+"id": 14,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "hard",
+"question": "According to recent reports, Chinese companies like DeepSeek and Qwen are closing the gap with which frontier AI lab?",
+"options": ["Anthropic", "OpenAI", "Google DeepMind", "Meta AI"],
+"correct_answer": "OpenAI"
+},
+{
+"id": 15,
+"type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "medium",
+"question": "What breakthrough did Google's Quantum Echoes algorithm demonstrate in 2025?",
+"options": ["Faster than classical supercomputers by 13,000x", "Perfect error correction", "Room temperature operation", "Infinite qubit scaling"],
+"correct_answer": "Faster than classical supercomputers by 13,000x"
+},
+{
+"id": 16,
+"type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "easy",
+"question": "What is the primary advantage of topological qubits being developed by Microsoft?",
+"options": ["Higher speed", "Lower cost", "Inherent stability", "Smaller size"],
+"correct_answer": "Inherent stability"
+},
+{
+"id": 17,
+"type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "medium",
+"question": "Which year was designated by the United Nations as the International Year of Quantum Science and Technology?",
+"options": ["2024", "2025", "2026", "2027"],
+"correct_answer": "2025"
+},
+{
+"id": 18,
+"type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "hard",
+"question": "According to McKinsey research, what has been the shift in quantum technology focus in 2024?",
+"options": ["From software to hardware", "From qubits to applications", "From growing qubits to stabilizing qubits", "From theory to commercialization"],
+"correct_answer": "From growing qubits to stabilizing qubits"
+},
+{
+"id": 19,
+"type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "medium",
+"question": "What is the name of IBM's most advanced quantum processor unveiled in 2025?",
+"options": ["IBM Quantum Eagle", "IBM Quantum Nighthawk", "IBM Quantum Condor", "IBM Quantum Heron"],
+"correct_answer": "IBM Quantum Nighthawk"
+},
+{
+"id": 20,
+"type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "easy",
+"question": "How many qubits does IBM Quantum Nighthawk feature?",
+"options": ["84", "100", "120", "156"],
+"correct_answer": "120"
+},
+{
+"id": 21,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "medium",
+"question": "Which company manufactures the humanoid robot called Optimus?",
+"options": ["Boston Dynamics", "Tesla", "Unitree", "Figure AI"],
+"correct_answer": "Tesla"
+},
+{
+"id": 22,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "easy",
+"question": "What is the starting price of Unitree's G1 humanoid robot announced in 2024?",
+"options": ["$8,000", "$16,000", "$25,000", "$50,000"],
+"correct_answer": "$16,000"
+},
+{
+"id": 23,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "hard",
+"question": "Which company's humanoid robot Figure 02 is working at BMW's Spartanburg plant?",
+"options": ["Agility Robotics", "Boston Dynamics", "Figure AI", "Tesla"],
+"correct_answer": "Figure AI"
+},
+{
+"id": 24,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "medium",
+"question": "In April 2024, Boston Dynamics introduced a new version of Atlas. What type of power system does it use?",
+"options": ["Hydraulic", "Electric", "Pneumatic", "Hybrid"],
+"correct_answer": "Electric"
+},
+{
+"id": 25,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "hard",
+"question": "According to market forecasts, what percentage of the robot market will humanoid robots hold in 2025?",
+"options": ["0.2%", "1.5%", "5%", "10%"],
+"correct_answer": "0.2%"
+},
+{
+"id": 26,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "medium",
+"question": "Which country's government issued guidelines calling for humanoid robot production at scale by 2025?",
+"options": ["United States", "Japan", "China", "South Korea"],
+"correct_answer": "China"
+},
+{
+"id": 27,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "easy",
+"question": "What is the name of Agility Robotics' humanoid robot designed for logistics?",
+"options": ["Atlas", "Digit", "Optimus", "Apollo"],
+"correct_answer": "Digit"
+},
+{
+"id": 28,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "hard",
+"question": "How many humanoid robots does Tesla CEO Elon Musk plan to produce in 2025?",
+"options": ["1,000", "5,000", "10,000", "50,000"],
+"correct_answer": "10,000"
+},
+{
+"id": 29,
+"type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "medium",
+"question": "What does RAG stand for in the context of reducing AI hallucinations?",
+"options": ["Rapid Algorithm Generation", "Retrieval-Augmented Generation", "Random Access Gateway", "Recursive AI Grounding"],
+"correct_answer": "Retrieval-Augmented Generation"
+},
+{
+"id": 30,
+"type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "easy",
+"question": "What term describes when AI models generate plausible but incorrect information?",
+"options": ["Hallucination", "Fabrication", "Glitch", "Malfunction"],
+"correct_answer": "Hallucination"
+},
+{
+"id": 31,
+"type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "medium",
+"question": "What does the HHH principle stand for in AI safety, introduced by Anthropic?",
+"options": ["Helpful, Harmless, Honest", "Helpful, Honest, Harmless", "Helpful, Honest, Humane", "Human, Honest, Helpful"],
+"correct_answer": "Helpful, Honest, Harmless"
+},
+{
+"id": 32,
+"type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "hard",
+"question": "According to a recent paper, can hallucinations in LLMs be completely eliminated?",
+"options": ["Yes, with proper training", "Yes, with enough data", "No, it is mathematically impossible", "Yes, but only for small models"],
+"correct_answer": "No, it is mathematically impossible"
+},
+{
+"id": 33,
+"type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "medium",
+"question": "What percentage of business leaders recognize AI-related risks according to recent surveys?",
+"options": ["45%", "60%", "77%", "93%"],
+"correct_answer": "77%"
+},
+{
+"id": 34,
+"type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "hard",
+"question": "What is the name of the framework designed to uncover biases in AI systems across 16 languages, launched in June 2025?",
+"options": ["BIAS-DETECT", "SHADES", "FAIRNESS", "EQUITY"],
+"correct_answer": "SHADES"
+},
+{
+"id": 35,
+"type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "easy",
+"question": "What is the term for attacks that trick AI systems into bypassing safety filters?",
+"options": ["Prompt injection", "Data poisoning", "Model hacking", "Algorithm cracking"],
+"correct_answer": "Prompt injection"
+},
+{
+"id": 36,
+"type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "medium",
+"question": "Which organization maintains the Top 10 Risk List for LLMs?",
+"options": ["NIST", "OWASP", "IEEE", "ISO"],
+"correct_answer": "OWASP"
+},
+{
+"id": 37,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "medium",
+"question": "Which AI company terminated its partnership with OpenAI in April 2025 in favor of its self-developed Helix model?",
+"options": ["Tesla", "Figure AI", "Boston Dynamics", "Anthropic"],
+"correct_answer": "Figure AI"
+},
+{
+"id": 38,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "easy",
+"question": "What is the name of Google's AI system for designing novel protein binders?",
+"options": ["AlphaProteo", "ProteinAI", "BioDesign", "MoleculeForge"],
+"correct_answer": "AlphaProteo"
+},
+{
+"id": 39,
+"type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "medium",
+"question": "What was a notable feature of NotebookLM released in 2024?",
+"options": ["Code generation", "Audio Overviews", "Image creation", "Video editing"],
+"correct_answer": "Audio Overviews"
+},
+{
+"id": 40,
+"type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "medium",
+"question": "What is the approximate bit-flip lifetime achieved by Alice & Bob's Boson 4 chip in 2024?",
+"options": ["30 seconds", "2 minutes", "7 minutes", "15 minutes"],
+"correct_answer": "7 minutes"
+},
+{
+"id": 41,
+"type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "hard",
+"question": "Which country announced a $7.4 billion investment in quantum technology in early 2025?",
+"options": ["United States", "China", "Japan", "Germany"],
+"correct_answer": "Japan"
+},
+{
+"id": 42,
+"type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "easy",
+"question": "What is a qubit?",
+"options": ["A quantum byte", "A quantum bit", "A quantum processor", "A quantum algorithm"],
+"correct_answer": "A quantum bit"
+},
+{
+"id": 43,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "medium",
+"question": "What is the height of Unitree's G1 humanoid robot?",
+"options": ["100 cm", "130 cm", "160 cm", "180 cm"],
+"correct_answer": "130 cm"
+},
+{
+"id": 44,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "hard",
+"question": "What is the estimated global humanoid robot market value projected for 2035?",
+"options": ["$10 billion", "$25 billion", "$51 billion", "$100 billion"],
+"correct_answer": "$51 billion"
+},
+{
+"id": 45,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "medium",
+"question": "Which company developed the humanoid robot called Apollo for industrial applications?",
+"options": ["Boston Dynamics", "Apptronik", "Tesla", "Figure AI"],
+"correct_answer": "Apptronik"
+},
+{
+"id": 46,
+"type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "hard",
+"question": "According to TrustLLM benchmark, how many dimensions does it assess for model trustworthiness?",
+"options": ["Four", "Six", "Eight", "Ten"],
+"correct_answer": "Six"
+},
+{
+"id": 47,
+"type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "medium",
+"question": "What is algorithmic bias in AI systems?",
+"options": ["Incorrect algorithms", "Unintentional discrimination", "Programming errors", "Hardware limitations"],
+"correct_answer": "Unintentional discrimination"
+},
+{
+"id": 48,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "easy",
+"question": "Which company's platform is commonly abbreviated as LLM?",
+"options": ["Large Language Model (generic term)", "Linear Learning Machine", "Logical Language Matrix", "Lambda Learning Method"],
+"correct_answer": "Large Language Model (generic term)"
+},
+{
+"id": 49,
+"type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "medium",
+"question": "What term describes AI models that can understand multiple types of input like text, images, and audio?",
+"options": ["Multimodal AI", "Universal AI", "Cross-platform AI", "Integrated AI"],
+"correct_answer": "Multimodal AI"
+},
+{
+"id": 50,
+"type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "medium",
+"question": "What quantum phenomenon allows qubits to exist in multiple states simultaneously?",
+"options": ["Entanglement", "Superposition", "Decoherence", "Tunneling"],
+"correct_answer": "Superposition"
+},
+{
+"id": 51,
+"type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "easy",
+"question": "What is quantum entanglement?",
+"options": ["When qubits get stuck together", "A correlation between quantum particles", "A type of quantum error", "A measurement technique"],
+"correct_answer": "A correlation between quantum particles"
+},
+{
+"id": 52,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "hard",
+"question": "Which company developed AlphaGeometry 2, which solved an International Mathematical Olympiad problem in 19 seconds?",
+"options": ["OpenAI", "Google DeepMind", "Anthropic", "Meta"],
+"correct_answer": "Google DeepMind"
+},
+{
+"id": 53,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "easy",
+"question": "What type of actuators do most modern humanoid robots like Tesla Optimus use?",
+"options": ["Hydraulic", "Pneumatic", "Electric", "Magnetic"],
+"correct_answer": "Electric"
+},
+{
+"id": 54,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "medium",
+"question": "What is the typical battery life challenge for current humanoid robots?",
+"options": ["30 minutes", "2 hours", "8 hours", "24 hours"],
+"correct_answer": "2 hours"
+},
+{
+"id": 55,
+"type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "medium",
+"question": "What does RLHF stand for in AI alignment?",
+"options": ["Real-time Learning from Humans", "Reinforcement Learning from Human Feedback", "Recursive Learning with Human Factors", "Regulated Learning for Helpful Functions"],
+"correct_answer": "Reinforcement Learning from Human Feedback"
+},
+{
+"id": 56,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "hard",
+"question": "What was the valuation of Figure AI after its Series B funding round in March 2024?",
+"options": ["$1.2 billion", "$2.6 billion", "$5.0 billion", "$10.0 billion"],
+"correct_answer": "$2.6 billion"
+},
+{
+"id": 57,
+"type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "easy",
+"question": "What is the primary function of large language models?",
+"options": ["Image generation", "Text generation and understanding", "Audio synthesis", "Video editing"],
+"correct_answer": "Text generation and understanding"
+},
+{
+"id": 58,
+"type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "medium",
+"question": "What is the main challenge that quantum error correction addresses?",
+"options": ["Speed limitations", "Qubit instability and errors", "Cost of production", "Size of quantum computers"],
+"correct_answer": "Qubit instability and errors"
+},
+{
+"id": 59,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "hard",
+"question": "According to reports, how much faster is Figure 02 at performing industrial tasks compared to its trial phase?",
+"options": ["2x faster", "4x faster", "7x faster", "10x faster"],
+"correct_answer": "4x faster"
+},
+{
+"id": 60,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "medium",
+"question": "What is the projected annual growth rate of the global AI market?",
+"options": ["15%", "25%", "37%", "50%"],
+"correct_answer": "37%"
+}
+]

@@ -1,4 +1,4 @@
-import { useEffect, lazy, Suspense } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'sonner';
 import { Layout } from './components/layout/Layout';
@@ -23,6 +23,8 @@ const QuizResults = lazy(() => import('./pages/user/QuizResults').then(module =>
 
 // Admin
 const AdminDashboard = lazy(() => import('./pages/admin/Dashboard').then(module => ({ default: module.AdminDashboard })));
+// Demo page (public)
+const Demo = lazy(() => import('./pages/auth/Demo').then(module => ({ default: module.Demo })));
 const Users = lazy(() => import('./pages/admin/Users').then(module => ({ default: module.Users })));
 const Questions = lazy(() => import('./pages/admin/Questions').then(module => ({ default: module.Questions })));
 const Media = lazy(() => import('./pages/admin/Media').then(module => ({ default: module.Media })));
@@ -30,8 +32,11 @@ const ActivityLogs = lazy(() => import('./pages/admin/ActivityLogs').then(module
 const SystemTools = lazy(() => import('./pages/admin/SystemTools').then(module => ({ default: module.SystemTools })));
 const Diagnostics = lazy(() => import('./pages/admin/Diagnostics').then(module => ({ default: module.Diagnostics })));
 
+import { SplashScreen } from './components/ui/SplashScreen';
+
 function App() {
   const { initialize } = useAuth();
+  const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
     initialize();
@@ -42,11 +47,14 @@ function App() {
       <Toaster position="top-center" richColors />
       <ErrorBoundary>
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+          {showSplash && <SplashScreen onFinish={() => setShowSplash(false)} />}
           <Layout>
             <Suspense fallback={<PageSkeleton />}>
               <Routes>
                 {/* Public Routes */}
                 <Route path="/login" element={<Login />} />
+                {/* Demo Page */}
+                <Route path="/demo" element={<Demo />} />
                 <Route path="/signup" element={<Signup />} />
 
                 {/* Protected User Routes */}

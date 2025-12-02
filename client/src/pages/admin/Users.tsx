@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAdmin } from '../../hooks/useAdmin';
+import { useAuth } from '../../hooks/useAuth';
 import { User, ActivityLog, QuizAttempt } from '../../types';
 import { Modal } from '../../components/ui/Modal';
 import {
@@ -17,7 +18,8 @@ interface UserActivity {
 }
 
 export function Users() {
-    const { fetchUsers, fetchUserActivity, toggleUserStatus, isLoading } = useAdmin();
+    const { fetchUsers, fetchUserActivity, toggleUserStatus, updateUserRole, isLoading } = useAdmin();
+    const { isSuperAdmin } = useAuth();
     const [users, setUsers] = useState<User[]>([]);
     const [total, setTotal] = useState(0);
     const [page, setPage] = useState(1);
@@ -112,6 +114,30 @@ export function Users() {
         }
     };
 
+    const handleRoleUpdate = async (user: User, newRole: 'user' | 'admin') => {
+        try {
+            await updateUserRole(user.id, newRole);
+            toast.success(`User role updated to ${newRole}`);
+            loadUsers();
+        } catch (error) {
+            toast.error('Failed to update user role');
+        }
+    };
+
+    const handleBulkRoleUpdate = async (newRole: 'user' | 'admin') => {
+        if (selectedIds.size === 0) return;
+        try {
+            await Promise.all(
+                Array.from(selectedIds).map(id => updateUserRole(id, newRole))
+            );
+            toast.success(`${selectedIds.size} users updated to ${newRole}`);
+            setSelectedIds(new Set());
+            loadUsers();
+        } catch (error) {
+            toast.error('Failed to update users');
+        }
+    };
+
     const handleExport = () => {
         const headers = ['Name', 'Email', 'Phone', 'Category', 'Institution', 'District', 'Role', 'Status', 'Joined'];
         const csvContent = [
@@ -182,6 +208,12 @@ export function Users() {
                                 className="flex items-center gap-2 px-4 py-2 bg-green-100 text-green-700 rounded-lg hover:bg-green-200"
                             >
                                 <UserCheck className="w-4 h-4" /> Enable Selected
+                            </button>
+                            <button
+                                onClick={() => handleBulkRoleUpdate('admin')}
+                                className="flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200"
+                            >
+                                <Shield className="w-4 h-4" /> Make Admin
                             </button>
                         </>
                     )}
@@ -297,15 +329,15 @@ export function Users() {
                                         <td className="p-4 font-medium text-gray-900 dark:text-white">
                                             {user.name}
                                         </td>
-                                        <td className="p-4 text-gray-500">
+                                        <td className="p-4 text-gray-700 dark:text-gray-300">
                                             <div className="flex flex-col">
                                                 <span>{user.email}</span>
-                                                <span className="text-xs">{user.phone}</span>
+                                                <span className="text-xs text-gray-500 dark:text-gray-400">{user.phone}</span>
                                             </div>
                                         </td>
-                                        <td className="p-4 capitalize">{user.category}</td>
-                                        <td className="p-4">{user.institution}</td>
-                                        <td className="p-4">{user.district}</td>
+                                        <td className="p-4 capitalize text-gray-900 dark:text-gray-100">{user.category}</td>
+                                        <td className="p-4 text-gray-900 dark:text-gray-100">{user.institution}</td>
+                                        <td className="p-4 text-gray-900 dark:text-gray-100">{user.district}</td>
                                         <td className="p-4">
                                             <span className={cn(
                                                 "px-2 py-1 rounded-full text-xs font-medium",
@@ -322,7 +354,7 @@ export function Users() {
                                                 {user.disabled ? 'Disabled' : 'Active'}
                                             </span>
                                         </td>
-                                        <td className="p-4 text-gray-500">
+                                        <td className="p-4 text-gray-700 dark:text-gray-300">
                                             {new Date(user.created_at).toLocaleDateString()}
                                         </td>
                                         <td className="p-4 text-right">
@@ -334,16 +366,42 @@ export function Users() {
                                                 >
                                                     <Eye className="w-4 h-4" />
                                                 </button>
-                                                <button
-                                                    onClick={() => handleToggleStatus(user)}
-                                                    className={cn(
-                                                        "p-1",
-                                                        user.disabled ? "text-green-600 hover:text-green-700" : "text-red-600 hover:text-red-700"
-                                                    )}
-                                                    title={user.disabled ? "Enable User" : "Disable User"}
-                                                >
-                                                    {user.disabled ? <Shield className="w-4 h-4" /> : <ShieldOff className="w-4 h-4" />}
-                                                </button>
+
+                                                {/* Only Super Admin can disable other Admins */}
+                                                {(user.role !== 'admin' && user.role !== 'super_admin') || isSuperAdmin ? (
+                                                    <button
+                                                        onClick={() => handleToggleStatus(user)}
+                                                        className={cn(
+                                                            "p-1",
+                                                            user.disabled ? "text-green-600 hover:text-green-700" : "text-red-600 hover:text-red-700"
+                                                        )}
+                                                        title={user.disabled ? "Enable User" : "Disable User"}
+                                                        disabled={user.role === 'super_admin'}
+                                                    >
+                                                        {user.disabled ? <Shield className="w-4 h-4" /> : <ShieldOff className="w-4 h-4" />}
+                                                    </button>
+                                                ) : null}
+
+                                                {/* Role Management Logic */}
+                                                {user.role === 'user' && (
+                                                    <button
+                                                        onClick={() => handleRoleUpdate(user, 'admin')}
+                                                        className="p-1 text-purple-600 hover:text-purple-700"
+                                                        title="Make Admin"
+                                                    >
+                                                        <Shield className="w-4 h-4" />
+                                                    </button>
+                                                )}
+
+                                                {user.role === 'admin' && isSuperAdmin && (
+                                                    <button
+                                                        onClick={() => handleRoleUpdate(user, 'user')}
+                                                        className="p-1 text-gray-500 hover:text-gray-700"
+                                                        title="Remove Admin"
+                                                    >
+                                                        <UserX className="w-4 h-4" />
+                                                    </button>
+                                                )}
                                             </div>
                                         </td>
                                     </tr>
@@ -390,23 +448,23 @@ export function Users() {
                         <div className="flex items-start justify-between pb-6 border-b dark:border-gray-700">
                             <div>
                                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{selectedUser.name}</h2>
-                                <p className="text-gray-500">{selectedUser.email} • {selectedUser.phone}</p>
+                                <p className="text-gray-600 dark:text-gray-400">{selectedUser.email} • {selectedUser.phone}</p>
                                 <div className="mt-2 flex gap-2">
-                                    <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-sm">
+                                    <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded text-sm">
                                         {selectedUser.institution || 'No Institution'}
                                     </span>
-                                    <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-sm capitalize">
+                                    <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded text-sm capitalize">
                                         {selectedUser.category}
                                     </span>
                                     {selectedUser.district && (
-                                        <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded text-sm">
+                                        <span className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded text-sm">
                                             {selectedUser.district}
                                         </span>
                                     )}
                                 </div>
                             </div>
                             <div className="text-right">
-                                <p className="text-sm text-gray-500">Joined</p>
+                                <p className="text-sm text-gray-600 dark:text-gray-400">Joined</p>
                                 <p className="font-medium">{new Date(selectedUser.created_at).toLocaleDateString()}</p>
                             </div>
                         </div>
@@ -424,12 +482,12 @@ export function Users() {
                                     </h3>
                                     <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4 space-y-3">
                                         {userActivity.logins.length === 0 ? (
-                                            <p className="text-sm text-gray-500">No recent logins</p>
+                                            <p className="text-sm text-gray-600 dark:text-gray-400">No recent logins</p>
                                         ) : (
                                             userActivity.logins.map((login) => (
                                                 <div key={login.id} className="flex justify-between text-sm">
                                                     <span>{new Date(login.created_at).toLocaleString()}</span>
-                                                    <span className="text-gray-500">{login.ip_address || 'Unknown IP'}</span>
+                                                    <span className="text-gray-600 dark:text-gray-400">{login.ip_address || 'Unknown IP'}</span>
                                                 </div>
                                             ))
                                         )}
@@ -443,13 +501,13 @@ export function Users() {
                                     </h3>
                                     <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4 space-y-3">
                                         {userActivity.attempts.length === 0 ? (
-                                            <p className="text-sm text-gray-500">No quiz attempts</p>
+                                            <p className="text-sm text-gray-600 dark:text-gray-400">No quiz attempts</p>
                                         ) : (
                                             userActivity.attempts.map((attempt) => (
                                                 <div key={attempt.id} className="flex justify-between text-sm border-b dark:border-gray-600 last:border-0 pb-2 last:pb-0">
                                                     <div>
                                                         <p className="font-medium">Score: {attempt.score || 0}</p>
-                                                        <p className="text-xs text-gray-500">{new Date(attempt.started_at).toLocaleDateString()}</p>
+                                                        <p className="text-xs text-gray-600 dark:text-gray-400">{new Date(attempt.started_at).toLocaleDateString()}</p>
                                                     </div>
                                                     <span className={cn(
                                                         "px-2 py-0.5 rounded text-xs h-fit",

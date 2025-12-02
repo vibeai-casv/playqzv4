@@ -1,0 +1,19 @@
+# Disable error display (enable logging instead)
+php_flag display_errors Off
+php_flag log_errors On
+
+# Set maximum upload size
+php_value upload_max_filesize 10M
+php_value post_max_size 10M
+
+# Security - protect sensitive files
+<FilesMatch "\.(sql|md|json|lock|txt)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Protect config files
+<FilesMatch "^(config|db)\.php$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

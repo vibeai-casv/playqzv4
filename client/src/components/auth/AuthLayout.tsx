@@ -26,20 +26,20 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
 
                     {/* Logo Area */}
                     <div className="flex flex-col items-center mb-8">
-                        <div className="w-20 h-20 relative mb-4 p-3 bg-gradient-to-br from-card to-secondary rounded-2xl border border-primary/20 shadow-lg group hover-scale">
-                            <div className="absolute inset-0 bg-primary/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100" />
+                        <div className="w-32 h-32 relative mb-2 flex items-center justify-center group hover-scale">
+                            <div className="absolute inset-0 bg-primary/20 rounded-full blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-50" />
                             <img
-                                src="/aiqmpm.png"
+                                src="/aiq3.png"
                                 alt="PlayQz Logo"
-                                className="w-full h-full object-contain relative z-10 drop-shadow-md"
+                                className="w-full h-full object-contain relative z-10 drop-shadow-xl"
                             />
                         </div>
                         <div className="text-center">
                             <h2 className="text-2xl font-bold gradient-text tracking-tight">
-                                AI Quizzer
+                                AI Quiz for Learners
                             </h2>
                             <p className="text-sm text-primary/80 mt-1 font-medium">
-                                CAS Vattamkulam
+                                edu@ai 3.0, IHRD
                             </p>
                         </div>
                     </div>

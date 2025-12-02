@@ -25,4 +25,9 @@ define('SESSION_SAMESITE', 'Strict');
 // File upload settings
 define('MAX_UPLOAD_SIZE', 5242880); // 5MB
 define('ALLOWED_UPLOAD_TYPES', ['image/jpeg', 'image/png', 'image/webp', 'image/gif']);
+
+// AI Configuration
+define('AI_PROVIDER', 'openrouter'); // 'gemini' or 'openrouter'
+define('AI_API_KEY', ''); // Put your API key here
+define('AI_MODEL', 'google/gemini-2.0-flash-lite-preview-02-05:free'); // Model to use (e.g., 'google/gemini-2.0-flash-lite-preview-02-05:free' for OpenRouter)
 ?>

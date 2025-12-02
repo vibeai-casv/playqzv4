@@ -83,6 +83,20 @@ export function useAdmin() {
         }
     };
 
+    const updateUserRole = async (userId: string, role: 'user' | 'admin') => {
+        setIsLoading(true);
+        setError(null);
+        try {
+            await api.post('/admin/update_role.php', { user_id: userId, role });
+        } catch (err: unknown) {
+            const message = err instanceof Error ? err.message : 'An error occurred';
+            setError(message);
+            throw err;
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     // Question Management
     const fetchQuestions = useCallback(async (filters?: {
         category?: string;
@@ -100,7 +114,7 @@ export function useAdmin() {
         setError(null);
         try {
             const response = await api.get('/questions/list.php', { params: filters });
-            return { questions: response.data.data as Question[], total: 100 };
+            return { questions: response.data.data as Question[], total: response.data.total };
         } catch (err: unknown) {
             const message = err instanceof Error ? err.message : 'An error occurred';
             setError(message);
@@ -154,9 +168,19 @@ export function useAdmin() {
         }
     };
 
-    const generateQuestions = async (_params: any) => {
-        console.warn('generateQuestions not implemented');
-        return [];
+    const generateQuestions = async (params: { topic: string; count: number; difficulty: string; type: string }) => {
+        setIsLoading(true);
+        setError(null);
+        try {
+            const response = await api.post('/admin/generate_questions.php', params);
+            return response.data;
+        } catch (err: unknown) {
+            const message = err instanceof Error ? err.message : 'An error occurred';
+            setError(message);
+            throw err;
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     // Media Management
@@ -248,6 +272,7 @@ export function useAdmin() {
         fetchUserActivity,
         fetchActivityLogs,
         toggleUserStatus,
+        updateUserRole,
 
         // Question Management
         fetchQuestions,

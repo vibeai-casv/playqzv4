@@ -18,7 +18,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
 
     const userNavigation = [
         { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
-        { name: 'Take Quiz', href: '/take-quiz', icon: PlayCircle },
+        { name: 'Take Quiz', href: '/quiz-config', icon: PlayCircle },
         { name: 'History', href: '/history', icon: History },
         { name: 'Profile', href: '/profile', icon: User },
     ];
@@ -59,11 +59,9 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                 <div className="flex items-center justify-between h-20 px-6 border-b border-border relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-transparent opacity-50" />
                     <Link to="/dashboard" className="flex items-center space-x-3 relative z-10">
-                        <div className="w-10 h-10 relative group">
-                            <div className="absolute inset-0 bg-indigo-500 rounded-xl blur-lg opacity-40 group-hover:opacity-60 transition-opacity" />
-                            <div className="relative w-full h-full bg-card rounded-xl border border-border flex items-center justify-center overflow-hidden">
-                                <img src="/aiqmpm.png" alt="Logo" className="w-8 h-8 object-contain" />
-                            </div>
+                        <div className="w-12 h-12 relative group flex items-center justify-center">
+                            <div className="absolute inset-0 bg-indigo-500 rounded-full blur-lg opacity-20 group-hover:opacity-40 transition-opacity" />
+                            <img src="/aiq3.png" alt="Logo" className="w-full h-full object-contain relative z-10" />
                         </div>
                         <div>
                             <span className="font-bold text-lg text-foreground tracking-tight block">AI Quizzer</span>

@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Upload, FileJson, AlertCircle, CheckCircle2, XCircle } from 'lucide-react';
 import { toast } from 'sonner';
-import axios from 'axios';
+import api from '../../lib/api';
+import axios from 'axios'; // Keep axios for isAxiosError check
 
 interface ImportResult {
     imported: number;
@@ -55,13 +56,13 @@ export function JSONImporter({ onImportComplete, onCancel }: JSONImporterProps) 
             }
 
             // Send to API
-            const response = await axios.post(
-                `${import.meta.env.VITE_API_URL}/questions/import.php`,
+            // Send to API
+            const response = await api.post(
+                '/questions/import.php',
                 {
                     questions,
                     skipDuplicates
-                },
-                { withCredentials: true }
+                }
             );
 
             setResult(response.data);

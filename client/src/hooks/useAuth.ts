@@ -7,6 +7,7 @@ interface AuthState {
     isLoading: boolean;
     isAuthenticated: boolean;
     isAdmin: boolean;
+    isSuperAdmin: boolean;
     initialize: () => Promise<void>;
     signIn: (credentials: LoginCredentials) => Promise<void>;
     signUp: (data: SignupData) => Promise<void>;
@@ -20,6 +21,7 @@ export const useAuth = create<AuthState>((set, get) => ({
     isLoading: true,
     isAuthenticated: false,
     isAdmin: false,
+    isSuperAdmin: false,
 
     initialize: async () => {
         try {
@@ -33,15 +35,16 @@ export const useAuth = create<AuthState>((set, get) => ({
                     set({
                         user,
                         isAuthenticated: true,
-                        isAdmin: user.role === 'admin'
+                        isAdmin: user.role === 'admin' || user.role === 'super_admin',
+                        isSuperAdmin: user.role === 'super_admin'
                     });
                 } catch (error) {
                     console.error('Failed to fetch user profile', error);
                     localStorage.removeItem('auth_token');
-                    set({ user: null, isAuthenticated: false, isAdmin: false });
+                    set({ user: null, isAuthenticated: false, isAdmin: false, isSuperAdmin: false });
                 }
             } else {
-                set({ user: null, isAuthenticated: false, isAdmin: false });
+                set({ user: null, isAuthenticated: false, isAdmin: false, isSuperAdmin: false });
             }
         } catch (error) {
             console.error('Auth initialization error:', error);
@@ -59,7 +62,8 @@ export const useAuth = create<AuthState>((set, get) => ({
             set({
                 user,
                 isAuthenticated: true,
-                isAdmin: user.role === 'admin'
+                isAdmin: user.role === 'admin' || user.role === 'super_admin',
+                isSuperAdmin: user.role === 'super_admin'
             });
         } catch (error) {
             console.error('Login failed:', error);
@@ -76,7 +80,8 @@ export const useAuth = create<AuthState>((set, get) => ({
             set({
                 user,
                 isAuthenticated: true,
-                isAdmin: user.role === 'admin'
+                isAdmin: user.role === 'admin' || user.role === 'super_admin',
+                isSuperAdmin: user.role === 'super_admin'
             });
         } catch (error) {
             console.error('Signup failed:', error);
@@ -85,8 +90,14 @@ export const useAuth = create<AuthState>((set, get) => ({
     },
 
     signOut: async () => {
-        localStorage.removeItem('auth_token');
-        set({ user: null, isAuthenticated: false, isAdmin: false });
+        try {
+            await api.post('/auth/logout.php');
+        } catch (error) {
+            console.error('Logout API call failed:', error);
+        } finally {
+            localStorage.removeItem('auth_token');
+            set({ user: null, isAuthenticated: false, isAdmin: false, isSuperAdmin: false });
+        }
     },
 
     logout: async () => {
@@ -100,7 +111,8 @@ export const useAuth = create<AuthState>((set, get) => ({
             set({
                 user,
                 isAuthenticated: true,
-                isAdmin: user.role === 'admin'
+                isAdmin: user.role === 'admin' || user.role === 'super_admin',
+                isSuperAdmin: user.role === 'super_admin'
             });
         } catch (error) {
             console.error('Failed to refresh profile', error);

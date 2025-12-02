@@ -17,7 +17,7 @@ export function Questions() {
     const [questions, setQuestions] = useState<Question[]>([]);
     const [total, setTotal] = useState(0);
     const [page, setPage] = useState(1);
-    const [limit] = useState(20);
+    const [limit] = useState(50);
 
     // Filters
     const [search, setSearch] = useState('');
@@ -165,7 +165,7 @@ export function Questions() {
                             placeholder="Search questions..."
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
-                            className="w-full pl-10 pr-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                            className="w-full pl-10 pr-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                         />
                     </div>
                     <input
@@ -173,12 +173,12 @@ export function Questions() {
                         placeholder="Filter by Category"
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
-                        className="px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                        className="px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                     />
                     <select
                         value={type}
                         onChange={(e) => setType(e.target.value)}
-                        className="px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                        className="px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                     >
                         <option value="">All Types</option>
                         <option value="text_mcq">Multiple Choice</option>
@@ -189,7 +189,7 @@ export function Questions() {
                     <select
                         value={difficulty}
                         onChange={(e) => setDifficulty(e.target.value)}
-                        className="px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                        className="px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                     >
                         <option value="">All Difficulties</option>
                         <option value="easy">Easy</option>
@@ -199,7 +199,7 @@ export function Questions() {
                     <select
                         value={status}
                         onChange={(e) => setStatus(e.target.value as 'active' | 'inactive' | 'draft' | '')}
-                        className="px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                        className="px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                     >
                         <option value="">All Status</option>
                         <option value="active">Active</option>
@@ -209,7 +209,7 @@ export function Questions() {
                     <select
                         value={aiGenerated === undefined ? '' : aiGenerated.toString()}
                         onChange={(e) => setAiGenerated(e.target.value === '' ? undefined : e.target.value === 'true')}
-                        className="px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                        className="px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                     >
                         <option value="">All Sources</option>
                         <option value="true">AI Generated</option>
@@ -255,6 +255,7 @@ export function Questions() {
                                         className="rounded border-gray-300"
                                     />
                                 </th>
+                                <th className="p-4 w-10"></th> {/* Image Indicator */}
                                 <th className="p-4 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600" onClick={() => handleSort('question_text')}>
                                     <div className="flex items-center gap-2">
                                         Question <ArrowUpDown className="w-4 h-4" />
@@ -275,14 +276,19 @@ export function Questions() {
                                         Difficulty <ArrowUpDown className="w-4 h-4" />
                                     </div>
                                 </th>
+                                <th className="p-4 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600" onClick={() => handleSort('points')}>
+                                    <div className="flex items-center gap-2">
+                                        Pts <ArrowUpDown className="w-4 h-4" />
+                                    </div>
+                                </th>
                                 <th className="p-4 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600" onClick={() => handleSort('status')}>
                                     <div className="flex items-center gap-2">
                                         Status <ArrowUpDown className="w-4 h-4" />
                                     </div>
                                 </th>
-                                <th className="p-4 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600" onClick={() => handleSort('ai_generated')}>
+                                <th className="p-4 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600" onClick={() => handleSort('created_at')}>
                                     <div className="flex items-center gap-2">
-                                        Source <ArrowUpDown className="w-4 h-4" />
+                                        Created <ArrowUpDown className="w-4 h-4" />
                                     </div>
                                 </th>
                                 <th className="p-4 text-right">Actions</th>
@@ -291,13 +297,13 @@ export function Questions() {
                         <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                             {isLoading ? (
                                 <tr>
-                                    <td colSpan={8} className="p-8 text-center">
+                                    <td colSpan={10} className="p-8 text-center">
                                         <Loader2 className="w-8 h-8 animate-spin mx-auto text-indigo-600" />
                                     </td>
                                 </tr>
                             ) : questions.length === 0 ? (
                                 <tr>
-                                    <td colSpan={8} className="p-8 text-center text-gray-500">
+                                    <td colSpan={10} className="p-8 text-center text-gray-500 dark:text-gray-400">
                                         No questions found
                                     </td>
                                 </tr>
@@ -312,34 +318,48 @@ export function Questions() {
                                                 className="rounded border-gray-300"
                                             />
                                         </td>
-                                        <td className="p-4 max-w-md truncate" title={q.question_text}>
-                                            {q.question_text}
+                                        <td className="p-4">
+                                            {(q.image_url || q.media_id) && (
+                                                <div className="w-8 h-8 rounded bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-gray-500 dark:text-gray-400">
+                                                    <FileUp className="w-4 h-4" />
+                                                </div>
+                                            )}
                                         </td>
-                                        <td className="p-4 capitalize">{q.question_type.replace(/_/g, ' ')}</td>
-                                        <td className="p-4">{q.category}</td>
+                                        <td className="p-4 max-w-md">
+                                            <div className="truncate font-medium text-gray-900 dark:text-gray-100" title={q.question_text}>
+                                                {q.question_text}
+                                            </div>
+                                            <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5 truncate" title={q.correct_answer}>
+                                                Ans: {q.correct_answer}
+                                            </div>
+                                        </td>
+                                        <td className="p-4 capitalize text-sm text-gray-700 dark:text-gray-300">{q.question_type.replace(/_/g, ' ')}</td>
+                                        <td className="p-4 text-sm text-gray-700 dark:text-gray-300">{q.category}</td>
                                         <td className="p-4">
                                             <span className={cn(
                                                 "px-2 py-1 rounded-full text-xs font-medium capitalize",
-                                                q.difficulty === 'easy' ? "bg-green-100 text-green-700" :
-                                                    q.difficulty === 'medium' ? "bg-yellow-100 text-yellow-700" :
-                                                        "bg-red-100 text-red-700"
+                                                q.difficulty === 'easy' ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400" :
+                                                    q.difficulty === 'medium' ? "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400" :
+                                                        "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
                                             )}>
                                                 {q.difficulty}
                                             </span>
                                         </td>
+                                        <td className="p-4 text-sm font-medium text-gray-700 dark:text-gray-300">{q.points}</td>
                                         <td className="p-4">
                                             <span className={cn(
                                                 "px-2 py-1 rounded-full text-xs font-medium capitalize",
-                                                q.status === 'active' ? "bg-green-100 text-green-700" :
-                                                    q.status === 'inactive' ? "bg-gray-100 text-gray-700" :
-                                                        "bg-yellow-100 text-yellow-700"
+                                                q.status === 'active' ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400" :
+                                                    q.status === 'inactive' ? "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-400" :
+                                                        "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400"
                                             )}>
                                                 {q.status}
                                             </span>
                                         </td>
-                                        <td className="p-4">
+                                        <td className="p-4 text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">
+                                            {new Date(q.created_at).toLocaleDateString()}
                                             {q.ai_generated && (
-                                                <span className="flex items-center gap-1 text-xs text-purple-600 bg-purple-50 px-2 py-1 rounded-full w-fit">
+                                                <span className="ml-2 inline-flex items-center gap-0.5 text-[10px] text-purple-600 bg-purple-50 dark:bg-purple-900/20 px-1.5 py-0.5 rounded-full border border-purple-100 dark:border-purple-800">
                                                     <Sparkles className="w-3 h-3" /> AI
                                                 </span>
                                             )}
@@ -351,13 +371,15 @@ export function Questions() {
                                                         setEditingQuestion(q);
                                                         setIsEditorOpen(true);
                                                     }}
-                                                    className="p-1 text-gray-500 hover:text-indigo-600"
+                                                    className="p-1 text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                                                    title="Edit"
                                                 >
                                                     <Edit className="w-4 h-4" />
                                                 </button>
                                                 <button
                                                     onClick={() => handleDelete(q.id)}
-                                                    className="p-1 text-gray-500 hover:text-red-600"
+                                                    className="p-1 text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors"
+                                                    title="Delete"
                                                 >
                                                     <Trash2 className="w-4 h-4" />
                                                 </button>
@@ -372,21 +394,21 @@ export function Questions() {
 
                 {/* Pagination */}
                 <div className="p-4 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center">
-                    <span className="text-sm text-gray-500">
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
                         Showing {((page - 1) * limit) + 1} to {Math.min(page * limit, total)} of {total} questions
                     </span>
                     <div className="flex gap-2">
                         <button
                             onClick={() => setPage(p => Math.max(1, p - 1))}
                             disabled={page === 1}
-                            className="p-2 border rounded hover:bg-gray-50 disabled:opacity-50"
+                            className="p-2 border rounded hover:bg-gray-50 disabled:opacity-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
                         >
                             <ChevronLeft className="w-4 h-4" />
                         </button>
                         <button
                             onClick={() => setPage(p => p + 1)}
                             disabled={page * limit >= total}
-                            className="p-2 border rounded hover:bg-gray-50 disabled:opacity-50"
+                            className="p-2 border rounded hover:bg-gray-50 disabled:opacity-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
                         >
                             <ChevronRight className="w-4 h-4" />
                         </button>

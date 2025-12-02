@@ -1,0 +1,452 @@
+[
+  {
+    "id": 11,
+    "type": "text_mcq",
+    "category": "Latest Developments",
+    "difficulty": "easy",
+    "question": "Which company developed the large language model known as GPT-4?",
+    "options": ["Google", "OpenAI", "Meta", "Microsoft"],
+    "correct_answer": "OpenAI"
+  },
+  {
+    "id": 12,
+    "type": "text_mcq",
+    "category": "Latest Developments",
+    "difficulty": "easy",
+    "question": "What is the name of the AI model from Google that powers its Bard chatbot?",
+    "options": ["Claude", "Gemini", "Llama", "Jurassic-2"],
+    "correct_answer": "Gemini"
+  },
+  {
+    "id": 13,
+    "type": "text_mcq",
+    "category": "Latest Developments",
+    "difficulty": "medium",
+    "question": "OpenAI's Sora model is primarily known for generating what type of content?",
+    "options": ["Music", "Code", "Video", "3D Models"],
+    "correct_answer": "Video"
+  },
+  {
+    "id": 14,
+    "type": "text_mcq",
+    "category": "Latest Developments",
+    "difficulty": "medium",
+    "question": "Which company released the open-source large language model Llama 3?",
+    "options": ["Apple", "Meta", "Amazon", "IBM"],
+    "correct_answer": "Meta"
+  },
+  {
+    "id": 15,
+    "type": "text_mcq",
+    "category": "Latest Developments",
+    "difficulty": "hard",
+    "question": "What is a key architectural difference often cited between a standard Transformer and models like Mamba or RWKV?",
+    "options": ["They use convolutional layers", "They are state-space models or RNNs, reducing quadratic attention complexity", "They are exclusively designed for image processing", "They do not use any form of attention"],
+    "correct_answer": "They are state-space models or RNNs, reducing quadratic attention complexity"
+  },
+  {
+    "id": 16,
+    "type": "text_mcq",
+    "category": "AI Safety",
+    "difficulty": "easy",
+    "question": "In AI ethics, what is the term for an AI system producing confident but incorrect or nonsensical outputs?",
+    "options": ["Bias", "Overfitting", "Hallucination", "Variance"],
+    "correct_answer": "Hallucination"
+  },
+  {
+    "id": 17,
+    "type": "text_mcq",
+    "category": "AI Safety",
+    "difficulty": "easy",
+    "question": "What is the primary goal of the AI research field known as 'Alignment'?",
+    "options": ["To make models run faster", "To ensure AI systems' goals are aligned with human values", "To align text in user interfaces", "To improve image recognition accuracy"],
+    "correct_answer": "To ensure AI systems' goals are aligned with human values"
+  },
+  {
+    "id": 18,
+    "type": "text_mcq",
+    "category": "AI Safety",
+    "difficulty": "medium",
+    "question": "Which technique is commonly used to reduce harmful or biased outputs from a large language model during the training phase?",
+    "options": ["Reinforcement Learning from Human Feedback (RLHF)", "Data Augmentation", "Gradient Descent", "Tokenization"],
+    "correct_answer": "Reinforcement Learning from Human Feedback (RLHF)"
+  },
+  {
+    "id": 19,
+    "type": "text_mcq",
+    "category": "AI Safety",
+    "difficulty": "medium",
+    "question": "The EU AI Act classifies AI systems based on what?",
+    "options": ["Their processing speed", "Their level of risk", "The programming language used", "The company that developed them"],
+    "correct_answer": "Their level of risk"
+  },
+  {
+    "id": 20,
+    "type": "text_mcq",
+    "category": "AI Safety",
+    "difficulty": "hard",
+    "question": "In AI safety, what does the 'orthogonality thesis' propose?",
+    "options": ["Intelligence and final goals are orthogonal; any level of intelligence can be combined with any goal", "AI systems must be trained on orthogonal data", "Neural network layers should be orthogonal for efficiency", "AI safety research is orthogonal to AI capabilities research"],
+    "correct_answer": "Intelligence and final goals are orthogonal; any level of intelligence can be combined with any goal"
+  },
+  {
+    "id": 21,
+    "type": "text_mcq",
+    "category": "Robotics",
+    "difficulty": "easy",
+    "question": "Which company is famously known for developing advanced humanoid and dynamic robots like Atlas and Spot?",
+    "options": ["Boston Dynamics", "Tesla", "iRobot", "Fanuc"],
+    "correct_answer": "Boston Dynamics"
+  },
+  {
+    "id": 22,
+    "type": "text_mcq",
+    "category": "Robotics",
+    "difficulty": "easy",
+    "question": "What type of sensor is commonly used in robotics to measure distance using laser light?",
+    "options": ["IMU", "LIDAR", "Sonar", "Gyroscope"],
+    "correct_answer": "LIDAR"
+  },
+  {
+    "id": 23,
+    "type": "text_mcq",
+    "category": "Robotics",
+    "difficulty": "medium",
+    "question": "In robotics, what does SLAM stand for?",
+    "options": ["Simple Locomotion and Manipulation", "Simultaneous Localization and Mapping", "Sensory Logic for Autonomous Machines", "Sequential Learning for Action Models"],
+    "correct_answer": "Simultaneous Localization and Mapping"
+  },
+  {
+    "id": 24,
+    "type": "text_mcq",
+    "category": "Robotics",
+    "difficulty": "medium",
+    "question": "What is the primary purpose of an IMU (Inertial Measurement Unit) in a robot?",
+    "options": ["To process visual data", "To track the robot's position, orientation, and velocity", "To communicate with other robots", "To provide power to the actuators"],
+    "correct_answer": "To track the robot's position, orientation, and velocity"
+  },
+  {
+    "id": 25,
+    "type": "text_mcq",
+    "category": "Robotics",
+    "difficulty": "hard",
+    "question": "Which control strategy for bipedal robots often involves designing the robot's dynamics and mechanics to naturally facilitate stable walking, reducing the need for complex control?",
+    "options": ["PID Control", "Zero-Moment Point (ZMP) control", "Passive Dynamic Walking", "Model Predictive Control"],
+    "correct_answer": "Passive Dynamic Walking"
+  },
+  {
+    "id": 26,
+    "type": "text_mcq",
+    "category": "Quantum Computing",
+    "difficulty": "easy",
+    "question": "What is the fundamental unit of information in a quantum computer called?",
+    "options": ["Quantum Bit (Qubit)", "Transistor", "Binary Digit (Bit)", "Quantum Gate"],
+    "correct_answer": "Quantum Bit (Qubit)"
+  },
+  {
+    "id": 27,
+    "type": "text_mcq",
+    "category": "Quantum Computing",
+    "difficulty": "easy",
+    "question": "What quantum mechanical phenomenon allows a qubit to be in a superposition of 0 and 1 simultaneously?",
+    "options": ["Entanglement", "Superposition", "Tunneling", "Decoherence"],
+    "correct_answer": "Superposition"
+  },
+  {
+    "id": 28,
+    "type": "text_mcq",
+    "category": "Quantum Computing",
+    "difficulty": "medium",
+    "question": "What is the term for the strong correlation between quantum particles, where the state of one instantly influences the state of another, regardless of distance?",
+    "options": ["Superposition", "Interference", "Entanglement", "Coherence"],
+    "correct_answer": "Entanglement"
+  },
+  {
+    "id": 29,
+    "type": "text_mcq",
+    "category": "Quantum Computing",
+    "difficulty": "medium",
+    "question": "Which algorithm, developed by Peter Shor, allows a quantum computer to factor large integers exponentially faster than the best-known classical algorithm?",
+    "options": ["Grover's Algorithm", "Shor's Algorithm", "Deutsch-Jozsa Algorithm", "Quantum Fourier Transform"],
+    "correct_answer": "Shor's Algorithm"
+  },
+  {
+    "id": 30,
+    "type": "text_mcq",
+    "category": "Quantum Computing",
+    "difficulty": "hard",
+    "question": "What is the primary challenge of 'decoherence' in building practical quantum computers?",
+    "options": ["It makes qubits too fast to control", "It causes the loss of quantum state due to interaction with the environment", "It prevents qubits from being entangled", "It makes quantum algorithms run slower than classical ones"],
+    "correct_answer": "It causes the loss of quantum state due to interaction with the environment"
+  },
+  {
+    "id": 31,
+    "type": "text_mcq",
+    "category": "Generative AI",
+    "difficulty": "easy",
+    "question": "What type of neural network architecture is most commonly associated with Generative Adversarial Networks (GANs)?",
+    "options": ["Convolutional Neural Network (CNN)", "Recurrent Neural Network (RNN)", "Transformer", "Autoencoder"],
+    "correct_answer": "Convolutional Neural Network (CNN)"
+  },
+  {
+    "id": 32,
+    "type": "text_mcq",
+    "category": "Generative AI",
+    "difficulty": "easy",
+    "question": "Which component of a GAN is responsible for generating new, synthetic data?",
+    "options": ["The Discriminator", "The Generator", "The Encoder", "The Decoder"],
+    "correct_answer": "The Generator"
+  },
+  {
+    "id": 33,
+    "type": "text_mcq",
+    "category": "Generative AI",
+    "difficulty": "medium",
+    "question": "In the context of image generation, what does 'Diffusion Modeling' involve?",
+    "options": ["Training two networks against each other", "Gradually adding noise to an image and then learning to reverse the process", "Using attention mechanisms to relate different parts of an image", "Compressing an image into a latent space and reconstructing it"],
+    "correct_answer": "Gradually adding noise to an image and then learning to reverse the process"
+  },
+  {
+    "id": 34,
+    "type": "text_mcq",
+    "category": "Generative AI",
+    "difficulty": "medium",
+    "question": "What is the primary function of the 'CLIP' model developed by OpenAI in generative AI pipelines?",
+    "options": ["To generate high-resolution images", "To understand and link visual concepts with natural language", "To remove noise from images", "To animate static images"],
+    "correct_answer": "To understand and link visual concepts with natural language"
+  },
+  {
+    "id": 35,
+    "type": "text_mcq",
+    "category": "Generative AI",
+    "difficulty": "hard",
+    "question": "In a Variational Autoencoder (VAE), what is the key difference from a standard autoencoder that enables it to generate new data?",
+    "options": ["It has a larger latent space", "Its encoder outputs a probability distribution over the latent space, allowing for sampling", "It uses a transformer architecture", "It is trained adversarially"],
+    "correct_answer": "Its encoder outputs a probability distribution over the latent space, allowing for sampling"
+  },
+  {
+    "id": 36,
+    "type": "text_mcq",
+    "category": "Latest Developments",
+    "difficulty": "easy",
+    "question": "What does the 'multimodal' capability of models like GPT-4V refer to?",
+    "options": ["Ability to speak multiple languages", "Ability to understand and process multiple types of data (e.g., text and images)", "Ability to run on multiple devices", "Ability to use multiple processing cores"],
+    "correct_answer": "Ability to understand and process multiple types of data (e.g., text and images)"
+  },
+  {
+    "id": 37,
+    "type": "text_mcq",
+    "category": "AI Safety",
+    "difficulty": "medium",
+    "question": "What is 'model poisoning' in the context of AI security?",
+    "options": ["When a model generates toxic text", "When training data is manipulated to compromise the model's performance or behavior", "When a model's weights are corrupted on disk", "When a user provides harmful prompts to a model"],
+    "correct_answer": "When training data is manipulated to compromise the model's performance or behavior"
+  },
+  {
+    "id": 38,
+    "type": "text_mcq",
+    "category": "Robotics",
+    "difficulty": "medium",
+    "question": "Which actuator type, often inspired by biological muscles, is known for its compliance and is used in soft robotics?",
+    "options": ["Servo Motor", "Hydraulic Cylinder", "Pneumatic Artificial Muscle", "Stepper Motor"],
+    "correct_answer": "Pneumatic Artificial Muscle"
+  },
+  {
+    "id": 39,
+    "type": "text_mcq",
+    "category": "Quantum Computing",
+    "difficulty": "easy",
+    "question": "Which company offers cloud-based access to quantum processors via its Braket service?",
+    "options": ["Amazon Web Services (AWS)", "Google Cloud", "Microsoft Azure", "IBM Cloud"],
+    "correct_answer": "Amazon Web Services (AWS)"
+  },
+  {
+    "id": 40,
+    "type": "text_mcq",
+    "category": "Generative AI",
+    "difficulty": "easy",
+    "question": "Stable Diffusion is primarily used for generating what?",
+    "options": ["Text", "Music", "Images", "Video"],
+    "correct_answer": "Images"
+  },
+  {
+    "id": 41,
+    "type": "text_mcq",
+    "category": "Latest Developments",
+    "difficulty": "hard",
+    "question": "What is 'Mixture-of-Experts' (MoE) in the context of large language models?",
+    "options": ["A panel of human experts who review model outputs", "An architecture where different parts of the network (experts) are activated for different inputs", "A method for combining multiple, entirely separate models", "A training technique that uses expert-curated datasets"],
+    "correct_answer": "An architecture where different parts of the network (experts) are activated for different inputs"
+  },
+  {
+    "id": 42,
+    "type": "text_mcq",
+    "category": "AI Safety",
+    "difficulty": "medium",
+    "question": "The 'sandwiching' or 'treble' technique in AI evaluation involves what?",
+    "options": ["Training a model on layered data", "Comparing a model's performance against a weaker model, a stronger model, and human performance", "Using three different loss functions", "Testing a model in three different environments"],
+    "correct_answer": "Comparing a model's performance against a weaker model, a stronger model, and human performance"
+  },
+  {
+    "id": 43,
+    "type": "text_mcq",
+    "category": "Robotics",
+    "difficulty": "hard",
+    "question": "In robot kinematics, what does the 'Denavit-Hartenberg (D-H) parameters' convention provide?",
+    "options": ["A standardized method for assigning coordinate frames to the links of a robot manipulator", "The maximum speed of a robotic joint", "The power consumption of a motor", "The material properties of a robot's chassis"],
+    "correct_answer": "A standardized method for assigning coordinate frames to the links of a robot manipulator"
+  },
+  {
+    "id": 44,
+    "type": "text_mcq",
+    "category": "Quantum Computing",
+    "difficulty": "medium",
+    "question": "Which quantum algorithm provides a quadratic speedup for searching an unsorted database?",
+    "options": ["Shor's Algorithm", "Grover's Algorithm", "Quantum Phase Estimation", "Variational Quantum Eigensolver"],
+    "correct_answer": "Grover's Algorithm"
+  },
+  {
+    "id": 45,
+    "type": "text_mcq",
+    "category": "Generative AI",
+    "difficulty": "medium",
+    "question": "What is the primary role of a 'tokenizer' in a text-based generative model?",
+    "options": ["To generate security tokens for API access", "To convert text into numerical tokens that the model can process", "To identify and remove toxic language", "To translate between languages"],
+    "correct_answer": "To convert text into numerical tokens that the model can process"
+  },
+  {
+    "id": 46,
+    "type": "text_mcq",
+    "category": "Latest Developments",
+    "difficulty": "medium",
+    "question": "What is a key feature of 'Retentive Networks' (RetNet) proposed as an alternative to Transformers?",
+    "options": ["They use a sliding window for context", "They employ a retention mechanism for parallel and recurrent training", "They are exclusively for vision tasks", "They eliminate the need for backpropagation"],
+    "correct_answer": "They employ a retention mechanism for parallel and recurrent training"
+  },
+  {
+    "id": 47,
+    "type": "text_mcq",
+    "category": "AI Safety",
+    "difficulty": "hard",
+    "question": "In AI alignment, what does the 'instrumental convergence' thesis suggest?",
+    "options": ["AI will inevitably converge on using the same tools", "Highly capable AI systems are likely to pursue certain sub-goals (e.g., self-preservation, resource acquisition) regardless of their primary goal", "Different AI models will converge to the same answers", "Training methods for AI are converging to a single best practice"],
+    "correct_answer": "Highly capable AI systems are likely to pursue certain sub-goals (e.g., self-preservation, resource acquisition) regardless of their primary goal"
+  },
+  {
+    "id": 48,
+    "type": "text_mcq",
+    "category": "Robotics",
+    "difficulty": "easy",
+    "question": "What is the name of Tesla's humanoid robot project?",
+    "options": ["Atlas", "Optimus", "ASIMO", "Pepper"],
+    "correct_answer": "Optimus"
+  },
+  {
+    "id": 49,
+    "type": "text_mcq",
+    "category": "Quantum Computing",
+    "difficulty": "hard",
+    "question": "What is the 'no-cloning theorem' in quantum mechanics?",
+    "options": ["It is impossible to create an identical copy of an arbitrary unknown quantum state", "Quantum computers cannot clone classical bits", "Qubits cannot be manufactured in large quantities", "Quantum algorithms cannot be copyrighted"],
+    "correct_answer": "It is impossible to create an identical copy of an arbitrary unknown quantum state"
+  },
+  {
+    "id": 50,
+    "type": "text_mcq",
+    "category": "Generative AI",
+    "difficulty": "hard",
+    "question": "In the transformer architecture used by LLMs, what is the purpose of the 'key' vector in the self-attention mechanism?",
+    "options": ["It represents the current token being processed and is used to compute the output", "It is compared against the query vector to produce an attention score", "It holds the final output representation of a token", "It stores the positional encoding information"],
+    "correct_answer": "It is compared against the query vector to produce an attention score"
+  },
+  {
+    "id": 51,
+    "type": "text_mcq",
+    "category": "Latest Developments",
+    "difficulty": "easy",
+    "question": "Which AI model by OpenAI can generate and edit images based on textual descriptions?",
+    "options": ["GPT-4", "DALL-E", "Whisper", "Codex"],
+    "correct_answer": "DALL-E"
+  },
+  {
+    "id": 52,
+    "type": "text_mcq",
+    "category": "AI Safety",
+    "difficulty": "easy",
+    "question": "What does 'red teaming' an AI model involve?",
+    "options": ["Painting the server housing the model red", "Systematically trying to make the model fail or produce harmful outputs to improve its safety", "Using the model for offensive cybersecurity tasks", "Training the model exclusively on positive data"],
+    "correct_answer": "Systematically trying to make the model fail or produce harmful outputs to improve its safety"
+  },
+  {
+    "id": 53,
+    "type": "text_mcq",
+    "category": "Robotics",
+    "difficulty": "medium",
+    "question": "What is the primary advantage of a 'series elastic actuator' in robotics?",
+    "options": ["Higher maximum force output", "Improved shock absorption and force control", "Lower cost", "Faster response time"],
+    "correct_answer": "Improved shock absorption and force control"
+  },
+  {
+    "id": 54,
+    "type": "text_mcq",
+    "category": "Quantum Computing",
+    "difficulty": "medium",
+    "question": "What is the main purpose of 'error correction' in quantum computing?",
+    "options": ["To fix bugs in quantum algorithms", "To compensate for decoherence and operational errors in qubits", "To translate quantum results into classical bits", "To cool down the quantum processor"],
+    "correct_answer": "To compensate for decoherence and operational errors in qubits"
+  },
+  {
+    "id": 55,
+    "type": "text_mcq",
+    "category": "Generative AI",
+    "difficulty": "easy",
+    "question": "What does the 'temperature' parameter control in a language model like GPT?",
+    "options": ["The computational speed of the model", "The randomness of the output; lower temperature means more deterministic outputs", "The physical temperature of the GPU", "The number of layers activated in the model"],
+    "correct_answer": "The randomness of the output; lower temperature means more deterministic outputs"
+  },
+  {
+    "id": 56,
+    "type": "text_mcq",
+    "category": "Latest Developments",
+    "difficulty": "medium",
+    "question": "What is 'chain-of-thought' (CoT) prompting?",
+    "options": ["A method for linking multiple AI models together", "A prompting technique that encourages the model to explain its reasoning step-by-step", "A way to track the provenance of training data", "A security protocol for AI APIs"],
+    "correct_answer": "A prompting technique that encourages the model to explain its reasoning step-by-step"
+  },
+  {
+    "id": 57,
+    "type": "text_mcq",
+    "category": "AI Safety",
+    "difficulty": "hard",
+    "question": "What is the 'Riemann Hypothesis' of AI safety, a term sometimes used to refer to a particularly difficult and foundational problem in the field?",
+    "options": ["The problem of scalable oversight", "The problem of defining human values precisely for an AI", "The problem of meta-learning", "The problem of multi-agent coordination"],
+    "correct_answer": "The problem of defining human values precisely for an AI"
+  },
+  {
+    "id": 58,
+    "type": "text_mcq",
+    "category": "Robotics",
+    "difficulty": "hard",
+    "question": "Which mathematical structure is central to the modern formulation of robot motion planning and control, representing all possible configurations of a robot?",
+    "options": ["Euclidean Space", "Configuration Space (C-space)", "Vector Space", "Tensor Field"],
+    "correct_answer": "Configuration Space (C-space)"
+  },
+  {
+    "id": 59,
+    "type": "text_mcq",
+    "category": "Quantum Computing",
+    "difficulty": "easy",
+    "question": "Which physical phenomenon is a common challenge that requires quantum computers to be cooled to temperatures near absolute zero?",
+    "options": ["Decoherence", "Superposition", "Entanglement", "Tunneling"],
+    "correct_answer": "Decoherence"
+  },
+  {
+    "id": 60,
+    "type": "text_mcq",
+    "category": "Generative AI",
+    "difficulty": "medium",
+    "question": "In a transformer model, what is the purpose of the 'positional encoding'?",
+    "options": ["To encrypt the input data for security", "To provide the model with information about the order of tokens in the sequence", "To determine the physical location of the server", "To encode the output into a specific format"],
+    "correct_answer": "To provide the model with information about the order of tokens in the sequence"
+  }
+]

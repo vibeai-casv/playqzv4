@@ -1,0 +1,702 @@
+[
+{
+"id": 11,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "easy",
+"question": "Which company develops the GPT-4 family of large language models used widely for natural language understanding and generation?",
+"options": [
+"OpenAI",
+"Google DeepMind",
+"Meta",
+"Anthropic"
+],
+"correct_answer": "OpenAI"
+},
+{
+"id": 12,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "medium",
+"question": "Google’s Gemini models are particularly known for which key capability compared with earlier single‑modal language models?",
+"options": [
+"Strictly numeric computation only",
+"Multimodal reasoning across text, images, and other inputs",
+"Operating only on offline datasets",
+"Functioning exclusively as a web browser"
+],
+"correct_answer": "Multimodal reasoning across text, images, and other inputs"
+},
+{
+"id": 13,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "medium",
+"question": "Meta’s Llama 3 models are often highlighted for which advantage in enterprise and research use?",
+"options": [
+"They are only available as closed, proprietary APIs",
+"They are open‑weight models that organizations can self‑host",
+"They run exclusively on mobile phones",
+"They do not require any GPUs to run"
+],
+"correct_answer": "They are open‑weight models that organizations can self‑host"
+},
+{
+"id": 14,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "medium",
+"question": "Compared with GPT‑4, what is a commonly cited benefit of Meta’s larger Llama 3 variants when deployed through some cloud providers?",
+"options": [
+"They are always slower but more accurate",
+"They are often cheaper and can respond faster at similar quality on many tasks",
+"They never require fine‑tuning or prompt engineering",
+"They only support code generation, not general language tasks"
+],
+"correct_answer": "They are often cheaper and can respond faster at similar quality on many tasks"
+},
+{
+"id": 15,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "easy",
+"question": "Which company releases the Gemini family of foundation models integrated deeply with its search and productivity tools?",
+"options": [
+"Apple",
+"Google",
+"Meta",
+"IBM"
+],
+"correct_answer": "Google"
+},
+{
+"id": 16,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "medium",
+"question": "Which of the following best describes OpenAI’s Sora model?",
+"options": [
+"A purely audio transcription system",
+"A text‑to‑3D printing controller",
+"A text‑to‑video generative model that creates realistic clips from prompts",
+"A database indexing engine for relational data"
+],
+"correct_answer": "A text‑to‑video generative model that creates realistic clips from prompts"
+},
+{
+"id": 17,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "hard",
+"question": "In recent evaluations of frontier models like GPT‑4, Gemini, and Llama 3, which benchmark family is commonly used to measure broad general knowledge and reasoning?",
+"options": [
+"MMLU",
+"ImageNet",
+"CIFAR‑10",
+"BLEU"
+],
+"correct_answer": "MMLU"
+},
+{
+"id": 18,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "medium",
+"question": "A practical advantage of using Llama 3 models for developers compared with some closed models is that they can be:",
+"options": [
+"Trained only on handwritten documents",
+"Self‑hosted and fine‑tuned on private infrastructure for customization",
+"Executed only on specialized quantum hardware",
+"Used only through a single vendor’s website"
+],
+"correct_answer": "Self‑hosted and fine‑tuned on private infrastructure for customization"
+},
+{
+"id": 19,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "easy",
+"question": "GPT‑4 and similar large language models are most commonly accessed by application developers through which mechanism?",
+"options": [
+"Physical USB dongles",
+"Application programming interfaces (APIs) over the internet",
+"Bluetooth pairing",
+"Embedded firmware updates"
+],
+"correct_answer": "Application programming interfaces (APIs) over the internet"
+},
+{
+"id": 20,
+"type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "medium",
+"question": "Which statement best characterizes the relationship between GPT‑4, Gemini, and Llama 3 in the current AI ecosystem?",
+"options": [
+"They are the only existing AI models",
+"They are prominent foundation models competing on quality, cost, and modality support",
+"They are specialized only for robotic control",
+"They are restricted to academic research and cannot be used commercially"
+],
+"correct_answer": "They are prominent foundation models competing on quality, cost, and modality support"
+},
+{
+"id": 21,
+"type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "easy",
+"question": "In AI safety, "alignment" primarily refers to ensuring that an AI system’s behavior is aligned with:",
+"options": [
+"Random choices made by the model",
+"Developers’ and society’s intended goals, preferences, and values",
+"The fastest possible hardware configuration",
+"Only the training dataset labels"
+],
+"correct_answer": "Developers’ and society’s intended goals, preferences, and values"
+},
+{
+"id": 22,
+"type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "medium",
+"question": "Which of the following is a key governance concern motivating AI regulation in many countries?",
+"options": [
+"Maximizing GPU production only",
+"Preventing harmful bias, discrimination, and misuse of AI systems",
+"Ensuring that only one company can train models",
+"Banning all forms of automation"
+],
+"correct_answer": "Preventing harmful bias, discrimination, and misuse of AI systems"
+},
+{
+"id": 23,
+"type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "medium",
+"question": "What is an "AI hallucination" in the context of large language models?",
+"options": [
+"The model refusing to answer a question",
+"The model generating confident but incorrect or fabricated information",
+"The model using too many tokens in an answer",
+"The model timing out due to network issues"
+],
+"correct_answer": "The model generating confident but incorrect or fabricated information"
+},
+{
+"id": 24,
+"type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "hard",
+"question": "Which technique is often used to reduce harmful content and bias by adjusting a model after pre‑training?",
+"options": [
+"Random weight initialization",
+"Reinforcement learning from human feedback (RLHF)",
+"Hardware overclocking",
+"Lossless data compression"
+],
+"correct_answer": "Reinforcement learning from human feedback (RLHF)"
+},
+{
+"id": 25,
+"type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "medium",
+"question": "From a safety perspective, why is high‑quality and diverse training data important?",
+"options": [
+"It guarantees zero energy consumption in data centers",
+"It reduces bias and helps models produce more accurate, reliable outputs",
+"It makes models incompatible with existing software",
+"It prevents models from being fine‑tuned"
+],
+"correct_answer": "It reduces bias and helps models produce more accurate, reliable outputs"
+},
+{
+"id": 26,
+"type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "medium",
+"question": "Human‑in‑the‑loop workflows are used in AI systems mainly to:",
+"options": [
+"Replace all safety checks with automation",
+"Allow human experts to review and correct AI outputs in critical contexts",
+"Slow down all decision‑making deliberately",
+"Disable model logging for privacy"
+],
+"correct_answer": "Allow human experts to review and correct AI outputs in critical contexts"
+},
+{
+"id": 27,
+"type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "hard",
+"question": "Which of the following tools or frameworks is specifically associated with detecting or mitigating bias and fairness issues in machine learning models?",
+"options": [
+"IBM AI Fairness 360",
+"OpenGL",
+"TensorRT",
+"CUDA Toolkit"
+],
+"correct_answer": "IBM AI Fairness 360"
+},
+{
+"id": 28,
+"type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "hard",
+"question": "A key regulatory priority in many AI laws and guidelines is to ensure that high‑risk AI systems are:",
+"options": [
+"Deployed without testing to encourage innovation",
+"Subject to transparency, risk assessment, and human oversight requirements",
+"Restricted only by GPU memory limits",
+"Used only for entertainment applications"
+],
+"correct_answer": "Subject to transparency, risk assessment, and human oversight requirements"
+},
+{
+"id": 29,
+"type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "medium",
+"question": "Which practice can help reduce hallucinations in retrieval‑augmented generation systems?",
+"options": [
+"Ignoring external documents and relying only on the base model",
+"Using high‑quality, relevant retrieval sources and grounding answers in cited documents",
+"Randomly shuffling retrieved passages before answering",
+"Removing all references from outputs"
+],
+"correct_answer": "Using high‑quality, relevant retrieval sources and grounding answers in cited documents"
+},
+{
+"id": 30,
+"type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "easy",
+"question": "Why is privacy a core concern in AI safety and governance?",
+"options": [
+"AI systems can only operate on encrypted data",
+"Models trained on personal data may expose or misuse sensitive information",
+"Privacy has no relation to AI deployment",
+"Privacy applies only to robotics, not software models"
+],
+"correct_answer": "Models trained on personal data may expose or misuse sensitive information"
+},
+{
+"id": 31,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "easy",
+"question": "Boston Dynamics is widely known for developing which type of advanced robotic platforms?",
+"options": [
+"Database servers",
+"Humanoid and legged robots capable of dynamic movement",
+"Purely virtual chatbots",
+"Nanorobots for medical injections"
+],
+"correct_answer": "Humanoid and legged robots capable of dynamic movement"
+},
+{
+"id": 32,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "medium",
+"question": "In mobile robotics, which category of sensors is typically used to perceive distance to obstacles and support navigation?",
+"options": [
+"LIDAR and ultrasonic rangefinders",
+"Inkjet printers",
+"Mechanical keyboards",
+"Optical disk drives"
+],
+"correct_answer": "LIDAR and ultrasonic rangefinders"
+},
+{
+"id": 33,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "medium",
+"question": "What is a primary design goal of humanoid robots such as Atlas or other bipedal platforms?",
+"options": [
+"To operate only underwater",
+"To move and interact in environments built for humans, such as stairs and tools",
+"To replace industrial conveyor belts",
+"To function only in microgravity"
+],
+"correct_answer": "To move and interact in environments built for humans, such as stairs and tools"
+},
+{
+"id": 34,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "medium",
+"question": "Which statement best describes the role of computer vision in modern robots?",
+"options": [
+"It is used only for decorative lighting",
+"It enables robots to interpret camera data for tasks like object detection and navigation",
+"It replaces all other sensors in a robot",
+"It only measures battery voltage"
+],
+"correct_answer": "It enables robots to interpret camera data for tasks like object detection and navigation"
+},
+{
+"id": 35,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "hard",
+"question": "In robotics, an inertial measurement unit (IMU) typically combines which sensing capabilities?",
+"options": [
+"Temperature and humidity only",
+"Acceleration and angular velocity, often with magnetometer data",
+"Pressure and color detection",
+"Sound and Wi‑Fi signal strength"
+],
+"correct_answer": "Acceleration and angular velocity, often with magnetometer data"
+},
+{
+"id": 36,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "medium",
+"question": "Why are safety protocols especially important for industrial and humanoid robots working near people?",
+"options": [
+"Robots cannot be turned off once started",
+"Physical robots can cause injury or damage if control or sensing fails",
+"Robots always operate silently",
+"Safety is only a concern for software systems"
+],
+"correct_answer": "Physical robots can cause injury or damage if control or sensing fails"
+},
+{
+"id": 37,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "hard",
+"question": "In autonomous robots, simultaneous localization and mapping (SLAM) is the process of:",
+"options": [
+"Encrypting network traffic",
+"Building a map of an unknown environment while estimating the robot’s position within it",
+"Calibrating the robot’s battery cells",
+"Converting analog signals to digital video"
+],
+"correct_answer": "Building a map of an unknown environment while estimating the robot’s position within it"
+},
+{
+"id": 38,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "medium",
+"question": "A key reason for adding force or torque sensors to robot arms is to:",
+"options": [
+"Improve Wi‑Fi connectivity",
+"Enable safe, compliant interaction with objects and humans",
+"Increase screen brightness",
+"Reduce processor clock speed"
+],
+"correct_answer": "Enable safe, compliant interaction with objects and humans"
+},
+{
+"id": 39,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "easy",
+"question": "Which of the following is an example of a common application domain for industrial robots?",
+"options": [
+"Automated welding and assembly in manufacturing",
+"Editing legal documents only",
+"Managing email servers",
+"Running web search engines"
+],
+"correct_answer": "Automated welding and assembly in manufacturing"
+},
+{
+"id": 40,
+"type": "text_mcq",
+"category": "Robotics",
+"difficulty": "medium",
+"question": "Why are robust perception systems critical for legged robots navigating uneven terrain?",
+"options": [
+"They reduce the need for motors",
+"They allow precise sensing of ground shape and obstacles to maintain balance and stability",
+"They remove the need for control algorithms",
+"They are only used for decorative animations"
+],
+"correct_answer": "They allow precise sensing of ground shape and obstacles to maintain balance and stability"
+},
+{
+"id": 41,
+"type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "easy",
+"question": "In quantum computing, what is the fundamental unit of quantum information?",
+"options": [
+"Bit",
+"Qubit",
+"Pixel",
+"Neuron"
+],
+"correct_answer": "Qubit"
+},
+{
+"id": 42,
+"type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "medium",
+"question": "Which property allows a qubit to exist in a combination of the logical states 0 and 1 at the same time?",
+"options": [
+"Superposition",
+"Friction",
+"Quantization of charge",
+"Ohmic resistance"
+],
+"correct_answer": "Superposition"
+},
+{
+"id": 43,
+"type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "medium",
+"question": "Quantum entanglement is a phenomenon in which:",
+"options": [
+"Qubits lose all correlation with each other",
+"Measurement of one qubit can be correlated with another, even when far apart",
+"Qubits stop obeying quantum mechanics",
+"Only one qubit can exist in a system"
+],
+"correct_answer": "Measurement of one qubit can be correlated with another, even when far apart"
+},
+{
+"id": 44,
+"type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "hard",
+"question": "A key challenge for practical quantum computers is preserving quantum information in the presence of noise. This challenge is commonly known as:",
+"options": [
+"Classical overfitting",
+"Decoherence and error accumulation",
+"Linear regression",
+"Voltage droop"
+],
+"correct_answer": "Decoherence and error accumulation"
+},
+{
+"id": 45,
+"type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "medium",
+"question": "Compared with classical bits, why can entangled qubits in principle offer computational advantages for some problems?",
+"options": [
+"They use less electricity per operation in all cases",
+"They allow correlated quantum states that explore many possibilities simultaneously",
+"They cannot be measured",
+"They always run at room temperature"
+],
+"correct_answer": "They allow correlated quantum states that explore many possibilities simultaneously"
+},
+{
+"id": 46,
+"type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "hard",
+"question": "Which of the following is a major research application often cited for future large‑scale quantum computers?",
+"options": [
+"Rendering 2D user interfaces",
+"Simulating complex quantum chemistry and materials",
+"Editing plain text documents",
+"Managing social media feeds"
+],
+"correct_answer": "Simulating complex quantum chemistry and materials"
+},
+{
+"id": 47,
+"type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "medium",
+"question": "What is one reason quantum sensors are attracting interest in advanced robotics and navigation?",
+"options": [
+"They only work in vacuum and are unusable in real environments",
+"They can exploit quantum effects to measure physical quantities with extremely high precision",
+"They eliminate the need for any classical sensors",
+"They function only as decorative LEDs"
+],
+"correct_answer": "They can exploit quantum effects to measure physical quantities with extremely high precision"
+},
+{
+"id": 48,
+"type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "hard",
+"question": "Hybrid systems that combine quantum sensors with classical sensors in robotics aim primarily to:",
+"options": [
+"Replace all control software with quantum code",
+"Balance performance and cost by leveraging strengths of both sensing approaches",
+"Eliminate the need for calibration",
+"Operate only in deep space"
+],
+"correct_answer": "Balance performance and cost by leveraging strengths of both sensing approaches"
+},
+{
+"id": 49,
+"type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "medium",
+"question": "Why are current quantum computers often referred to as "NISQ" devices (Noisy Intermediate‑Scale Quantum)?",
+"options": [
+"They are completely error‑free and scalable",
+"They have a moderate number of noisy qubits that limit large‑scale error‑corrected algorithms",
+"They only run classical algorithms",
+"They can operate only at room temperature"
+],
+"correct_answer": "They have a moderate number of noisy qubits that limit large‑scale error‑corrected algorithms"
+},
+{
+"id": 50,
+"type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "easy",
+"question": "Which of the following best describes a key difference between classical bits and qubits?",
+"options": [
+"Bits can only be 0, while qubits can only be 1",
+"Bits are continuous values, qubits are always integers",
+"Bits are either 0 or 1, while qubits can be in superpositions of 0 and 1",
+"Bits require absolute zero temperature, qubits do not"
+],
+"correct_answer": "Bits are either 0 or 1, while qubits can be in superpositions of 0 and 1"
+},
+{
+"id": 51,
+"type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "easy",
+"question": "Generative AI models like GPT‑4 or Llama 3 are primarily designed to:",
+"options": [
+"Generate new data such as text, images, or code from patterns learned during training",
+"Only sort existing rows in spreadsheets",
+"Control the speed of electric motors directly",
+"Encrypt network packets"
+],
+"correct_answer": "Generate new data such as text, images, or code from patterns learned during training"
+},
+{
+"id": 52,
+"type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "medium",
+"question": "Compared with traditional rule‑based chatbots, a key advantage of large generative AI models is that they:",
+"options": [
+"Rely solely on fixed decision trees",
+"Can generalize to many unseen questions using learned representations",
+"Require manual scripting for every possible input",
+"Cannot be fine‑tuned for specific domains"
+],
+"correct_answer": "Can generalize to many unseen questions using learned representations"
+},
+{
+"id": 53,
+"type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "medium",
+"question": "Which of the following is an example of a safety risk specific to generative AI systems?",
+"options": [
+"Generating synthetic but misleading news articles at scale",
+"Reducing file sizes using compression",
+"Compiling source code into binaries",
+"Sorting records in a database table"
+],
+"correct_answer": "Generating synthetic but misleading news articles at scale"
+},
+{
+"id": 54,
+"type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "medium",
+"question": "Why are watermarking and provenance techniques being researched for generative AI outputs?",
+"options": [
+"To increase model training time",
+"To help identify or track AI‑generated content and support content authenticity",
+"To lower GPU memory usage",
+"To disable multimodal capabilities"
+],
+"correct_answer": "To help identify or track AI‑generated content and support content authenticity"
+},
+{
+"id": 55,
+"type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "hard",
+"question": "From an ethical standpoint, one major concern when training generative AI models on web‑scale data is:",
+"options": [
+"The models becoming too small",
+"The presence of copyrighted, sensitive, or biased content in the training corpus",
+"The lack of enough punctuation in datasets",
+"The inability to use any text data"
+],
+"correct_answer": "The presence of copyrighted, sensitive, or biased content in the training corpus"
+},
+{
+"id": 56,
+"type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "medium",
+"question": "In text‑to‑image generative models, the term "prompt engineering" usually refers to:",
+"options": [
+"Designing new GPUs for training",
+"Crafting input descriptions to steer the model toward desired outputs",
+"Repairing corrupted image files",
+"Building physical camera rigs"
+],
+"correct_answer": "Crafting input descriptions to steer the model toward desired outputs"
+},
+{
+"id": 57,
+"type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "hard",
+"question": "Why is evaluation of generative AI systems often more challenging than evaluation of traditional classification models?",
+"options": [
+"Outputs are always numerical labels",
+"Generative outputs can be open‑ended and require qualitative or human‑in‑the‑loop judgment",
+"There are never any benchmarks",
+"They do not produce any observable outputs"
+],
+"correct_answer": "Generative outputs can be open‑ended and require qualitative or human‑in‑the‑loop judgment"
+},
+{
+"id": 58,
+"type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "easy",
+"question": "Which everyday application is a typical example of generative AI in consumer products?",
+"options": [
+"Autocompletion and smart reply suggestions in email clients",
+"Sorting files alphabetically in folders",
+"Measuring internet bandwidth",
+"Formatting USB drives"
+],
+"correct_answer": "Autocompletion and smart reply suggestions in email clients"
+},
+{
+"id": 59,
+"type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "medium",
+"question": "One reason retrieval‑augmented generation (RAG) is popular in enterprise generative AI solutions is that it:",
+"options": [
+"Prevents any need for search indices",
+"Combines model generation with up‑to‑date documents to ground answers in organizational data",
+"Forces the model to ignore domain knowledge",
+"Eliminates the need for prompt design"
+],
+"correct_answer": "Combines model generation with up‑to‑date documents to ground answers in organizational data"
+},
+{
+"id": 60,
+"type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "hard",
+"question": "Which of the following best describes "mode collapse" in the context of generative adversarial networks (GANs)?",
+"options": [
+"The generator produces a limited variety of outputs, failing to capture the full data distribution",
+"The discriminator network stops receiving gradients",
+"The training data becomes corrupted by noise",
+"The model automatically improves diversity over time"
+],
+"correct_answer": "The generator produces a limited variety of outputs, failing to capture the full data distribution"
+}
+]
