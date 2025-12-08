@@ -28,6 +28,6 @@ define('ALLOWED_UPLOAD_TYPES', ['image/jpeg', 'image/png', 'image/webp', 'image/
 
 // AI Configuration
 define('AI_PROVIDER', 'openrouter'); // 'gemini' or 'openrouter'
-define('AI_API_KEY', ''); // Put your API key here
-define('AI_MODEL', 'google/gemini-2.0-flash-lite-preview-02-05:free'); // Model to use (e.g., 'google/gemini-2.0-flash-lite-preview-02-05:free' for OpenRouter)
+define('AI_API_KEY', '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'); // Put your API key here
+define('AI_MODEL', 'google/gemini-2.0-flash-001'); // Model to use
 ?>

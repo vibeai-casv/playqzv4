@@ -61,7 +61,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                     <Link to="/dashboard" className="flex items-center space-x-3 relative z-10">
                         <div className="w-12 h-12 relative group flex items-center justify-center">
                             <div className="absolute inset-0 bg-indigo-500 rounded-full blur-lg opacity-20 group-hover:opacity-40 transition-opacity" />
-                            <img src="/aiq3.png" alt="Logo" className="w-full h-full object-contain relative z-10" />
+                            <img src="/aiq4.png" alt="Logo" className="w-full h-full object-contain relative z-10" />
                         </div>
                         <div>
                             <span className="font-bold text-lg text-foreground tracking-tight block">AI Quizzer</span>

@@ -158,63 +158,65 @@ export function Questions() {
             {/* Filters */}
             <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow space-y-4">
                 <div className="flex flex-wrap gap-4">
-                    <div className="flex-1 min-w-[200px] relative">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div className="relative">
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                            <input
+                                type="text"
+                                placeholder="Search questions..."
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                                className="w-full pl-10 pr-4 py-2 border rounded-lg text-gray-900 bg-white border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400"
+                            />
+                        </div>
                         <input
                             type="text"
-                            placeholder="Search questions..."
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                            className="w-full pl-10 pr-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                            placeholder="Filter by Category"
+                            value={category}
+                            onChange={(e) => setCategory(e.target.value)}
+                            className="w-full px-4 py-2 border rounded-lg text-gray-900 bg-white border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400"
                         />
+                        <select
+                            value={type}
+                            onChange={(e) => setType(e.target.value)}
+                            className="w-full px-4 py-2 border rounded-lg text-gray-900 bg-white border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                        >
+                            <option value="">All Types</option>
+                            <option value="text_mcq">Multiple Choice</option>
+                            <option value="image_identify_logo">Logo ID</option>
+                            <option value="image_identify_person">Person ID</option>
+                            <option value="true_false">True/False</option>
+                        </select>
+                        <select
+                            value={difficulty}
+                            onChange={(e) => setDifficulty(e.target.value)}
+                            className="w-full px-4 py-2 border rounded-lg text-gray-900 bg-white border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                        >
+                            <option value="">All Difficulties</option>
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                        <select
+                            value={status}
+                            onChange={(e) => setStatus(e.target.value as 'active' | 'inactive' | 'draft' | '')}
+                            className="w-full px-4 py-2 border rounded-lg text-gray-900 bg-white border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                        >
+                            <option value="">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                            <option value="draft">Draft</option>
+                        </select>
+                        <select
+                            value={aiGenerated === undefined ? '' : aiGenerated.toString()}
+                            onChange={(e) => setAiGenerated(e.target.value === '' ? undefined : e.target.value === 'true')}
+                            className="w-full px-4 py-2 border rounded-lg text-gray-900 bg-white border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                        >
+                            <option value="">All Sources</option>
+                            <option value="true">AI Generated</option>
+                            <option value="false">Manual</option>
+                        </select>
                     </div>
-                    <input
-                        type="text"
-                        placeholder="Filter by Category"
-                        value={category}
-                        onChange={(e) => setCategory(e.target.value)}
-                        className="px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                    />
-                    <select
-                        value={type}
-                        onChange={(e) => setType(e.target.value)}
-                        className="px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                    >
-                        <option value="">All Types</option>
-                        <option value="text_mcq">Multiple Choice</option>
-                        <option value="image_identify_logo">Logo ID</option>
-                        <option value="image_identify_person">Person ID</option>
-                        <option value="true_false">True/False</option>
-                    </select>
-                    <select
-                        value={difficulty}
-                        onChange={(e) => setDifficulty(e.target.value)}
-                        className="px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                    >
-                        <option value="">All Difficulties</option>
-                        <option value="easy">Easy</option>
-                        <option value="medium">Medium</option>
-                        <option value="hard">Hard</option>
-                    </select>
-                    <select
-                        value={status}
-                        onChange={(e) => setStatus(e.target.value as 'active' | 'inactive' | 'draft' | '')}
-                        className="px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                    >
-                        <option value="">All Status</option>
-                        <option value="active">Active</option>
-                        <option value="inactive">Inactive</option>
-                        <option value="draft">Draft</option>
-                    </select>
-                    <select
-                        value={aiGenerated === undefined ? '' : aiGenerated.toString()}
-                        onChange={(e) => setAiGenerated(e.target.value === '' ? undefined : e.target.value === 'true')}
-                        className="px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                    >
-                        <option value="">All Sources</option>
-                        <option value="true">AI Generated</option>
-                        <option value="false">Manual</option>
-                    </select>
                 </div>
 
                 {selectedIds.size > 0 && (
@@ -309,7 +311,10 @@ export function Questions() {
                                 </tr>
                             ) : (
                                 questions.map((q) => (
-                                    <tr key={q.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                                    <tr key={q.id} className={cn(
+                                        "hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors",
+                                        q.status === 'inactive' && "opacity-60 bg-gray-50/50 dark:bg-gray-800/50 grayscale-[0.5]"
+                                    )}>
                                         <td className="p-4">
                                             <input
                                                 type="checkbox"

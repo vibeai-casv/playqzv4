@@ -28,7 +28,7 @@ try {
         // Generate Token
         $token = bin2hex(random_bytes(32));
         $sessionId = generateUuid();
-        $expiresAt = date('Y-m-d H:i:s', strtotime('+7 days'));
+        $expiresAt = date('Y-m-d H:i:s', time() + SESSION_LIFETIME);
 
         $stmt = $pdo->prepare("INSERT INTO sessions (id, user_id, token, expires_at) VALUES (?, ?, ?, ?)");
         $stmt->execute([$sessionId, $user['id'], $token, $expiresAt]);

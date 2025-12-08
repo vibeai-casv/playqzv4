@@ -34,6 +34,8 @@ const Diagnostics = lazy(() => import('./pages/admin/Diagnostics').then(module =
 
 import { SplashScreen } from './components/ui/SplashScreen';
 
+import { SessionManager } from './components/SessionManager';
+
 function App() {
   const { initialize } = useAuth();
   const [showSplash, setShowSplash] = useState(true);
@@ -47,6 +49,7 @@ function App() {
       <Toaster position="top-center" richColors />
       <ErrorBoundary>
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+          <SessionManager />
           {showSplash && <SplashScreen onFinish={() => setShowSplash(false)} />}
           <Layout>
             <Suspense fallback={<PageSkeleton />}>

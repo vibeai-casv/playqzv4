@@ -26,7 +26,7 @@ export const useAuth = create<AuthState>((set, get) => ({
     initialize: async () => {
         try {
             set({ isLoading: true });
-            const token = localStorage.getItem('auth_token');
+            const token = sessionStorage.getItem('auth_token');
 
             if (token) {
                 try {
@@ -40,7 +40,7 @@ export const useAuth = create<AuthState>((set, get) => ({
                     });
                 } catch (error) {
                     console.error('Failed to fetch user profile', error);
-                    localStorage.removeItem('auth_token');
+                    sessionStorage.removeItem('auth_token');
                     set({ user: null, isAuthenticated: false, isAdmin: false, isSuperAdmin: false });
                 }
             } else {
@@ -58,7 +58,7 @@ export const useAuth = create<AuthState>((set, get) => ({
             const response = await api.post('/auth/login.php', credentials);
             const { token, user } = response.data;
 
-            localStorage.setItem('auth_token', token);
+            sessionStorage.setItem('auth_token', token);
             set({
                 user,
                 isAuthenticated: true,
@@ -76,7 +76,7 @@ export const useAuth = create<AuthState>((set, get) => ({
             const response = await api.post('/auth/signup.php', data);
             const { token, user } = response.data;
 
-            localStorage.setItem('auth_token', token);
+            sessionStorage.setItem('auth_token', token);
             set({
                 user,
                 isAuthenticated: true,
@@ -95,7 +95,8 @@ export const useAuth = create<AuthState>((set, get) => ({
         } catch (error) {
             console.error('Logout API call failed:', error);
         } finally {
-            localStorage.removeItem('auth_token');
+            sessionStorage.removeItem('auth_token');
+            sessionStorage.clear();
             set({ user: null, isAuthenticated: false, isAdmin: false, isSuperAdmin: false });
         }
     },

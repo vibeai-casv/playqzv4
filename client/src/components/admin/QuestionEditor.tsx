@@ -82,10 +82,10 @@ export function QuestionEditor({ question, onSave, onCancel }: QuestionEditorPro
         <form onSubmit={form.handleSubmit(onSubmit as any)} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                    <label className="text-sm font-medium">Question Type</label>
+                    <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Question Type</label>
                     <select
                         {...form.register('question_type')}
-                        className="w-full p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                        className="w-full p-2 border rounded-lg text-gray-900 bg-white border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                     >
                         <option value="text_mcq">Multiple Choice</option>
                         <option value="image_identify_logo">Logo Identification</option>
@@ -96,10 +96,10 @@ export function QuestionEditor({ question, onSave, onCancel }: QuestionEditorPro
                 </div>
 
                 <div className="space-y-2">
-                    <label className="text-sm font-medium">Category</label>
+                    <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Category</label>
                     <input
                         {...form.register('category')}
-                        className="w-full p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                        className="w-full p-2 border rounded-lg text-gray-900 bg-white border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                         placeholder="e.g. Science, History"
                     />
                     {form.formState.errors.category && (
@@ -108,10 +108,10 @@ export function QuestionEditor({ question, onSave, onCancel }: QuestionEditorPro
                 </div>
 
                 <div className="space-y-2">
-                    <label className="text-sm font-medium">Difficulty</label>
+                    <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Difficulty</label>
                     <select
                         {...form.register('difficulty')}
-                        className="w-full p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                        className="w-full p-2 border rounded-lg text-gray-900 bg-white border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                     >
                         <option value="easy">Easy</option>
                         <option value="medium">Medium</option>
@@ -120,19 +120,19 @@ export function QuestionEditor({ question, onSave, onCancel }: QuestionEditorPro
                 </div>
 
                 <div className="space-y-2">
-                    <label className="text-sm font-medium">Points</label>
+                    <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Points</label>
                     <input
                         type="number"
                         {...form.register('points', { valueAsNumber: true })}
-                        className="w-full p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                        className="w-full p-2 border rounded-lg text-gray-900 bg-white border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                     />
                 </div>
 
                 <div className="space-y-2">
-                    <label className="text-sm font-medium">Status</label>
+                    <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Status</label>
                     <select
                         {...form.register('status')}
-                        className="w-full p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                        className="w-full p-2 border rounded-lg text-gray-900 bg-white border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                     >
                         <option value="draft">Draft</option>
                         <option value="active">Active</option>
@@ -142,11 +142,11 @@ export function QuestionEditor({ question, onSave, onCancel }: QuestionEditorPro
             </div>
 
             <div className="space-y-2">
-                <label className="text-sm font-medium">Question Text</label>
+                <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Question Text</label>
                 <textarea
                     {...form.register('question_text')}
                     rows={3}
-                    className="w-full p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                    className="w-full p-2 border rounded-lg text-gray-900 bg-white border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                     placeholder="Enter the question here..."
                 />
                 {form.formState.errors.question_text && (
@@ -156,13 +156,13 @@ export function QuestionEditor({ question, onSave, onCancel }: QuestionEditorPro
 
             {(questionType === 'image_identify_logo' || questionType === 'image_identify_person') && (
                 <div className="space-y-2">
-                    <label className="text-sm font-medium">Image</label>
+                    <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Image</label>
                     <div className="flex gap-4 items-start">
                         <div className="flex-1">
                             <div className="flex gap-2">
                                 <input
                                     {...form.register('image_url')}
-                                    className="flex-1 p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                                    className="flex-1 p-2 border rounded-lg text-gray-900 bg-white border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                     placeholder="https://... or select from library"
                                 />
                                 <button
@@ -212,7 +212,7 @@ export function QuestionEditor({ question, onSave, onCancel }: QuestionEditorPro
             {(questionType === 'text_mcq' || questionType === 'image_identify_logo' || questionType === 'image_identify_person') && (
                 <div className="space-y-4">
                     <div className="flex justify-between items-center">
-                        <label className="text-sm font-medium">Options</label>
+                        <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Options</label>
                         <button
                             type="button"
                             onClick={() => append('')}
@@ -226,7 +226,7 @@ export function QuestionEditor({ question, onSave, onCancel }: QuestionEditorPro
                             <div key={field.id} className="flex gap-2">
                                 <input
                                     {...form.register(`options.${index}` as const)}
-                                    className="flex-1 p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                                    className="flex-1 p-2 border rounded-lg text-gray-900 bg-white border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                                     placeholder={`Option ${index + 1}`}
                                 />
                                 <button
@@ -243,11 +243,11 @@ export function QuestionEditor({ question, onSave, onCancel }: QuestionEditorPro
             )}
 
             <div className="space-y-2">
-                <label className="text-sm font-medium">Correct Answer</label>
+                <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Correct Answer</label>
                 {questionType === 'true_false' ? (
                     <select
                         {...form.register('correct_answer')}
-                        className="w-full p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                        className="w-full p-2 border rounded-lg text-gray-900 bg-white border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                     >
                         <option value="">Select Answer</option>
                         <option value="True">True</option>
@@ -256,7 +256,7 @@ export function QuestionEditor({ question, onSave, onCancel }: QuestionEditorPro
                 ) : (questionType === 'text_mcq' || questionType === 'image_identify_logo' || questionType === 'image_identify_person') ? (
                     <select
                         {...form.register('correct_answer')}
-                        className="w-full p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                        className="w-full p-2 border rounded-lg text-gray-900 bg-white border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                     >
                         <option value="">Select Correct Option</option>
                         {form.watch('options')?.map((opt, i) => (
@@ -266,7 +266,7 @@ export function QuestionEditor({ question, onSave, onCancel }: QuestionEditorPro
                 ) : (
                     <input
                         {...form.register('correct_answer')}
-                        className="w-full p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                        className="w-full p-2 border rounded-lg text-gray-900 bg-white border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                         placeholder="Enter correct answer"
                     />
                 )}
@@ -276,11 +276,11 @@ export function QuestionEditor({ question, onSave, onCancel }: QuestionEditorPro
             </div>
 
             <div className="space-y-2">
-                <label className="text-sm font-medium">Explanation (Optional)</label>
+                <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Explanation (Optional)</label>
                 <textarea
                     {...form.register('explanation')}
                     rows={2}
-                    className="w-full p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                    className="w-full p-2 border rounded-lg text-gray-900 bg-white border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                     placeholder="Explain why this is the correct answer..."
                 />
             </div>

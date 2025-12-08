@@ -68,6 +68,8 @@ $questions = $stmt->fetchAll();
 foreach ($questions as &$q) {
     $q['options'] = json_decode($q['options']);
     $q['tags'] = json_decode($q['tags']);
+    // Compute status for frontend
+    $q['status'] = $q['is_active'] ? 'active' : 'inactive';
 }
 
 // Get total count for pagination

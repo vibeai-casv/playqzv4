@@ -174,10 +174,10 @@ export function useAdmin() {
         try {
             const response = await api.post('/admin/generate_questions.php', params);
             return response.data;
-        } catch (err: unknown) {
-            const message = err instanceof Error ? err.message : 'An error occurred';
+        } catch (err: any) {
+            const message = err.response?.data?.error || (err instanceof Error ? err.message : 'An error occurred');
             setError(message);
-            throw err;
+            throw new Error(message);
         } finally {
             setIsLoading(false);
         }

@@ -22,7 +22,7 @@ if (empty($topic)) {
 }
 
 if (empty(AI_API_KEY)) {
-    jsonResponse(['error' => 'AI API Key is not configured. Please check config.php'], 500);
+    jsonResponse(['error' => 'AI API Key is not configured. Please get a key from openrouter.ai or aistudio.google.com and update api/config.php'], 500);
 }
 
 function callGemini($prompt) {
@@ -169,7 +169,7 @@ try {
     foreach ($questions as $q) {
         $id = generateUuid();
         $stmt = $pdo->prepare("INSERT INTO questions (
-            id, text, type, options, correct_answer, explanation, 
+            id, question_text, question_type, options, correct_answer, explanation, 
             difficulty, category, created_by, is_active, ai_generated, created_at
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 1, NOW())");
         

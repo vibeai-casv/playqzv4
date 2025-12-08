@@ -28,9 +28,9 @@ export function AIGenerator({ onGenerate, onCancel }: AIGeneratorProps) {
             await generateQuestions(data);
             toast.success('Questions generated successfully! Check the Drafts tab.');
             onGenerate();
-        } catch (error) {
+        } catch (error: any) {
             console.error(error);
-            toast.error('Failed to generate questions. Please try again.');
+            toast.error(error.message || 'Failed to generate questions. Please try again.');
         }
     };
 
@@ -47,10 +47,10 @@ export function AIGenerator({ onGenerate, onCancel }: AIGeneratorProps) {
                 </div>
 
                 <div className="space-y-2">
-                    <label className="text-sm font-medium">Topic / Subject</label>
+                    <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Topic / Subject</label>
                     <input
                         {...form.register('topic')}
-                        className="w-full p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                        className="w-full p-2 border rounded-lg text-gray-900 dark:text-gray-100 dark:bg-gray-700 dark:border-gray-600"
                         placeholder="e.g. Solar System, World War II, Python Programming"
                     />
                     {form.formState.errors.topic && (
@@ -60,11 +60,11 @@ export function AIGenerator({ onGenerate, onCancel }: AIGeneratorProps) {
 
                 <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
-                        <label className="text-sm font-medium">Number of Questions</label>
+                        <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Number of Questions</label>
                         <input
                             type="number"
                             {...form.register('count', { valueAsNumber: true })}
-                            className="w-full p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                            className="w-full p-2 border rounded-lg text-gray-900 dark:text-gray-100 dark:bg-gray-700 dark:border-gray-600"
                             min={1}
                             max={50}
                         />
@@ -74,10 +74,10 @@ export function AIGenerator({ onGenerate, onCancel }: AIGeneratorProps) {
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-sm font-medium">Difficulty</label>
+                        <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Difficulty</label>
                         <select
                             {...form.register('difficulty')}
-                            className="w-full p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                            className="w-full p-2 border rounded-lg text-gray-900 dark:text-gray-100 dark:bg-gray-700 dark:border-gray-600"
                         >
                             <option value="easy">Easy</option>
                             <option value="medium">Medium</option>
@@ -87,10 +87,10 @@ export function AIGenerator({ onGenerate, onCancel }: AIGeneratorProps) {
                 </div>
 
                 <div className="space-y-2">
-                    <label className="text-sm font-medium">Question Type</label>
+                    <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Question Type</label>
                     <select
                         {...form.register('type')}
-                        className="w-full p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                        className="w-full p-2 border rounded-lg text-gray-900 dark:text-gray-100 dark:bg-gray-700 dark:border-gray-600"
                     >
                         <option value="text_mcq">Multiple Choice</option>
                         <option value="image_identify_logo">Logo Identification</option>
