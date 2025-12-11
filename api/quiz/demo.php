@@ -10,13 +10,20 @@ cors();
 $numQuestions = 5;
 
 // Build query to select random questions
-$sql = "SELECT * FROM questions WHERE is_active = 1 ORDER BY RAND() LIMIT ?";
-$params = [(int)$numQuestions];
-
 try {
+    // Try to get questions marked as demo first
+    $sql = "SELECT * FROM questions WHERE is_demo = 1 AND is_active = 1 ORDER BY RAND() LIMIT ?";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute($params);
+    $stmt->execute([(int)$numQuestions]);
     $questions = $stmt->fetchAll();
+
+    // If no demo questions found, fallback to random active questions
+    if (empty($questions)) {
+        $sql = "SELECT * FROM questions WHERE is_active = 1 ORDER BY RAND() LIMIT ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([(int)$numQuestions]);
+        $questions = $stmt->fetchAll();
+    }
 
     if (empty($questions)) {
         jsonResponse(['error' => 'No questions found'], 404);

@@ -31,6 +31,7 @@ const Media = lazy(() => import('./pages/admin/Media').then(module => ({ default
 const ActivityLogs = lazy(() => import('./pages/admin/ActivityLogs').then(module => ({ default: module.ActivityLogs })));
 const SystemTools = lazy(() => import('./pages/admin/SystemTools').then(module => ({ default: module.SystemTools })));
 const Diagnostics = lazy(() => import('./pages/admin/Diagnostics').then(module => ({ default: module.Diagnostics })));
+const ImportExport = lazy(() => import('./pages/admin/ImportExport').then(module => ({ default: module.ImportExport })));
 
 import { SplashScreen } from './components/ui/SplashScreen';
 
@@ -172,6 +173,14 @@ function App() {
                   element={
                     <ProtectedRoute requireAdmin>
                       <Diagnostics />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/admin/import-export"
+                  element={
+                    <ProtectedRoute requireAdmin>
+                      <ImportExport />
                     </ProtectedRoute>
                   }
                 />

@@ -26,7 +26,7 @@ import { cn } from '../../lib/utils';
 
 // ----- Validation Schema -----
 const quizConfigSchema = z.object({
-    numQuestions: z.enum(['5', '10', '20', '50']),
+    numQuestions: z.enum(['3', '5', '10', '20', '50']),
     difficulty: z.enum(['Easy', 'Medium', 'Hard', 'Mixed']),
     categories: z.array(z.string()).min(1, { message: 'Select at least one category' }),
 });
@@ -61,7 +61,7 @@ export function QuizConfig() {
         resolver: zodResolver(quizConfigSchema),
         mode: 'onChange',
         defaultValues: {
-            numQuestions: '10',
+            numQuestions: '5',
             difficulty: 'Mixed',
             categories: [],
         },
@@ -209,8 +209,8 @@ export function QuizConfig() {
                                 <span className="w-8 h-8 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center mr-3 text-sm font-bold">1</span>
                                 Number of Questions
                             </h2>
-                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                                {['5', '10', '20', '50'].map((val) => (
+                            <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
+                                {['3', '5', '10', '20', '50'].map((val) => (
                                     <label
                                         key={val}
                                         className={cn(

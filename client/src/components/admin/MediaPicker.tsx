@@ -41,9 +41,9 @@ export function MediaPicker({ onSelect, onCancel }: MediaPickerProps) {
         try {
             // Determine type based on current filter or default to logo
             const uploadType = type === 'all' ? 'logo' : type;
-            await uploadMedia(file, uploadType);
+            const newMedia = await uploadMedia(file, uploadType);
             toast.success('File uploaded successfully');
-            loadMedia();
+            onSelect(newMedia.url);
         } catch (error) {
             console.error(error);
             toast.error('Failed to upload file');

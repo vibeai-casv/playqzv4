@@ -1,0 +1,137 @@
+ Backend Infrastructure
+Enhanced Media Upload API (
+api/media/upload.php
+)
+Supports logo, personality, and question_image types
+Automatic file organization in subdirectories
+Image metadata extraction
+File validation (5MB max, JPG/PNG/GIF/WebP/SVG)
+Database integration
+2. Frontend Components
+LogoUploader Component (
+client/src/components/LogoUploader.tsx
+)
+Drag-and-drop upload interface
+Browse existing logos from media library
+Search functionality
+Visual preview with selection
+Fully integrated with your existing 
+useAdmin
+ hook
+3. Comprehensive Documentation
+LOGO_QUESTIONS_GUIDE.md
+ - Complete guide (500+ lines)
+How the system works
+Upload process
+Best practices
+Quality assurance
+Troubleshooting
+AI_LOGO_PROMPTS.md
+ - AI generation prompts
+Multiple prompt variations
+Category-specific prompts
+Post-processing instructions
+Expected output examples
+LOGO_IMPLEMENTATION_SUMMARY.md
+ - Implementation overview
+Quick start guide
+Integration steps
+Testing checklist
+Configuration options
+QUICK_AI_PROMPT.md
+ - Ready-to-copy prompt
+Just copy and paste into ChatGPT/Claude/Gemini
+Get 20 professional logo questions instantly
+📋 Ready-to-Use AI Prompt
+Here's the prompt you can use right now with any LLM:
+
+I need you to generate 20 logo identification quiz questions for an educational quiz application.
+Generate questions in this EXACT JSON format:
+[
+  {
+    "brand_name": "Nike",
+    "logo_description": "A curved swoosh symbol in black or white, suggesting motion and speed.",
+    "question_text": "Identify the brand from this logo:",
+    "options": ["Adidas", "Nike", "Puma", "Reebok"],
+    "correct_answer": "Nike",
+    "explanation": "The Nike Swoosh, designed by Carolyn Davidson in 1971, represents the wing of Nike, the Greek goddess of victory.",
+    "difficulty": "easy",
+    "category": "Sports Brands",
+    "tags": ["sports", "footwear", "athletic", "iconic"],
+    "search_query": "Nike swoosh logo official PNG transparent",
+    "points": 10,
+    "time_limit_seconds": 30
+  }
+]
+REQUIREMENTS:
+- 20 questions total
+- Categories: Technology, Automotive, Food & Beverage, Fashion, Sports, Entertainment, Finance, Retail
+- Difficulty: 40% easy, 40% medium, 20% hard
+- All 4 options must be from the SAME category
+- Include detailed logo descriptions (colors, shapes, symbols)
+- Add interesting facts in explanations
+- Provide search queries to find official logos
+Generate the 20 questions now.
+🚀 How to Use
+Step 1: Generate Questions with AI
+Copy the prompt from 
+QUICK_AI_PROMPT.md
+Paste into ChatGPT, Claude, or Gemini
+Get 20 professional logo questions in JSON format
+Step 2: Download Logo Images
+Use the search_query field from each question
+Download official logo images (PNG format recommended)
+Save to a local folder
+Step 3: Upload Logos
+tsx
+// Use the LogoUploader component in your admin panel
+<LogoUploader
+  mediaType="logo"
+  onSelect={(media) => {
+    // media.id - Use this as media_id
+    // media.url - Use this as image_url
+  }}
+/>
+Step 4: Create Questions
+javascript
+await createQuestion({
+  question_text: "Identify the brand from this logo:",
+  question_type: "image_identify_logo",
+  media_id: media.id,
+  image_url: media.url,
+  options: ["Adidas", "Nike", "Puma", "Reebok"],
+  correct_answer: "Nike",
+  explanation: "The Nike Swoosh...",
+  difficulty: "easy",
+  category: "Sports Brands",
+  points: 10,
+  time_limit_seconds: 30
+});
+📁 Files Created
+playqzv4/
+├── api/media/upload.php                    ✅ Enhanced
+├── client/src/components/LogoUploader.tsx  ✅ NEW
+├── LOGO_QUESTIONS_GUIDE.md                 ✅ NEW (Complete guide)
+├── AI_LOGO_PROMPTS.md                      ✅ NEW (AI prompts)
+├── LOGO_IMPLEMENTATION_SUMMARY.md          ✅ NEW (Overview)
+└── QUICK_AI_PROMPT.md                      ✅ NEW (Copy-paste prompt)
+🎯 Next Steps
+Integrate LogoUploader into your question creation form
+Test the upload with a sample logo
+Generate questions using the AI prompt
+Download logos from the generated search queries
+Upload and create your first logo questions!
+💡 Key Features
+✅ Drag-and-drop upload interface
+✅ Media library browser with search
+✅ Automatic organization by media type
+✅ Image validation and metadata extraction
+✅ AI-ready prompts for instant question generation
+✅ Complete documentation with examples
+✅ Database integration already configured
+Everything is ready to use! Just open 
+QUICK_AI_PROMPT.md
+, copy the prompt, paste it into your favorite LLM, and you'll have 20 professional logo identification questions in seconds! 🚀
+
+Good
+Bad

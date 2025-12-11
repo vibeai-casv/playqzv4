@@ -113,7 +113,7 @@ export function useAdmin() {
         setIsLoading(true);
         setError(null);
         try {
-            const response = await api.get('/questions/list.php', { params: filters });
+            const response = await api.get('/questions/list.php', { params: { ...filters, _t: Date.now() } });
             return { questions: response.data.data as Question[], total: response.data.total };
         } catch (err: unknown) {
             const message = err instanceof Error ? err.message : 'An error occurred';
@@ -215,7 +215,7 @@ export function useAdmin() {
             const response = await api.post('/media/upload.php', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
-            return response.data.file;
+            return response.data.media;
         } catch (err: unknown) {
             const message = err instanceof Error ? err.message : 'An error occurred';
             setError(message);

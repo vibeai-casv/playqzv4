@@ -1,0 +1,268 @@
+===========================================
+DUPLICATE DETECTION - TESTING GUIDE
+===========================================
+
+The import feature now has ENHANCED duplicate detection
+that checks for:
+1. Exact duplicates (same text)
+2. Similar questions (case-insensitive, ignoring extra spaces)
+3. Both active AND inactive/draft questions
+
+===========================================
+HOW IT WORKS
+===========================================
+
+LEVEL 1: Exact Match (after trimming)
+- Compares: TRIM(question_text)
+- Example:
+  Existing: "What is AI?"
+  Import:   "What is AI?"  → SKIPPED (exact match)
+  Import:   "  What is AI?  " → SKIPPED (same after trim)
+
+LEVEL 2: Normalized Match (case + spaces)
+- Compares: Lowercase text with normalized spaces
+- Example:
+  Existing: "What is AI?"
+  Import:   "what is ai?" → SKIPPED (same ignoring case)
+  Import:   "What  is  AI?" → SKIPPED (same with normalized spaces)
+  Import:   "WHAT IS AI?" → SKIPPED (same in lowercase)
+
+===========================================
+TEST SCENARIOS
+===========================================
+
+TEST 1: Exact Duplicate
+--------------------
+Existing Question:
+"What is artificial intelligence?"
+
+Try Importing:
+"What is artificial intelligence?"
+
+Expected Result:
+✖ SKIPPED - "Duplicate - identical question already exists"
+
+TEST 2: Case Variation
+--------------------
+Existing Question:
+"What is Machine Learning?"
+
+Try Importing:
+"what is machine learning?"
+
+Expected Result:
+✖ SKIPPED - "Similar question exists"
+
+TEST 3: Extra Spaces
+--------------------
+Existing Question:
+"What is Deep Learning?"
+
+Try Importing:
+"What  is  Deep  Learning?"  (multiple spaces)
+
+Expected Result:
+✖ SKIPPED - "Similar question exists"
+
+TEST 4: Leading/Trailing Spaces
+--------------------
+Existing Question:
+"What is Neural Network?"
+
+Try Importing:
+"  What is Neural Network?  "
+
+Expected Result:
+✖ SKIPPED - "Duplicate - identical question already exists"
+
+TEST 5: Genuinely Different Question
+--------------------
+Existing Question:
+"What is AI?"
+
+Try Importing:
+"What is ML?"
+
+Expected Result:
+✓ IMPORTED - Different question
+
+===========================================
+IMPORT RESULTS DISPLAY
+===========================================
+
+After import, you'll see:
+
+Success Toast (Green):
+"Import complete! 10 total, 7 imported, 3 skipped/failed"
+
+Warning Toast (Orange) - if duplicates found:
+"3 question(s) skipped:
+Question 2: Duplicate - identical question already exists (active)
+Question 5: Similar question exists - 'What is AI?...'
+Question 8: Duplicate - identical question already exists (draft)
+...and 2 more"
+
+Console Log:
+Full list of all errors/skips
+
+===========================================
+TEST JSON FILE
+===========================================
+
+Create this file to test: test_duplicates.json
+
+[
+  {
+    "question_text": "What is artificial intelligence?",
+    "question_type": "text_mcq",
+    "category": "AI Basics",
+    "difficulty": "easy",
+    "points": 10,
+    "options": ["Smart machines", "Human brain", "Computer code", "Algorithm"],
+    "correct_answer": "Smart machines",
+    "explanation": "AI refers to smart machines"
+  },
+  {
+    "question_text": "WHAT IS ARTIFICIAL INTELLIGENCE?",
+    "question_type": "text_mcq",
+    "category": "AI Basics",
+    "difficulty": "easy",
+    "points": 10,
+    "options": ["Smart machines", "Human brain", "Computer code", "Algorithm"],
+    "correct_answer": "Smart machines",
+    "explanation": "AI refers to smart machines"
+  },
+  {
+    "question_text": "  What is artificial intelligence?  ",
+    "question_type": "text_mcq",
+    "category": "AI Basics",
+    "difficulty": "easy",
+    "points": 10,
+    "options": ["Smart machines", "Human brain", "Computer code", "Algorithm"],
+    "correct_answer": "Smart machines",
+    "explanation": "AI refers to smart machines"
+  },
+  {
+    "question_text": "What is machine learning?",
+    "question_type": "text_mcq",
+    "category": "AI Basics",
+    "difficulty": "medium",
+    "points": 15,
+    "options": ["Subset of AI", "Database", "Programming", "Web Dev"],
+    "correct_answer": "Subset of AI",
+    "explanation": "ML is a subset of AI"
+  }
+]
+
+Expected Result:
+- Question 1: IMPORTED (first occurrence)
+- Question 2: SKIPPED (same as Q1, different case)
+- Question 3: SKIPPED (same as Q1, extra spaces)
+- Question 4: IMPORTED (different question)
+
+Total: 4 questions → 2 imported, 2 skipped
+
+===========================================
+HOW TO TEST
+===========================================
+
+STEP 1: Export some existing questions
+- Go to Import/Export → Export tab
+- Select a few questions
+- Export to questions_test.json
+
+STEP 2: Try re-importing the same file
+- Go to Import tab
+- Upload questions_test.json
+- Click Import All
+
+Expected: ALL questions should be SKIPPED as duplicates
+
+STEP 3: Modify the JSON file
+- Open questions_test.json
+- Change one question's text slightly
+  Old: "What is AI?"
+  New: "What is Artificial Intelligence?"
+- Save and re-import
+
+Expected: Only the modified question imports
+
+STEP 4: Test case variations
+- Take an exported question
+- Change to all UPPERCASE
+- Try importing
+
+Expected: SKIPPED as similar question
+
+===========================================
+COMMON SCENARIOS
+===========================================
+
+SCENARIO 1: Backup & Restore
+Problem: I exported my questions as backup, then accidentally 
+         re-imported. Will I have duplicates?
+Answer:  NO - All duplicates will be automatically skipped
+
+SCENARIO 2: Merging Question Banks
+Problem: I have 2 JSON files from different sources. Some 
+         questions might overlap.
+Answer:  Import both files. System will skip duplicates 
+         and only add unique questions.
+
+SCENARIO 3: Question Updates
+Problem: I want to update existing questions via import.
+Answer:  Currently, duplicates are SKIPPED. To update:
+         1. Delete old question from Question Bank
+         2. Import updated version
+         OR manually edit in Question Bank
+
+SCENARIO 4: Case Differences
+Problem: I have "What is AI?" and want to import "WHAT IS AI?"
+Answer:  SKIPPED - System treats them as duplicates
+
+===========================================
+TECHNICAL DETAILS
+===========================================
+
+Duplicate Check SQL:
+1. Exact Match:
+   SELECT id FROM questions 
+   WHERE TRIM(question_text) = ?
+
+2. Normalized Match:
+   SELECT id FROM questions  
+   WHERE LOWER(TRIM(REPLACE(question_text, '  ', ' '))) = ?
+
+3. Checks ALL questions:
+   - Active (is_active = 1)
+   - Inactive (is_active = 0)
+   - Draft (is_active = 0, is_verified = 0)
+
+===========================================
+BENEFITS
+===========================================
+
+✓ Prevents accidental duplicates
+✓ Safe to re-import backup files
+✓ Merges multiple question sources safely
+✓ Case-insensitive matching
+✓ Handles whitespace variations
+✓ Clear error messages
+✓ Transaction-based (all or nothing within DB)
+✓ Detailed import summary
+
+===========================================
+LIMITATIONS
+===========================================
+
+✗ Cannot detect semantic duplicates
+  ("What is AI?" vs "Define artificial intelligence")
+✗ Cannot update existing questions via import
+  (must delete old question first)
+✗ Very large imports (1000+) may be slow
+  (each question checked individually)
+
+===========================================
+
+Last Updated: December 12, 2025
+Feature: Enhanced Duplicate Detection v2.0

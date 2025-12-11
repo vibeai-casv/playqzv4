@@ -1,0 +1,184 @@
+===========================================
+FTP UPLOAD INSTRUCTIONS FOR AIQUIZ.VIBEAI.CV
+===========================================
+
+PRODUCTION SERVER: aiquiz.vibeai.cv
+DEPLOYMENT DATE: 2025-12-11
+
+===========================================
+STEP 1: CONNECT TO FTP
+===========================================
+
+Using FileZilla (Recommended):
+1. Download FileZilla from: https://filezilla-project.org/
+2. Open FileZilla
+3. Click "File" → "Site Manager"
+4. Click "New Site" and name it "AIQuiz Production"
+5. Enter connection details:
+   - Protocol: SFTP (SSH File Transfer Protocol)
+   - Host: aiquiz.vibeai.cv
+   - Port: 22 (or your FTP/SFTP port)
+   - Logon Type: Normal
+   - User: [Your FTP username]
+   - Password: [Your FTP password]
+6. Click "Connect"
+
+Alternative: Using WinSCP
+1. Download from: https://winscp.net/
+2. New Site → SFTP
+3. Enter hostname: aiquiz.vibeai.cv
+4. Enter username and password
+5. Click "Login"
+
+===========================================
+STEP 2: UPLOAD FILES
+===========================================
+
+Navigate to the web root directory on your server.
+Common locations:
+- /var/www/aiquiz.vibeai.cv/
+- /public_html/
+- /home/[username]/public_html/
+
+Upload these folders:
+
+1. FRONTEND (public/)
+   Local:  upload_package_production\public\*
+   Remote: /var/www/aiquiz.vibeai.cv/public/
+   
+   This contains your built React app (index.html, assets, etc.)
+
+2. BACKEND (api/)
+   Local:  upload_package_production\api\*
+   Remote: /var/www/aiquiz.vibeai.cv/api/
+   
+   This contains all PHP backend files
+
+3. UPLOADS (uploads/)
+   Local:  upload_package_production\uploads\*
+   Remote: /var/www/aiquiz.vibeai.cv/uploads/
+   
+   This contains your uploaded images (logos, personalities)
+
+===========================================
+STEP 3: SET PERMISSIONS
+===========================================
+
+After uploading, set these permissions via FTP client:
+(Right-click → File Permissions)
+
+Directories (755):
+- public/
+- api/
+- uploads/
+
+Files (644):
+- All .html files
+- All .php files
+- All .css files
+- All .js files
+
+Writable directories (777):
+- uploads/ (and all subdirectories)
+
+===========================================
+STEP 4: CONFIGURE DATABASE
+===========================================
+
+IMPORTANT: Before the site works, you need to:
+
+1. Create MySQL database on your server
+2. Import schema from: api/schema.sql
+3. Update api/config.php with production credentials:
+   - DB_HOST (usually 'localhost')
+   - DB_NAME (your database name)
+   - DB_USER (your database username)
+   - DB_PASS (your database password)
+
+===========================================
+STEP 5: WEB SERVER CONFIGURATION
+===========================================
+
+Ensure your web server is configured to:
+1. Serve from /public/ directory as document root
+2. Route /api requests to /api/ folder
+3. Route /uploads requests to /uploads/ folder
+4. Enable .htaccess (if using Apache)
+5. Enable PHP processing
+
+===========================================
+STEP 6: VERIFY DEPLOYMENT
+===========================================
+
+1. Visit: https://aiquiz.vibeai.cv
+   - Should see the login page
+
+2. Test API: https://aiquiz.vibeai.cv/api/
+   - Should return API status or error (not 404)
+
+3. Login with your admin credentials
+
+===========================================
+TROUBLESHOOTING
+===========================================
+
+If you see blank page:
+- Check browser console for errors (F12)
+- Verify all files uploaded correctly
+- Check file permissions
+
+If you see 404 errors:
+- Verify web server document root points to /public/
+- Check .htaccess file exists in /public/
+- Enable mod_rewrite (Apache)
+
+If images don't load:
+- Check /uploads/ folder uploaded correctly
+- Verify folder permissions (755 for folders, 644 for files)
+- Check browser console for 404s on image URLs
+
+Database connection errors:
+- Verify config.php credentials
+- Test database connection separately
+- Check MySQL is running
+
+===========================================
+FILES IN THIS PACKAGE
+===========================================
+
+public/          → Frontend (React build)
+  └── index.html
+  └── assets/
+      └── [All JS/CSS bundles]
+
+api/             → Backend (PHP)
+  └── *.php      (All API endpoints)
+  └── schema.sql (Database structure)
+  └── config.php (MUST UPDATE FOR PRODUCTION!)
+
+uploads/         → Media files
+  └── logo/
+  └── personality/
+
+===========================================
+NEXT STEPS AFTER UPLOAD
+===========================================
+
+1. Update api/config.php with production database credentials
+2. Import api/schema.sql to your production database
+3. Create admin user in database
+4. Test login at https://aiquiz.vibeai.cv
+5. Verify all features work
+6. Delete this FTP_UPLOAD_INSTRUCTIONS.txt from server
+
+===========================================
+SUPPORT
+===========================================
+
+If you need help:
+- Check server error logs
+- Check browser console (F12)
+- Contact your hosting provider for server-specific questions
+
+Production Date: December 11, 2025
+Build Version: Production Release

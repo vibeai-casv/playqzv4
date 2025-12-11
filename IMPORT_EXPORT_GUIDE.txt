@@ -1,0 +1,229 @@
+===========================================
+IMPORT/EXPORT FEATURE - USER GUIDE
+===========================================
+
+NEW FEATURE: Question Bank Import/Export
+Location: Admin Sidebar → "Import/Export"
+
+===========================================
+FEATURES
+===========================================
+
+✓ Export questions to JSON format
+✓ Filter questions by type and difficulty before export
+✓ Select specific questions to export
+✓ Import questions from JSON file
+✓ Preview questions before importing
+✓ Automatic duplicate detection
+
+===========================================
+HOW TO EXPORT QUESTIONS
+===========================================
+
+1. Login as admin
+2. Click "Import/Export" in sidebar
+3. Stay on "Export Questions" tab
+4. Use filters to narrow down questions:
+   - Question Type (All, MCQ, Logo, Person, T/F, Short Answer)
+   - Difficulty Level (All, Easy, Medium, Hard)
+5. Select questions to export:
+   - Click individual questions to select/deselect
+   - OR click "Select All" to select all filtered questions
+6. Click "Export Selected" button
+7. JSON file downloads automatically
+   - Filename: questions_export_YYYY-MM-DD.json
+
+===========================================
+EXPORT FILE FORMAT
+===========================================
+
+The exported JSON contains an array of questions:
+
+[
+  {
+    "id": "uuid",
+    "question_text": "What is AI?",
+    "question_type": "text_mcq",
+    "options": ["Option 1", "Option 2", "Option 3", "Option 4"],
+    "correct_answer": "Option 1",
+    "explanation": "AI stands for...",
+    "difficulty": "easy",
+    "category": "Technology",
+    "points": 10,
+    "image_url": "/uploads/logo/example.png"
+  },
+  ...
+]
+
+===========================================
+HOW TO IMPORT QUESTIONS
+===========================================
+
+1. Login as admin
+2. Click "Import/Export" in sidebar
+3. Click "Import Questions" tab
+4. Click "Choose JSON File" button
+5. Select your JSON file (must be .json format)
+6. Review the preview of questions to be imported
+7. Check the question count and details
+8. Click "Import All" to import questions
+9. Wait for confirmation message
+
+===========================================
+IMPORT VALIDATION
+===========================================
+
+The system validates:
+✓ JSON file format is valid
+✓ All required fields are present:
+  - question_text
+  - question_type
+  - category
+  - difficulty
+  - correct_answer
+✓ No duplicate questions (checks question_text)
+✓ Valid question types
+✓ Valid difficulty levels
+
+Imported questions are set to "draft" status by default.
+You must activate them manually from Question Bank.
+
+===========================================
+TROUBLESHOOTING
+===========================================
+
+**Error: "Invalid JSON format"**
+- Ensure file is valid JSON
+- Use a JSON validator tool
+- Check for syntax errors (missing commas, brackets)
+
+**Error: "Missing required field"**
+- Each question must have:
+  question_text, question_type, category, 
+  difficulty, correct_answer
+- Check your JSON structure
+
+**Error: "Duplicate question text"**
+- A question with the same text already exists as active
+- Either delete the existing question first
+- Or modify the question text in your import file
+
+**No questions showing for export**
+- Check your filters
+- Ensure questions exist in database
+- Try "All Types" and "All Difficulties"
+
+**Import button disabled**
+- Make sure you've selected a file
+- File must be .json format
+- File must contain at least one question
+
+===========================================
+BEST PRACTICES
+===========================================
+
+1. EXPORT REGULARLY
+   - Backup your question bank monthly
+   - Export before major changes
+   - Keep versioned backups
+
+2. TEST IMPORTS
+   - Try importing with 1-2 questions first
+   - Verify the format is correct
+   - Then import the full set
+
+3. ORGANIZE EXPORTS
+   - Use descriptive filenames
+   - Include date in filename
+   - Separate by category/type if needed
+
+4. VALIDATE BEFORE IMPORT
+   - Review the preview carefully
+   - Check for typos
+   - Verify correct answers
+   - Check image paths
+
+5. ACTIVATE AFTER IMPORT
+   - Go to Question Bank
+   - Find imported questions (status: draft)
+   - Review each question
+   - Activate when verified
+
+===========================================
+EXAMPLE WORKFLOW
+===========================================
+
+SCENARIO: Moving questions between servers
+
+1. On OLD server:
+   - Export all "Logo" questions
+   - Filter: Type = "image_identify_logo"
+   - Select All → Export
+   - Save: logo_questions_2025-12-12.json
+
+2. On NEW server:
+   - Go to Import/Export
+   - Upload: logo_questions_2025-12-12.json
+   - Review preview
+   - Import All
+   - Go to Question Bank
+   - Activate imported questions
+
+===========================================
+API ENDPOINT (For Developers)
+===========================================
+
+Import Endpoint: /api/questions/import.php
+Method: POST
+Auth: Bearer token required
+Role: admin or super_admin
+
+Request Body:
+{
+  "questions": [
+    { question object },
+    { question object },
+    ...
+  ]
+}
+
+Response:
+{
+  "success": true,
+  "imported": 15,
+  "total": 20,
+  "errors": [
+    "Question 3: Duplicate question text",
+    "Question 7: Missing correct_answer"
+  ]
+}
+
+===========================================
+TECHNICAL DETAILS
+===========================================
+
+Frontend:
+- Location: /admin/import-export
+- Component: client/src/pages/admin/ImportExport.tsx
+- Uses React hooks and state management
+- File handling via FileReader API
+
+Backend:
+- API: api/questions/import.php
+- Validates all fields
+- Checks for duplicates
+- Transaction-based (all or nothing)
+- Sets imported questions as "draft"
+
+===========================================
+SUPPORT
+===========================================
+
+For issues or questions:
+1. Check browser console (F12) for errors
+2. Verify JSON format with online validator
+3. Check server error logs
+4. Contact system administrator
+
+Last Updated: December 12, 2025
+Feature Version: 1.0

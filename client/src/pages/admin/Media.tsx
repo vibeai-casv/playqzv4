@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useAdmin } from '../../hooks/useAdmin';
 import { MediaFile, Question } from '../../types';
-import { Loader2, Upload, Search, Trash2, Image as ImageIcon, Link as LinkIcon, Check } from 'lucide-react';
+import { Loader2, Upload, Search, Trash2, Image as ImageIcon, Link as LinkIcon, Check, RefreshCw } from 'lucide-react';
 import { toast } from 'sonner';
 import { cn } from '../../lib/utils';
 import { Modal } from '../../components/ui/Modal';
@@ -11,6 +11,7 @@ export function Media() {
     const [media, setMedia] = useState<MediaFile[]>([]);
     const [isUploading, setIsUploading] = useState(false);
     const [uploadProgress, setUploadProgress] = useState<Record<string, number>>({});
+    const [isRefreshing, setIsRefreshing] = useState(false);
 
     // Filters
     const [search, setSearch] = useState('');
@@ -25,7 +26,8 @@ export function Media() {
     const [selectedQuestion, setSelectedQuestion] = useState<Question | null>(null);
     const [loadingQuestions, setLoadingQuestions] = useState(false);
 
-    const loadMedia = useCallback(async () => {
+    const loadMedia = useCallback(async (showRefreshIndicator = false) => {
+        if (showRefreshIndicator) setIsRefreshing(true);
         try {
             const { media: data } = await fetchMedia({
                 type: type === 'all' ? undefined : type
@@ -34,12 +36,28 @@ export function Media() {
         } catch (error) {
             console.error(error);
             toast.error('Failed to load media');
+        } finally {
+            if (showRefreshIndicator) setIsRefreshing(false);
         }
     }, [fetchMedia, type]);
 
+    // Initial load and auto-refresh every 60 seconds
     useEffect(() => {
         loadMedia();
+
+        // Set up auto-refresh every 60 seconds (1 minute)
+        const interval = setInterval(() => {
+            loadMedia();
+        }, 60000);
+
+        return () => clearInterval(interval);
     }, [loadMedia]);
+
+    // Manual refresh handler
+    const handleRefresh = () => {
+        loadMedia(true);
+        toast.success('Media refreshed');
+    };
 
     const handleFileUpload = async (files: FileList | null) => {
         if (!files || files.length === 0) return;
@@ -168,6 +186,17 @@ export function Media() {
                 <h1 className="text-3xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
                     <ImageIcon className="w-8 h-8" /> Media Library
                 </h1>
+                <button
+                    onClick={handleRefresh}
+                    disabled={isRefreshing}
+                    className={cn(
+                        "flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors",
+                        isRefreshing && "opacity-50 cursor-not-allowed"
+                    )}
+                >
+                    <RefreshCw className={cn("w-4 h-4", isRefreshing && "animate-spin")} />
+                    {isRefreshing ? 'Refreshing...' : 'Refresh'}
+                </button>
             </div>
 
             {/* Upload Area */}

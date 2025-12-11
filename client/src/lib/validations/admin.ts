@@ -10,7 +10,20 @@ export const questionSchema = z.object({
     options: z.array(z.string()).default([]),
     correct_answer: z.string().min(1, 'Correct answer is required'),
     explanation: z.string().optional(),
-    image_url: z.string().url().optional().or(z.literal('')),
+    image_url: z.string().optional().refine(
+        (val) => !val || val === '' || val.startsWith('/') || val.startsWith('http://') || val.startsWith('https://'),
+        'Image URL must be a valid URL or path starting with /'
+    ),
+}).superRefine((data, ctx) => {
+    if (data.status === 'active' && (data.question_type === 'image_identify_logo' || data.question_type === 'image_identify_person')) {
+        if (!data.image_url) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "Image is required for active image identification questions",
+                path: ["image_url"]
+            });
+        }
+    }
 });
 
 export type QuestionFormData = z.infer<typeof questionSchema>;

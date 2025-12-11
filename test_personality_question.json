@@ -1,0 +1,24 @@
+[
+    {
+        "question": "Identify this AI pioneer",
+        "type": "image_identify_person",
+        "options": [
+            "Geoffrey Hinton",
+            "Yann LeCun",
+            "Yoshua Bengio",
+            "Andrew Ng"
+        ],
+        "correct_answer": "Geoffrey Hinton",
+        "explanation": "Geoffrey Hinton is known as the 'Godfather of AI' and won the 2024 Nobel Prize in Physics for his pioneering work in artificial neural networks and deep learning.",
+        "difficulty": "medium",
+        "category": "Personalities",
+        "subcategory": "AI Pioneers",
+        "tags": [
+            "deep learning",
+            "neural networks",
+            "nobel prize"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Geoffrey_Hinton_at_UofT_%28cropped%29.jpg/440px-Geoffrey_Hinton_at_UofT_%28cropped%29.jpg",
+        "points": 10
+    }
+]

@@ -248,6 +248,13 @@ export function QuizResults() {
                                                     {q.correct_answer}
                                                 </div>
                                             </div>
+
+                                            {q.explanation && (
+                                                <div className="mt-4 p-4 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-200">
+                                                    <span className="block text-xs opacity-70 mb-2 uppercase tracking-wider font-bold">Explanation</span>
+                                                    <p className="text-sm leading-relaxed">{q.explanation}</p>
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                 </div>

@@ -37,6 +37,16 @@ if (isset($input['status'])) {
 $newIsActive = isset($input['is_active']) ? (int)$input['is_active'] : (int)$currentQuestion['is_active'];
 $newText = isset($input['question_text']) ? $input['question_text'] : $currentQuestion['question_text'];
 
+// Check for image requirement on activation
+$typeToCheck = isset($input['question_type']) ? $input['question_type'] : $currentQuestion['question_type'];
+$imageToCheck = isset($input['image_url']) ? $input['image_url'] : $currentQuestion['image_url'];
+
+if ($newIsActive === 1 && in_array($typeToCheck, ['image_identify_logo', 'image_identify_person'])) {
+    if (empty($imageToCheck)) {
+        jsonResponse(['error' => 'Active image identification questions must have an image.'], 400);
+    }
+}
+
 // Check for duplicates if the question is (or becoming) active
 // Only check if we are changing status to active OR changing text of an active question
 $statusChangingToActive = ($newIsActive === 1 && $currentQuestion['is_active'] == 0);
@@ -54,12 +64,17 @@ if ($statusChangingToActive || $textChangingOfActive) {
 // Removed 'status' from allowed fields as it maps to is_active
 $allowedFields = [
     'question_text', 'question_type', 'options', 'correct_answer', 
-    'explanation', 'difficulty', 'category', 'points', 'media_id', 
-    'is_active', 'is_verified'
+    'explanation', 'difficulty', 'category', 'points', 'media_id', 'image_url', 
+    'is_active', 'is_verified', 'is_demo'
 ];
 
 $updates = [];
 $params = [];
+
+// If image_url is updated, clear media_id to ensure we use the explicit URL
+if (array_key_exists('image_url', $input) && !array_key_exists('media_id', $input)) {
+    $input['media_id'] = null;
+}
 
 foreach ($input as $key => $value) {
     if (in_array($key, $allowedFields)) {

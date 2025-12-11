@@ -50,6 +50,7 @@ export interface Question {
     points: number;
     status: 'active' | 'inactive' | 'draft';
     ai_generated: boolean;
+    is_demo?: boolean;
     created_at: string;
     updated_at: string;
 }

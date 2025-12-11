@@ -34,4 +34,9 @@ define('MAX_UPLOAD_SIZE', 5242880); // 5MB in bytes
 define('ALLOWED_UPLOAD_TYPES', ['image/jpeg', 'image/png', 'image/webp', 'image/gif']);
 define('UPLOAD_PATH', '/var/www/aiquiz.vibeai.cv/uploads');
 
+// AI Configuration
+define('AI_PROVIDER', 'gemini');
+define('AI_API_KEY', 'AIzaSyBAEQMkw01uCSQ1XFin3H4_D6DJ7HeHM7I');
+define('AI_MODEL', 'gemini-2.0-flash');
+
 ?>

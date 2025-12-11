@@ -1,0 +1,319 @@
+[
+    {
+        "question_text": "Identify this AI pioneer",
+        "question_type": "image_identify_person",
+        "options": [
+            "Geoffrey Hinton",
+            "Yann LeCun",
+            "Yoshua Bengio",
+            "Andrew Ng"
+        ],
+        "correct_answer": "Geoffrey Hinton",
+        "explanation": "Geoffrey Hinton is known as the 'Godfather of AI' and won the 2024 Nobel Prize in Physics for his pioneering work in artificial neural networks and deep learning.",
+        "difficulty": "medium",
+        "category": "Personalities",
+        "subcategory": "AI Pioneers",
+        "tags": [
+            "deep learning",
+            "neural networks",
+            "nobel prize"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Geoffrey_Hinton_at_UofT_%28cropped%29.jpg/440px-Geoffrey_Hinton_at_UofT_%28cropped%29.jpg"
+    },
+    {
+        "question_text": "Who is this AI researcher?",
+        "question_type": "image_identify_person",
+        "options": [
+            "Yann LeCun",
+            "Geoffrey Hinton",
+            "Demis Hassabis",
+            "Fei-Fei Li"
+        ],
+        "correct_answer": "Yann LeCun",
+        "explanation": "Yann LeCun is the Chief AI Scientist at Meta and a pioneer in convolutional neural networks (CNNs). He shared the 2018 Turing Award with Geoffrey Hinton and Yoshua Bengio.",
+        "difficulty": "medium",
+        "category": "Personalities",
+        "subcategory": "AI Pioneers",
+        "tags": [
+            "CNN",
+            "computer vision",
+            "turing award"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Yann_LeCun_-_2018_%28cropped%29.jpg/440px-Yann_LeCun_-_2018_%28cropped%29.jpg"
+    },
+    {
+        "question_text": "Identify this AI leader",
+        "question_type": "image_identify_person",
+        "options": [
+            "Sam Altman",
+            "Elon Musk",
+            "Demis Hassabis",
+            "Sundar Pichai"
+        ],
+        "correct_answer": "Sam Altman",
+        "explanation": "Sam Altman is the CEO of OpenAI, the company behind ChatGPT and GPT-4. He has been instrumental in bringing advanced AI to the mainstream.",
+        "difficulty": "easy",
+        "category": "Personalities",
+        "subcategory": "AI Leaders",
+        "tags": [
+            "OpenAI",
+            "ChatGPT",
+            "GPT"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Sam_Altman_TechCrunch_2019_%28cropped%29.jpg/440px-Sam_Altman_TechCrunch_2019_%28cropped%29.jpg"
+    },
+    {
+        "question_text": "Who is this AI researcher and entrepreneur?",
+        "question_type": "image_identify_person",
+        "options": [
+            "Demis Hassabis",
+            "Andrew Ng",
+            "Ian Goodfellow",
+            "Yoshua Bengio"
+        ],
+        "correct_answer": "Demis Hassabis",
+        "explanation": "Demis Hassabis is the co-founder and CEO of Google DeepMind. He won the 2024 Nobel Prize in Chemistry for AlphaFold's breakthrough in protein structure prediction.",
+        "difficulty": "medium",
+        "category": "Personalities",
+        "subcategory": "AI Leaders",
+        "tags": [
+            "DeepMind",
+            "AlphaGo",
+            "AlphaFold",
+            "nobel prize"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Demis_Hassabis_Royal_Society.jpg/440px-Demis_Hassabis_Royal_Society.jpg"
+    },
+    {
+        "question_text": "Identify this computer scientist",
+        "question_type": "image_identify_person",
+        "options": [
+            "Andrew Ng",
+            "Geoffrey Hinton",
+            "Yann LeCun",
+            "Fei-Fei Li"
+        ],
+        "correct_answer": "Andrew Ng",
+        "explanation": "Andrew Ng is a co-founder of Google Brain and Coursera. He is widely known for his online machine learning courses and contributions to AI education.",
+        "difficulty": "easy",
+        "category": "Personalities",
+        "subcategory": "AI Educators",
+        "tags": [
+            "Google Brain",
+            "Coursera",
+            "machine learning",
+            "education"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Andrew_Ng_-_TechCrunch_Disrupt_SF_2019_-_Day_2_%28cropped%29.jpg/440px-Andrew_Ng_-_TechCrunch_Disrupt_SF_2019_-_Day_2_%28cropped%29.jpg"
+    },
+    {
+        "question_text": "Who is this AI researcher?",
+        "question_type": "image_identify_person",
+        "options": [
+            "Fei-Fei Li",
+            "Timnit Gebru",
+            "Kate Crawford",
+            "Joy Buolamwini"
+        ],
+        "correct_answer": "Fei-Fei Li",
+        "explanation": "Fei-Fei Li is a professor at Stanford and co-director of the Stanford Human-Centered AI Institute. She created ImageNet, which revolutionized computer vision.",
+        "difficulty": "medium",
+        "category": "Personalities",
+        "subcategory": "AI Researchers",
+        "tags": [
+            "ImageNet",
+            "computer vision",
+            "Stanford"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Fei-Fei_Li_at_AI_for_Good_Global_Summit_2017.jpg/440px-Fei-Fei_Li_at_AI_for_Good_Global_Summit_2017.jpg"
+    },
+    {
+        "question_text": "Identify this AI pioneer",
+        "question_type": "image_identify_person",
+        "options": [
+            "Yoshua Bengio",
+            "Geoffrey Hinton",
+            "Yann LeCun",
+            "Jürgen Schmidhuber"
+        ],
+        "correct_answer": "Yoshua Bengio",
+        "explanation": "Yoshua Bengio is a professor at the University of Montreal and a co-recipient of the 2018 Turing Award for his work on deep learning.",
+        "difficulty": "hard",
+        "category": "Personalities",
+        "subcategory": "AI Pioneers",
+        "tags": [
+            "deep learning",
+            "turing award",
+            "neural networks"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Yoshua_Bengio_-_2017_%28cropped%29.jpg/440px-Yoshua_Bengio_-_2017_%28cropped%29.jpg"
+    },
+    {
+        "question_text": "Who is this AI researcher?",
+        "question_type": "image_identify_person",
+        "options": [
+            "Ian Goodfellow",
+            "Andrej Karpathy",
+            "Ilya Sutskever",
+            "Alex Krizhevsky"
+        ],
+        "correct_answer": "Ian Goodfellow",
+        "explanation": "Ian Goodfellow is best known for inventing Generative Adversarial Networks (GANs) in 2014, a breakthrough in generative AI.",
+        "difficulty": "medium",
+        "category": "Personalities",
+        "subcategory": "AI Researchers",
+        "tags": [
+            "GANs",
+            "generative AI",
+            "deep learning"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Ian_Goodfellow_at_NIPS_%28cropped%29.jpg/440px-Ian_Goodfellow_at_NIPS_%28cropped%29.jpg"
+    },
+    {
+        "question_text": "Identify this technology leader",
+        "question_type": "image_identify_person",
+        "options": [
+            "Sundar Pichai",
+            "Satya Nadella",
+            "Tim Cook",
+            "Mark Zuckerberg"
+        ],
+        "correct_answer": "Sundar Pichai",
+        "explanation": "Sundar Pichai is the CEO of Google and Alphabet, leading the company's AI initiatives including Google Gemini and Bard.",
+        "difficulty": "easy",
+        "category": "Personalities",
+        "subcategory": "Tech CEOs",
+        "tags": [
+            "Google",
+            "Gemini",
+            "Alphabet"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Sundar_Pichai_-_2023_%28cropped%29.jpg/440px-Sundar_Pichai_-_2023_%28cropped%29.jpg"
+    },
+    {
+        "question_text": "Who is this AI researcher?",
+        "question_type": "image_identify_person",
+        "options": [
+            "Ilya Sutskever",
+            "Ian Goodfellow",
+            "Andrej Karpathy",
+            "Pieter Abbeel"
+        ],
+        "correct_answer": "Ilya Sutskever",
+        "explanation": "Ilya Sutskever is the co-founder and Chief Scientist of OpenAI. He was a key figure in developing GPT models and has made significant contributions to deep learning.",
+        "difficulty": "hard",
+        "category": "Personalities",
+        "subcategory": "AI Leaders",
+        "tags": [
+            "OpenAI",
+            "GPT",
+            "deep learning"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Ilya_Sutskever_2019.jpg/440px-Ilya_Sutskever_2019.jpg"
+    },
+    {
+        "question_text": "Identify this AI researcher",
+        "question_type": "image_identify_person",
+        "options": [
+            "Andrej Karpathy",
+            "Ilya Sutskever",
+            "Greg Brockman",
+            "Wojciech Zaremba"
+        ],
+        "correct_answer": "Andrej Karpathy",
+        "explanation": "Andrej Karpathy is a renowned AI researcher who was the Director of AI at Tesla and a founding member of OpenAI. He is known for his work on computer vision and neural networks.",
+        "difficulty": "medium",
+        "category": "Personalities",
+        "subcategory": "AI Researchers",
+        "tags": [
+            "Tesla",
+            "OpenAI",
+            "computer vision"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Andrej_Karpathy_-_2017.jpg/440px-Andrej_Karpathy_-_2017.jpg"
+    },
+    {
+        "question_text": "Who is this technology entrepreneur?",
+        "question_type": "image_identify_person",
+        "options": [
+            "Elon Musk",
+            "Sam Altman",
+            "Jeff Bezos",
+            "Bill Gates"
+        ],
+        "correct_answer": "Elon Musk",
+        "explanation": "Elon Musk is the founder of xAI and co-founder of OpenAI (though he later left). He has been a vocal advocate for AI safety and regulation.",
+        "difficulty": "easy",
+        "category": "Personalities",
+        "subcategory": "Tech Entrepreneurs",
+        "tags": [
+            "xAI",
+            "Tesla",
+            "AI safety"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Elon_Musk_Royal_Society_%28crop2%29.jpg/440px-Elon_Musk_Royal_Society_%28crop2%29.jpg"
+    },
+    {
+        "question_text": "Identify this AI ethics researcher",
+        "question_type": "image_identify_person",
+        "options": [
+            "Timnit Gebru",
+            "Fei-Fei Li",
+            "Kate Crawford",
+            "Joy Buolamwini"
+        ],
+        "correct_answer": "Timnit Gebru",
+        "explanation": "Timnit Gebru is a computer scientist known for her work on algorithmic bias and AI ethics. She founded the Distributed AI Research Institute (DAIR).",
+        "difficulty": "hard",
+        "category": "Personalities",
+        "subcategory": "AI Ethics",
+        "tags": [
+            "AI ethics",
+            "bias",
+            "fairness"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Timnit_Gebru_-_2018_%28cropped%29.jpg/440px-Timnit_Gebru_-_2018_%28cropped%29.jpg"
+    },
+    {
+        "question_text": "Who is this Microsoft executive?",
+        "question_type": "image_identify_person",
+        "options": [
+            "Satya Nadella",
+            "Sundar Pichai",
+            "Andy Jassy",
+            "Tim Cook"
+        ],
+        "correct_answer": "Satya Nadella",
+        "explanation": "Satya Nadella is the CEO of Microsoft and has led the company's major investments in AI, including the partnership with OpenAI.",
+        "difficulty": "easy",
+        "category": "Personalities",
+        "subcategory": "Tech CEOs",
+        "tags": [
+            "Microsoft",
+            "OpenAI partnership",
+            "Azure AI"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Satya_Nadella_-_2017_%28cropped%29.jpg/440px-Satya_Nadella_-_2017_%28cropped%29.jpg"
+    },
+    {
+        "question_text": "Identify this AI researcher",
+        "question_type": "image_identify_person",
+        "options": [
+            "Jürgen Schmidhuber",
+            "Yoshua Bengio",
+            "Geoffrey Hinton",
+            "Sepp Hochreiter"
+        ],
+        "correct_answer": "Jürgen Schmidhuber",
+        "explanation": "Jürgen Schmidhuber is known for his work on Long Short-Term Memory (LSTM) networks and recurrent neural networks, fundamental to modern AI.",
+        "difficulty": "hard",
+        "category": "Personalities",
+        "subcategory": "AI Researchers",
+        "tags": [
+            "LSTM",
+            "RNN",
+            "neural networks"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/J%C3%BCrgen_Schmidhuber_2018.jpg/440px-J%C3%BCrgen_Schmidhuber_2018.jpg"
+    }
+]

@@ -167,6 +167,26 @@ try {
     
     $insertedCount = 0;
     foreach ($questions as $q) {
+        // Duplicate Check
+        $qType = $type;
+        $qText = $q['text'];
+        $qAnswer = $q['correct_answer'];
+        
+        $isDuplicate = false;
+        if (in_array($qType, ['image_identify_logo', 'image_identify_person'])) {
+            $stmt = $pdo->prepare("SELECT id FROM questions WHERE question_type = ? AND correct_answer = ?");
+            $stmt->execute([$qType, $qAnswer]);
+            if ($stmt->fetch()) $isDuplicate = true;
+        } else {
+            $stmt = $pdo->prepare("SELECT id FROM questions WHERE question_text = ?");
+            $stmt->execute([$qText]);
+            if ($stmt->fetch()) $isDuplicate = true;
+        }
+
+        if ($isDuplicate) {
+            continue; 
+        }
+
         $id = generateUuid();
         $stmt = $pdo->prepare("INSERT INTO questions (
             id, question_text, question_type, options, correct_answer, explanation, 

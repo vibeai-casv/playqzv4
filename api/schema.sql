@@ -87,6 +87,7 @@ CREATE TABLE IF NOT EXISTS `questions` (
     `correct_count` INT DEFAULT 0,
     `ai_generated` TINYINT(1) DEFAULT 0,
     `ai_prompt` TEXT,
+    `is_demo` TINYINT(1) DEFAULT 0,
     `created_by` CHAR(36) NOT NULL,
     `verified_by` CHAR(36) NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

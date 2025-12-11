@@ -4,7 +4,7 @@ import { Question } from '../../types';
 import { Modal } from '../../components/ui/Modal';
 import {
     Search, Plus, Sparkles, Trash2, CheckCircle, XCircle,
-    Edit, Loader2, ChevronLeft, ChevronRight, ArrowUpDown, FileUp, RefreshCw
+    Edit, Loader2, ChevronLeft, ChevronRight, ArrowUpDown, FileUp, RefreshCw, Star
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { cn } from '../../lib/utils';
@@ -84,6 +84,17 @@ export function Questions() {
         } catch (error) {
             console.error(error);
             toast.error('Failed to delete question');
+        }
+    };
+
+    const handleToggleDemo = async (question: Question) => {
+        try {
+            await updateQuestion(question.id, { is_demo: !question.is_demo });
+            toast.success(`Question ${question.is_demo ? 'removed from' : 'added to'} Demo`);
+            loadQuestions();
+        } catch (error) {
+            console.error(error);
+            toast.error('Failed to update question');
         }
     };
 
@@ -263,6 +274,7 @@ export function Questions() {
                                         Question <ArrowUpDown className="w-4 h-4" />
                                     </div>
                                 </th>
+                                <th className="p-4 w-10 text-center">Demo</th>
                                 <th className="p-4 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600" onClick={() => handleSort('question_type')}>
                                     <div className="flex items-center gap-2">
                                         Type <ArrowUpDown className="w-4 h-4" />
@@ -288,24 +300,19 @@ export function Questions() {
                                         Status <ArrowUpDown className="w-4 h-4" />
                                     </div>
                                 </th>
-                                <th className="p-4 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600" onClick={() => handleSort('created_at')}>
-                                    <div className="flex items-center gap-2">
-                                        Created <ArrowUpDown className="w-4 h-4" />
-                                    </div>
-                                </th>
                                 <th className="p-4 text-right">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                             {isLoading ? (
                                 <tr>
-                                    <td colSpan={10} className="p-8 text-center">
+                                    <td colSpan={9} className="p-8 text-center">
                                         <Loader2 className="w-8 h-8 animate-spin mx-auto text-indigo-600" />
                                     </td>
                                 </tr>
                             ) : questions.length === 0 ? (
                                 <tr>
-                                    <td colSpan={10} className="p-8 text-center text-gray-500 dark:text-gray-400">
+                                    <td colSpan={9} className="p-8 text-center text-gray-500 dark:text-gray-400">
                                         No questions found
                                     </td>
                                 </tr>
@@ -324,19 +331,51 @@ export function Questions() {
                                             />
                                         </td>
                                         <td className="p-4">
-                                            {(q.image_url || q.media_id) && (
-                                                <div className="w-8 h-8 rounded bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-gray-500 dark:text-gray-400">
-                                                    <FileUp className="w-4 h-4" />
+                                            {(q.image_url) ? (
+                                                <img
+                                                    src={q.image_url}
+                                                    alt="Q"
+                                                    className="w-16 h-16 object-cover rounded border border-gray-200 dark:border-gray-700 bg-white"
+                                                />
+                                            ) : (q.media_id) && (
+                                                <div className="w-10 h-10 rounded bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-gray-500 dark:text-gray-400">
+                                                    <FileUp className="w-5 h-5" />
                                                 </div>
                                             )}
                                         </td>
-                                        <td className="p-4 max-w-md">
-                                            <div className="truncate font-medium text-gray-900 dark:text-gray-100" title={q.question_text}>
-                                                {q.question_text}
+                                        <td className="p-4 max-w-md group">
+                                            <div className="flex items-start gap-2">
+                                                <div className="truncate font-medium text-gray-900 dark:text-gray-100" title={q.question_text}>
+                                                    {q.question_text}
+                                                </div>
+                                                <button
+                                                    onClick={() => {
+                                                        setEditingQuestion(q);
+                                                        setIsEditorOpen(true);
+                                                    }}
+                                                    className="p-1 text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 opacity-0 group-hover:opacity-100 transition-opacity"
+                                                    title="Edit Question"
+                                                >
+                                                    <Edit className="w-4 h-4" />
+                                                </button>
                                             </div>
                                             <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5 truncate" title={q.correct_answer}>
                                                 Ans: {q.correct_answer}
                                             </div>
+                                        </td>
+                                        <td className="p-4 text-center">
+                                            <button
+                                                onClick={() => handleToggleDemo(q)}
+                                                className={cn(
+                                                    "p-1 rounded-full transition-colors",
+                                                    q.is_demo
+                                                        ? "text-yellow-400 hover:text-yellow-500 bg-yellow-400/10"
+                                                        : "text-gray-300 hover:text-yellow-400 dark:text-gray-600 dark:hover:text-yellow-400"
+                                                )}
+                                                title={q.is_demo ? "Remove from Demo" : "Add to Demo"}
+                                            >
+                                                <Star className={cn("w-4 h-4", q.is_demo && "fill-current")} />
+                                            </button>
                                         </td>
                                         <td className="p-4 capitalize text-sm text-gray-700 dark:text-gray-300">{q.question_type.replace(/_/g, ' ')}</td>
                                         <td className="p-4 text-sm text-gray-700 dark:text-gray-300">{q.category}</td>
@@ -361,34 +400,14 @@ export function Questions() {
                                                 {q.status}
                                             </span>
                                         </td>
-                                        <td className="p-4 text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">
-                                            {new Date(q.created_at).toLocaleDateString()}
-                                            {q.ai_generated && (
-                                                <span className="ml-2 inline-flex items-center gap-0.5 text-[10px] text-purple-600 bg-purple-50 dark:bg-purple-900/20 px-1.5 py-0.5 rounded-full border border-purple-100 dark:border-purple-800">
-                                                    <Sparkles className="w-3 h-3" /> AI
-                                                </span>
-                                            )}
-                                        </td>
                                         <td className="p-4 text-right">
-                                            <div className="flex justify-end gap-2">
-                                                <button
-                                                    onClick={() => {
-                                                        setEditingQuestion(q);
-                                                        setIsEditorOpen(true);
-                                                    }}
-                                                    className="p-1 text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
-                                                    title="Edit"
-                                                >
-                                                    <Edit className="w-4 h-4" />
-                                                </button>
-                                                <button
-                                                    onClick={() => handleDelete(q.id)}
-                                                    className="p-1 text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors"
-                                                    title="Delete"
-                                                >
-                                                    <Trash2 className="w-4 h-4" />
-                                                </button>
-                                            </div>
+                                            <button
+                                                onClick={() => handleDelete(q.id)}
+                                                className="p-1 text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors"
+                                                title="Delete"
+                                            >
+                                                <Trash2 className="w-4 h-4" />
+                                            </button>
                                         </td>
                                     </tr>
                                 ))

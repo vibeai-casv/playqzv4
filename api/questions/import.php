@@ -1,159 +1,138 @@
 <?php
-/**
- * Import Questions from JSON - Production Schema Compatible
- * POST /api/questions/import.php
- */
+require_once '../config.php';
+require_once '../db.php';
+require_once '../utils.php';
 
-header('Content-Type: application/json');
-
-// Include required files
-$configPath = dirname(__FILE__) . '/../config.php';
-$dbPath = dirname(__FILE__) . '/../db.php';
-$utilsPath = dirname(__FILE__) . '/../utils.php';
-
-if (!file_exists($configPath)) {
-    echo json_encode(['error' => 'Config file not found']);
-    exit;
-}
-
-require_once $configPath;
-require_once $dbPath;
-require_once $utilsPath;
-
-// Set CORS headers
 cors();
 
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(200);
-    exit;
+$session = authenticate($pdo);
+
+// Check if admin
+if ($session['role'] !== 'admin' && $session['role'] !== 'super_admin') {
+    jsonResponse(['error' => 'Forbidden'], 403);
 }
 
-// Verify authentication using Token (Standard App Auth)
-try {
-    $session = authenticate($pdo);
-} catch (Exception $e) {
-    http_response_code(401);
-    echo json_encode(['error' => 'Authentication failed']);
-    exit;
-}
-
-// Check Admin Role
-if ($session['role'] !== 'admin') {
-    http_response_code(403);
-    echo json_encode(['error' => 'Unauthorized. Admin access required.']);
-    exit;
-}
-
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    echo json_encode(['error' => 'Method not allowed']);
-    exit;
-}
-
-// Get JSON data
 $input = getJsonInput();
+$questions = $input['questions'] ?? [];
 
-if (!isset($input['questions']) || !is_array($input['questions'])) {
-    http_response_code(400);
-    echo json_encode(['error' => 'Invalid input. Expected "questions" array']);
-    exit;
+if (empty($questions)) {
+    jsonResponse(['error' => 'No questions provided'], 400);
 }
 
-$questions = $input['questions'];
-$skipDuplicates = isset($input['skipDuplicates']) ? $input['skipDuplicates'] : true;
+if (!is_array($questions)) {
+    jsonResponse(['error' => 'Invalid format. Expected array of questions'], 400);
+}
 
 $imported = 0;
 $skipped = 0;
-$errors = array();
+$errors = [];
 
-foreach ($questions as $index => $q) {
-    try {
-        // Validate required fields
-        if (!isset($q['question']) || !isset($q['correct_answer']) || !isset($q['options'])) {
-            $errors[] = "Question at index $index: Missing required fields";
-            continue;
-        }
-        
-        // Check for duplicates (using question_text)
-        if ($skipDuplicates) {
-            $stmt = $pdo->prepare("SELECT id FROM questions WHERE question_text = ?");
-            $stmt->execute(array($q['question']));
-            if ($stmt->fetch()) {
+try {
+    $pdo->beginTransaction();
+    
+    foreach ($questions as $index => $question) {
+        try {
+            // Validate required fields
+            $requiredFields = ['question_text', 'question_type', 'category', 'difficulty', 'correct_answer'];
+            foreach ($requiredFields as $field) {
+                if (!isset($question[$field]) || empty($question[$field])) {
+                    $errors[] = "Question " . ($index + 1) . ": Missing $field";
+                    continue 2; // Skip to next question
+                }
+            }
+            
+            // Generate new UUID
+            $id = generateUuid();
+            
+            // Prepare data
+            $questionText = trim($question['question_text']);
+            $questionType = $question['question_type'];
+            $category = $question['category'];
+            $difficulty = $question['difficulty'];
+            $points = $question['points'] ?? 10;
+            $options = isset($question['options']) ? json_encode($question['options']) : '[]';
+            $correctAnswer = $question['correct_answer'];
+            $explanation = $question['explanation'] ?? '';
+            $imageUrl = $question['image_url'] ?? '';
+            
+            // Check for duplicates - check ALL questions (active, inactive, draft)
+            // Use exact match on question_text after trimming
+            $stmt = $pdo->prepare("
+                SELECT id, is_active 
+                FROM questions 
+                WHERE TRIM(question_text) = ? 
+                LIMIT 1
+            ");
+            $stmt->execute([$questionText]);
+            $existing = $stmt->fetch();
+            
+            if ($existing) {
+                $status = $existing['is_active'] ? 'active' : 'inactive/draft';
+                $errors[] = "Question " . ($index + 1) . ": Duplicate - identical question already exists ($status)";
                 $skipped++;
                 continue;
             }
+            
+            // Also check for very similar questions (same text ignoring case and extra spaces)
+            $normalizedText = preg_replace('/\s+/', ' ', strtolower($questionText));
+            $stmt = $pdo->prepare("
+                SELECT id, question_text 
+                FROM questions 
+                WHERE LOWER(TRIM(REPLACE(question_text, '  ', ' '))) = ? 
+                LIMIT 1
+            ");
+            $stmt->execute([$normalizedText]);
+            $similar = $stmt->fetch();
+            
+            if ($similar) {
+                $errors[] = "Question " . ($index + 1) . ": Similar question exists - '" . substr($similar['question_text'], 0, 50) . "...'";
+                $skipped++;
+                continue;
+            }
+            
+            // Insert question
+            $stmt = $pdo->prepare("
+                INSERT INTO questions (
+                    id, question_text, question_type, options, correct_answer,
+                    explanation, difficulty, category, points, image_url,
+                    is_active, is_verified, created_at, updated_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0, NOW(), NOW())
+            ");
+            
+            $stmt->execute([
+                $id,
+                $questionText,
+                $questionType,
+                $options,
+                $correctAnswer,
+                $explanation,
+                $difficulty,
+                $category,
+                $points,
+                $imageUrl
+            ]);
+            
+            $imported++;
+            
+        } catch (PDOException $e) {
+            $errors[] = "Question " . ($index + 1) . ": Database error - " . $e->getMessage();
+            $skipped++;
         }
-        
-        // Generate UUID
-        $id = sprintf(
-            '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
-            mt_rand(0, 0xffff), mt_rand(0, 0xffff),
-            mt_rand(0, 0xffff),
-            mt_rand(0, 0x0fff) | 0x4000,
-            mt_rand(0, 0x3fff) | 0x8000,
-            mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
-        );
-        
-        // Prepare data
-        $type = isset($q['type']) ? $q['type'] : 'text_mcq';
-        $category = isset($q['category']) ? $q['category'] : 'General';
-        $difficulty = isset($q['difficulty']) ? $q['difficulty'] : 'medium';
-        $questionText = $q['question'];
-        $options = json_encode($q['options']);
-        $correctAnswer = $q['correct_answer'];
-        $imageUrl = isset($q['image_url']) ? $q['image_url'] : null;
-        $explanation = isset($q['explanation']) ? $q['explanation'] : null;
-        $userId = $session['user_id']; // Use the authenticated user ID
-        $points = isset($q['points']) ? $q['points'] : 10;
-        $mediaId = null; // Default to null for imported questions
-        
-        // Insert question using CORRECT column names
-        $stmt = $pdo->prepare("
-            INSERT INTO questions (
-                id, 
-                question_text, 
-                question_type, 
-                category, 
-                difficulty, 
-                options, 
-                correct_answer, 
-                explanation, 
-                points,
-                media_id,
-                is_active, 
-                created_by,
-                created_at
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, NOW())
-        ");
-        
-        $stmt->execute(array(
-            $id, 
-            $questionText, 
-            $type, 
-            $category, 
-            $difficulty, 
-            $options, 
-            $correctAnswer, 
-            $explanation,
-            $points,
-            $mediaId,
-            $userId
-        ));
-        
-        $imported++;
-        
-    } catch (PDOException $e) {
-        $errors[] = "Question at index $index: " . $e->getMessage();
-    } catch (Exception $e) {
-        $errors[] = "Question at index $index: " . $e->getMessage();
     }
+    
+    $pdo->commit();
+    
+    jsonResponse([
+        'success' => true,
+        'imported' => $imported,
+        'skipped' => $skipped,
+        'total' => count($questions),
+        'errors' => $errors,
+        'summary' => count($questions) . " total, $imported imported, $skipped skipped/failed"
+    ]);
+    
+} catch (Exception $e) {
+    $pdo->rollBack();
+    jsonResponse(['error' => 'Import failed: ' . $e->getMessage()], 500);
 }
-
-echo json_encode(array(
-    'success' => true,
-    'imported' => $imported,
-    'skipped' => $skipped,
-    'errors' => $errors,
-    'total_processed' => count($questions)
-));
 ?>

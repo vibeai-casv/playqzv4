@@ -34,7 +34,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onFinish }) => {
                 className="w-full h-full object-cover"
                 onEnded={handleFinish}
             >
-                <source src="/aiq4Anim.mp4" type="video/mp4" />
+                <source src="/aiq44.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
             </video>
         </div>

@@ -1,0 +1,284 @@
+╔════════════════════════════════════════════════════════════════╗
+║          FTP UPLOAD GUIDE - AIQUIZ.VIBEAI.CV                   ║
+║                 Production Deployment                          ║
+╚════════════════════════════════════════════════════════════════╝
+
+BUILD DATE: December 12, 2025
+PRODUCTION SERVER: aiquiz.vibeai.cv
+
+═══════════════════════════════════════════════════════════════
+WHAT TO UPLOAD - 3 MAIN FOLDERS
+═══════════════════════════════════════════════════════════════
+
+📁 FOLDER 1: FRONTEND (Client Build)
+   Local Path:  e:\projects\playqzv4\client\dist\*
+   Upload To:   /var/www/aiquiz.vibeai.cv/public/
+   
+   Contains:
+   - index.html
+   - assets/ folder (all JS, CSS bundles)
+   - aiq4.png (logo)
+   - aiq44.mp4 (splash screen animation)
+
+   IMPORTANT: Upload ALL files inside dist folder
+
+─────────────────────────────────────────────────────────────────
+
+📁 FOLDER 2: BACKEND (API)
+   Local Path:  e:\projects\playqzv4\api\*
+   Upload To:   /var/www/aiquiz.vibeai.cv/api/
+   
+   Contains:
+   - All .php files (auth/, questions/, media/, etc.)
+   - config.php (UPDATE THIS AFTER UPLOAD!)
+   - db.php
+   - utils.php
+   - schema.sql
+
+   IMPORTANT: Upload ALL PHP files and subfolders
+
+─────────────────────────────────────────────────────────────────
+
+📁 FOLDER 3: UPLOADS (Media Files)
+   Local Path:  e:\projects\playqzv4\uploads\*
+   Upload To:   /var/www/aiquiz.vibeai.cv/uploads/
+   
+   Contains:
+   - logo/ folder (logo images)
+   - personality/ folder (personality images)
+   - All uploaded images from your local testing
+
+   IMPORTANT: Upload ALL subfolders and files
+
+═══════════════════════════════════════════════════════════════
+STEP-BY-STEP FTP UPLOAD INSTRUCTIONS
+═══════════════════════════════════════════════════════════════
+
+STEP 1: CONNECT TO FTP
+----------------------
+1. Open FileZilla (or your FTP client)
+2. Host: aiquiz.vibeai.cv
+3. Username: [your FTP username]
+4. Password: [your FTP password]
+5. Port: 22 (SFTP) or 21 (FTP)
+6. Click "Quickconnect" or "Connect"
+
+STEP 2: NAVIGATE TO WEB ROOT
+-----------------------------
+On the server (right panel), navigate to:
+   /var/www/aiquiz.vibeai.cv/
+   
+   (or your web root directory, common alternatives:
+    /public_html/
+    /home/[username]/public_html/)
+
+STEP 3: CREATE FOLDERS (if they don't exist)
+---------------------------------------------
+Right-click → Create Directory:
+   - public
+   - api
+   - uploads
+
+STEP 4: UPLOAD FRONTEND
+-----------------------
+LEFT PANEL (Your Computer):
+   Navigate to: e:\projects\playqzv4\client\dist\
+
+RIGHT PANEL (Server):
+   Navigate to: /var/www/aiquiz.vibeai.cv/public/
+
+ACTION:
+   Select ALL files in dist folder → Right-click → Upload
+   
+   Files to upload:
+   ✓ index.html
+   ✓ assets/ (entire folder)
+   ✓ aiq4.png
+   ✓ aiq44.mp4
+   ✓ all other files
+
+STEP 5: UPLOAD BACKEND
+----------------------
+LEFT PANEL (Your Computer):
+   Navigate to: e:\projects\playqzv4\api\
+
+RIGHT PANEL (Server):
+   Navigate to: /var/www/aiquiz.vibeai.cv/api/
+
+ACTION:
+   Select ALL files and folders → Right-click → Upload
+   
+   Key files:
+   ✓ config.php
+   ✓ db.php
+   ✓ utils.php
+   ✓ schema.sql
+   ✓ auth/ folder
+   ✓ questions/ folder
+   ✓ media/ folder
+   ✓ admin/ folder
+   ✓ analytics/ folder
+
+STEP 6: UPLOAD MEDIA/UPLOADS
+-----------------------------
+LEFT PANEL (Your Computer):
+   Navigate to: e:\projects\playqzv4\uploads\
+
+RIGHT PANEL (Server):
+   Navigate to: /var/www/aiquiz.vibeai.cv/uploads/
+
+ACTION:
+   Select ALL files and folders → Right-click → Upload
+   
+   Folders:
+   ✓ logo/
+   ✓ personality/
+
+═══════════════════════════════════════════════════════════════
+AFTER UPLOAD - CRITICAL STEPS
+═══════════════════════════════════════════════════════════════
+
+⚠️  STEP 1: UPDATE config.php
+-----------------------------
+1. In FileZilla, navigate to: /var/www/aiquiz.vibeai.cv/api/
+2. Right-click config.php → View/Edit
+3. Update these values:
+
+   define('DB_HOST', 'localhost');
+   define('DB_NAME', 'your_production_db_name');
+   define('DB_USER', 'your_production_db_user');
+   define('DB_PASS', 'your_production_db_password');
+   define('ALLOWED_ORIGIN', 'https://aiquiz.vibeai.cv');
+
+4. Save the file
+5. FileZilla will ask to upload - click YES
+
+⚠️  STEP 2: SET FILE PERMISSIONS
+---------------------------------
+Right-click → File Permissions:
+
+FOLDERS (755):
+   - /public/ and all subfolders
+   - /api/ and all subfolders
+   - /uploads/
+
+FILES (644):
+   - All .html, .php, .css, .js files
+
+WRITABLE FOLDER (777):
+   - /uploads/ (so PHP can write uploaded images)
+
+⚠️  STEP 3: IMPORT DATABASE
+---------------------------
+1. Login to cPanel/phpMyAdmin on your server
+2. Create database (if not exists)
+3. Import file: /api/schema.sql
+4. Create admin user (see below)
+
+═══════════════════════════════════════════════════════════════
+CREATE ADMIN USER IN DATABASE
+═══════════════════════════════════════════════════════════════
+
+Run these SQL commands in phpMyAdmin:
+
+-- Generate UUID
+SET @user_id = UUID();
+
+-- Create user
+INSERT INTO users (id, email, password_hash, created_at)
+VALUES (
+    @user_id,
+    'your_email@gmail.com',
+    '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+    NOW()
+);
+
+-- Create profile
+INSERT INTO profiles (id, email, name, role, created_at)
+VALUES (
+    @user_id,
+    'your_email@gmail.com',
+    'Admin User',
+    'super_admin',
+    NOW()
+);
+
+Default password: password123
+⚠️  CHANGE THIS AFTER FIRST LOGIN!
+
+═══════════════════════════════════════════════════════════════
+VERIFY DEPLOYMENT
+═══════════════════════════════════════════════════════════════
+
+1. Visit: https://aiquiz.vibeai.cv
+   ✓ Should see login page with aiq4.png logo
+   ✓ Should play aiq44.mp4 splash screen
+
+2. Login with admin credentials
+   ✓ Should redirect to dashboard
+
+3. Test features:
+   ✓ Create a quiz
+   ✓ Upload an image
+   ✓ Take a quiz
+   ✓ View results
+
+═══════════════════════════════════════════════════════════════
+TROUBLESHOOTING
+═══════════════════════════════════════════════════════════════
+
+❌ Blank page / White screen
+   → Check browser console (F12)
+   → Verify all files in /public/ uploaded correctly
+   → Check web server is pointing to /public/ as root
+
+❌ API errors / 404 on API calls
+   → Verify /api/ folder uploaded
+   → Check config.php has correct database credentials
+   → Verify PHP is enabled on server
+
+❌ Images not loading
+   → Verify /uploads/ folder uploaded
+   → Check folder permissions (755 for folders, 644 for files)
+   → Verify /uploads/ path is writable (777)
+
+❌ Database connection failed
+   → Double-check config.php credentials
+   → Verify database exists
+   → Verify user has permissions
+
+═══════════════════════════════════════════════════════════════
+QUICK CHECKLIST
+═══════════════════════════════════════════════════════════════
+
+Before going live:
+□ All files uploaded to correct directories
+□ config.php updated with production credentials
+□ Database imported from schema.sql
+□ Admin user created
+□ File permissions set correctly (755/644/777)
+□ Web server configured to serve from /public/
+□ HTTPS/SSL certificate installed
+□ Tested login functionality
+□ Tested quiz creation
+□ Tested image upload
+□ Tested quiz taking and results
+
+═══════════════════════════════════════════════════════════════
+NEED HELP?
+═══════════════════════════════════════════════════════════════
+
+Check these files on your server:
+- Error logs: /var/log/apache2/error.log (or nginx)
+- PHP errors: Enable in php.ini temporarily
+- Browser console: Press F12 in browser
+
+Common issues are usually:
+1. Wrong file permissions
+2. Incorrect database credentials
+3. Web server not pointing to /public/
+4. Missing .htaccess or mod_rewrite
+
+═══════════════════════════════════════════════════════════════
+
+Good luck with your deployment! 🚀

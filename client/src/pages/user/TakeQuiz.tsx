@@ -206,7 +206,7 @@ export function TakeQuiz() {
                             <Image
                                 src={currentQuestion.image_url}
                                 alt="Question illustration"
-                                className="w-full h-auto max-h-96 object-contain"
+                                className="max-w-[250px] max-h-[250px] object-contain mx-auto"
                             />
                         </div>
                     )}
