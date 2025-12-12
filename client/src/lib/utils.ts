@@ -56,3 +56,42 @@ export function shuffle<T>(array: T[]): T[] {
     }
     return newArray;
 }
+
+export function getImageUrl(path: string | undefined | null): string {
+    if (!path) return '';
+    if (path.startsWith('http') || path.startsWith('data:')) return path;
+
+    // Get base URL from API URL
+    const apiUrl = import.meta.env.VITE_API_URL || '';
+    let baseUrl = '';
+
+    try {
+        if (apiUrl) {
+            const url = new URL(apiUrl);
+            const pathname = url.pathname;
+
+            // If API is at .../api, assume uploads are at .../uploads (sibling)
+            // Example: http://host/app/api -> http://host/app
+            if (pathname.endsWith('/api') || pathname.endsWith('/api/')) {
+                const cleanPath = pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
+                baseUrl = url.origin + cleanPath.slice(0, -4); // Remove /api
+            } else {
+                baseUrl = url.origin + (pathname === '/' ? '' : pathname);
+            }
+
+            // Remove trailing slash
+            if (baseUrl.endsWith('/')) baseUrl = baseUrl.slice(0, -1);
+        }
+    } catch (e) {
+        console.error('Error parsing API URL', e);
+    }
+
+    // Ensure path starts with /
+    const cleanPath = path.startsWith('/') ? path : `/${path}`;
+
+    // If we have a base URL, use it. Otherwise rely on relative path (proxy)
+    // But if proxy is misconfigured, this won't help. 
+    // However, if we are in production, API URL should be set correctly.
+
+    return baseUrl ? `${baseUrl}${cleanPath}` : cleanPath;
+}

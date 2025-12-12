@@ -3,7 +3,7 @@ import { useAdmin } from '../../hooks/useAdmin';
 import { MediaFile, Question } from '../../types';
 import { Loader2, Upload, Search, Trash2, Image as ImageIcon, Link as LinkIcon, Check, RefreshCw } from 'lucide-react';
 import { toast } from 'sonner';
-import { cn } from '../../lib/utils';
+import { cn, getImageUrl } from '../../lib/utils';
 import { Modal } from '../../components/ui/Modal';
 
 export function Media() {
@@ -309,7 +309,7 @@ export function Media() {
                                 className="group relative aspect-square bg-gray-100 dark:bg-gray-900 rounded-lg overflow-hidden border hover:border-indigo-500 transition-colors"
                             >
                                 <img
-                                    src={item.url}
+                                    src={getImageUrl(item.url)}
                                     alt={item.filename}
                                     loading="lazy"
                                     className="w-full h-full object-cover"
@@ -322,7 +322,7 @@ export function Media() {
                                         <LinkIcon className="w-3 h-3" /> Assign
                                     </button>
                                     <button
-                                        onClick={() => window.open(item.url, '_blank')}
+                                        onClick={() => window.open(getImageUrl(item.url), '_blank')}
                                         className="w-full py-1.5 bg-gray-600 text-white rounded text-sm hover:bg-gray-700 flex items-center justify-center gap-1"
                                     >
                                         <ImageIcon className="w-3 h-3" /> View
@@ -356,7 +356,7 @@ export function Media() {
                         <div className="w-24 h-24 bg-gray-200 rounded-lg overflow-hidden shrink-0">
                             {selectedMedia && (
                                 <img
-                                    src={selectedMedia.url}
+                                    src={getImageUrl(selectedMedia.url)}
                                     alt="Selected"
                                     className="w-full h-full object-cover"
                                 />

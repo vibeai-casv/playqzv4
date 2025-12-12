@@ -1,0 +1,25 @@
+# Enable Rewrite Engine
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /aiq2/
+    
+    # Don't rewrite files or directories
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    
+    # Don't rewrite API requests
+    RewriteCond %{REQUEST_URI} !^/aiq2/api/
+    
+    # Rewrite everything else to index.html
+    RewriteRule . /aiq2/index.html [L]
+</IfModule>
+
+# Security Headers
+<IfModule mod_headers.c>
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# Disable directory browsing
+Options -Indexes

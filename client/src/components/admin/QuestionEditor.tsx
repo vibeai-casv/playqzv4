@@ -8,6 +8,7 @@ import { Loader2, Plus, Trash2, Save, Image as ImageIcon, X } from 'lucide-react
 import { toast } from 'sonner';
 import { Modal } from '../ui/Modal';
 import { MediaPicker } from './MediaPicker';
+import { getImageUrl } from '../../lib/utils';
 
 interface QuestionEditorProps {
     question?: Question;
@@ -16,8 +17,25 @@ interface QuestionEditorProps {
 }
 
 export function QuestionEditor({ question, onSave, onCancel }: QuestionEditorProps) {
-    const { createQuestion, updateQuestion, isLoading } = useAdmin();
+    const { createQuestion, updateQuestion, fetchMetadata, isLoading } = useAdmin();
     const [showMediaPicker, setShowMediaPicker] = useState(false);
+
+    // Metadata state
+    const [categories, setCategories] = useState<string[]>([]);
+    const [difficulties, setDifficulties] = useState<string[]>(['easy', 'medium', 'hard']);
+    const [types, setTypes] = useState<string[]>(['text_mcq', 'image_identify_logo', 'image_identify_person', 'true_false', 'short_answer']);
+
+    useEffect(() => {
+        const loadMetadata = async () => {
+            const data = await fetchMetadata();
+            if (data) {
+                if (data.categories && data.categories.length > 0) setCategories(data.categories);
+                if (data.difficulties && data.difficulties.length > 0) setDifficulties(data.difficulties);
+                if (data.types && data.types.length > 0) setTypes(data.types);
+            }
+        };
+        loadMetadata();
+    }, []);
 
     const form = useForm<QuestionFormData>({
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -89,21 +107,35 @@ export function QuestionEditor({ question, onSave, onCancel }: QuestionEditorPro
                         {...form.register('question_type')}
                         className="w-full p-2 border rounded-lg text-gray-900 bg-white border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                     >
-                        <option value="text_mcq">Multiple Choice</option>
-                        <option value="image_identify_logo">Logo Identification</option>
-                        <option value="image_identify_person">Person Identification</option>
-                        <option value="true_false">True/False</option>
-                        <option value="short_answer">Short Answer</option>
+                        {types.map(t => (
+                            <option key={t} value={t}>
+                                {{
+                                    'text_mcq': 'Multiple Choice',
+                                    'image_identify_logo': 'Logo Identification',
+                                    'image_identify_person': 'Person Identification',
+                                    'true_false': 'True/False',
+                                    'short_answer': 'Short Answer'
+                                }[t] || t.replace(/_/g, ' ')}
+                            </option>
+                        ))}
                     </select>
                 </div>
 
                 <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Category</label>
-                    <input
-                        {...form.register('category')}
-                        className="w-full p-2 border rounded-lg text-gray-900 bg-white border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                        placeholder="e.g. Science, History"
-                    />
+                    <div className="relative">
+                        <input
+                            {...form.register('category')}
+                            list="categories-list"
+                            className="w-full p-2 border rounded-lg text-gray-900 bg-white border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                            placeholder="Select or type new category"
+                        />
+                        <datalist id="categories-list">
+                            {categories.map((c, i) => (
+                                <option key={i} value={c} />
+                            ))}
+                        </datalist>
+                    </div>
                     {form.formState.errors.category && (
                         <p className="text-xs text-red-500">{form.formState.errors.category.message}</p>
                     )}
@@ -115,9 +147,9 @@ export function QuestionEditor({ question, onSave, onCancel }: QuestionEditorPro
                         {...form.register('difficulty')}
                         className="w-full p-2 border rounded-lg text-gray-900 bg-white border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                     >
-                        <option value="easy">Easy</option>
-                        <option value="medium">Medium</option>
-                        <option value="hard">Hard</option>
+                        {difficulties.map(d => (
+                            <option key={d} value={d} className="capitalize">{d}</option>
+                        ))}
                     </select>
                 </div>
 
@@ -178,7 +210,7 @@ export function QuestionEditor({ question, onSave, onCancel }: QuestionEditorPro
                             {form.watch('image_url') && (
                                 <div className="mt-2 relative w-fit group">
                                     <img
-                                        src={form.watch('image_url') || ''}
+                                        src={getImageUrl(form.watch('image_url')) || ''}
                                         alt="Preview"
                                         className="h-32 object-contain rounded border bg-gray-50 dark:bg-gray-800"
                                     />
@@ -203,6 +235,10 @@ export function QuestionEditor({ question, onSave, onCancel }: QuestionEditorPro
                 className="max-w-3xl"
             >
                 <MediaPicker
+                    defaultType={
+                        questionType === 'image_identify_logo' ? 'logo' :
+                            questionType === 'image_identify_person' ? 'personality' : 'all'
+                    }
                     onSelect={(url) => {
                         form.setValue('image_url', url);
                         setShowMediaPicker(false);

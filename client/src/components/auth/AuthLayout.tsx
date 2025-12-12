@@ -29,7 +29,7 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
                         <div className="w-32 h-32 relative mb-2 flex items-center justify-center group hover-scale">
                             <div className="absolute inset-0 bg-primary/20 rounded-full blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-50" />
                             <img
-                                src="/aiq4.png"
+                                src={`${import.meta.env.BASE_URL}aiq4.png`}
                                 alt="PlayQz Logo"
                                 className="w-full h-full object-contain relative z-10 drop-shadow-xl"
                             />

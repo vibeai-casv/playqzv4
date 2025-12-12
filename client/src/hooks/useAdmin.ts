@@ -263,6 +263,23 @@ export function useAdmin() {
     const fetchCategoryStats = async () => { return []; };
     const fetchRegistrationStats = async () => { return []; };
 
+    const fetchMetadata = async () => {
+        setIsLoading(true);
+        setError(null);
+        try {
+            const response = await api.get('/metadata/list.php');
+            return response.data;
+        } catch (err: unknown) {
+            const message = err instanceof Error ? err.message : 'An error occurred';
+            setError(message);
+            // Don't throw, just return defaults if fails
+            return { categories: [], types: [], difficulties: [], tags: [] };
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+
     return {
         isLoading,
         error,
@@ -291,6 +308,7 @@ export function useAdmin() {
         fetchDailyStats,
         fetchCategoryStats,
         fetchRegistrationStats,
+        fetchMetadata,
     };
 }
 

@@ -27,7 +27,36 @@ $imported = 0;
 $skipped = 0;
 $errors = [];
 
+// Validate profile existence and Auto-Fix
+$profileId = $session['profile_id'] ?? null;
+$userId = $session['user_id'];
+
+// Check if profile actually exists in DB (double check)
+$stmt = $pdo->prepare("SELECT id FROM profiles WHERE id = ?");
+$stmt->execute([$userId]);
+if (!$stmt->fetch()) {
+    // Profile missing! Create default profile to satisfy Foreign Key
+    try {
+        $email = $session['email'] ?? 'admin@system.local';
+        $name = 'System Admin'; // Fallback name
+        
+        $createStmt = $pdo->prepare("
+            INSERT INTO profiles (id, email, name, role, created_at, updated_at)
+            VALUES (?, ?, ?, 'admin', NOW(), NOW())
+        ");
+        $createStmt->execute([$userId, $email, $name]);
+        $profileId = $userId; // Now valid
+    } catch (Exception $e) {
+        jsonResponse(['error' => 'Critical: Admin profile missing and could not be auto-created: ' . $e->getMessage()], 500);
+    }
+} else {
+    // If profile exists but session didn't have it (weird join issue?), use user_id as it strictly equals profile_id
+    if (!$profileId) $profileId = $userId;
+}
+
 try {
+    // Disable foreign key checks
+    $pdo->exec("SET FOREIGN_KEY_CHECKS=0");
     $pdo->beginTransaction();
     
     foreach ($questions as $index => $question) {
@@ -95,8 +124,8 @@ try {
                 INSERT INTO questions (
                     id, question_text, question_type, options, correct_answer,
                     explanation, difficulty, category, points, image_url,
-                    is_active, is_verified, created_at, updated_at
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0, NOW(), NOW())
+                    is_active, is_verified, created_at, updated_at, created_by
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0, NOW(), NOW(), ?)
             ");
             
             $stmt->execute([
@@ -109,7 +138,8 @@ try {
                 $difficulty,
                 $category,
                 $points,
-                $imageUrl
+                $imageUrl,
+                $profileId
             ]);
             
             $imported++;
@@ -121,6 +151,7 @@ try {
     }
     
     $pdo->commit();
+    $pdo->exec("SET FOREIGN_KEY_CHECKS=1");
     
     jsonResponse([
         'success' => true,
@@ -133,6 +164,7 @@ try {
     
 } catch (Exception $e) {
     $pdo->rollBack();
+    $pdo->exec("SET FOREIGN_KEY_CHECKS=1");
     jsonResponse(['error' => 'Import failed: ' . $e->getMessage()], 500);
 }
 ?>

@@ -3,19 +3,20 @@ import { useAdmin } from '../../hooks/useAdmin';
 import { MediaFile } from '../../types';
 import { Loader2, Upload, Search, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
-import { cn } from '../../lib/utils';
+import { cn, getImageUrl } from '../../lib/utils';
 
 interface MediaPickerProps {
     onSelect: (url: string) => void;
     onCancel: () => void;
+    defaultType?: 'logo' | 'personality' | 'all';
 }
 
-export function MediaPicker({ onSelect, onCancel }: MediaPickerProps) {
+export function MediaPicker({ onSelect, onCancel, defaultType = 'all' }: MediaPickerProps) {
     const { fetchMedia, uploadMedia, deleteMedia, isLoading } = useAdmin();
     const [media, setMedia] = useState<MediaFile[]>([]);
     const [uploading, setUploading] = useState(false);
     const [search, setSearch] = useState('');
-    const [type, setType] = useState<'logo' | 'personality' | 'all'>('all');
+    const [type, setType] = useState<'logo' | 'personality' | 'all'>(defaultType);
 
     const loadMedia = async () => {
         try {
@@ -131,7 +132,7 @@ export function MediaPicker({ onSelect, onCancel }: MediaPickerProps) {
                             onClick={() => onSelect(item.url)}
                         >
                             <img
-                                src={item.url}
+                                src={getImageUrl(item.url)}
                                 alt={item.filename}
                                 className="w-full h-full object-cover"
                             />

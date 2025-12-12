@@ -46,7 +46,7 @@ function App() {
   }, [initialize]);
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Toaster position="top-center" richColors />
       <ErrorBoundary>
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">

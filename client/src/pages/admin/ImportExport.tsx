@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react';
-import { Download, Upload, FileJson, Loader2, CheckSquare, Square, Filter, X } from 'lucide-react';
+import { Download, Upload, FileJson, Loader2, CheckSquare, Square, Filter, X, Package } from 'lucide-react';
 import { useAdmin } from '../../hooks/useAdmin';
+import api from '../../lib/api';
 import { Question } from '../../types';
 import { toast } from 'sonner';
 import { cn } from '../../lib/utils';
+import { BundleImporter } from '../../components/admin/BundleImporter';
 
 export function ImportExport() {
     const { fetchQuestions, isLoading } = useAdmin();
-    const [activeTab, setActiveTab] = useState<'export' | 'import'>('export');
+    // Tabs: export-json, import-json, export-bundle, import-bundle
+    const [activeTab, setActiveTab] = useState<'export-json' | 'import-json' | 'export-bundle' | 'import-bundle'>('export-json');
 
     // Export state
     const [questions, setQuestions] = useState<Question[]>([]);
@@ -23,7 +26,7 @@ export function ImportExport() {
     const [importing, setImporting] = useState(false);
 
     useEffect(() => {
-        if (activeTab === 'export') {
+        if (activeTab === 'export-json' || activeTab === 'export-bundle') {
             loadQuestions();
         }
     }, [activeTab, filters]);
@@ -60,7 +63,7 @@ export function ImportExport() {
         }
     };
 
-    const handleExport = () => {
+    const handleExportJson = () => {
         if (selectedQuestions.size === 0) {
             toast.error('Please select at least one question to export');
             return;
@@ -80,7 +83,39 @@ export function ImportExport() {
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
 
-        toast.success(`Exported ${selectedQuestions.size} questions`);
+        toast.success(`Exported ${selectedQuestions.size} questions to JSON`);
+    };
+
+    const handleExportBundle = async () => {
+        if (selectedQuestions.size === 0) {
+            toast.error('Please select at least one question to export');
+            return;
+        }
+
+        try {
+            const toastId = toast.loading('Creating export bundle...');
+
+            const response = await api.post('/bundle/export.php', {
+                question_ids: Array.from(selectedQuestions)
+            }, {
+                responseType: 'blob'
+            });
+
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', `question_bundle_${new Date().toISOString().slice(0, 10)}.zip`);
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+
+            toast.dismiss(toastId);
+            toast.success('Bundle downloaded successfully');
+
+        } catch (error) {
+            console.error('Export error:', error);
+            toast.error('Failed to export bundle');
+        }
     };
 
     const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -120,20 +155,8 @@ export function ImportExport() {
         setImporting(true);
         try {
             // Import questions via API
-            const response = await fetch('/api/questions/import.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                },
-                body: JSON.stringify({ questions: previewQuestions })
-            });
-
-            const result = await response.json();
-
-            if (!response.ok) {
-                throw new Error(result.error || 'Import failed');
-            }
+            const response = await api.post('/questions/import.php', { questions: previewQuestions });
+            const result = response.data;
 
             // Show detailed results
             const { imported, skipped, errors, summary } = result;
@@ -163,7 +186,7 @@ export function ImportExport() {
             setPreviewQuestions([]);
 
             // Refresh questions list if on export tab
-            if (activeTab === 'export') {
+            if (activeTab === 'export-json') {
                 loadQuestions();
             }
         } catch (error) {
@@ -177,42 +200,67 @@ export function ImportExport() {
     return (
         <div className="max-w-7xl mx-auto p-6 space-y-6">
             <div>
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Import / Export Questions</h1>
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Import / Export Data</h1>
                 <p className="mt-2 text-gray-600 dark:text-gray-400">
-                    Export questions to JSON or import questions from a JSON file
+                    Manage question data via JSON (text only) or Bundles (includes images)
                 </p>
             </div>
 
             {/* Tabs */}
-            <div className="bg-gray-100 dark:bg-gray-800 p-1 rounded-xl inline-flex">
+            <div className="bg-gray-100 dark:bg-gray-800 p-1 rounded-xl inline-flex flex-wrap gap-1">
                 <button
-                    onClick={() => setActiveTab('export')}
+                    onClick={() => setActiveTab('export-json')}
                     className={cn(
-                        "px-6 py-2.5 rounded-lg font-medium transition-all flex items-center gap-2",
-                        activeTab === 'export'
-                            ? "bg-white dark:bg-gray-700 shadow-lg text-indigo-600 dark:text-indigo-400"
+                        "px-4 py-2 rounded-lg font-medium transition-all flex items-center gap-2 text-sm",
+                        activeTab === 'export-json'
+                            ? "bg-white dark:bg-gray-700 shadow text-indigo-600 dark:text-indigo-400"
                             : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
                     )}
                 >
                     <Download className="w-4 h-4" />
-                    Export Questions
+                    Export JSON
                 </button>
                 <button
-                    onClick={() => setActiveTab('import')}
+                    onClick={() => setActiveTab('import-json')}
                     className={cn(
-                        "px-6 py-2.5 rounded-lg font-medium transition-all flex items-center gap-2",
-                        activeTab === 'import'
-                            ? "bg-white dark:bg-gray-700 shadow-lg text-indigo-600 dark:text-indigo-400"
+                        "px-4 py-2 rounded-lg font-medium transition-all flex items-center gap-2 text-sm",
+                        activeTab === 'import-json'
+                            ? "bg-white dark:bg-gray-700 shadow text-indigo-600 dark:text-indigo-400"
                             : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
                     )}
                 >
                     <Upload className="w-4 h-4" />
-                    Import Questions
+                    Import JSON
+                </button>
+                <div className="w-px bg-gray-300 dark:bg-gray-600 mx-2 h-8 self-center hidden sm:block"></div>
+                <button
+                    onClick={() => setActiveTab('export-bundle')}
+                    className={cn(
+                        "px-4 py-2 rounded-lg font-medium transition-all flex items-center gap-2 text-sm",
+                        activeTab === 'export-bundle'
+                            ? "bg-white dark:bg-gray-700 shadow text-blue-600 dark:text-blue-400"
+                            : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                    )}
+                >
+                    <Package className="w-4 h-4" />
+                    Export Bundle (ZIP)
+                </button>
+                <button
+                    onClick={() => setActiveTab('import-bundle')}
+                    className={cn(
+                        "px-4 py-2 rounded-lg font-medium transition-all flex items-center gap-2 text-sm",
+                        activeTab === 'import-bundle'
+                            ? "bg-white dark:bg-gray-700 shadow text-blue-600 dark:text-blue-400"
+                            : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                    )}
+                >
+                    <Package className="w-4 h-4" />
+                    Import Bundle (ZIP)
                 </button>
             </div>
 
-            {/* Export Tab */}
-            {activeTab === 'export' && (
+            {/* Export Views (JSON or Bundle) */}
+            {(activeTab === 'export-json' || activeTab === 'export-bundle') && (
                 <div className="space-y-6">
                     {/* Filters */}
                     <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
@@ -285,12 +333,12 @@ export function ImportExport() {
                                     )}
                                 </button>
                                 <button
-                                    onClick={handleExport}
+                                    onClick={activeTab === 'export-json' ? handleExportJson : handleExportBundle}
                                     disabled={selectedQuestions.size === 0}
                                     className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 font-medium"
                                 >
                                     <Download className="w-4 h-4" />
-                                    Export Selected
+                                    Export {activeTab === 'export-json' ? 'JSON' : 'Bundle'}
                                 </button>
                             </div>
                         </div>
@@ -350,8 +398,8 @@ export function ImportExport() {
                 </div>
             )}
 
-            {/* Import Tab */}
-            {activeTab === 'import' && (
+            {/* Import JSON Tab */}
+            {activeTab === 'import-json' && (
                 <div className="space-y-6">
                     {/* File Upload */}
                     <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
@@ -442,6 +490,15 @@ export function ImportExport() {
                             </div>
                         </div>
                     )}
+                </div>
+            )}
+            {/* Import Bundle Tab */}
+            {activeTab === 'import-bundle' && (
+                <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+                    <BundleImporter
+                        onImportComplete={() => { }}
+                        onCancel={() => { }} // BundleImporter handles its own state mostly, these are just required props
+                    />
                 </div>
             )}
         </div>

@@ -1,0 +1,113 @@
+[
+    {
+        "question_text": "Identify this key figure in the field of Artificial Intelligence.",
+        "question_type": "image_identify_person",
+        "options": [
+            "Sam Altman",
+            "Elon Musk",
+            "Mark Zuckerberg",
+            "Sundar Pichai"
+        ],
+        "correct_answer": "Sam Altman",
+        "explanation": "Sam Altman is the CEO of OpenAI, the company responsible for developing ChatGPT and the GPT series of models, which popularized Generative AI globally.",
+        "difficulty": "easy",
+        "category": "Personalities",
+        "subcategory": "Generative AI Leaders",
+        "points": 10,
+        "tags": [
+            "OpenAI",
+            "ChatGPT",
+            "CEO"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Sam_Altman_CropEdit_James_Tamim.jpg/640px-Sam_Altman_CropEdit_James_Tamim.jpg"
+    },
+    {
+        "question_text": "Identify this Nobel Prize-winning computer scientist, often called the 'Godfather of AI'.",
+        "question_type": "image_identify_person",
+        "options": [
+            "Geoffrey Hinton",
+            "Yann LeCun",
+            "Yoshua Bengio",
+            "Andrew Ng"
+        ],
+        "correct_answer": "Geoffrey Hinton",
+        "explanation": "Geoffrey Hinton is a pioneer of deep learning and backpropagation. He famously resigned from Google in 2023 to speak freely about the risks of Generative AI.",
+        "difficulty": "medium",
+        "category": "Personalities",
+        "subcategory": "AI Pioneers",
+        "points": 10,
+        "tags": [
+            "Deep Learning",
+            "Nobel Prize",
+            "Google"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/14/Deep_Thinkers_on_Deep_Learning_%28cropped_to_Geoffrey_Hinton%29.jpg"
+    },
+    {
+        "question_text": "Identify this researcher, known for inventing Generative Adversarial Networks (GANs).",
+        "question_type": "image_identify_person",
+        "options": [
+            "Ian Goodfellow",
+            "Ilya Sutskever",
+            "Andrej Karpathy",
+            "Dario Amodei"
+        ],
+        "correct_answer": "Ian Goodfellow",
+        "explanation": "Ian Goodfellow invented Generative Adversarial Networks (GANs) in 2014, a fundamental framework that allowed AI to generate realistic images and data.",
+        "difficulty": "hard",
+        "category": "Personalities",
+        "subcategory": "Generative AI Researchers",
+        "points": 10,
+        "tags": [
+            "GANs",
+            "Deep Learning",
+            "Apple",
+            "Google"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/e7/Ian_Goodfellow.jpg"
+    },
+    {
+        "question_text": "Identify this CEO of Google DeepMind.",
+        "question_type": "image_identify_person",
+        "options": [
+            "Demis Hassabis",
+            "Mustafa Suleyman",
+            "Jeff Dean",
+            "Fei-Fei Li"
+        ],
+        "correct_answer": "Demis Hassabis",
+        "explanation": "Demis Hassabis is the co-founder and CEO of Google DeepMind. He led the teams behind AlphaGo, AlphaFold, and the Gemini generative AI models.",
+        "difficulty": "medium",
+        "category": "Personalities",
+        "subcategory": "AI Leadership",
+        "points": 10,
+        "tags": [
+            "DeepMind",
+            "Gemini",
+            "AlphaGo"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Demis_Hassabis%2C_2024_Nobel_Prize_Laureate_in_Chemistry.jpg/640px-Demis_Hassabis%2C_2024_Nobel_Prize_Laureate_in_Chemistry.jpg"
+    },
+    {
+        "question_text": "Identify this Chief AI Scientist at Meta.",
+        "question_type": "image_identify_person",
+        "options": [
+            "Yann LeCun",
+            "Geoffrey Hinton",
+            "Jürgen Schmidhuber",
+            "Kai-Fu Lee"
+        ],
+        "correct_answer": "Yann LeCun",
+        "explanation": "Yann LeCun is a Turing Award winner and the Chief AI Scientist at Meta. He is a key figure in the development of Convolutional Neural Networks (CNNs) and open-source AI models like Llama.",
+        "difficulty": "medium",
+        "category": "Personalities",
+        "subcategory": "AI Pioneers",
+        "points": 10,
+        "tags": [
+            "Meta",
+            "CNN",
+            "Llama"
+        ],
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Yann_LeCun_-_2025_%28cropped%29.jpg/640px-Yann_LeCun_-_2025_%28cropped%29.jpg"
+    }
+]

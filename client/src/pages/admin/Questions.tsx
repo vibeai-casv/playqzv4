@@ -7,10 +7,13 @@ import {
     Edit, Loader2, ChevronLeft, ChevronRight, ArrowUpDown, FileUp, RefreshCw, Star
 } from 'lucide-react';
 import { toast } from 'sonner';
-import { cn } from '../../lib/utils';
+import { cn, getImageUrl } from '../../lib/utils';
 import { QuestionEditor } from '../../components/admin/QuestionEditor';
 import { AIGenerator } from '../../components/admin/AIGenerator';
 import { JSONImporter } from '../../components/admin/JSONImporter';
+import { BundleImporter } from '../../components/admin/BundleImporter';
+import { Package, Download } from 'lucide-react';
+import api from '../../lib/api'; // Direct api import for export download
 
 export function Questions() {
     const { fetchQuestions, deleteQuestion, updateQuestion, isLoading } = useAdmin();
@@ -34,6 +37,7 @@ export function Questions() {
     const [isEditorOpen, setIsEditorOpen] = useState(false);
     const [isGeneratorOpen, setIsGeneratorOpen] = useState(false);
     const [isImportOpen, setIsImportOpen] = useState(false);
+    const [isBundleImportOpen, setIsBundleImportOpen] = useState(false);
     const [editingQuestion, setEditingQuestion] = useState<Question | undefined>(undefined);
 
     const loadQuestions = useCallback(async () => {
@@ -98,6 +102,37 @@ export function Questions() {
         }
     };
 
+    const handleExportBundle = async () => {
+        if (selectedIds.size === 0) return;
+
+        try {
+            const toastId = toast.loading('Creating export bundle...');
+
+            // Use axios to get blob response
+            const response = await api.post('/bundle/export.php', {
+                question_ids: Array.from(selectedIds)
+            }, {
+                responseType: 'blob'
+            });
+
+            // Create download link
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', `question_bundle_${new Date().toISOString().slice(0, 10)}.zip`);
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+
+            toast.dismiss(toastId);
+            toast.success('Bundle downloaded successfully');
+
+        } catch (error) {
+            console.error('Export error:', error);
+            toast.error('Failed to export bundle');
+        }
+    };
+
     const handleBulkAction = async (action: 'activate' | 'deactivate' | 'delete') => {
         if (selectedIds.size === 0) return;
         if (action === 'delete' && !confirm(`Delete ${selectedIds.size} questions?`)) return;
@@ -149,6 +184,12 @@ export function Questions() {
                         <FileUp className="w-4 h-4" /> Import JSON
                     </button>
                     <button
+                        onClick={() => setIsBundleImportOpen(true)}
+                        className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                    >
+                        <Package className="w-4 h-4" /> Import Bundle
+                    </button>
+                    <button
                         onClick={() => setIsGeneratorOpen(true)}
                         className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
                     >
@@ -194,9 +235,10 @@ export function Questions() {
                         >
                             <option value="">All Types</option>
                             <option value="text_mcq">Multiple Choice</option>
-                            <option value="image_identify_logo">Logo ID</option>
-                            <option value="image_identify_person">Person ID</option>
+                            <option value="image_identify_logo">Logo Identification</option>
+                            <option value="image_identify_person">Person Identification</option>
                             <option value="true_false">True/False</option>
+                            <option value="short_answer">Short Answer</option>
                         </select>
                         <select
                             value={difficulty}
@@ -249,6 +291,12 @@ export function Questions() {
                             className="flex items-center gap-2 px-3 py-1.5 bg-red-100 text-red-700 rounded hover:bg-red-200 text-sm"
                         >
                             <Trash2 className="w-4 h-4" /> Delete Selected
+                        </button>
+                        <button
+                            onClick={handleExportBundle}
+                            className="flex items-center gap-2 px-3 py-1.5 bg-blue-100 text-blue-700 rounded hover:bg-blue-200 text-sm"
+                        >
+                            <Download className="w-4 h-4" /> Export Bundle
                         </button>
                     </div>
                 )}
@@ -333,7 +381,7 @@ export function Questions() {
                                         <td className="p-4">
                                             {(q.image_url) ? (
                                                 <img
-                                                    src={q.image_url}
+                                                    src={getImageUrl(q.image_url)}
                                                     alt="Q"
                                                     className="w-16 h-16 object-cover rounded border border-gray-200 dark:border-gray-700 bg-white"
                                                 />
@@ -377,7 +425,15 @@ export function Questions() {
                                                 <Star className={cn("w-4 h-4", q.is_demo && "fill-current")} />
                                             </button>
                                         </td>
-                                        <td className="p-4 capitalize text-sm text-gray-700 dark:text-gray-300">{q.question_type.replace(/_/g, ' ')}</td>
+                                        <td className="p-4 text-sm text-gray-700 dark:text-gray-300">
+                                            {{
+                                                'text_mcq': 'Multiple Choice',
+                                                'image_identify_logo': 'Logo Identification',
+                                                'image_identify_person': 'Person Identification',
+                                                'true_false': 'True/False',
+                                                'short_answer': 'Short Answer'
+                                            }[q.question_type] || q.question_type.replace(/_/g, ' ')}
+                                        </td>
                                         <td className="p-4 text-sm text-gray-700 dark:text-gray-300">{q.category}</td>
                                         <td className="p-4">
                                             <span className={cn(
@@ -483,6 +539,21 @@ export function Questions() {
                         loadQuestions();
                     }}
                     onCancel={() => setIsImportOpen(false)}
+                />
+            </Modal>
+
+            <Modal
+                open={isBundleImportOpen}
+                onClose={() => setIsBundleImportOpen(false)}
+                title="Import Question Bundle (ZIP)"
+                className="max-w-3xl"
+            >
+                <BundleImporter
+                    onImportComplete={() => {
+                        setIsBundleImportOpen(false);
+                        loadQuestions();
+                    }}
+                    onCancel={() => setIsBundleImportOpen(false)}
                 />
             </Modal>
         </div>
