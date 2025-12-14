@@ -1,0 +1,125 @@
+
+in a webapp we use this to automatically generate questions for a quiz but it is not working properly can you list few free providers and their models who support generation of questions using the above code
+
+CLAUDE
+
+
+Free Providers & Models
+1. Google AI Studio (Gemini) - Direct ✅ Already Supported
+
+Model: gemini-1.5-flash or gemini-2.0-flash-exp
+API Key: Get from https://aistudio.google.com
+Config:
+
+php  define('AI_PROVIDER', 'gemini'); // or leave undefined
+  define('AI_MODEL', 'gemini-1.5-flash');
+  define('AI_API_KEY', 'your-key-here');
+2. OpenRouter (Free Models) ✅ Already Supported
+
+API Key: Get from https://openrouter.ai/keys
+Free Models:
+
+google/gemini-2.0-flash-thinking-exp:free
+google/gemini-2.0-flash-exp:free
+mistralai/mistral-7b-instruct:free
+meta-llama/llama-3.2-3b-instruct:free
+qwen/qwen-2-7b-instruct:free
+
+
+Config:
+
+php  define('AI_PROVIDER', 'openrouter');
+  define('AI_MODEL', 'google/gemini-2.0-flash-exp:free');
+  define('AI_API_KEY', 'sk-or-v1-...');
+3. Groq (Would need code modification)
+
+Free Tier: Very fast, generous limits
+Models:
+
+llama-3.3-70b-versatile
+mixtral-8x7b-32768
+gemma2-9b-it
+
+
+API: https://console.groq.com
+
+4. Hugging Face Inference API (Would need code modification)
+
+Free Tier: Available
+Models: Various open-source models
+API: https://huggingface.co/inference-api
+
+Recommended Quick Fix
+For immediate use with your existing code, I'd recommend:
+Option 1: Use Google AI Studio directly
+phpdefine('AI_PROVIDER', 'gemini');
+define('AI_MODEL', 'gemini-1.5-flash');
+define('AI_API_KEY', 'your-gemini-key');
+Option 2: Use OpenRouter with free Gemini
+phpdefine('AI_PROVIDER', 'openrouter');
+define('AI_MODEL', 'google/gemini-2.0-flash-exp:free');
+define('AI_API_KEY', 'your-openrouter-key');
+
+perplex
+
+Based on your code, the generate_questions.php script is already built to support OpenRouter and Google Gemini directly. Because OpenRouter aggregates many providers, it is your best option for accessing multiple free models without changing your code structure.
+
+Here are the free providers and specific model IDs you can use by updating your api/config.php (or wherever AI_MODEL and AI_PROVIDER are defined).
+
+1. OpenRouter (Recommended)
+Your code already has a function callOpenRouter that handles this API. OpenRouter offers a rotating list of free models. You just need an API key from openrouter.ai.
+
+Provider Setting: define('AI_PROVIDER', 'openrouter');
+
+Free Model IDs (Update AI_MODEL with one of these):
+
+Model Name	Model ID (put this in AI_MODEL)	Best For...
+Google Gemini 2.0 Flash Lite	google/gemini-2.0-flash-lite-preview-02-05:free	High speed, good logic, very generous free limits.
+Meta Llama 3.3 70B	meta-llama/llama-3.3-70b-instruct:free	Best quality free model for complex topics.
+DeepSeek R1	deepseek/deepseek-r1:free	Excellent reasoning (strong for math/science quizzes).
+Mistral 7B Instruct	mistralai/mistral-7b-instruct:free	Lightweight, fast, good for general knowledge.
+Note: OpenRouter free models may have rate limits or wait times during peak hours.
+
+2. Google Gemini (Direct)
+Your code also has a callGemini function. This connects directly to Google's API, which has a generous free tier (15 requests/minute).
+
+Provider Setting: define('AI_PROVIDER', 'gemini');
+
+Free Model IDs:
+
+gemini-1.5-flash (Fast, lightweight, stable)
+
+gemini-2.0-flash-exp (Newer, smarter, experimental)
+
+3. Groq (Fastest Option)
+Groq provides extremely fast inference and has a free tier, but your code defaults to OpenRouter or Gemini URLs. To use Groq, you can "trick" your callOpenRouter function because Groq is compatible with the OpenAI format used there.
+
+How to use Groq with your current code:
+
+Get a key from console.groq.com.
+
+In generate_questions.php (or your config), find where callOpenRouter is defined.
+
+Change the URL inside that function from openrouter.ai/... to:
+https://api.groq.com/openai/v1/chat/completions
+
+Use these settings:
+
+Provider Setting: define('AI_PROVIDER', 'openrouter'); (keeps logic using the function)
+
+Model IDs:
+
+llama-3.3-70b-versatile
+
+mixtral-8x7b-32768
+
+Why is your current code "not working properly"?
+Looking at your generate_questions.php, here are the likely culprits:
+
+JSON Parsing Errors: The prompt asks for "RETURN ONLY JSON", but AI models often add conversational text (e.g., "Here are your questions...") or Markdown formatting (json ...
+
+Fix: Your code tries to strip markdown (preg_replace), but if the AI adds text outside the code blocks, json_decode will still fail.
+
+Model Availability: If you are using a model that is no longer free or has changed names (e.g., older Gemini versions), the API will return a 404 or 400 error.
+
+Strict Strictness: The code throws an exception immediately if json_last_error() is not JSON_ERROR_NONE. It does not attempt to "repair" the JSON if the AI missed a comma or bracket.

@@ -1,11 +1,15 @@
 import { useState } from 'react';
 import { seedQuestions } from '../../utils/seeder';
 import { toast } from 'sonner';
-import { Database, Play, AlertTriangle, Terminal } from 'lucide-react';
+import { Database, Play, AlertTriangle, Terminal, RefreshCw, CheckCircle2 } from 'lucide-react';
+import { fetchAPI } from '../../lib/api';
 
 export function SystemTools() {
     const [seeding, setSeeding] = useState(false);
     const [logs, setLogs] = useState<string[]>([]);
+    const [schemaUpdating, setSchemaUpdating] = useState(false);
+    const [schemaLogs, setSchemaLogs] = useState<string[]>([]);
+    const [schemaResult, setSchemaResult] = useState<any>(null);
 
     const addLog = (msg: string) => {
         setLogs(prev => [...prev, `[${new Date().toLocaleTimeString()}] ${msg}`]);
@@ -27,6 +31,148 @@ export function SystemTools() {
             toast.error('Seeding failed');
         } finally {
             setSeeding(false);
+        }
+    };
+
+    const handleSchemaUpdate = async () => {
+        if (!confirm('This will update the database schema with any missing fields. This is safe to run multiple times. Continue?')) return;
+
+        setSchemaUpdating(true);
+        setSchemaLogs([]);
+        setSchemaResult(null);
+
+        // Debug: Log the API URL being used (always use path detection, ignore VITE_API_URL)
+        setSchemaLogs(prev => [...prev, '🔍 Debug Information:']);
+        setSchemaLogs(prev => [...prev, `  window.location.pathname = "${window.location.pathname}"`]);
+        setSchemaLogs(prev => [...prev, `  window.location.hostname = "${window.location.hostname}"`]);
+
+        const currentPath = window.location.pathname;
+        setSchemaLogs(prev => [...prev, `  currentPath = "${currentPath}"`]);
+        setSchemaLogs(prev => [...prev, `  currentPath.startsWith('/aiq3/') = ${currentPath.startsWith('/aiq3/')}`]);
+
+        let apiUrl;
+        let detectionMethod = '';
+
+        // Always detect from path (ignore environment variables)
+        if (currentPath.startsWith('/aiq3/')) {
+            apiUrl = '/aiq3/api';
+            detectionMethod = 'Detected /aiq3/ in path';
+        } else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            apiUrl = 'http://localhost:8000/api';
+            detectionMethod = 'Localhost detected';
+        } else {
+            const base = window.location.pathname.split('/').slice(0, 2).join('/');
+            apiUrl = base ? `${base}/api` : '/api';
+            detectionMethod = `Fallback: base="${base}"`;
+        }
+
+        const fullUrl = `${apiUrl}/admin/update-schema.php`;
+
+        setSchemaLogs(prev => [...prev, `  Detection Method: ${detectionMethod}`]);
+        setSchemaLogs(prev => [...prev, `  Detected API URL: ${apiUrl}`]);
+        setSchemaLogs(prev => [...prev, `  Full Endpoint: ${fullUrl}`]);
+        setSchemaLogs(prev => [...prev, `  Current Location: ${window.location.href}`]);
+        setSchemaLogs(prev => [...prev, '']);
+        setSchemaLogs(prev => [...prev, 'Starting database schema update...']);
+
+        try {
+            const result = await fetchAPI('/admin/update-schema.php', {
+                method: 'POST',
+            });
+
+            setSchemaResult(result);
+
+            if (result.success) {
+                setSchemaLogs(prev => [...prev, '✅ Schema update completed successfully']);
+                if (result.changes && result.changes.length > 0) {
+                    result.changes.forEach((change: string) => {
+                        setSchemaLogs(prev => [...prev, `  • ${change}`]);
+                    });
+                    toast.success(`Schema updated! ${result.changes.length} change(s) applied.`);
+                } else {
+                    setSchemaLogs(prev => [...prev, 'ℹ️ No changes needed - schema is up to date']);
+                    toast.info('Schema is already up to date');
+                }
+
+                if (result.stats) {
+                    setSchemaLogs(prev => [...prev, '', 'Database Statistics:']);
+                    setSchemaLogs(prev => [...prev, `  - Tables Checked: ${result.stats.tablesChecked}`]);
+                    setSchemaLogs(prev => [...prev, `  - Fields Validated: ${result.stats.fieldsChecked}`]);
+                    setSchemaLogs(prev => [...prev, `  - Fields Added: ${result.stats.fieldsAdded}`]);
+                    setSchemaLogs(prev => [...prev, `  - Indexes Created: ${result.stats.indexesAdded}`]);
+                }
+            } else {
+                setSchemaLogs(prev => [...prev, `❌ Error: ${result.error || 'Unknown error'}`]);
+                toast.error('Schema update failed');
+            }
+        } catch (error: any) {
+            // Enhanced error logging
+            setSchemaLogs(prev => [...prev, '']);
+            setSchemaLogs(prev => [...prev, '❌ Request Failed:']);
+            setSchemaLogs(prev => [...prev, `  Error: ${error.message}`]);
+            setSchemaLogs(prev => [...prev, `  Type: ${error.constructor.name}`]);
+
+            // Try to provide more context
+            if (error.message.includes('404')) {
+                setSchemaLogs(prev => [...prev, '']);
+                setSchemaLogs(prev => [...prev, '💡 Troubleshooting 404:']);
+                setSchemaLogs(prev => [...prev, '  1. Verify file exists on server']);
+                setSchemaLogs(prev => [...prev, `  2. Check: ${window.location.origin}/aiq2/api/admin/update-schema.php`]);
+                setSchemaLogs(prev => [...prev, '  3. Ensure .htaccess is not blocking the file']);
+                setSchemaLogs(prev => [...prev, '  4. Check file permissions (should be 644)']);
+            }
+
+            console.error('Schema update error:', error);
+            console.error('Full URL attempted:', fullUrl);
+            toast.error('Failed to update schema - check console for details');
+        } finally {
+            setSchemaUpdating(false);
+        }
+    };
+
+    // Test connection function
+    const testConnection = async () => {
+        setSchemaLogs([]);
+        setSchemaLogs(prev => [...prev, '🔍 Testing API Connection...']);
+
+        // Always use path detection (ignore environment variables)
+        const currentPath = window.location.pathname;
+        let apiUrl;
+
+        if (currentPath.startsWith('/aiq3/')) {
+            apiUrl = '/aiq3/api';
+        } else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            apiUrl = 'http://localhost:8000/api';
+        } else {
+            const base = window.location.pathname.split('/').slice(0, 2).join('/');
+            apiUrl = base ? `${base}/api` : '/api';
+        }
+
+        setSchemaLogs(prev => [...prev, `Current Path: ${window.location.pathname}`]);
+        setSchemaLogs(prev => [...prev, `Detected API URL: ${apiUrl}`]);
+
+        try {
+            const testUrl = `${apiUrl}/admin/test.php`;
+            setSchemaLogs(prev => [...prev, `Testing: ${testUrl}`]);
+
+            const response = await fetch(testUrl);
+            const data = await response.json();
+
+            setSchemaLogs(prev => [...prev, '✅ Connection successful!']);
+            setSchemaLogs(prev => [...prev, `Server Time: ${data.timestamp}`]);
+            setSchemaLogs(prev => [...prev, `PHP Version: ${data.php_version}`]);
+            setSchemaLogs(prev => [...prev, '']);
+            setSchemaLogs(prev => [...prev, 'Files in admin directory:']);
+            data.files_in_directory?.forEach((file: string) => {
+                if (file !== '.' && file !== '..') {
+                    setSchemaLogs(prev => [...prev, `  - ${file}`]);
+                }
+            });
+
+            toast.success('API connection test successful');
+        } catch (error: any) {
+            setSchemaLogs(prev => [...prev, `❌ Connection failed: ${error.message}`]);
+            toast.error('API connection test failed');
         }
     };
 
@@ -77,18 +223,79 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
 
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-8">System Tools</h1>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8">System Tools</h1>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                {/* Seed Questions */}
-                <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                {/* Database Schema Update */}
+                <div className="bg-card rounded-xl shadow-sm border border-border p-6">
                     <div className="flex items-center gap-3 mb-4">
-                        <div className="p-2 bg-blue-100 rounded-lg">
-                            <Database className="w-6 h-6 text-blue-600" />
+                        <div className="p-2 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg">
+                            <RefreshCw className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
                         </div>
-                        <h2 className="text-xl font-semibold text-gray-900">Seed Question Bank</h2>
+                        <h2 className="text-xl font-semibold text-foreground">Database Schema Update</h2>
                     </div>
-                    <p className="text-gray-600 mb-6">
+                    <p className="text-muted-foreground mb-6">
+                        Update the database schema with any missing fields or indexes.
+                        This is safe to run multiple times and will only add what's missing.
+                    </p>
+
+                    <div className="space-y-3">
+                        <button
+                            onClick={testConnection}
+                            className="w-full flex items-center justify-center px-4 py-2 border border-border rounded-md shadow-sm text-sm font-medium text-foreground bg-muted hover:bg-muted/80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        >
+                            <Terminal className="w-4 h-4 mr-2" />
+                            Test API Connection
+                        </button>
+
+                        <button
+                            onClick={handleSchemaUpdate}
+                            disabled={schemaUpdating}
+                            className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                            {schemaUpdating ? (
+                                <>
+                                    <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
+                                    Updating Schema...
+                                </>
+                            ) : (
+                                <>
+                                    <CheckCircle2 className="w-4 h-4 mr-2" />
+                                    Run Schema Update
+                                </>
+                            )}
+                        </button>
+                    </div>
+
+                    {schemaLogs.length > 0 && (
+                        <div className="mt-6 bg-gray-900 dark:bg-gray-950 rounded-lg p-4 font-mono text-xs text-green-400 h-48 overflow-y-auto">
+                            {schemaLogs.map((log, i) => (
+                                <div key={i}>{log}</div>
+                            ))}
+                        </div>
+                    )}
+
+                    {schemaResult && schemaResult.success && (
+                        <div className="mt-4 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
+                            <div className="flex items-start gap-2">
+                                <CheckCircle2 className="w-5 h-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0" />
+                                <div className="text-sm text-green-800 dark:text-green-200">
+                                    <strong>Success!</strong> Database schema has been updated successfully.
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+
+                {/* Seed Questions */}
+                <div className="bg-card rounded-xl shadow-sm border border-border p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                        <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
+                            <Database className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                        </div>
+                        <h2 className="text-xl font-semibold text-foreground">Seed Question Bank</h2>
+                    </div>
+                    <p className="text-muted-foreground mb-6">
                         Import questions from the local JSON files (`qbank/`) into the Supabase database.
                         Duplicates will be skipped automatically.
                     </p>
@@ -109,48 +316,50 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
                     </button>
 
                     {logs.length > 0 && (
-                        <div className="mt-6 bg-gray-900 rounded-lg p-4 font-mono text-xs text-green-400 h-48 overflow-y-auto">
+                        <div className="mt-6 bg-gray-900 dark:bg-gray-950 rounded-lg p-4 font-mono text-xs text-green-400 h-48 overflow-y-auto">
                             {logs.map((log, i) => (
                                 <div key={i}>{log}</div>
                             ))}
                         </div>
-                    )}
+                    )
+                    }
                 </div>
 
-                {/* Database Setup Info */}
-                <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-                    <div className="flex items-center gap-3 mb-4">
-                        <div className="p-2 bg-yellow-100 rounded-lg">
-                            <AlertTriangle className="w-6 h-6 text-yellow-600" />
-                        </div>
-                        <h2 className="text-xl font-semibold text-gray-900">Database Setup Required</h2>
+            </div>
+
+            {/* Database Setup Info - Full Width */}
+            <div className="mt-8 bg-card rounded-xl shadow-sm border border-border p-6">
+                <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2 bg-yellow-100 dark:bg-yellow-900/30 rounded-lg">
+                        <AlertTriangle className="w-6 h-6 text-yellow-600 dark:text-yellow-400" />
                     </div>
-                    <p className="text-gray-600 mb-4">
-                        Some database functions (RPCs) cannot be created from this dashboard.
-                        If "Start Quiz" is failing, please run the following SQL in your Supabase SQL Editor:
+                    <h2 className="text-xl font-semibold text-foreground">Database Setup Required</h2>
+                </div>
+                <p className="text-muted-foreground mb-4">
+                    Some database functions (RPCs) cannot be created from this dashboard.
+                    If "Start Quiz" is failing, please run the following SQL in your Supabase SQL Editor:
+                </p>
+
+                <div className="relative">
+                    <pre className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4 text-xs text-gray-700 dark:text-gray-300 overflow-x-auto h-64 border border-border">
+                        {rpcSql}
+                    </pre>
+                    <button
+                        onClick={() => {
+                            navigator.clipboard.writeText(rpcSql);
+                            toast.success('SQL copied to clipboard');
+                        }}
+                        className="absolute top-2 right-2 p-2 bg-white dark:bg-gray-800 rounded shadow hover:bg-gray-50 dark:hover:bg-gray-700 text-xs font-medium text-gray-600 dark:text-gray-300 border border-border"
+                    >
+                        Copy SQL
+                    </button>
+                </div>
+
+                <div className="mt-4 flex items-start gap-2 text-sm text-muted-foreground">
+                    <Terminal className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                    <p>
+                        Go to Supabase Dashboard &rarr; SQL Editor &rarr; New Query &rarr; Paste & Run.
                     </p>
-
-                    <div className="relative">
-                        <pre className="bg-gray-50 rounded-lg p-4 text-xs text-gray-700 overflow-x-auto h-64 border border-gray-200">
-                            {rpcSql}
-                        </pre>
-                        <button
-                            onClick={() => {
-                                navigator.clipboard.writeText(rpcSql);
-                                toast.success('SQL copied to clipboard');
-                            }}
-                            className="absolute top-2 right-2 p-2 bg-white rounded shadow hover:bg-gray-50 text-xs font-medium text-gray-600 border border-gray-200"
-                        >
-                            Copy SQL
-                        </button>
-                    </div>
-
-                    <div className="mt-4 flex items-start gap-2 text-sm text-gray-500">
-                        <Terminal className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                        <p>
-                            Go to Supabase Dashboard &rarr; SQL Editor &rarr; New Query &rarr; Paste & Run.
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>

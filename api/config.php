@@ -28,6 +28,6 @@ define('ALLOWED_UPLOAD_TYPES', ['image/jpeg', 'image/png', 'image/webp', 'image/
 
 // AI Configuration
 define('AI_PROVIDER', 'gemini'); // 'gemini' or 'openrouter'
-define('AI_API_KEY', 'AIzaSyBAEQMkw01uCSQ1XFin3H4_D6DJ7HeHM7I'); // Put your API key here
+define('AI_API_KEY', 'AIzaSyC0faiIeIWEqYu1Y_RP90n2ydiW3Zy9iNo'); // Put your API key here
 define('AI_MODEL', 'gemini-1.5-flash'); // Model to use
 ?>

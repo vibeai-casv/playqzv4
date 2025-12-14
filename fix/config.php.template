@@ -1,0 +1,51 @@
+<?php
+// Production Database Configuration Template
+// ===========================================
+// 
+// INSTRUCTIONS FOR SETUP:
+// 1. Get your database credentials from your hosting control panel (cPanel/Plesk)
+// 2. Update the values below with your actual credentials
+// 3. Upload this file to /aiq2/api/config.php on your server
+// 4. Verify the connection by visiting: /aiq2/fix/check-db-connection.php
+//
+// Common hosting database formats:
+// - Database Name: username_dbname (e.g., vibeaicv_aiquiz)
+// - Database User: username_user (e.g., vibeaicv_user)
+// - Or custom names you created in hosting panel
+//
+// ===========================================
+
+// DATABASE CREDENTIALS - UPDATE THESE!
+define('DB_HOST', 'localhost');               // Usually 'localhost' for most hosting
+define('DB_NAME', 'aiqz_production');         // ← CHANGE: Your actual database name
+define('DB_USER', 'aiqz_user');               // ← CHANGE: Your actual database username
+define('DB_PASS', 'YOUR_PASSWORD_HERE');      // ← CHANGE: Your actual database password
+define('DB_CHARSET', 'utf8mb4');
+
+// CORS CONFIGURATION
+define('ALLOWED_ORIGIN', 'https://aiquiz.vibeai.cv');
+
+// PRODUCTION SETTINGS
+define('ENVIRONMENT', 'production');
+define('DEBUG_MODE', false);                  // Set to true only for debugging
+define('LOG_ERRORS', true);
+
+// SESSION CONFIGURATION
+define('SESSION_LIFETIME', 86400);            // 24 hours
+define('SESSION_SECURE', true);               // Require HTTPS
+define('SESSION_HTTPONLY', true);
+define('SESSION_SAMESITE', 'Strict');
+
+// FILE UPLOAD SETTINGS
+define('MAX_UPLOAD_SIZE', 5242880);           // 5MB
+define('ALLOWED_UPLOAD_TYPES', ['image/jpeg', 'image/png', 'image/webp', 'image/gif']);
+
+// ERROR REPORTING (only for debugging - disable in production)
+if (DEBUG_MODE) {
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+} else {
+    error_reporting(0);
+    ini_set('display_errors', 0);
+}
+?>

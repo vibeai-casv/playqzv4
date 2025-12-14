@@ -1,0 +1,205 @@
+AI Question Generator - Prompt Guide
+Universal Prompt Template
+Use this prompt with any AI (ChatGPT, Claude, Gemini, etc.) to generate quiz questions:
+
+PROMPT:
+Generate [NUMBER] multiple choice questions about [TOPIC] with [DIFFICULTY] difficulty level.
+
+Requirements:
+- Each question must have exactly 4 answer options
+- Only one option should be correct
+- Include a brief explanation for each answer
+- Make questions engaging and educational
+- Avoid ambiguous or trick questions
+
+Format your response as a JSON array with this exact structure:
+
+[
+  {
+    "text": "The question text goes here?",
+    "options": ["Option A", "Option B", "Option C", "Option D"],
+    "correct_answer": "Option B",
+    "explanation": "Brief explanation of why this is correct.",
+    "category": "[TOPIC]",
+    "type": "text_mcq"
+  }
+]
+
+Return ONLY the JSON array, no additional text or markdown code blocks.
+
+Example Prompts for Different Topics
+1. General Knowledge
+Generate 10 multiple choice questions about World History with medium difficulty level.
+
+Requirements:
+- Each question must have exactly 4 answer options
+- Only one option should be correct
+- Include a brief explanation for each answer
+- Cover different time periods and regions
+- Make questions engaging and educational
+
+Format your response as a JSON array with this structure:
+[{"text": "question", "options": ["A", "B", "C", "D"], "correct_answer": "B", "explanation": "why", "category": "World History", "type": "text_mcq"}]
+
+Return ONLY the JSON array.
+2. Programming/Technical
+Generate 5 multiple choice questions about Python Programming with hard difficulty level.
+
+Requirements:
+- Each question must have exactly 4 answer options
+- Focus on practical coding scenarios
+- Include code snippets where appropriate
+- Test understanding of concepts, not just memorization
+- Include explanations with code examples
+
+Format your response as a JSON array.
+Return ONLY the JSON array, no markdown.
+3. Science
+Generate 8 multiple choice questions about Human Biology with easy difficulty level.
+
+Requirements:
+- Each question must have exactly 4 answer options
+- Use simple, clear language
+- Focus on fundamental concepts
+- Include practical, real-world connections
+- Provide explanations suitable for beginners
+
+Format your response as a JSON array.
+Return ONLY the JSON array.
+4. Business/Professional
+Generate 6 multiple choice questions about Digital Marketing with medium difficulty level.
+
+Requirements:
+- Each question must have exactly 4 answer options
+- Focus on current industry practices
+- Include practical scenarios
+- Cover various aspects (SEO, social media, analytics, etc.)
+- Provide actionable explanations
+
+Format your response as a JSON array.
+Return ONLY the JSON array.
+
+Customization Options
+By Difficulty Level
+Easy:
+
+Basic concepts and definitions
+Clear, straightforward questions
+Obvious distractors
+
+Medium:
+
+Application of concepts
+Scenario-based questions
+Plausible distractors
+
+Hard:
+
+Complex scenarios
+Multiple concepts combined
+Very similar answer options
+
+By Question Style
+Factual Questions:
+Generate questions that test factual knowledge about [TOPIC]
+Example: "What year was X founded?"
+Conceptual Questions:
+Generate questions that test understanding of concepts in [TOPIC]
+Example: "Why does X occur?"
+Application Questions:
+Generate scenario-based questions where users must apply knowledge of [TOPIC]
+Example: "In situation X, what would be the best approach?"
+Analysis Questions:
+Generate questions that require analyzing information about [TOPIC]
+Example: "What is the primary reason for X?"
+
+Tips for Best Results
+1. Be Specific
+❌ "Generate questions about science"
+✅ "Generate 5 questions about photosynthesis in plants for high school students"
+2. Specify Difficulty Clearly
+Easy: Middle school level
+Medium: High school / undergraduate level
+Hard: Advanced undergraduate / professional level
+3. Request Consistent Formatting
+Always include: "Return ONLY the JSON array, no markdown code blocks or additional text"
+4. Add Context
+Generate questions for:
+- College entrance exam prep
+- Corporate training
+- Certification preparation
+- General knowledge quiz
+- Educational game
+5. Specify Question Distribution
+Generate 10 questions about European History:
+- 3 about Ancient Rome
+- 3 about Medieval Period
+- 2 about Renaissance
+- 2 about World Wars
+
+Advanced Prompt Examples
+Mixed Difficulty
+Generate 10 questions about JavaScript:
+- 3 easy (basic syntax and concepts)
+- 4 medium (functions, arrays, objects)
+- 3 hard (async, closures, prototypes)
+
+Return as JSON array with difficulty field included.
+With Learning Objectives
+Generate 5 questions about Climate Change that test:
+1. Understanding of greenhouse effect
+2. Knowledge of human impact
+3. Awareness of solutions
+4. Critical thinking about policies
+5. Application of concepts to real scenarios
+
+Return as JSON array.
+Domain-Specific Vocabulary
+Generate 8 medical terminology questions for nursing students:
+- Use proper medical terms
+- Include common abbreviations
+- Focus on body systems
+- Provide detailed explanations
+
+Return as JSON array.
+
+Validation Checklist
+Before using generated questions, verify:
+
+✅ Each question has exactly 4 options
+✅ Correct answer exactly matches one option (case-sensitive)
+✅ Explanations are clear and educational
+✅ No duplicate questions
+✅ Options are roughly similar length
+✅ No obvious pattern in correct answers (all B's, etc.)
+✅ Questions are factually accurate
+✅ Language is appropriate for target audience
+
+
+Troubleshooting
+If AI returns markdown code blocks:
+Add to prompt: "Do NOT wrap response in json or  markers"
+If options aren't consistent:
+Add to prompt: "All 4 options must be similar in length and detail level"
+If correct_answer doesn't match options:
+Add to prompt: "The correct_answer value must EXACTLY match one of the strings in the options array, including capitalization and punctuation"
+If getting explanations that are too long/short:
+Add to prompt: "Each explanation should be 1-2 sentences (20-40 words)"
+
+Quick Reference
+Minimum Viable Prompt:
+Generate [N] MCQ questions about [TOPIC] with [difficulty] level.
+Format: JSON array with fields: text, options (array of 4), correct_answer, explanation, category, type.
+Return ONLY JSON.
+Recommended Full Prompt:
+Generate [N] multiple choice questions about [TOPIC] with [DIFFICULTY] difficulty.
+
+Each question needs:
+- text: Clear question
+- options: Array of exactly 4 strings
+- correct_answer: Must exactly match one option
+- explanation: 1-2 sentence explanation
+- category: "[TOPIC]"
+- type: "text_mcq"
+
+Return ONLY a JSON array, no markdown or extra text.

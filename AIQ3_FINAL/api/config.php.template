@@ -1,0 +1,35 @@
+<?php
+/**
+ * AIQ3 Production Configuration Template
+ * 
+ * IMPORTANT: Copy this file to config.php and update with your credentials!
+ * 
+ * cp config.php.template config.php
+ * then edit config.php
+ */
+
+// Database Configuration
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'YOUR_DATABASE_NAME');  // ← UPDATE THIS!
+define('DB_USER', 'YOUR_DATABASE_USER');  // ← UPDATE THIS!
+define('DB_PASS', 'YOUR_DATABASE_PASSWORD');  // ← UPDATE THIS!
+
+// API Configuration
+define('API_BASE_URL', 'https://aiquiz.vibeai.cv/aiq3/api');
+define('FRONTEND_URL', 'https://aiquiz.vibeai.cv/aiq3');
+
+// Security
+define('JWT_SECRET', 'CHANGE_THIS_TO_RANDOM_STRING_32_CHARS_MIN');  // ← UPDATE THIS!
+define('SESSION_TIMEOUT', 3600); // 1 hour
+
+// File Upload
+define('UPLOAD_DIR', __DIR__ . '/../uploads/');
+define('MAX_UPLOAD_SIZE', 50 * 1024 * 1024); // 50MB
+
+// Environment
+define('ENVIRONMENT', 'production');
+define('DEBUG_MODE', false);
+
+// Gemini AI (optional - for question generation)
+define('GEMINI_API_KEY', ''); // Add your key if using AI features
+?>

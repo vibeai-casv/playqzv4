@@ -30,6 +30,7 @@ function callGemini($prompt) {
     // Clean model name if it contains 'google/' prefix for OpenRouter compatibility
     $model = str_replace('google/', '', $model);
     
+    // Use v1beta for model compatibility, without responseMimeType for v1beta compatibility
     $url = "https://generativelanguage.googleapis.com/v1beta/models/$model:generateContent?key=" . AI_API_KEY;
     
     $data = [
@@ -41,8 +42,7 @@ function callGemini($prompt) {
             ]
         ],
         'generationConfig' => [
-            'temperature' => 0.7,
-            'responseMimeType' => 'application/json'
+            'temperature' => 0.7
         ]
     ];
 

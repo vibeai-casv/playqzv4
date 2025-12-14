@@ -42,9 +42,30 @@ export function BundleImporter({ onImportComplete, onCancel }: BundleImporterPro
         setIsImporting(true);
         setStats(null);
 
+        // Diagnostic logging
+        console.log('=== BUNDLE IMPORT STARTED ===');
+        console.log('File:', {
+            name: file.name,
+            size: file.size,
+            type: file.type,
+            lastModified: new Date(file.lastModified).toISOString()
+        });
+
         try {
+            console.log('Step 1: Creating FormData...');
             const formData = new FormData();
             formData.append('bundle', file);
+            console.log('✅ FormData created');
+
+            // Log API URL being used
+            const apiBaseURL = (api.defaults.baseURL || '') + '/bundle/import.php';
+            console.log('Step 2: Sending POST request to:', apiBaseURL);
+            console.log('Request headers will include:', {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': sessionStorage.getItem('auth_token') ? '✓ Present' : '✗ Missing'
+            });
+
+            toast.info('Uploading bundle...', { duration: 2000 });
 
             const response = await api.post('/bundle/import.php', formData, {
                 headers: {
@@ -52,25 +73,73 @@ export function BundleImporter({ onImportComplete, onCancel }: BundleImporterPro
                 },
             });
 
+            console.log('Step 3: Response received');
+            console.log('Response status:', response.status);
+            console.log('Response data:', response.data);
+
             setStats(response.data.stats);
 
+            // Log import results
+            console.log('Import Stats:', {
+                questions_imported: response.data.stats.questions_imported,
+                questions_skipped: response.data.stats.questions_skipped,
+                media_imported: response.data.stats.media_imported,
+                errors_count: response.data.stats.errors.length
+            });
+
             if (response.data.stats.questions_imported > 0) {
-                toast.success(`Successfully imported bundle!`);
+                toast.success(`Successfully imported ${response.data.stats.questions_imported} question(s)!`);
+                console.log('✅ Import successful');
             } else {
                 toast.warning('No new questions were imported (records may already exist)');
+                console.log('⚠️ No questions imported (possibly duplicates)');
             }
 
+            if (response.data.stats.errors.length > 0) {
+                console.error('Import errors:', response.data.stats.errors);
+            }
+
+            console.log('=== BUNDLE IMPORT COMPLETED ===');
+
         } catch (error) {
-            console.error('Import error:', error);
+            console.error('=== BUNDLE IMPORT FAILED ===');
+            console.error('Error details:', error);
+
             let errorMessage = 'Failed to import bundle';
-            if (axios.isAxiosError(error) && error.response?.data?.error) {
-                errorMessage = error.response.data.error;
+
+            if (axios.isAxiosError(error)) {
+                console.error('Axios Error:', {
+                    message: error.message,
+                    code: error.code,
+                    status: error.response?.status,
+                    statusText: error.response?.statusText,
+                    responseData: error.response?.data,
+                    requestURL: error.config?.url,
+                    requestMethod: error.config?.method
+                });
+
+                if (error.response?.data?.error) {
+                    errorMessage = error.response.data.error;
+                } else if (error.response?.status === 404) {
+                    errorMessage = 'Import endpoint not found - check if /bundle/import.php exists';
+                } else if (error.response?.status === 413) {
+                    errorMessage = 'File too large - check server upload limits';
+                } else if (error.response?.status === 500) {
+                    errorMessage = 'Server error - check server logs';
+                } else if (error.code === 'ERR_NETWORK') {
+                    errorMessage = 'Network error - check connection';
+                }
             } else if (error instanceof Error) {
+                console.error('Generic Error:', error.message);
                 errorMessage = error.message;
             }
-            toast.error(errorMessage);
+
+            toast.error(errorMessage, { duration: 5000 });
+            console.log('Error message shown to user:', errorMessage);
+
         } finally {
             setIsImporting(false);
+            console.log('=== IMPORT PROCESS ENDED ===');
         }
     };
 

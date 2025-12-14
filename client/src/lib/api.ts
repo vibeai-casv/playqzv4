@@ -35,4 +35,51 @@ api.interceptors.response.use(
     }
 );
 
+// Helper function for fetch-based API calls
+export async function fetchAPI(endpoint: string, options: RequestInit = {}) {
+    // Always detect from current location (ignore VITE_API_URL for subdirectory deployments)
+    let API_URL;
+
+    if (typeof window !== 'undefined') {
+        // Detect from current location
+        const currentPath = window.location.pathname;
+        if (currentPath.startsWith('/aiq3/')) {
+            // Production: We're in /aiq3/ subdirectory
+            API_URL = '/aiq3/api';
+        } else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            // Development: localhost
+            API_URL = 'http://localhost:8000/api';
+        } else {
+            // Fallback: try to detect base from current URL
+            const base = window.location.pathname.split('/').slice(0, 2).join('/');
+            API_URL = base ? `${base}/api` : '/api';
+        }
+    } else {
+        // Server-side rendering fallback
+        API_URL = '/api';
+    }
+
+    const token = sessionStorage.getItem('auth_token');
+
+    const headers: Record<string, string> = {
+        'Content-Type': 'application/json',
+        ...(options.headers as Record<string, string> || {}),
+    };
+
+    if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+    }
+
+    const response = await fetch(`${API_URL}${endpoint}`, {
+        ...options,
+        headers,
+    });
+
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return response.json();
+}
+
 export default api;
