@@ -19,6 +19,7 @@ interface QuestionEditorProps {
 export function QuestionEditor({ question, onSave, onCancel }: QuestionEditorProps) {
     const { createQuestion, updateQuestion, fetchMetadata, isLoading } = useAdmin();
     const [showMediaPicker, setShowMediaPicker] = useState(false);
+    const [selectedImageFilename, setSelectedImageFilename] = useState<string>('');
 
     // Metadata state
     const [categories, setCategories] = useState<string[]>([]);
@@ -208,19 +209,24 @@ export function QuestionEditor({ question, onSave, onCancel }: QuestionEditorPro
                                 </button>
                             </div>
                             {form.watch('image_url') && (
-                                <div className="mt-2 relative w-fit group">
-                                    <img
-                                        src={getImageUrl(form.watch('image_url')) || ''}
-                                        alt="Preview"
-                                        className="h-32 object-contain rounded border bg-gray-50 dark:bg-gray-800"
-                                    />
-                                    <button
-                                        type="button"
-                                        onClick={() => form.setValue('image_url', '')}
-                                        className="absolute -top-2 -right-2 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-                                    >
-                                        <X className="w-3 h-3" />
-                                    </button>
+                                <div className="mt-2 space-y-1">
+                                    <div className="relative w-fit group">
+                                        <img
+                                            src={getImageUrl(form.watch('image_url')) || ''}
+                                            alt="Preview"
+                                            className="h-32 object-contain rounded border bg-gray-50 dark:bg-gray-800"
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() => form.setValue('image_url', '')}
+                                            className="absolute -top-2 -right-2 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                                        >
+                                            <X className="w-3 h-3" />
+                                        </button>
+                                    </div>
+                                    <p className="text-xs text-gray-500 dark:text-gray-400 break-all">
+                                        {selectedImageFilename || form.watch('image_url')?.split('/').pop() || 'Unknown'}
+                                    </p>
                                 </div>
                             )}
                         </div>
@@ -239,8 +245,9 @@ export function QuestionEditor({ question, onSave, onCancel }: QuestionEditorPro
                         questionType === 'image_identify_logo' ? 'logo' :
                             questionType === 'image_identify_person' ? 'personality' : 'all'
                     }
-                    onSelect={(url) => {
+                    onSelect={(url, originalFilename) => {
                         form.setValue('image_url', url);
+                        setSelectedImageFilename(originalFilename || '');
                         setShowMediaPicker(false);
                     }}
                     onCancel={() => setShowMediaPicker(false)}

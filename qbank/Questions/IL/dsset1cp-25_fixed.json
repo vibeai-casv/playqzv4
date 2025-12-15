@@ -1,0 +1,352 @@
+[
+  {
+    "options": [
+      "OpenAI",
+      "Anthropic",
+      "Cohere",
+      "AI21 Labs"
+    ],
+    "correct_answer": "Anthropic",
+    "explanation": "Anthropic was co-founded by Dario and Daniela Amodei after they left OpenAI. It's known for the Claude LLM and its focus on AI safety via Constitutional AI.",
+    "category": "AI Companies & Tools",
+    "type": "image_identify_logo",
+    "difficulty": "medium",
+    "question_text": "This AI safety and research company, founded by former OpenAI executives, created the Claude language models and emphasizes constitutional AI principles."
+  },
+  {
+    "options": [
+      "TensorFlow",
+      "PyTorch",
+      "Keras",
+      "JAX"
+    ],
+    "correct_answer": "PyTorch",
+    "explanation": "PyTorch was developed primarily by Meta's Fundamental AI Research (FAIR) lab. Its dynamic computation graph and intuitive interface made it extremely popular in research.",
+    "category": "AI Companies & Tools",
+    "type": "image_identify_logo",
+    "difficulty": "medium",
+    "question_text": "Which open-source deep learning framework, originally developed by researchers at Meta's AI lab (FAIR), is known for its dynamic computation graphs and Python-first approach?"
+  },
+  {
+    "options": [
+      "Midjourney",
+      "Stability AI",
+      "Runway",
+      "OpenAI"
+    ],
+    "correct_answer": "Stability AI",
+    "explanation": "Stability AI is the company behind the open-source Stable Diffusion image generation model and is known for its distinctive fractal-based logo.",
+    "category": "AI Companies & Tools",
+    "type": "image_identify_logo",
+    "difficulty": "medium",
+    "question_text": "This AI company is known for its Stable Diffusion text-to-image model and for advocating open access to generative AI models. Its logo often features a unique fractal pattern."
+  },
+  {
+    "options": [
+      "Replicate",
+      "Hugging Face",
+      "Runway",
+      "Cohere"
+    ],
+    "correct_answer": "Replicate",
+    "explanation": "Replicate is a platform that makes it easy to run machine learning models with a cloud API, hosting many popular open-source models including those for image generation and language.",
+    "category": "AI Companies & Tools",
+    "type": "image_identify_logo",
+    "difficulty": "medium",
+    "question_text": "Which AI platform provides a managed service for running and scaling machine learning models, offering a simple API and hosting for models like Stable Diffusion and Llama?"
+  },
+  {
+    "options": [
+      "TensorFlow",
+      "PyTorch",
+      "Scikit-learn",
+      "Pandas"
+    ],
+    "correct_answer": "Scikit-learn",
+    "explanation": "Scikit-learn is a fundamental Python library for classical machine learning algorithms, widely used for classification, regression, clustering, and model evaluation.",
+    "category": "AI Companies & Tools",
+    "type": "image_identify_logo",
+    "difficulty": "medium",
+    "question_text": "This popular Python library provides simple and efficient tools for data mining and data analysis, built on NumPy, SciPy, and matplotlib."
+  },
+  {
+    "options": [
+      "LangChain",
+      "Weights & Biases",
+      "Pinecone",
+      "LlamaIndex"
+    ],
+    "correct_answer": "Weights & Biases",
+    "explanation": "Weights & Biases (W&B) is a platform for machine learning experiment tracking, hyperparameter tuning, and collaborative model development.",
+    "category": "AI Companies & Tools",
+    "type": "image_identify_logo",
+    "difficulty": "medium",
+    "question_text": "Which AI development tool provides a platform for experiment tracking, dataset versioning, and model management, often visualized with interactive dashboards?"
+  },
+  {
+    "options": [
+      "NVIDIA",
+      "Graphcore",
+      "Cerebras",
+      "Google TPU"
+    ],
+    "correct_answer": "Cerebras",
+    "explanation": "Cerebras Systems is known for its wafer-scale AI chips, which are enormous single chips designed to accelerate deep learning training.",
+    "category": "AI Companies & Tools",
+    "type": "image_identify_logo",
+    "difficulty": "medium",
+    "question_text": "This company builds specialized AI chips called Wafer-Scale Engines (WSEs), which are some of the largest processors ever made, designed for high-performance AI computing."
+  },
+  {
+    "options": [
+      "TensorFlow",
+      "JAX",
+      "PyTorch",
+      "MXNet"
+    ],
+    "correct_answer": "JAX",
+    "explanation": "JAX is a Google research project that combines NumPy, automatic differentiation, and XLA for high-performance machine learning research. It's known for composable function transformations.",
+    "category": "AI Companies & Tools",
+    "type": "image_identify_logo",
+    "difficulty": "medium",
+    "question_text": "Which AI framework, developed by Google, introduced the concept of a 'Define-by-Run' interface and is designed for high-performance numerical computing and machine learning research?"
+  },
+  {
+    "options": [
+      "Pinecone",
+      "Weaviate",
+      "Milvus",
+      "Qdrant"
+    ],
+    "correct_answer": "Pinecone",
+    "explanation": "Pinecone is a managed vector database service designed to store and query vector embeddings at scale, commonly used in AI applications for semantic search and memory.",
+    "category": "AI Companies & Tools",
+    "type": "image_identify_logo",
+    "difficulty": "medium",
+    "question_text": "This company provides a vector database that is often used as a long-term memory for AI applications, allowing for efficient similarity search over embeddings."
+  },
+  {
+    "options": [
+      "Anthropic",
+      "Cohere",
+      "AI21 Labs",
+      "Perplexity AI"
+    ],
+    "correct_answer": "Cohere",
+    "explanation": "Cohere, founded by ex-Google Brain researchers including Aidan Gomez (co-author of the 'Attention Is All You Need' paper), focuses on LLMs for enterprise use cases like search and RAG.",
+    "category": "AI Companies & Tools",
+    "type": "image_identify_logo",
+    "difficulty": "medium",
+    "question_text": "Which AI startup, founded by ex-Googlers, focuses on building large language models for enterprise search and retrieval-augmented generation (RAG) applications?"
+  },
+  {
+    "options": [
+      "LlamaIndex",
+      "LangChain",
+      "Hugging Face Transformers",
+      "Semantic Kernel"
+    ],
+    "correct_answer": "LangChain",
+    "explanation": "LangChain is a popular framework that simplifies building context-aware, reasoning applications with LLMs by providing components for chaining calls, memory, and agentic workflows.",
+    "category": "AI Companies & Tools",
+    "type": "image_identify_logo",
+    "difficulty": "medium",
+    "question_text": "This framework for developing applications powered by language models is known for its 'chains' that orchestrate sequences of calls to LLMs and other tools."
+  },
+  {
+    "options": [
+      "Perplexity AI",
+      "You.com",
+      "Phind",
+      "Google Bard"
+    ],
+    "correct_answer": "Perplexity AI",
+    "explanation": "Perplexity AI is an answer engine that uses AI to provide direct answers to questions, complete with citations and follow-up queries, distinguishing it from traditional chatbots.",
+    "category": "AI Companies & Tools",
+    "type": "image_identify_logo",
+    "difficulty": "medium",
+    "question_text": "Which AI-powered search engine and chatbot presents answers with citations and sources, functioning as a conversational answer engine rather than just a chat interface?"
+  },
+  {
+    "options": [
+      "Google Cloud Vertex AI",
+      "Azure Machine Learning",
+      "AWS SageMaker",
+      "Databricks"
+    ],
+    "correct_answer": "AWS SageMaker",
+    "explanation": "Amazon SageMaker is AWS's comprehensive service for the entire machine learning workflow, from data preparation and model training to deployment and monitoring.",
+    "category": "AI Companies & Tools",
+    "type": "image_identify_logo",
+    "difficulty": "medium",
+    "question_text": "This Amazon Web Services (AWS) offering is a fully managed machine learning service that lets data scientists and developers build, train, and deploy ML models quickly."
+  },
+  {
+    "options": [
+      "Google",
+      "Meta",
+      "Microsoft",
+      "Apple"
+    ],
+    "correct_answer": "Meta",
+    "explanation": "Meta's Fundamental AI Research (FAIR) lab is responsible for many influential open-source AI projects, including the PyTorch framework and the Llama family of LLMs.",
+    "category": "AI Companies & Tools",
+    "type": "image_identify_logo",
+    "difficulty": "medium",
+    "question_text": "Which company's AI research division, known as FAIR, is behind open-source projects like PyTorch, Llama large language models, and Segment Anything?"
+  },
+  {
+    "options": [
+      "Kaggle",
+      "Hugging Face",
+      "GitHub",
+      "Papers with Code"
+    ],
+    "correct_answer": "Hugging Face",
+    "explanation": "Hugging Face hosts the largest community-driven repository of machine learning models, datasets, and spaces for demos, central to the NLP and open-source AI ecosystem.",
+    "category": "AI Companies & Tools",
+    "type": "image_identify_logo",
+    "difficulty": "medium",
+    "question_text": "This platform is often called the 'GitHub of Machine Learning,' hosting thousands of pre-trained models, datasets, and demos, with a focus on the Transformer architecture."
+  },
+  {
+    "options": [
+      "Cerebras",
+      "Graphcore",
+      "SambaNova",
+      "Groq"
+    ],
+    "correct_answer": "Graphcore",
+    "explanation": "Graphcore is a British semiconductor company that builds the Intelligence Processing Unit (IPU), a processor designed from the ground up for AI and machine learning tasks.",
+    "category": "AI Companies & Tools",
+    "type": "image_identify_logo",
+    "difficulty": "medium",
+    "question_text": "Which AI hardware company, based in the UK, designs Intelligence Processing Units (IPUs) specifically for machine learning workloads?"
+  },
+  {
+    "options": [
+      "LangChain",
+      "LlamaIndex",
+      "Haystack",
+      "Pinecone"
+    ],
+    "correct_answer": "LlamaIndex",
+    "explanation": "LlamaIndex (formerly GPT Index) is a data framework that helps in ingesting, structuring, and accessing private or domain-specific data for use with large language models.",
+    "category": "AI Companies & Tools",
+    "type": "image_identify_logo",
+    "difficulty": "medium",
+    "question_text": "This tool is a data framework for LLM applications, providing connectors to data sources and indices to structure data for efficient retrieval and use with LLMs."
+  },
+  {
+    "options": [
+      "Google AI Platform",
+      "Google Cloud AI",
+      "Vertex AI",
+      "TensorFlow Enterprise"
+    ],
+    "correct_answer": "Vertex AI",
+    "explanation": "Vertex AI is Google Cloud's unified machine learning platform that brings AutoML and custom training together in a single environment with MLOps capabilities.",
+    "category": "AI Companies & Tools",
+    "type": "image_identify_logo",
+    "difficulty": "medium",
+    "question_text": "Which Google Cloud service provides a unified AI platform for building, deploying, and scaling ML models and AI applications, including MLOps tools?"
+  },
+  {
+    "options": [
+      "Pika Labs",
+      "Stability AI",
+      "Runway",
+      "Synthesia"
+    ],
+    "correct_answer": "Runway",
+    "explanation": "Runway is a applied AI research company creating creative tools, famous for its Gen-2 video generation model and for being a co-creator of the original Stable Diffusion model.",
+    "category": "AI Companies & Tools",
+    "type": "image_identify_logo",
+    "difficulty": "medium",
+    "question_text": "This AI video creation and editing platform is known for tools like Gen-2 for text-to-video and its involvement in the development of Stable Diffusion."
+  },
+  {
+    "options": [
+      "Pinecone",
+      "Weaviate",
+      "Chroma",
+      "Qdrant"
+    ],
+    "correct_answer": "Weaviate",
+    "explanation": "Weaviate is an open-source vector database that can be self-hosted or used as a managed service. It supports hybrid search (keyword + vector) and has a modular design.",
+    "category": "AI Companies & Tools",
+    "type": "image_identify_logo",
+    "difficulty": "medium",
+    "question_text": "Which open-source vector database can function as a standalone server and is designed for scalable similarity search with support for hybrid search?"
+  },
+  {
+    "options": [
+      "Fastai",
+      "Keras",
+      "PyTorch Lightning",
+      "MXNet Gluon"
+    ],
+    "correct_answer": "Keras",
+    "explanation": "Keras is a high-level neural networks API, focused on enabling fast experimentation. It became the official high-level API for TensorFlow and now supports multiple backends.",
+    "category": "AI Companies & Tools",
+    "type": "image_identify_logo",
+    "difficulty": "medium",
+    "question_text": "This neural network API, written in Python, is known for its user-friendliness and modularity, and it can run on top of TensorFlow, JAX, or PyTorch."
+  },
+  {
+    "options": [
+      "Anthropic",
+      "OpenAI",
+      "DeepMind",
+      "EleutherAI"
+    ],
+    "correct_answer": "OpenAI",
+    "explanation": "OpenAI was founded as a non-profit in 2015. It created the GPT models and ChatGPT, and later formed a capped-profit subsidiary (OpenAI LP) to attract investment.",
+    "category": "AI Companies & Tools",
+    "type": "image_identify_logo",
+    "difficulty": "medium",
+    "question_text": "Which AI research organization, founded as a non-profit in 2015, created ChatGPT and the GPT series of models, and later transitioned to a 'capped-profit' structure?"
+  },
+  {
+    "options": [
+      "Azure OpenAI Service",
+      "Azure Cognitive Services",
+      "Azure Machine Learning",
+      "Azure Databricks"
+    ],
+    "correct_answer": "Azure Cognitive Services",
+    "explanation": "Azure Cognitive Services is a suite of pre-built AI models and APIs (for vision, speech, language, etc.) that developers can use without machine learning expertise.",
+    "category": "AI Companies & Tools",
+    "type": "image_identify_logo",
+    "difficulty": "medium",
+    "question_text": "This Microsoft Azure service provides a portfolio of AI services and cognitive APIs for vision, speech, language, and decision-making, helping developers add intelligence to applications."
+  },
+  {
+    "options": [
+      "AMD",
+      "Intel",
+      "NVIDIA",
+      "Google"
+    ],
+    "correct_answer": "NVIDIA",
+    "explanation": "NVIDIA is the dominant player in AI accelerator hardware with its GPUs. Its CUDA platform and architectures like Hopper (e.g., H100 GPU) are industry standards for AI training and inference.",
+    "category": "AI Companies & Tools",
+    "type": "image_identify_logo",
+    "difficulty": "medium",
+    "question_text": "Which company, a leader in AI accelerators, created the CUDA parallel computing platform and the Hopper architecture for its data center GPUs?"
+  },
+  {
+    "options": [
+      "Hugging Face",
+      "EleutherAI",
+      "LAION",
+      "Stability AI"
+    ],
+    "correct_answer": "EleutherAI",
+    "explanation": "EleutherAI is a decentralized collective of researchers focused on open-source AI. They are known for projects like The Pile dataset and the GPT-J, GPT-NeoX, and Pythia model families.",
+    "category": "AI Companies & Tools",
+    "type": "image_identify_logo",
+    "difficulty": "medium",
+    "question_text": "This open-source community and research group is focused on democratizing AI and is known for creating open-source language models like the Pythia suite and the GPT-NeoX model."
+  }
+]

@@ -1,0 +1,452 @@
+[
+{
+"id": 11,
+"question_type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "easy",
+"question_text": "Which company is the primary developer of the GPT series of language models?",
+"options": ["Google", "Meta", "OpenAI", "Microsoft"],
+"correct_answer": "OpenAI"
+},
+{
+"id": 12,
+"question_type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "easy",
+"question_text": "What is the name of Google's flagship family of multimodal AI models?",
+"options": ["Claude", "GPT", "Llama", "Gemini"],
+"correct_answer": "Gemini"
+},
+{
+"id": 13,
+"question_type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "medium",
+"question_text": "Sora, introduced by OpenAI in 2024, is a model primarily designed for generating what?",
+"options": ["Audio music", "Video from text", "3D models", "Code repositories"],
+"correct_answer": "Video from text"
+},
+{
+"id": 14,
+"question_type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "medium",
+"question_text": "What does 'AGENTIC AI' typically refer to in recent AI discourse?",
+"options": ["AI that operates autonomously to achieve complex goals", "AI specialized in customer service chats", "AI designed for data compression", "AI that generates legal documents"],
+"correct_answer": "AI that operates autonomously to achieve complex goals"
+},
+{
+"id": 15,
+"question_type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "hard",
+"question_text": "Which notable feature was introduced with the Llama 3 model architecture compared to its predecessor?",
+"options": ["A 128K context window", "A new grouped-query attention mechanism", "Built-in image generation", "Specialized quantum computing layers"],
+"correct_answer": "A new grouped-query attention mechanism"
+},
+{
+"id": 16,
+"question_type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "easy",
+"question_text": "In AI safety, what is the term for an AI system's generation of plausible but incorrect or nonsensical information?",
+"options": ["Bias", "Overfitting", "Hallucination", "Variance"],
+"correct_answer": "Hallucination"
+},
+{
+"id": 17,
+"question_type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "easy",
+"question_text": "Which of these is a primary concern regarding bias in AI systems?",
+"options": ["They require too much electricity", "They can perpetuate and amplify societal prejudices", "They are always too slow to respond", "They cannot be updated with new data"],
+"correct_answer": "They can perpetuate and amplify societal prejudices"
+},
+{
+"id": 18,
+"question_type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "medium",
+"question_text": "The 'Alignment Problem' in AI safety primarily concerns what?",
+"options": ["Aligning circuit boards for efficient cooling", "Ensuring AI's goals and behaviors are aligned with human values", "Aligning training data from different sources", "Aligning the AI's internal clock with universal time"],
+"correct_answer": "Ensuring AI's goals and behaviors are aligned with human values"
+},
+{
+"id": 19,
+"question_type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "medium",
+"question_text": "The EU AI Act, a major regulatory framework, classifies AI systems based primarily on what?",
+"options": ["Their computational cost", "The programming language they use", "Their level of risk", "The company that developed them"],
+"correct_answer": "Their level of risk"
+},
+{
+"id": 20,
+"question_type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "hard",
+"question_text": "What is a 'Constitutional AI' approach, as pioneered by Anthropic?",
+"options": ["Training AI using principles and rules defined in a 'constitution' to guide its behavior", "Using AI to draft national constitutions", "Restricting AI development to specific countries with constitutions", "An AI that can only answer question_texts about constitutional law"],
+"correct_answer": "Training AI using principles and rules defined in a 'constitution' to guide its behavior"
+},
+{
+"id": 21,
+"question_type": "text_mcq",
+"category": "Robotics",
+"difficulty": "easy",
+"question_text": "Which company is famous for developing advanced dynamic robots like Atlas and Spot?",
+"options": ["Tesla", "Boston Dynamics", "Honda", "Samsung"],
+"correct_answer": "Boston Dynamics"
+},
+{
+"id": 22,
+"question_type": "text_mcq",
+"category": "Robotics",
+"difficulty": "easy",
+"question_text": "What question_type of robot is designed to mimic the form and movement of a human?",
+"options": ["Drone", "Humanoid", "Robotic arm", "Autonomous vehicle"],
+"correct_answer": "Humanoid"
+},
+{
+"id": 23,
+"question_type": "text_mcq",
+"category": "Robotics",
+"difficulty": "medium",
+"question_text": "What is the primary purpose of a LIDAR sensor in robotics?",
+"options": ["Detecting sound waves", "Measuring temperature", "Creating 3D maps using lasers", "Measuring pressure"],
+"correct_answer": "Creating 3D maps using lasers"
+},
+{
+"id": 24,
+"question_type": "text_mcq",
+"category": "Robotics",
+"difficulty": "medium",
+"question_text": "In robotics, what does 'SLAM' stand for?",
+"options": ["Standard Locomotion And Movement", "Simultaneous Localization And Mapping", "Synchronized Linear Actuator Mechanism", "Sensory Linkage for Autonomous Machines"],
+"correct_answer": "Simultaneous Localization And Mapping"
+},
+{
+"id": 25,
+"question_type": "text_mcq",
+"category": "Robotics",
+"difficulty": "hard",
+"question_text": "What is a key engineering challenge specific to bipedal (two-legged) humanoid robots compared to wheeled robots?",
+"options": ["Achieving stable, dynamic balance", "Processing visual data faster", "Connecting to Wi-Fi", "Carrying heavier loads"],
+"correct_answer": "Achieving stable, dynamic balance"
+},
+{
+"id": 26,
+"question_type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "easy",
+"question_text": "What is the fundamental unit of information in quantum computing called?",
+"options": ["Binary Digit (Bit)", "Quantum Bit (Qubit)", "Trit", "Byte"],
+"correct_answer": "Quantum Bit (Qubit)"
+},
+{
+"id": 27,
+"question_type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "easy",
+"question_text": "What is the quantum phenomenon where a qubit can exist in a state of 0 and 1 simultaneously called?",
+"options": ["Entanglement", "Superposition", "Interference", "Decoherence"],
+"correct_answer": "Superposition"
+},
+{
+"id": 28,
+"question_type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "medium",
+"question_text": "What is the term for the strong correlation between quantum particles, where the state of one instantly influences the state of another?",
+"options": ["Superposition", "Interference", "Entanglement", "Superconductivity"],
+"correct_answer": "Entanglement"
+},
+{
+"id": 29,
+"question_type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "medium",
+"question_text": "What major obstacle in quantum computing refers to the loss of quantum information due to interaction with the environment?",
+"options": ["Quantum Tunneling", "Decoherence", "The Observer Effect", "Superconducting Loop Collapse"],
+"correct_answer": "Decoherence"
+},
+{
+"id": 30,
+"question_type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "hard",
+"question_text": "Which famous quantum algorithm provides an exponential speedup for factoring large integers, posing a threat to current cryptography?",
+"options": ["Grover's Algorithm", "Shor's Algorithm", "Deutsch-Jozsa Algorithm", "Quantum Fourier Transform"],
+"correct_answer": "Shor's Algorithm"
+},
+{
+"id": 31,
+"question_type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "easy",
+"question_text": "What question_type of Generative AI model is primarily used to create realistic images from text descriptions?",
+"options": ["Large Language Model (LLM)", "Diffusion Model", "Recurrent Neural Network", "Support Vector Machine"],
+"correct_answer": "Diffusion Model"
+},
+{
+"id": 32,
+"question_type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "easy",
+"question_text": "What is the 'T' in the acronym GPT?",
+"options": ["Transformer", "Tensor", "Text", "Terminal"],
+"correct_answer": "Transformer"
+},
+{
+"id": 33,
+"question_type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "medium",
+"question_text": "In the context of Generative AI, what does 'fine-tuning' typically involve?",
+"options": ["Further training a pre-trained model on a specific, smaller dataset", "Making the model's code more efficient", "Reducing the physical size of the model", "Converting the model to a different programming language"],
+"correct_answer": "Further training a pre-trained model on a specific, smaller dataset"
+},
+{
+"id": 34,
+"question_type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "medium",
+"question_text": "What is a 'latent space' in generative models like VAEs or GANs?",
+"options": ["A physical memory location in the computer", "A compressed, conceptual representation of the data the model has learned", "The space where failed model outputs are stored", "The user interface for interacting with the model"],
+"correct_answer": "A compressed, conceptual representation of the data the model has learned"
+},
+{
+"id": 35,
+"question_type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "hard",
+"question_text": "What is the key architectural innovation that allows Transformers to process sequences more effectively for generation than older RNNs?",
+"options": ["Self-Attention Mechanism", "Convolutional Layers", "Long Short-Term Memory Cells", "Backpropagation Through Time"],
+"correct_answer": "Self-Attention Mechanism"
+},
+{
+"id": 36,
+"question_type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "medium",
+"question_text": "Which model is known for being a highly capable 'open-weight' LLM released by Meta?",
+"options": ["GPT-4", "Claude 3", "Llama 3", "Gemini Ultra"],
+"correct_answer": "Llama 3"
+},
+{
+"id": 37,
+"question_type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "easy",
+"question_text": "What is the process of intentionally designing AI systems to be transparent and understandable to humans called?",
+"options": ["Interpretability", "Encryption", "Compilation", "Randomization"],
+"correct_answer": "Interpretability"
+},
+{
+"id": 38,
+"question_type": "text_mcq",
+"category": "Robotics",
+"difficulty": "medium",
+"question_text": "Which sensor is most critical for a robot vacuum cleaner to navigate and map a room?",
+"options": ["Thermocouple", "Microphone", "Gyroscope", "Optical encoder"],
+"correct_answer": "Gyroscope"
+},
+{
+"id": 39,
+"question_type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "medium",
+"question_text": "Which physical implementation is NOT a common approach to creating a qubit?",
+"options": ["Trapped Ions", "Superconducting Loops", "Silicon-based Transistors", "Photons"],
+"correct_answer": "Silicon-based Transistors"
+},
+{
+"id": 40,
+"question_type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "easy",
+"question_text": "What does the acronym VAE stand for in generative AI?",
+"options": ["Variable Autoencoder", "Variational Autoencoder", "Vector Animation Engine", "Volumetric Analysis Entity"],
+"correct_answer": "Variational Autoencoder"
+},
+{
+"id": 41,
+"question_type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "hard",
+"question_text": "What distinguishes an 'agentic' AI workflow from a simple prompt-response LLM interaction?",
+"options": ["It uses larger models", "The AI can break down a task, use tools (like web search, code execution), and iteratively work towards a solution", "It only works with image generation", "It requires quantum computing hardware"],
+"correct_answer": "The AI can break down a task, use tools (like web search, code execution), and iteratively work towards a solution"
+},
+{
+"id": 42,
+"question_type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "medium",
+"question_text": "Which technique is used to reduce harmful outputs from an LLM by training it to choose from curated, safer responses?",
+"options": ["Reinforcement Learning from Human Feedback (RLHF)", "Data Augmentation", "Model Quantization", "Architectural Pruning"],
+"correct_answer": "Reinforcement Learning from Human Feedback (RLHF)"
+},
+{
+"id": 43,
+"question_type": "text_mcq",
+"category": "Robotics",
+"difficulty": "hard",
+"question_text": "In robot locomotion, what does 'ZMP' (Zero Moment Point) refer to?",
+"options": ["A point on the foot where the net moment of inertia forces is zero, crucial for bipedal stability", "The point where battery power is zero", "The central point of a robot's wireless communication zone", "The point of maximum torque in a robotic joint"],
+"correct_answer": "A point on the foot where the net moment of inertia forces is zero, crucial for bipedal stability"
+},
+{
+"id": 44,
+"question_type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "hard",
+"question_text": "What does 'NISQ' stand for in the context of current quantum computing era?",
+"options": ["New Integrated Silicon Quantum", "Noisy Intermediate-Scale Quantum", "Neutral Ion State Qubit", "Non-Interfering Superconducting Qubit"],
+"correct_answer": "Noisy Intermediate-Scale Quantum"
+},
+{
+"id": 45,
+"question_type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "medium",
+"question_text": "In a Generative Adversarial Network (GAN), what is the role of the 'Discriminator' network?",
+"options": ["To generate new data samples", "To compress the latent space", "To distinguish between real training data and fake data from the Generator", "To fine-tune the learning rate"],
+"correct_answer": "To distinguish between real training data and fake data from the Generator"
+},
+{
+"id": 46,
+"question_type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "medium",
+"question_text": "Which AI development is focused on creating models that can process and understand multiple question_types of input (text, image, audio) simultaneously?",
+"options": ["Unimodal AI", "Multimodal AI", "Cross-platform AI", "Quantum AI"],
+"correct_answer": "Multimodal AI"
+},
+{
+"id": 47,
+"question_type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "hard",
+"question_text": "What is 'instrumental convergence' in AI alignment theory?",
+"options": ["The idea that diverse AI agents will likely converge on similar sub-goals (like self-preservation, resource acquisition) regardless of their final goal", "The convergence of different hardware platforms", "The phenomenon where AI training algorithms converge to the same solution", "The standardization of AI programming tools"],
+"correct_answer": "The idea that diverse AI agents will likely converge on similar sub-goals (like self-preservation, resource acquisition) regardless of their final goal"
+},
+{
+"id": 48,
+"question_type": "text_mcq",
+"category": "Robotics",
+"difficulty": "easy",
+"question_text": "What is the common term for a robot's perception of its own position and orientation in space?",
+"options": ["Mapping", "Localization", "Actuation", "Simulation"],
+"correct_answer": "Localization"
+},
+{
+"id": 49,
+"question_type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "medium",
+"question_text": "Which quantum algorithm provides a quadratic speedup for searching an unstructured database?",
+"options": ["Shor's Algorithm", "Grover's Algorithm", "Quantum Phase Estimation", "Bernstein–Vazirani Algorithm"],
+"correct_answer": "Grover's Algorithm"
+},
+{
+"id": 50,
+"question_type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "hard",
+"question_text": "In diffusion models for image generation, what is the purpose of the forward (noising) process?",
+"options": ["To gradually add noise to an image until it becomes pure random noise", "To immediately generate a clear image from text", "To remove artifacts from the final image", "To compress the image size"],
+"correct_answer": "To gradually add noise to an image until it becomes pure random noise"
+},
+{
+"id": 51,
+"question_type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "easy",
+"question_text": "Which model by OpenAI introduced 'reasoning capabilities' via an official 'o1' preview in 2024?",
+"options": ["GPT-3.5", "GPT-4 Turbo", "GPT-4o", "DALL-E 3"],
+"correct_answer": "GPT-4o"
+},
+{
+"id": 52,
+"question_type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "medium",
+"question_text": "What is 'red teaming' in the context of AI safety evaluation?",
+"options": ["Painting servers red for high priority", "Having a team deliberately try to find flaws, vulnerabilities, or harmful outputs in an AI system", "Using only red-colored data for training", "A method for speeding up model training"],
+"correct_answer": "Having a team deliberately try to find flaws, vulnerabilities, or harmful outputs in an AI system"
+},
+{
+"id": 53,
+"question_type": "text_mcq",
+"category": "Robotics",
+"difficulty": "medium",
+"question_text": "Which question_type of actuator is commonly used in robotics for precise position and velocity control?",
+"options": ["Hydraulic piston", "Servomotor", "Solenoid", "Pneumatic cylinder"],
+"correct_answer": "Servomotor"
+},
+{
+"id": 54,
+"question_type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "easy",
+"question_text": "What property allows a quantum computer to perform many calculations in parallel, in principle?",
+"options": ["Superconductivity", "Superposition", "Entanglement", "Quantum Tunneling"],
+"correct_answer": "Superposition"
+},
+{
+"id": 55,
+"question_type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "medium",
+"question_text": "What is a 'token' in the context of Large Language Models like GPT?",
+"options": ["A hardware security key", "A unit of text (like a word or sub-word) that the model processes", "A form of cryptocurrency used to pay for API access", "A question_type of error in the output"],
+"correct_answer": "A unit of text (like a word or sub-word) that the model processes"
+},
+{
+"id": 56,
+"question_type": "text_mcq",
+"category": "Latest Developments",
+"difficulty": "hard",
+"question_text": "What is a key claimed advantage of 'Mixture of Experts' (MoE) architecture in models like GPT-4?",
+"options": ["It uses less computational resources per inference by activating only relevant subnetworks", "It guarantees 100% accuracy", "It eliminates the need for training data", "It allows the model to run on quantum computers"],
+"correct_answer": "It uses less computational resources per inference by activating only relevant subnetworks"
+},
+{
+"id": 57,
+"question_type": "text_mcq",
+"category": "AI Safety",
+"difficulty": "easy",
+"question_text": "What term describes an AI system making a decision that is unfair or discriminatory against a particular group?",
+"options": ["Hallucination", "Algorithmic Bias", "Overfitting", "Variance"],
+"correct_answer": "Algorithmic Bias"
+},
+{
+"id": 58,
+"question_type": "text_mcq",
+"category": "Robotics",
+"difficulty": "hard",
+"question_text": "What is the ROS (Robot Operating System) primarily?",
+"options": ["A proprietary operating system from Boston Dynamics", "A set of software libraries and tools to help build robot applications", "The main CPU inside an industrial robot arm", "A specific question_type of sensor fusion algorithm"],
+"correct_answer": "A set of software libraries and tools to help build robot applications"
+},
+{
+"id": 59,
+"question_type": "text_mcq",
+"category": "Quantum Computing",
+"difficulty": "medium",
+"question_text": "What is the primary function of a quantum logic gate?",
+"options": ["To control the flow of electricity in a quantum circuit", "To perform a specific unitary operation on one or more qubits", "To measure the state of a qubit", "To cool the quantum processor"],
+"correct_answer": "To perform a specific unitary operation on one or more qubits"
+},
+{
+"id": 60,
+"question_type": "text_mcq",
+"category": "Generative AI",
+"difficulty": "easy",
+"question_text": "Which of these is a popular model for generating images from text prompts?",
+"options": ["Stable Diffusion", "Whisper", "BERT", "AlphaFold"],
+"correct_answer": "Stable Diffusion"
+}
+]

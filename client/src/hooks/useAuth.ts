@@ -32,11 +32,12 @@ export const useAuth = create<AuthState>((set, get) => ({
                 try {
                     const response = await api.get('/auth/me.php');
                     const user = response.data.user;
+                    const userData = { ...user, role: user?.role || 'user' };
                     set({
-                        user,
+                        user: userData,
                         isAuthenticated: true,
-                        isAdmin: user.role === 'admin' || user.role === 'super_admin',
-                        isSuperAdmin: user.role === 'super_admin'
+                        isAdmin: userData.role === 'admin' || userData.role === 'super_admin',
+                        isSuperAdmin: userData.role === 'super_admin'
                     });
                 } catch (error) {
                     console.error('Failed to fetch user profile', error);
@@ -58,12 +59,22 @@ export const useAuth = create<AuthState>((set, get) => ({
             const response = await api.post('/auth/login.php', credentials);
             const { token, user } = response.data;
 
+            if (!user || typeof user !== 'object') {
+                throw new Error('Invalid user data received from server');
+            }
+
+            // Ensure role property exists, default to 'user' if missing
+            const userData = {
+                ...user,
+                role: user.role || 'user'
+            };
+
             sessionStorage.setItem('auth_token', token);
             set({
-                user,
+                user: userData,
                 isAuthenticated: true,
-                isAdmin: user.role === 'admin' || user.role === 'super_admin',
-                isSuperAdmin: user.role === 'super_admin'
+                isAdmin: userData.role === 'admin' || userData.role === 'super_admin',
+                isSuperAdmin: userData.role === 'super_admin'
             });
         } catch (error) {
             console.error('Login failed:', error);
@@ -75,13 +86,14 @@ export const useAuth = create<AuthState>((set, get) => ({
         try {
             const response = await api.post('/auth/signup.php', data);
             const { token, user } = response.data;
+            const userData = { ...user, role: user?.role || 'user' };
 
             sessionStorage.setItem('auth_token', token);
             set({
-                user,
+                user: userData,
                 isAuthenticated: true,
-                isAdmin: user.role === 'admin' || user.role === 'super_admin',
-                isSuperAdmin: user.role === 'super_admin'
+                isAdmin: userData.role === 'admin' || userData.role === 'super_admin',
+                isSuperAdmin: userData.role === 'super_admin'
             });
         } catch (error) {
             console.error('Signup failed:', error);
@@ -109,11 +121,12 @@ export const useAuth = create<AuthState>((set, get) => ({
         try {
             const response = await api.get('/auth/me.php');
             const user = response.data.user;
+            const userData = { ...user, role: user?.role || 'user' };
             set({
-                user,
+                user: userData,
                 isAuthenticated: true,
-                isAdmin: user.role === 'admin' || user.role === 'super_admin',
-                isSuperAdmin: user.role === 'super_admin'
+                isAdmin: userData.role === 'admin' || userData.role === 'super_admin',
+                isSuperAdmin: userData.role === 'super_admin'
             });
         } catch (error) {
             console.error('Failed to refresh profile', error);

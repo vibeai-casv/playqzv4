@@ -1,0 +1,112 @@
+[
+{
+"question_text": "This British mathematician laid the foundations of computer science, proposed the imitation game later known as the Turing Test, and played a crucial role in breaking the Enigma code during World War II.",
+"question_type": "image_identify_person",
+"options": ["Alan Turing", "John von Neumann", "Claude Shannon", "Norbert Wiener"],
+"correct_answer": "Alan Turing",
+"explanation": "Alan Turing is widely regarded as a foundational figure in computer science and artificial intelligence, known for the Turing Test and his wartime cryptographic work.",
+"category": "AI Personalities",
+"difficulty": "medium",
+"image_url": "",
+"points": 10
+},
+{
+"question_text": "This computer scientist coined the term 'Artificial Intelligence' in 1956, created the Lisp programming language, and was instrumental in organizing the Dartmouth Conference.",
+"question_type": "image_identify_person",
+"options": ["Marvin Minsky", "John McCarthy", "Allen Newell", "Herbert A. Simon"],
+"correct_answer": "John McCarthy",
+"explanation": "John McCarthy introduced the term 'Artificial Intelligence' and developed Lisp, a language that became central to early AI research.",
+"category": "AI Personalities",
+"difficulty": "medium",
+"image_url": "",
+"points": 10
+},
+{
+"question_text": "A co-founder of MIT’s AI Lab, this pioneer emphasized symbolic AI and human-level intelligence, and was an early advocate for studying the mind as a computational system.",
+"question_type": "image_identify_person",
+"options": ["Marvin Minsky", "John McCarthy", "Geoffrey Hinton", "Edward Feigenbaum"],
+"correct_answer": "Marvin Minsky",
+"explanation": "Marvin Minsky was a key figure in early AI, known for symbolic approaches and for co-founding the MIT AI Laboratory.",
+"category": "AI Personalities",
+"difficulty": "medium",
+"image_url": "",
+"points": 10
+},
+{
+"question_text": "This researcher, often called one of the 'Godfathers of Deep Learning', helped popularize backpropagation and previously led AI research at Google Brain.",
+"question_type": "image_identify_person",
+"options": ["Yoshua Bengio", "Yann LeCun", "Geoffrey Hinton", "Andrew Ng"],
+"correct_answer": "Geoffrey Hinton",
+"explanation": "Geoffrey Hinton is renowned for his contributions to neural networks and backpropagation and for his leadership at Google Brain.",
+"category": "AI Personalities",
+"difficulty": "medium",
+"image_url": "",
+"points": 10
+},
+{
+"question_text": "This British AI researcher and entrepreneur co-founded DeepMind, led the development of AlphaGo, and later became CEO of the company after its acquisition by Google.",
+"question_type": "image_identify_person",
+"options": ["Mustafa Suleyman", "Demis Hassabis", "Sam Altman", "Dario Amodei"],
+"correct_answer": "Demis Hassabis",
+"explanation": "Demis Hassabis is the co-founder and CEO of DeepMind, best known for leading the AlphaGo project.",
+"category": "AI Personalities",
+"difficulty": "medium",
+"image_url": "",
+"points": 10
+},
+{
+"question_text": "This AI educator and entrepreneur founded Google Brain, later led AI efforts at Baidu, and is widely known for making machine learning accessible through online courses.",
+"question_type": "image_identify_person",
+"options": ["Andrew Ng", "Fei-Fei Li", "Geoffrey Hinton", "Sebastian Thrun"],
+"correct_answer": "Andrew Ng",
+"explanation": "Andrew Ng is known for founding Google Brain, leading Baidu AI, and popularizing AI education worldwide.",
+"category": "AI Personalities",
+"difficulty": "medium",
+"image_url": "",
+"points": 10
+},
+{
+"question_text": "This AI ethics researcher gained global attention after co-authoring a paper on the risks of large language models and later co-founded the Distributed AI Research Institute (DAIR).",
+"question_type": "image_identify_person",
+"options": ["Kate Crawford", "Timnit Gebru", "Joy Buolamwini", "Meredith Whittaker"],
+"correct_answer": "Timnit Gebru",
+"explanation": "Timnit Gebru is a prominent AI ethics researcher and co-founder of DAIR, known for her work on bias and accountability in AI systems.",
+"category": "AI Personalities",
+"difficulty": "medium",
+"image_url": "",
+"points": 10
+},
+{
+"question_text": "This computer vision expert led the ImageNet project, served as Chief Scientist of AI/ML at Google Cloud, and is a strong advocate for human-centered AI.",
+"question_type": "image_identify_person",
+"options": ["Fei-Fei Li", "Anima Anandkumar", "Daphne Koller", "Yann LeCun"],
+"correct_answer": "Fei-Fei Li",
+"explanation": "Fei-Fei Li is best known for leading the ImageNet project and for her leadership in human-centered AI initiatives.",
+"category": "AI Personalities",
+"difficulty": "medium",
+"image_url": "",
+"points": 10
+},
+{
+"question_text": "This researcher co-founded OpenAI, made key contributions to deep learning optimization, and later became Chief Scientist at the organization.",
+"question_type": "image_identify_person",
+"options": ["Ilya Sutskever", "Sam Altman", "Dario Amodei", "Andrej Karpathy"],
+"correct_answer": "Ilya Sutskever",
+"explanation": "Ilya Sutskever is a co-founder and Chief Scientist of OpenAI, known for influential work in deep learning.",
+"category": "AI Personalities",
+"difficulty": "medium",
+"image_url": "",
+"points": 10
+},
+{
+"question_text": "This tech leader became a prominent figure in AI as the CEO of OpenAI, focusing on the deployment and governance of large-scale generative models.",
+"question_type": "image_identify_person",
+"options": ["Elon Musk", "Sam Altman", "Satya Nadella", "Reid Hoffman"],
+"correct_answer": "Sam Altman",
+"explanation": "Sam Altman is the CEO of OpenAI and is known for guiding the organization’s work on large-scale AI systems and policy discussions.",
+"category": "AI Personalities",
+"difficulty": "medium",
+"image_url": "",
+"points": 10
+}
+]

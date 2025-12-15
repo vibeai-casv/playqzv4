@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 import { cn, getImageUrl } from '../../lib/utils';
 
 interface MediaPickerProps {
-    onSelect: (url: string) => void;
+    onSelect: (url: string, originalFilename?: string) => void;
     onCancel: () => void;
     defaultType?: 'logo' | 'personality' | 'all';
 }
@@ -44,7 +44,7 @@ export function MediaPicker({ onSelect, onCancel, defaultType = 'all' }: MediaPi
             const uploadType = type === 'all' ? 'logo' : type;
             const newMedia = await uploadMedia(file, uploadType);
             toast.success('File uploaded successfully');
-            onSelect(newMedia.url);
+            onSelect(newMedia.url, newMedia.original_filename);
         } catch (error) {
             console.error(error);
             toast.error('Failed to upload file');
@@ -129,7 +129,7 @@ export function MediaPicker({ onSelect, onCancel, defaultType = 'all' }: MediaPi
                         <div
                             key={item.id}
                             className="group relative aspect-square bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden border hover:border-indigo-500 cursor-pointer"
-                            onClick={() => onSelect(item.url)}
+                            onClick={() => onSelect(item.url, item.original_filename)}
                         >
                             <img
                                 src={getImageUrl(item.url)}
@@ -147,7 +147,7 @@ export function MediaPicker({ onSelect, onCancel, defaultType = 'all' }: MediaPi
                                 </button>
                             </div>
                             <div className="absolute bottom-0 left-0 right-0 bg-black/60 p-2 text-xs text-white truncate">
-                                {item.filename}
+                                {item.original_filename || item.filename}
                             </div>
                         </div>
                     ))

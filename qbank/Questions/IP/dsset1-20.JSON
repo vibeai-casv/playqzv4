@@ -1,0 +1,182 @@
+[
+{
+"text": "This computer scientist, who died in 2011, is often called the 'Father of AI' for coining the term 'Artificial Intelligence' and organizing the 1956 Dartmouth Workshop.",
+"options": ["Alan Turing", "John McCarthy", "Marvin Minsky", "Claude Shannon"],
+"correct_answer": "John McCarthy",
+"explanation": "John McCarthy proposed the term 'Artificial Intelligence' for the seminal 1956 Dartmouth Conference, which is considered the founding event of AI as a field.",
+"category": "AI Personalities",
+"type": "image_identify_person",
+"difficulty": "medium"
+},
+{
+"text": "A philosopher and cognitive scientist, she is a leading voice on the ethics of data and AI, co-founded the AI Now Institute, and wrote 'Atlas of AI: Power, Politics, and the Planetary Costs of Artificial Intelligence'.",
+"options": ["Kate Crawford", "Timnit Gebru", "Meredith Whittaker", "Joy Buolamwini"],
+"correct_answer": "Kate Crawford",
+"explanation": "Kate Crawford is a renowned researcher focusing on the social implications of AI. She co-founded the AI Now Institute and authored the influential book 'Atlas of AI'.",
+"category": "AI Personalities",
+"type": "image_identify_person",
+"difficulty": "medium"
+},
+{
+"text": "This AI researcher, one of the 'Godfathers of Deep Learning', is a professor at the University of Toronto and a former Google researcher known for seminal work on neural networks and backpropagation.",
+"options": ["Yann LeCun", "Yoshua Bengio", "Geoffrey Hinton", "Jürgen Schmidhuber"],
+"correct_answer": "Geoffrey Hinton",
+"explanation": "Geoffrey Hinton, a professor at the University of Toronto and former VP at Google, is a foundational figure in deep learning, especially for his work on backpropagation and belief networks.",
+"category": "AI Personalities",
+"type": "image_identify_person",
+"difficulty": "medium"
+},
+{
+"text": "A co-founder of DeepMind, this neuroscientist and AI researcher was a child chess prodigy and later led the creation of AlphaGo, the first AI to defeat a world champion in Go.",
+"options": ["Demis Hassabis", "Shane Legg", "Mustafa Suleyman", "Sam Altman"],
+"correct_answer": "Demis Hassabis",
+"explanation": "Demis Hassabis is a neuroscientist, former chess prodigy, and CEO/co-founder of DeepMind, the company behind the groundbreaking AlphaGo system.",
+"category": "AI Personalities",
+"type": "image_identify_person",
+"difficulty": "medium"
+},
+{
+"text": "This pioneer, who died in 2016, co-founded the MIT AI Lab and was known for his work on frames as a knowledge representation and his skepticism of purely logic-based AI.",
+"options": ["John McCarthy", "Allen Newell", "Herbert A. Simon", "Marvin Minsky"],
+"correct_answer": "Marvin Minsky",
+"explanation": "Marvin Minsky co-founded the MIT AI Lab, made significant contributions to cognitive science and robotics, and proposed the 'frames' model for representing knowledge.",
+"category": "AI Personalities",
+"type": "image_identify_person",
+"difficulty": "medium"
+},
+{
+"text": "This professor at Université de Montréal, a 'Godfather of AI' and Turing Award winner, is also known for founding the element AI startup and directing Mila, a major AI research institute.",
+"options": ["Yoshua Bengio", "Geoffrey Hinton", "Yann LeCun", "Ian Goodfellow"],
+"correct_answer": "Yoshua Bengio",
+"explanation": "Yoshua Bengio is a professor at Université de Montréal, scientific director of Mila - Quebec AI Institute, and a Turing Award winner for his work on deep learning.",
+"category": "AI Personalities",
+"type": "image_identify_person",
+"difficulty": "medium"
+},
+{
+"text": "This computer scientist is known for creating the Transformer architecture with the 2017 'Attention Is All You Need' paper and later co-founded the AI company Adept.",
+"options": ["Ashish Vaswani", "Noam Shazeer", "Ilya Sutskever", "Jakob Uszkoreit"],
+"correct_answer": "Ashish Vaswani",
+"explanation": "Ashish Vaswani was the first author on the seminal 'Attention Is All You Need' paper that introduced the Transformer architecture, fundamental to modern LLMs.",
+"category": "AI Personalities",
+"type": "image_identify_person",
+"difficulty": "medium"
+},
+{
+"text": "She is a renowned computer scientist known for her research on algorithmic bias and fairness. She was controversially dismissed from Google and later founded the Distributed AI Research Institute (DAIR).",
+"options": ["Kate Crawford", "Meredith Whittaker", "Timnit Gebru", "Fei-Fei Li"],
+"correct_answer": "Timnit Gebru",
+"explanation": "Timnit Gebru is a leading researcher in algorithmic bias and co-founder of Black in AI. Her exit from Google sparked widespread debate, and she later founded DAIR.",
+"category": "AI Personalities",
+"type": "image_identify_person",
+"difficulty": "medium"
+},
+{
+"text": "A Stanford professor and co-founder of Coursera, he popularized AI education through his online courses and led AI projects at Baidu and Google Brain.",
+"options": ["Peter Norvig", "Andrew Ng", "Sebastian Thrun", "Daphne Koller"],
+"correct_answer": "Andrew Ng",
+"explanation": "Andrew Ng co-founded Coursera, taught highly popular machine learning courses online, and formerly led AI teams at Google Brain and Baidu.",
+"category": "AI Personalities",
+"type": "image_identify_person",
+"difficulty": "medium"
+},
+{
+"text": "This British mathematician and logician laid the theoretical groundwork for computer science and AI with his concept of a universal machine and the 'Turing Test' for intelligence.",
+"options": ["Alonzo Church", "John von Neumann", "Alan Turing", "Kurt Gödel"],
+"correct_answer": "Alan Turing",
+"explanation": "Alan Turing's 1936 paper introduced the concept of the Turing machine, and his 1950 paper proposed the 'Imitation Game' (Turing Test), foundational to AI theory.",
+"category": "AI Personalities",
+"type": "image_identify_person",
+"difficulty": "medium"
+},
+{
+"text": "This researcher, currently Chief Scientist at OpenAI, was a co-inventor of AlexNet and has been a key figure in developing GPT models and the RLHF technique.",
+"options": ["Ilya Sutskever", "Wojciech Zaremba", "Greg Brockman", "John Schulman"],
+"correct_answer": "Ilya Sutskever",
+"explanation": "Ilya Sutskever co-invented AlexNet, co-founded OpenAI, and has served as its Chief Scientist, playing a central role in the development of GPT models and RLHF.",
+"category": "AI Personalities",
+"type": "image_identify_person",
+"difficulty": "medium"
+},
+{
+"text": "Known for her work in computer vision, she pioneered ImageNet and the ImageNet Challenge that catalyzed the deep learning revolution. She is a professor at Stanford and former Chief Scientist at Google Cloud.",
+"options": ["Cynthia Breazeal", "Fei-Fei Li", "Anima Anandkumar", "Daniela Rus"],
+"correct_answer": "Fei-Fei Li",
+"explanation": "Fei-Fei Li is the driving force behind the creation of the ImageNet dataset and challenge, which were pivotal for advancing deep learning in computer vision.",
+"category": "AI Personalities",
+"type": "image_identify_person",
+"difficulty": "medium"
+},
+{
+"text": "This entrepreneur and engineer co-founded OpenAI and was its CEO, helping to steer its transition from a non-profit to a capped-profit model and the release of ChatGPT.",
+"options": ["Greg Brockman", "Sam Altman", "Elon Musk", "Reid Hoffman"],
+"correct_answer": "Sam Altman",
+"explanation": "Sam Altman co-founded OpenAI and served as its CEO during its pivotal early years and the launch of products like ChatGPT and GPT-4.",
+"category": "AI Personalities",
+"type": "image_identify_person",
+"difficulty": "medium"
+},
+{
+"text": "A co-recipient of the 1975 Turing Award, this pioneer is known for work on the Logic Theorist and the General Problem Solver, and for the concept of 'bounded rationality' in decision-making.",
+"options": ["Herbert A. Simon", "Allen Newell", "John McCarthy", "Marvin Minsky"],
+"correct_answer": "Herbert A. Simon",
+"explanation": "Herbert A. Simon, an economist and cognitive psychologist, collaborated with Allen Newell on early AI programs and introduced the concept of 'bounded rationality'. He shared the 1975 Turing Award with Newell.",
+"category": "AI Personalities",
+"type": "image_identify_person",
+"difficulty": "medium"
+},
+{
+"text": "This AI researcher introduced Generative Adversarial Networks (GANs) in 2014. The concept is famously illustrated by a thought experiment involving a counterfeiter and a police detective.",
+"options": ["Ian Goodfellow", "Jürgen Schmidhuber", "David Silver", "Pieter Abbeel"],
+"correct_answer": "Ian Goodfellow",
+"explanation": "Ian Goodfellow is credited with inventing Generative Adversarial Networks (GANs) during his time as a PhD student, a breakthrough framework for generative models.",
+"category": "AI Personalities",
+"type": "image_identify_person",
+"difficulty": "medium"
+},
+{
+"text": "A Chinese AI researcher known as the 'Godfather of Chinese AI', he founded the company SenseTime, which specializes in facial recognition and computer vision technology.",
+"options": ["Kai-Fu Lee", "Tang Xiao'ou", "Andrew Ng", "Zhang Hongjiang"],
+"correct_answer": "Tang Xiao'ou",
+"explanation": "Tang Xiao'ou, a professor at The Chinese University of Hong Kong, founded SenseTime, one of the world's most valuable AI startups focused on computer vision.",
+"category": "AI Personalities",
+"type": "image_identify_person",
+"difficulty": "medium"
+},
+{
+"text": "This roboticist is the director of the MIT Computer Science and Artificial Intelligence Laboratory (CSAIL) and a leading researcher in robotics, AI, and data science.",
+"options": ["Daniela Rus", "Rodney Brooks", "Cynthia Breazeal", "Anca Dragan"],
+"correct_answer": "Daniela Rus",
+"explanation": "Daniela Rus is the director of MIT CSAIL, one of the world's leading AI research labs, and her work focuses on robotics, mobile computing, and AI.",
+"category": "AI Personalities",
+"type": "image_identify_person",
+"difficulty": "medium"
+},
+{
+"text": "This AI leader co-founded Anthropic, an AI safety startup, after serving as VP of Research at OpenAI. He is known for work on AI interpretability and safety.",
+"options": ["Dario Amodei", "Chris Olah", "Jack Clark", "Paul Christiano"],
+"correct_answer": "Dario Amodei",
+"explanation": "Dario Amodei, former VP of Research at OpenAI, co-founded Anthropic with a focus on developing reliable, interpretable, and steerable AI systems.",
+"category": "AI Personalities",
+"type": "image_identify_person",
+"difficulty": "medium"
+},
+{
+"text": "A professor at UC Berkeley, she is a leading researcher in robot learning and AI, focusing on deep reinforcement learning, human-robot interaction, and assistive robotics.",
+"options": ["Anca Dragan", "Pieter Abbeel", "Sergey Levine", "Chelsea Finn"],
+"correct_answer": "Anca Dragan",
+"explanation": "Anca Dragan leads the InterACT Lab at UC Berkeley, where her research centers on algorithms for human-robot interaction and the foundations of AI value alignment.",
+"category": "AI Personalities",
+"type": "image_identify_person",
+"difficulty": "medium"
+},
+{
+"text": "This computer scientist was a pioneer in neural networks and deep learning. He is known for the LSTM network and has frequently highlighted his team's early contributions to the field.",
+"options": ["Sepp Hochreiter", "Jürgen Schmidhuber", "Yoshua Bengio", "Geoffrey Hinton"],
+"correct_answer": "Jürgen Schmidhuber",
+"explanation": "Jürgen Schmidhuber, co-director of the Swiss AI Lab IDSIA, made major contributions to deep learning, including the LSTM recurrent network architecture.",
+"category": "AI Personalities",
+"type": "image_identify_person",
+"difficulty": "medium"
+}
+]

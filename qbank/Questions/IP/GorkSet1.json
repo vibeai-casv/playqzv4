@@ -1,0 +1,92 @@
+[
+{
+"text": "This British mathematician is considered the father of theoretical computer science and artificial intelligence, known for developing the Turing machine and proposing the Turing Test to evaluate machine intelligence.",
+"options": ["Alan Turing", "John McCarthy", "Marvin Minsky", "Claude Shannon"],
+"correct_answer": "Alan Turing",
+"explanation": "Alan Turing laid the foundations for AI with his work on computability and the concept of machines that can simulate human intelligence.",
+"category": "AI Personalities",
+"type": "image_identify_person",
+"difficulty": "medium"
+},
+{
+"text": "This American computer scientist coined the term 'Artificial Intelligence' in 1956 and invented the Lisp programming language, which became fundamental to AI research.",
+"options": ["John McCarthy", "Marvin Minsky", "Herbert Simon", "Allen Newell"],
+"correct_answer": "John McCarthy",
+"explanation": "John McCarthy organized the Dartmouth Conference, the birthplace of AI as a field, and his contributions include time-sharing systems and garbage collection in programming.",
+"category": "AI Personalities",
+"type": "image_identify_person",
+"difficulty": "medium"
+},
+{
+"text": "This MIT professor co-founded the AI Laboratory and developed theories on human cognition, authoring 'The Society of Mind' which views intelligence as emerging from simple agents.",
+"options": ["Marvin Minsky", "Geoffrey Hinton", "Yoshua Bengio", "Stuart Russell"],
+"correct_answer": "Marvin Minsky",
+"explanation": "Marvin Minsky was a pioneer in neural networks and robotics, influencing generations of AI researchers with his interdisciplinary approach.",
+"category": "AI Personalities",
+"type": "image_identify_person",
+"difficulty": "medium"
+},
+{
+"text": "Known as one of the 'Godfathers of Deep Learning', this Canadian researcher founded the Vector Institute and won the Turing Award for contributions to deep neural networks.",
+"options": ["Geoffrey Hinton", "Yann LeCun", "Yoshua Bengio", "Andrew Ng"],
+"correct_answer": "Yoshua Bengio",
+"explanation": "Yoshua Bengio leads MILA in Montreal and has advanced generative models and sequence learning in AI.",
+"category": "AI Personalities",
+"type": "image_identify_person",
+"difficulty": "medium"
+},
+{
+"text": "This co-founder of DeepMind led the development of AlphaGo, which defeated the world champion in Go, and now serves as CEO of Google DeepMind.",
+"options": ["Demis Hassabis", "Sam Altman", "Elon Musk", "Ilya Sutskever"],
+"correct_answer": "Demis Hassabis",
+"explanation": "Demis Hassabis combines neuroscience and AI, achieving breakthroughs in protein folding with AlphaFold.",
+"category": "AI Personalities",
+"type": "image_identify_person",
+"difficulty": "medium"
+},
+{
+"text": "This Stanford professor created ImageNet, revolutionizing computer vision, and is a leading voice in AI for healthcare and human-centered AI.",
+"options": ["Fei-Fei Li", "Timnit Gebru", "Kate Crawford", "Joy Buolamwini"],
+"correct_answer": "Fei-Fei Li",
+"explanation": "Fei-Fei Li's ImageNet dataset spurred the deep learning boom in visual recognition tasks.",
+"category": "AI Personalities",
+"type": "image_identify_person",
+"difficulty": "medium"
+},
+{
+"text": "This CEO of OpenAI oversaw the release of ChatGPT and advocates for AI safety, having previously led Y Combinator.",
+"options": ["Sam Altman", "Demis Hassabis", "Andrew Ng", "Elon Musk"],
+"correct_answer": "Sam Altman",
+"explanation": "Sam Altman has been instrumental in scaling generative AI models and discussing AGI risks.",
+"category": "AI Personalities",
+"type": "image_identify_person",
+"difficulty": "medium"
+},
+{
+"text": "This Ethiopian-American researcher co-founded the Black in AI organization and was ousted from Google after raising concerns about bias in large language models.",
+"options": ["Timnit Gebru", "Kate Crawford", "Joy Buolamwini", "Fei-Fei Li"],
+"correct_answer": "Timnit Gebru",
+"explanation": "Timnit Gebru's work focuses on AI ethics, algorithmic bias, and the societal impacts of technology.",
+"category": "AI Personalities",
+"type": "image_identify_person",
+"difficulty": "medium"
+},
+{
+"text": "This co-author of the standard AI textbook 'Artificial Intelligence: A Modern Approach' has warned about the risks of superintelligent AI and promotes human-compatible AI.",
+"options": ["Stuart Russell", "Judea Pearl", "Ray Kurzweil", "Rodney Brooks"],
+"correct_answer": "Stuart Russell",
+"explanation": "Stuart Russell's research spans probabilistic reasoning and AI safety, influencing policy on autonomous weapons.",
+"category": "AI Personalities",
+"type": "image_identify_person",
+"difficulty": "medium"
+},
+{
+"text": "This MIT professor pioneered affective computing, developing technologies that recognize and respond to human emotions, and founded Affectiva.",
+"options": ["Rosalind Picard", "Cynthia Breazeal", "Fei-Fei Li", "Kate Crawford"],
+"correct_answer": "Rosalind Picard",
+"explanation": "Rosalind Picard's work integrates AI with wearable sensors to improve mental health and human-computer interaction.",
+"category": "AI Personalities",
+"type": "image_identify_person",
+"difficulty": "medium"
+}
+]

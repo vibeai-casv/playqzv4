@@ -32,6 +32,7 @@ const ActivityLogs = lazy(() => import('./pages/admin/ActivityLogs').then(module
 const SystemTools = lazy(() => import('./pages/admin/SystemTools').then(module => ({ default: module.SystemTools })));
 const Diagnostics = lazy(() => import('./pages/admin/Diagnostics').then(module => ({ default: module.Diagnostics })));
 const ImportExport = lazy(() => import('./pages/admin/ImportExport').then(module => ({ default: module.ImportExport })));
+const BulkEditQuestions = lazy(() => import('./pages/admin/BulkEditQuestions').then(module => ({ default: module.BulkEditQuestions })));
 
 import { SplashScreen } from './components/ui/SplashScreen';
 
@@ -181,6 +182,14 @@ function App() {
                   element={
                     <ProtectedRoute requireAdmin>
                       <ImportExport />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/admin/bulk-edit"
+                  element={
+                    <ProtectedRoute requireAdmin>
+                      <BulkEditQuestions />
                     </ProtectedRoute>
                   }
                 />

@@ -1,0 +1,103 @@
+
+[
+  {
+    "question_text": "What is the primary function of the self-attention mechanism in Transformer-based LLMs?",
+    "question_type": "text_mcq",
+    "options": ["To reduce the model's parameter count", "To weigh the importance of different words in context and understand relationships", "To compress the input text into smaller embeddings", "To prevent overfitting during training"],
+    "correct_answer": "To weigh the importance of different words in context and understand relationships",
+    "explanation": "Self-attention mechanisms allow the model to focus on relevant words in a sentence and understand their relationships in context. This enables LLMs to handle long-range dependencies effectively and process sequences in parallel, which is crucial for understanding complex language patterns.",
+    "category": "Large Language Models",
+    "difficulty": "medium",
+    "points": 10
+  },
+  {
+    "question_text": "Which component of an LLM architecture is responsible for adding sequence and order information to the input?",
+    "question_type": "text_mcq",
+    "options": ["Embedding Layer", "Positional Encoding", "Feed-Forward Layer", "Multi-Head Attention"],
+    "correct_answer": "Positional Encoding",
+    "explanation": "Positional Encoding adds information about the position and order of words in a sequence. Since Transformers process sequences in parallel rather than sequentially like RNNs, positional encoding is essential to help the model understand word order and sequence relationships.",
+    "category": "Large Language Models",
+    "difficulty": "medium",
+    "points": 10
+  },
+  {
+    "question_text": "What is the main purpose of fine-tuning a pre-trained LLM?",
+    "question_type": "text_mcq",
+    "options": ["To increase the number of parameters in the model", "To adapt the model to a specific task using domain-specific data while retaining general knowledge", "To reduce computational costs during inference", "To remove bias from the training data"],
+    "correct_answer": "To adapt the model to a specific task using domain-specific data while retaining general knowledge",
+    "explanation": "Fine-tuning involves taking a pre-trained model and training it further on a smaller, domain-specific dataset. This allows the model to maintain its general language understanding capabilities while becoming more accurate and specialized for particular tasks or domains.",
+    "category": "Large Language Models",
+    "difficulty": "medium",
+    "points": 10
+  },
+  {
+    "question_text": "How does the temperature parameter affect an LLM's output generation?",
+    "question_type": "text_mcq",
+    "options": ["Higher temperature increases model accuracy", "Higher temperature produces more varied and creative responses while lower temperature produces more predictable responses", "Temperature controls the size of the training dataset", "Temperature determines how many parameters the model uses"],
+    "correct_answer": "Higher temperature produces more varied and creative responses while lower temperature produces more predictable responses",
+    "explanation": "Temperature is a hyperparameter that controls the randomness of the model's predictions. Higher temperature values make the probability distribution more uniform, leading to more diverse and unexpected outputs. Lower values make the model more confident and deterministic, producing safer and more predictable responses.",
+    "category": "Large Language Models",
+    "difficulty": "medium",
+    "points": 10
+  },
+  {
+    "question_text": "What role does Layer Normalization play in Transformer architecture?",
+    "question_type": "text_mcq",
+    "options": ["It reduces the model size for faster inference", "It stabilizes training by normalizing inputs across features and improving convergence", "It generates the final output predictions", "It encrypts sensitive data during processing"],
+    "correct_answer": "It stabilizes training by normalizing inputs across features and improving convergence",
+    "explanation": "Layer Normalization ensures that the mean and variance of activations remain consistent throughout training. This helps mitigate internal covariate shift, stabilizes the learning process, and reduces sensitivity to initial weight values. It is applied multiple times in each Transformer block to improve training effectiveness.",
+    "category": "Large Language Models",
+    "difficulty": "medium",
+    "points": 10
+  },
+  {
+    "question_text": "Which of the following is a primary ethical concern associated with LLM deployment?",
+    "question_type": "text_mcq",
+    "options": ["High computational costs", "Bias in outputs that can reinforce stereotypes or produce discriminatory content", "Limited vocabulary size", "Slow inference speed"],
+    "correct_answer": "Bias in outputs that can reinforce stereotypes or produce discriminatory content",
+    "explanation": "Bias is a critical ethical concern because LLMs learn from training data that may contain societal biases and stereotypes. This can lead to outputs that reinforce harmful stereotypes, produce discriminatory content, or promote unfair treatment of certain groups. Addressing bias requires careful dataset curation, ethical guidelines, and ongoing monitoring.",
+    "category": "Large Language Models",
+    "difficulty": "medium",
+    "points": 10
+  },
+  {
+    "question_text": "What is the advantage of Transfer Learning in the context of LLMs?",
+    "question_type": "text_mcq",
+    "options": ["It eliminates the need for any training data", "It allows models trained on one dataset to be adapted for another task without retraining from scratch", "It automatically removes all biases from the model", "It reduces the model to a smaller size"],
+    "correct_answer": "It allows models trained on one dataset to be adapted for another task without retraining from scratch",
+    "explanation": "Transfer Learning leverages knowledge gained from training on large datasets and applies it to new tasks. By adjusting parameters on a new task rather than starting from scratch, it saves significant time and computational resources while maintaining the model's foundational language understanding capabilities.",
+    "category": "Large Language Models",
+    "difficulty": "medium",
+    "points": 10
+  },
+  {
+    "question_text": "Which strategy can help prevent LLMs from generating harmful or inappropriate content?",
+    "question_type": "text_mcq",
+    "options": ["Increasing the model's parameter count", "Implementing robust content moderation mechanisms and filtering systems", "Using only open-source training data", "Reducing the temperature parameter to zero"],
+    "correct_answer": "Implementing robust content moderation mechanisms and filtering systems",
+    "explanation": "Content moderation involves filtering and flagging inappropriate responses to prevent LLMs from producing harmful outputs. This includes implementing detection systems, establishing ethical guidelines, and restricting access to sensitive functionalities to ensure responsible use of the technology.",
+    "category": "Large Language Models",
+    "difficulty": "medium",
+    "points": 10
+  },
+  {
+    "question_text": "What is the primary function of the Embedding Layer in an LLM?",
+    "question_type": "text_mcq",
+    "options": ["To generate the final output text", "To convert tokens (words or subwords) into dense numerical vectors", "To normalize the training data", "To calculate the loss function during training"],
+    "correct_answer": "To convert tokens (words or subwords) into dense numerical vectors",
+    "explanation": "The Embedding Layer transforms discrete text tokens into continuous vector representations that the model can process mathematically. These dense vectors capture semantic meaning and allow the model to perform mathematical operations on language, enabling it to understand relationships between words and concepts.",
+    "category": "Large Language Models",
+    "difficulty": "medium",
+    "points": 10
+  },
+  {
+    "question_text": "Why must organizations ensure their LLM deployments comply with regulations like GDPR?",
+    "question_type": "text_mcq",
+    "options": ["To improve the model's accuracy", "To ensure transparency in data handling practices and protect user privacy rights", "To reduce training costs", "To increase the model's parameter count"],
+    "correct_answer": "To ensure transparency in data handling practices and protect user privacy rights",
+    "explanation": "Compliance with data protection regulations like GDPR is essential to protect user privacy and ensure legal accountability. Organizations must be transparent about how they collect, process, and store data, obtain proper consent, and implement safeguards to prevent unauthorized access or misuse of personal information processed by LLMs.",
+    "category": "Large Language Models",
+    "difficulty": "medium",
+    "points": 10
+  }
+]

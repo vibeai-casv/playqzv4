@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // You can change this to your PHP server URL
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://projects/playqzv4/api';
 
 const api = axios.create({
     baseURL: API_URL,
@@ -47,8 +47,8 @@ export async function fetchAPI(endpoint: string, options: RequestInit = {}) {
             // Production: We're in /aiq3/ subdirectory
             API_URL = '/aiq3/api';
         } else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-            // Development: localhost
-            API_URL = 'http://localhost:8000/api';
+            // Development: Use XAMPP virtual host
+            API_URL = 'http://projects/playqzv4/api';
         } else {
             // Fallback: try to detect base from current URL
             const base = window.location.pathname.split('/').slice(0, 2).join('/');
