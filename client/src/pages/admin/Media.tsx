@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { useAdmin } from '../../hooks/useAdmin';
 import { MediaFile, Question } from '../../types';
 import { Loader2, Upload, Search, Trash2, Image as ImageIcon, Link as LinkIcon, Check, RefreshCw } from 'lucide-react';
@@ -26,8 +26,9 @@ export function Media() {
     const [selectedQuestion, setSelectedQuestion] = useState<Question | null>(null);
     const [loadingQuestions, setLoadingQuestions] = useState(false);
 
-    const loadMedia = useCallback(async (showRefreshIndicator = false) => {
-        if (showRefreshIndicator) setIsRefreshing(true);
+    // Load media - simple, no callbacks
+    const loadMedia = async (showIndicator = false) => {
+        if (showIndicator) setIsRefreshing(true);
         try {
             const { media: data } = await fetchMedia({
                 type: type === 'all' ? undefined : type
@@ -37,21 +38,21 @@ export function Media() {
             console.error(error);
             toast.error('Failed to load media');
         } finally {
-            if (showRefreshIndicator) setIsRefreshing(false);
+            if (showIndicator) setIsRefreshing(false);
         }
-    }, [fetchMedia, type]);
+    };
 
-    // Initial load and auto-refresh every 60 seconds
+    // Initial load only - NO auto-refresh
     useEffect(() => {
         loadMedia();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []); // Empty dependency array = only run once on mount
 
-        // Set up auto-refresh every 60 seconds (1 minute)
-        const interval = setInterval(() => {
-            loadMedia();
-        }, 60000);
-
-        return () => clearInterval(interval);
-    }, [loadMedia]);
+    // Reload when type filter changes
+    useEffect(() => {
+        loadMedia();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [type]);
 
     // Manual refresh handler
     const handleRefresh = () => {
@@ -84,7 +85,7 @@ export function Media() {
         try {
             await Promise.all(validFiles.map(async (file) => {
                 setUploadProgress(prev => ({ ...prev, [file.name]: 0 }));
-                // Simulate progress (since supabase storage upload doesn't provide progress callback easily here)
+                // Simulate progress
                 const interval = setInterval(() => {
                     setUploadProgress(prev => ({
                         ...prev,
@@ -407,7 +408,12 @@ export function Media() {
                                     <p className="font-medium text-gray-900 dark:text-white line-clamp-2">
                                         {q.question_text}
                                     </p>
-                                    <div className="flex gap-2 mt-1 text-xs text-gray-500">
+                                    <div className="mt-2 p-2 bg-green-50 dark:bg-green-900/20 rounded border-l-2 border-green-500">
+                                        <p className="text-sm font-semibold text-green-700 dark:text-green-400">
+                                            ✓ Correct Answer: {q.correct_answer}
+                                        </p>
+                                    </div>
+                                    <div className="flex gap-2 mt-2 text-xs text-gray-500">
                                         <span className="uppercase">{q.question_type}</span>
                                         <span>•</span>
                                         <span>{q.category}</span>

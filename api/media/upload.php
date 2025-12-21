@@ -1,4 +1,9 @@
 <?php
+// Clear opcache to ensure latest code runs
+if (function_exists('opcache_reset')) {
+    @opcache_reset();
+}
+
 require_once '../config.php';
 require_once '../db.php';
 require_once '../utils.php';
@@ -51,15 +56,28 @@ if (!is_dir($typeDir)) {
     mkdir($typeDir, 0777, true);
 }
 
-// Generate name based on original filename (sanitized)
-$sanitizedFileName = preg_replace('/[^a-zA-Z0-9_\-\.]/', '_', pathinfo($fileName, PATHINFO_FILENAME));
+// Preserve original filename (only remove dangerous characters)
+// Keep original case and structure - just sanitize for safety
+$baseName = pathinfo($fileName, PATHINFO_FILENAME);
+// Only remove truly dangerous characters, keep alphanumeric and common safe chars
+$sanitizedFileName = preg_replace('/[^a-zA-Z0-9_\-]/', '', $baseName);
 $newFileName = $sanitizedFileName . "." . $ext;
 $destination = $typeDir . $newFileName;
 
-// If file exists, append timestamp to prevent overwrite but keep name
+// Debug logging
+error_log("=== UPLOAD DEBUG ===");
+error_log("Original filename: " . $fileName);
+error_log("Base name: " . $baseName);
+error_log("Sanitized: " . $sanitizedFileName);
+error_log("New filename: " . $newFileName);
+error_log("Destination: " . $destination);
+
+// If file exists, OVERWRITE it (user is likely re-uploading the same person)
+// This ensures DemisHassabis.png stays as DemisHassabis.png
 if (file_exists($destination)) {
-    $newFileName = $sanitizedFileName . "_" . time() . "." . $ext;
-    $destination = $typeDir . $newFileName;
+    // Delete old file and use the same name
+    error_log("File exists, overwriting: " . $destination);
+    @unlink($destination);
 }
 
 if (move_uploaded_file($fileTmp, $destination)) {

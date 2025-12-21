@@ -40,12 +40,37 @@ export function BulkEditQuestions() {
     const fetchQuestionTypes = async () => {
         try {
             const data = await fetchAPI('/questions/types.php');
-            setQuestionTypes(data.types || []);
+
+            // If API returns types, use them
             if (data.types && data.types.length > 0) {
+                setQuestionTypes(data.types);
                 setSelectedType(data.types[0]);
+            } else {
+                // Fallback to known types if database is empty
+                const fallbackTypes = [
+                    'text_mcq',
+                    'image_identify_logo',
+                    'image_identify_person',
+                    'true_false',
+                    'short_answer'
+                ];
+                setQuestionTypes(fallbackTypes);
+                setSelectedType(fallbackTypes[0]);
+                console.warn('No question types from database, using fallback types');
             }
         } catch (error) {
             console.error('Failed to load question types', error);
+
+            // Fallback to hardcoded types on error
+            const fallbackTypes = [
+                'text_mcq',
+                'image_identify_logo',
+                'image_identify_person',
+                'true_false',
+                'short_answer'
+            ];
+            setQuestionTypes(fallbackTypes);
+            setSelectedType(fallbackTypes[0]);
         }
     };
 

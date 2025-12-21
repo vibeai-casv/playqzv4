@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/aiq3/',
+  base: '/playqzv4/client/dist/',
   plugins: [
     react(),
     tailwindcss(),
