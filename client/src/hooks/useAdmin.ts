@@ -206,20 +206,49 @@ export function useAdmin() {
     const uploadMedia = async (file: File, type: string, description?: string) => {
         setIsLoading(true);
         setError(null);
+        
         try {
-            const formData = new FormData();
-            formData.append('file', file);
-            formData.append('type', type);
-            if (description) formData.append('description', description);
+            // Retry configuration
+            const maxRetries = 3;
+            const baseDelay = 1000; // 1 second
+            
+            for (let attempt = 1; attempt <= maxRetries; attempt++) {
+                try {
+                    const formData = new FormData();
+                    formData.append('file', file);
+                    formData.append('type', type);
+                    if (description) formData.append('description', description);
 
-            const response = await api.post('/media/upload.php', formData, {
-                headers: { 'Content-Type': 'multipart/form-data' }
-            });
-            return response.data.media;
-        } catch (err: unknown) {
-            const message = err instanceof Error ? err.message : 'An error occurred';
-            setError(message);
-            throw err;
+                    const response = await api.post('/media/upload.php', formData, {
+                        headers: { 'Content-Type': 'multipart/form-data' }
+                    });
+                    return response.data.media;
+                } catch (err: unknown) {
+                    const message = err instanceof Error ? err.message : 'An error occurred';
+                    setError(message);
+                    
+                    // Don't retry on certain errors
+                    const error = err as any;
+                    if (error.response &&
+                        (error.response.status >= 400 && error.response.status < 500)) {
+                        // Client errors (4xx) - don't retry
+                        throw err;
+                    }
+                    
+                    if (attempt < maxRetries) {
+                        const delay = baseDelay * Math.pow(2, attempt - 1); // Exponential backoff
+                        console.warn(`Upload attempt ${attempt} failed. Retrying in ${delay}ms...`);
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        continue;
+                    }
+                    
+                    // If we've exhausted all retries
+                    throw err;
+                }
+            }
+            
+            // This line should theoretically never be reached
+            throw new Error('Upload failed after all retry attempts');
         } finally {
             setIsLoading(false);
         }

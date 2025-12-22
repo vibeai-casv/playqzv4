@@ -16,12 +16,13 @@ export default defineConfig({
     },
   },
   build: {
+    outDir: './dist',
     rollupOptions: {
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom', 'react-router-dom'],
           ui: ['lucide-react', 'sonner', 'clsx', 'tailwind-merge'],
-          charts: ['recharts'], // If recharts is used
+          charts: ['recharts'],
         },
       },
     },
@@ -30,11 +31,11 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:8000',
+        target: 'http://localhost/projects/playqzv4',
         changeOrigin: true,
       },
       '/uploads': {
-        target: 'http://localhost:8000',
+        target: 'http://localhost/projects/playqzv4',
         changeOrigin: true,
       },
     },

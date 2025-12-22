@@ -17,7 +17,10 @@ import {
     PlayCircle,
     AlertCircle,
     Shield,
-    Zap
+    Zap,
+    Image as ImageIcon,
+    FileText,
+    CheckSquare
 } from 'lucide-react';
 import { useQuiz } from '../../hooks/useQuiz';
 import api from '../../lib/api';
@@ -28,10 +31,28 @@ import { cn } from '../../lib/utils';
 const quizConfigSchema = z.object({
     numQuestions: z.enum(['3', '5', '10', '20', '50']),
     difficulty: z.enum(['Easy', 'Medium', 'Hard', 'Mixed']),
-    categories: z.array(z.string()).min(1, { message: 'Select at least one category' }),
+    categories: z.array(z.string()), // Optional: empty means "Any"
+    types: z.array(z.string()).optional(),
 });
 
+const QUESTION_TYPES = [
+    { id: 'text_mcq', label: 'Multiple Choice', icon: FileText },
+    { id: 'image_identify_person', label: 'Identify Person', icon: Users },
+    { id: 'image_identify_logo', label: 'Identify Logo', icon: ImageIcon },
+    { id: 'true_false', label: 'True / False', icon: CheckSquare },
+];
+
 type QuizConfig = z.infer<typeof quizConfigSchema>;
+
+// ... (CategoryInfo interface and STYLE_MAP kept as is, skipping for brevity in replacement if possible, but replace_file_content needs contiguous block)
+// I will target specific blocks to minimize context.
+
+// Block 1: Schema
+// Block 2: Logic inside component
+
+// I'll do Block 1 (Schema) first.
+// Wait, I can't do multiple blocks in one ONE-SHOT unless using multi_replace.
+// I'll use multi_replace.
 
 interface CategoryInfo {
     name: string;
@@ -64,6 +85,7 @@ export function QuizConfig() {
             numQuestions: '5',
             difficulty: 'Mixed',
             categories: [],
+            types: [],
         },
     });
 
@@ -139,6 +161,10 @@ export function QuizConfig() {
                 // Only set categories that actually exist in the loaded info (if loaded)
                 // But since info loads async, we might just set it and let the user adjust
                 setValue('categories', parsed.categories);
+
+                if (parsed.types) {
+                    setValue('types', parsed.types);
+                }
             } catch { }
         }
     }, [setValue]);
@@ -152,6 +178,7 @@ export function QuizConfig() {
                 numQuestions: Number(data.numQuestions),
                 difficulty: data.difficulty.toLowerCase() as 'easy' | 'medium' | 'hard' | 'mixed',
                 categories: data.categories,
+                types: data.types,
                 timeLimit: Number(data.numQuestions) * 30,
                 includeExplanations: true,
             };
@@ -166,12 +193,15 @@ export function QuizConfig() {
 
     const watched = watch();
     const selectedCategories = watched.categories as string[];
+    const selectedTypes = (watched.types as string[]) || [];
 
     // Calculate total available questions across ALL selected categories
-    const totalAvailable = selectedCategories.reduce((sum, cat) => {
-        const info = categoryInfo.find((c) => c.name === cat);
-        return sum + (info?.available || 0);
-    }, 0);
+    const totalAvailable = selectedCategories.length > 0
+        ? selectedCategories.reduce((sum, cat) => {
+            const info = categoryInfo.find((c) => c.name === cat);
+            return sum + (info?.available || 0);
+        }, 0)
+        : categoryInfo.reduce((sum, c) => sum + c.available, 0);
 
     const insufficient = totalAvailable < Number(watched.numQuestions);
 
@@ -182,6 +212,14 @@ export function QuizConfig() {
             setValue('categories', []);
         } else {
             setValue('categories', categoryInfo.map(c => c.name));
+        }
+    };
+
+    const toggleSelectAllTypes = () => {
+        if (selectedTypes.length === QUESTION_TYPES.length) {
+            setValue('types', []);
+        } else {
+            setValue('types', QUESTION_TYPES.map(t => t.id));
         }
     };
 
@@ -269,11 +307,64 @@ export function QuizConfig() {
                             )}
                         </section>
 
+                        {/* Question Types */}
+                        <section className="bg-slate-900/50 backdrop-blur-sm rounded-3xl border border-white/5 p-6 md:p-8">
+                            <div className="flex justify-between items-center mb-6">
+                                <h2 className="text-xl font-bold text-white flex items-center">
+                                    <span className="w-8 h-8 rounded-lg bg-pink-500/20 text-pink-400 flex items-center justify-center mr-3 text-sm font-bold">3</span>
+                                    Question Types
+                                </h2>
+                                <button
+                                    type="button"
+                                    onClick={toggleSelectAllTypes}
+                                    className="text-sm text-primary hover:text-primary/80 font-medium transition-colors"
+                                >
+                                    {selectedTypes.length === QUESTION_TYPES.length ? 'Deselect All' : 'Select All'}
+                                </button>
+                            </div>
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                                {QUESTION_TYPES.map((type) => {
+                                    const isSelected = selectedTypes.includes(type.id);
+                                    return (
+                                        <label
+                                            key={type.id}
+                                            className={cn(
+                                                'relative flex flex-col items-center justify-center p-4 rounded-2xl cursor-pointer transition-all duration-200 border-2 text-center',
+                                                isSelected
+                                                    ? 'bg-pink-500/10 border-pink-500 shadow-[0_0_20px_-5px_rgba(236,72,153,0.5)]'
+                                                    : 'bg-white/5 border-transparent hover:bg-white/10 hover:border-white/10'
+                                            )}
+                                        >
+                                            <input
+                                                type="checkbox"
+                                                value={type.id}
+                                                {...register('types')}
+                                                className="hidden"
+                                            />
+                                            <div className={cn(
+                                                "mb-2 p-2 rounded-lg",
+                                                isSelected ? "bg-pink-500/20 text-pink-400" : "bg-white/10 text-slate-400"
+                                            )}>
+                                                <type.icon className="w-6 h-6" />
+                                            </div>
+                                            <span className={cn(
+                                                "font-bold text-sm",
+                                                isSelected ? "text-pink-400" : "text-slate-300"
+                                            )}>{type.label}</span>
+                                        </label>
+                                    );
+                                })}
+                            </div>
+                            <p className="text-xs text-slate-500 mt-4 text-center">
+                                Select specific question types or leave blank to include all.
+                            </p>
+                        </section>
+
                         {/* Categories */}
                         <section className="bg-slate-900/50 backdrop-blur-sm rounded-3xl border border-white/5 p-6 md:p-8">
                             <div className="flex justify-between items-center mb-6">
                                 <h2 className="text-xl font-bold text-white flex items-center">
-                                    <span className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center mr-3 text-sm font-bold">3</span>
+                                    <span className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center mr-3 text-sm font-bold">4</span>
                                     Topics
                                 </h2>
                                 <button
@@ -343,6 +434,9 @@ export function QuizConfig() {
                                     })}
                                 </div>
                             )}
+                            <p className="text-xs text-slate-500 mt-4 text-center">
+                                Select specific topics or leave blank to include all.
+                            </p>
                             {errors.categories && (
                                 <p className="mt-2 text-sm text-red-400">{errors.categories.message}</p>
                             )}
@@ -365,6 +459,23 @@ export function QuizConfig() {
                                         <span className="font-bold text-white">{watched.difficulty}</span>
                                     </div>
                                     <div className="py-3 border-b border-white/5">
+                                        <span className="text-slate-400 block mb-2">Types</span>
+                                        <div className="flex flex-wrap gap-2">
+                                            {selectedTypes.length > 0 ? (
+                                                selectedTypes.map(typeId => {
+                                                    const type = QUESTION_TYPES.find(t => t.id === typeId);
+                                                    return (
+                                                        <span key={typeId} className="px-2 py-1 rounded-lg bg-white/5 text-xs text-slate-300 border border-white/5">
+                                                            {type?.label || typeId}
+                                                        </span>
+                                                    );
+                                                })
+                                            ) : (
+                                                <span className="text-slate-600 text-sm italic">All Types</span>
+                                            )}
+                                        </div>
+                                    </div>
+                                    <div className="py-3 border-b border-white/5">
                                         <span className="text-slate-400 block mb-2">Topics</span>
                                         <div className="flex flex-wrap gap-2">
                                             {selectedCategories.length > 0 ? (
@@ -374,7 +485,7 @@ export function QuizConfig() {
                                                     </span>
                                                 ))
                                             ) : (
-                                                <span className="text-slate-600 text-sm italic">None selected</span>
+                                                <span className="text-slate-600 text-sm italic">Any Topic</span>
                                             )}
                                         </div>
                                     </div>

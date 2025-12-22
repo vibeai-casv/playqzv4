@@ -17,7 +17,7 @@ interface QuestionEditorProps {
 }
 
 export function QuestionEditor({ question, onSave, onCancel }: QuestionEditorProps) {
-    const { createQuestion, updateQuestion, fetchMetadata, isLoading } = useAdmin();
+    const { createQuestion, updateQuestion, fetchMetadata, fetchMedia, isLoading } = useAdmin();
     const [showMediaPicker, setShowMediaPicker] = useState(false);
     const [selectedImageFilename, setSelectedImageFilename] = useState<string>('');
 
@@ -37,6 +37,30 @@ export function QuestionEditor({ question, onSave, onCancel }: QuestionEditorPro
         };
         loadMetadata();
     }, []);
+
+    // Load original filename when editing existing question
+    useEffect(() => {
+        const loadOriginalFilename = async () => {
+            if (question?.image_url) {
+                try {
+                    const { media } = await fetchMedia();
+                    const matchingMedia = media.find(m => 
+                        question.image_url?.includes(m.filename) || 
+                        question.image_url?.includes(m.original_filename)
+                    );
+                    if (matchingMedia) {
+                        setSelectedImageFilename(matchingMedia.original_filename);
+                    }
+                } catch (error) {
+                    console.error('Failed to load media info:', error);
+                }
+            }
+        };
+        
+        if (question) {
+            loadOriginalFilename();
+        }
+    }, [question, fetchMedia]);
 
     const form = useForm<QuestionFormData>({
         // eslint-disable-next-line @typescript-eslint/no-explicit-any

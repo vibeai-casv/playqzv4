@@ -28,6 +28,13 @@ if (!empty($categories)) {
     $params = array_merge($params, $categories);
 }
 
+$types = $input['types'] ?? []; // Array of strings e.g. ['image_identify_person']
+if (!empty($types)) {
+    $placeholders = implode(',', array_fill(0, count($types), '?'));
+    $sql .= " AND question_type IN ($placeholders)";
+    $params = array_merge($params, $types);
+}
+
 $sql .= " ORDER BY RAND() LIMIT ?";
 $params[] = (int)$numQuestions;
 
@@ -45,6 +52,7 @@ $config = json_encode([
     'numQuestions' => $numQuestions,
     'difficulty' => $difficulty,
     'categories' => $categories,
+    'types' => $types,
     'timeLimit' => $timeLimit
 ]);
 $questionIdsJson = json_encode($questionIds);

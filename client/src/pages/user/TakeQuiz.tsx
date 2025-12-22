@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { XCircle, Loader2, Clock, X, ChevronLeft, ChevronRight, CheckCircle, AlertTriangle } from 'lucide-react';
 import { useQuizStore } from '../../stores/quizStore';
-import { cn } from '../../lib/utils';
+import { cn, getImageUrl } from '../../lib/utils';
 import { Image } from '../../components/ui/Image';
 
 // Simple modal component for confirmations and image zoom
@@ -107,7 +107,7 @@ export function TakeQuiz() {
     }, [currentQuestion, submitAnswer, currentQuestionIndex, totalQuestions, nextQuestion, isNavigating]);
 
     const openImage = (src: string) => {
-        setImageSrc(src);
+        setImageSrc(getImageUrl(src));
         setShowImageModal(true);
     };
 
@@ -204,7 +204,7 @@ export function TakeQuiz() {
                                 <span className="opacity-0 group-hover:opacity-100 text-white font-medium px-4 py-2 bg-black/50 rounded-full backdrop-blur-sm transition-opacity">Click to zoom</span>
                             </div>
                             <Image
-                                src={currentQuestion.image_url}
+                                src={getImageUrl(currentQuestion.image_url)}
                                 alt="Question illustration"
                                 className="max-w-[250px] max-h-[250px] object-contain mx-auto"
                             />

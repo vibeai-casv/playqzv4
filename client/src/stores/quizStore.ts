@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import type { Question, QuizAttempt, QuizResponse, QuizConfig } from '../types';
 import api from '../lib/api';
+import { generateUuid } from '../lib/utils';
 
 interface QuizState {
     currentAttempt: QuizAttempt | null;
@@ -80,7 +81,7 @@ export const useQuizStore = create<QuizState>((set, get) => ({
         const isCorrect = answer === question.correct_answer;
 
         const response: QuizResponse = {
-            id: crypto.randomUUID(),
+            id: generateUuid(),
             attempt_id: currentAttempt.id,
             question_id: questionId,
             user_id: currentAttempt.user_id,

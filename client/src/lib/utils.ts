@@ -57,6 +57,19 @@ export function shuffle<T>(array: T[]): T[] {
     return newArray;
 }
 
+// Safe UUID generator that works in non-secure contexts
+export function generateUuid(): string {
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+        return crypto.randomUUID();
+    }
+    // Fallback for non-secure contexts (http)
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        const r = Math.random() * 16 | 0;
+        const v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
+
 export function getImageUrl(path: string | undefined | null): string {
     if (!path) return '';
 
@@ -70,7 +83,15 @@ export function getImageUrl(path: string | undefined | null): string {
     // Ensure path starts with /
     let cleanPath = path.startsWith('/') ? path : `/${path}`;
 
-    // If path doesn't already include /projects/playqzv4/, add it
+    // Handle 'projects' hostname specifically (http://projects/playqzv4/...)
+    if (window.location.hostname === 'projects') {
+        if (!cleanPath.startsWith('/playqzv4/')) {
+            cleanPath = `/playqzv4${cleanPath}`;
+        }
+        return cleanPath;
+    }
+
+    // Default fallback for localhost (http://localhost/projects/playqzv4/...)
     if (!cleanPath.startsWith('/projects/playqzv4/')) {
         cleanPath = `/projects/playqzv4${cleanPath}`;
     }

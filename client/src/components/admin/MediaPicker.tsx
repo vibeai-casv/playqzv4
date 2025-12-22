@@ -40,14 +40,31 @@ export function MediaPicker({ onSelect, onCancel, defaultType = 'all' }: MediaPi
 
         setUploading(true);
         try {
-            // Determine type based on current filter or default to logo
-            const uploadType = type === 'all' ? 'logo' : type;
+            // Determine type based on context:
+            // 1. If filter is set to specific type, use that
+            // 2. If filter is 'all', try to infer from defaultType prop
+            // 3. If still no clear type, default to 'logo' (safest default)
+            let uploadType: string;
+            if (type !== 'all') {
+                uploadType = type;
+            } else if (defaultType !== 'all') {
+                uploadType = defaultType;
+            } else {
+                uploadType = 'logo'; // fallback
+            }
+            
             const newMedia = await uploadMedia(file, uploadType);
             toast.success('File uploaded successfully');
+            
+            // Reload media list to show the new file
+            await loadMedia();
+            
+            // Select the newly uploaded file
             onSelect(newMedia.url, newMedia.original_filename);
         } catch (error) {
             console.error(error);
-            toast.error('Failed to upload file');
+            const err = error as Error;
+            toast.error(`Failed to upload file: ${err.message || 'Unknown error'}`);
         } finally {
             setUploading(false);
         }

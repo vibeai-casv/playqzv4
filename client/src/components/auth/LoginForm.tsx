@@ -28,7 +28,8 @@ export const LoginForm: React.FC = () => {
 
             await signIn({
                 email: data.identifier,
-                password: data.password
+                password: data.password,
+                rememberMe: data.rememberMe
             });
 
             toast.success('Welcome back!');

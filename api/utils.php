@@ -55,9 +55,14 @@ function authenticate($pdo) {
         $authHeader = $_SERVER['HTTP_AUTHORIZATION'];
     }
 
+    $token = null;
     if (preg_match('/Bearer\s(\S+)/', $authHeader, $matches)) {
         $token = $matches[1];
-        
+    } elseif (isset($_REQUEST['token'])) {
+        $token = $_REQUEST['token'];
+    }
+
+    if ($token) {
         $stmt = $pdo->prepare("
             SELECT s.*, u.email, p.role, p.id as profile_id 
             FROM sessions s

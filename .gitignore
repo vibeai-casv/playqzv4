@@ -39,3 +39,7 @@ tmp/
 temp/
 *.tmp
 upload_prod_update/
+PRODUCTION_READY_V1/
+dist/
+client/dist/
+mcp-server/node_modules/

@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Edit2, Save, X, Filter, Loader2 } from 'lucide-react';
+import { Save, X, Filter, Loader2, Upload, Image as ImageIcon } from 'lucide-react';
 import { fetchAPI } from '../../lib/api';
+import { getImageUrl } from '../../lib/utils';
+import { QuestionDisplay } from '../../components/admin/QuestionDisplay';
 
 
 interface Question {
@@ -11,10 +13,19 @@ interface Question {
     correct_answer: string;
     explanation: string;
     category: string;
+    subcategory?: string;
     difficulty: string;
     points: number;
     is_active: number;
-    media_url?: string;
+    image_url?: string;
+    media_id?: string;
+    hint?: string;
+    tags?: string[];
+    status?: string;
+    ai_generated?: boolean;
+    is_demo?: boolean;
+    created_at?: string;
+    updated_at?: string;
 }
 
 export function BulkEditQuestions() {
@@ -86,6 +97,57 @@ export function BulkEditQuestions() {
         }
     };
 
+    const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('type', 'question_image');
+
+        // Pass token in body as fallback for Apache header stripping
+        const token = localStorage.getItem('auth_token') || sessionStorage.getItem('auth_token');
+        if (token) {
+            formData.append('token', token);
+        }
+
+        try {
+            const headers: Record<string, string> = {};
+            if (token) headers['Authorization'] = `Bearer ${token}`;
+
+            // Dynamic base detection to handle different deployment paths
+            const path = window.location.pathname; // e.g. /playqzv4/client/dist/...
+            const basePath = path.split('/client/')[0]; // /playqzv4
+            const apiUrl = `${basePath}/api/media/public_upload.php`;
+
+            console.log('Target API URL:', apiUrl);
+
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: headers,
+                body: formData
+            });
+
+
+
+            if (!response.ok) {
+                const text = await response.text();
+                throw new Error(`HTTP ${response.status} at ${response.url}: ${response.statusText}\n${text.substring(0, 200)}`);
+            }
+
+            const data = await response.json();
+
+            if (data.success) {
+                setEditForm(prev => ({ ...prev, image_url: data.media.url }));
+            } else {
+                alert('Upload failed: ' + (data.error || 'Unknown error'));
+            }
+        } catch (error: any) {
+            console.error('Upload error:', error);
+            alert(`Upload failed: ${error.message || error}`);
+        }
+    };
+
     const startEdit = (question: Question) => {
         setEditingId(question.id);
         setEditForm({
@@ -96,6 +158,7 @@ export function BulkEditQuestions() {
             category: question.category,
             difficulty: question.difficulty,
             points: question.points,
+            image_url: question.image_url,
         });
     };
 
@@ -106,7 +169,7 @@ export function BulkEditQuestions() {
 
     const saveEdit = async (id: string) => {
         try {
-            await fetchAPI(`/questions/update.php?id=${id}`, {
+            await fetchAPI(`/questions/public_update.php?id=${id}`, {
                 method: 'PUT',
                 body: JSON.stringify(editForm),
             });
@@ -201,6 +264,61 @@ export function BulkEditQuestions() {
                                             rows={3}
                                             className="w-full px-4 py-2 bg-background border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                                         />
+                                    </div>
+
+                                    {/* Image Upload */}
+                                    <div className="border border-border rounded-lg p-4 bg-muted/20">
+                                        <label className="block text-sm font-medium text-foreground mb-2">
+                                            Question Image
+                                        </label>
+                                        <div className="flex items-start gap-4">
+                                            {/* Preview */}
+                                            <div className="w-32 h-32 bg-background border border-border rounded-lg flex items-center justify-center overflow-hidden">
+                                                {editForm.image_url ? (
+                                                    <img
+                                                        src={getImageUrl(editForm.image_url)}
+                                                        alt="Question"
+                                                        className="w-full h-full object-contain"
+                                                    />
+                                                ) : (
+                                                    <div className="text-muted-foreground flex flex-col items-center">
+                                                        <ImageIcon className="w-8 h-8 mb-1" />
+                                                        <span className="text-xs">No image</span>
+                                                    </div>
+                                                )}
+                                            </div>
+
+                                            {/* Controls */}
+                                            <div className="flex-1 space-y-3">
+                                                <div>
+                                                    <label className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 cursor-pointer w-fit transition-colors text-sm font-medium">
+                                                        <Upload className="w-4 h-4" />
+                                                        Upload Image
+                                                        <input
+                                                            type="file"
+                                                            accept="image/*"
+                                                            className="hidden"
+                                                            onChange={handleFileUpload}
+                                                        />
+                                                    </label>
+                                                    <p className="text-xs text-muted-foreground mt-1">
+                                                        JPG, PNG, GIF, WebP (Max 5MB)
+                                                    </p>
+                                                </div>
+
+                                                {editForm.image_url && (
+                                                    <div>
+                                                        <p className="text-xs font-medium text-foreground mb-1">Current URL:</p>
+                                                        <input
+                                                            type="text"
+                                                            value={editForm.image_url}
+                                                            readOnly
+                                                            className="w-full text-xs px-2 py-1 bg-background border border-border rounded text-muted-foreground"
+                                                        />
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
                                     </div>
 
                                     {/* Options (for MCQ type) */}
@@ -326,63 +444,7 @@ export function BulkEditQuestions() {
                                 </div>
                             ) : (
                                 /* View Mode */
-                                <div>
-                                    <div className="flex items-start justify-between mb-4">
-                                        <div className="flex-1">
-                                            <h3 className="text-lg font-semibold text-foreground mb-2">
-                                                {question.question_text}
-                                            </h3>
-                                            <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                                                <span className="px-2 py-1 bg-primary/10 text-primary rounded">
-                                                    {question.category}
-                                                </span>
-                                                <span className="capitalize">{question.difficulty}</span>
-                                                <span>{question.points} points</span>
-                                                <span
-                                                    className={
-                                                        question.is_active
-                                                            ? 'text-green-500'
-                                                            : 'text-yellow-500'
-                                                    }
-                                                >
-                                                    {question.is_active ? 'Active' : 'Inactive'}
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <button
-                                            onClick={() => startEdit(question)}
-                                            className="px-3 py-1.5 border border-border rounded-lg hover:bg-muted/50 transition-colors flex items-center gap-2 text-sm"
-                                        >
-                                            <Edit2 className="w-4 h-4" />
-                                            Edit
-                                        </button>
-                                    </div>
-
-                                    {question.options && question.options.length > 0 && (
-                                        <div className="mb-3">
-                                            <p className="text-sm font-medium text-foreground mb-2">Options:</p>
-                                            <div className="grid grid-cols-2 gap-2">
-                                                {question.options.map((option, idx) => (
-                                                    <div
-                                                        key={idx}
-                                                        className={`px-3 py-2 rounded-lg text-sm ${option === question.correct_answer
-                                                            ? 'bg-green-500/10 text-green-500 border border-green-500/30'
-                                                            : 'bg-muted/50 text-muted-foreground'
-                                                            }`}
-                                                    >
-                                                        {option}
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    )}
-
-                                    {question.explanation && (
-                                        <p className="text-sm text-muted-foreground italic">
-                                            {question.explanation}
-                                        </p>
-                                    )}
-                                </div>
+                                <QuestionDisplay question={question} startEdit={startEdit} />
                             )}
                         </div>
                     ))}

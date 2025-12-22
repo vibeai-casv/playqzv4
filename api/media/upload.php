@@ -1,16 +1,39 @@
 <?php
+// Disable error display to prevent valid JSON corruption
+ini_set('display_errors', 0);
+// Log errors to server log instead
+ini_set('log_errors', 1);
+ini_set('error_log', __DIR__ . '/debug_errors.log');
+error_reporting(E_ALL);
+
+// Debug start
+file_put_contents(__DIR__ . '/debug_errors.log', "Script starting at " . date('Y-m-d H:i:s') . "\n", FILE_APPEND);
+
 // Clear opcache to ensure latest code runs
 if (function_exists('opcache_reset')) {
     @opcache_reset();
 }
 
-require_once '../config.php';
 require_once '../db.php';
 require_once '../utils.php';
 
 cors();
 
-$session = authenticate($pdo);
+try {
+    // Normal Authentication
+    $session = authenticate($pdo);
+    
+    // Debug logging removed.
+    // ...
+} catch (Exception $e) {
+    // Return 401/500 based on error
+    if ($e->getMessage() === 'Unauthorized') {
+        jsonResponse(['error' => 'Unauthorized'], 401);
+    }
+    error_log("Authentication Error: " . $e->getMessage());
+    // Return 200 to bypass Apache error pages
+    jsonResponse(['success' => false, 'error' => 'Authentication Exception: ' . $e->getMessage()], 200);
+}
 
 if (!isset($_FILES['file'])) {
     jsonResponse(['error' => 'No file uploaded'], 400);
@@ -23,6 +46,12 @@ $fileSize = $file['size'];
 $fileError = $file['error'];
 $mediaType = $_POST['type'] ?? 'question_image'; // logo, personality, question_image, avatar
 $description = $_POST['description'] ?? '';
+
+// Debug logging
+error_log("=== UPLOAD REQUEST DEBUG ===");
+error_log("Received mediaType: " . $mediaType);
+error_log("POST data: " . print_r($_POST, true));
+error_log("File name: " . $fileName);
 
 // Validate media type
 $validTypes = ['logo', 'personality', 'question_image', 'avatar'];
@@ -56,8 +85,7 @@ if (!is_dir($typeDir)) {
     mkdir($typeDir, 0777, true);
 }
 
-// Preserve original filename (only remove dangerous characters)
-// Keep original case and structure - just sanitize for safety
+// Generate filename based on original filename (sanitized)
 $baseName = pathinfo($fileName, PATHINFO_FILENAME);
 // Only remove truly dangerous characters, keep alphanumeric and common safe chars
 $sanitizedFileName = preg_replace('/[^a-zA-Z0-9_\-]/', '', $baseName);
@@ -72,12 +100,13 @@ error_log("Sanitized: " . $sanitizedFileName);
 error_log("New filename: " . $newFileName);
 error_log("Destination: " . $destination);
 
-// If file exists, OVERWRITE it (user is likely re-uploading the same person)
-// This ensures DemisHassabis.png stays as DemisHassabis.png
+// If file exists, add timestamp suffix to prevent conflicts
+// This ensures we always return the correct filename that was actually saved
 if (file_exists($destination)) {
-    // Delete old file and use the same name
-    error_log("File exists, overwriting: " . $destination);
-    @unlink($destination);
+    $timestamp = time();
+    $newFileName = $sanitizedFileName . "_" . $timestamp . "." . $ext;
+    $destination = $typeDir . $newFileName;
+    error_log("File exists, created new filename: " . $newFileName);
 }
 
 if (move_uploaded_file($fileTmp, $destination)) {

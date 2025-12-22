@@ -13,7 +13,7 @@ if ($session['role'] !== 'admin') {
 }
 
 $input = getJsonInput();
-$id = $input['id'] ?? null;
+$id = $input['id'] ?? $_GET['id'] ?? null;
 
 if (!$id) {
     jsonResponse(['error' => 'ID is required'], 400);
