@@ -33,6 +33,7 @@ const SystemTools = lazy(() => import('./pages/admin/SystemTools').then(module =
 const Diagnostics = lazy(() => import('./pages/admin/Diagnostics').then(module => ({ default: module.Diagnostics })));
 const ImportExport = lazy(() => import('./pages/admin/ImportExport').then(module => ({ default: module.ImportExport })));
 const BulkEditQuestions = lazy(() => import('./pages/admin/BulkEditQuestions').then(module => ({ default: module.BulkEditQuestions })));
+const ImageQuestions = lazy(() => import('./pages/admin/ImageQuestions').then(module => ({ default: module.ImageQuestions })));
 
 import { SplashScreen } from './components/ui/SplashScreen';
 
@@ -190,6 +191,14 @@ function App() {
                   element={
                     <ProtectedRoute requireAdmin>
                       <BulkEditQuestions />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/admin/image-questions"
+                  element={
+                    <ProtectedRoute requireAdmin>
+                      <ImageQuestions />
                     </ProtectedRoute>
                   }
                 />

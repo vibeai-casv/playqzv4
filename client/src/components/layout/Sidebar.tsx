@@ -28,6 +28,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         { name: 'Users', href: '/admin/users', icon: Users },
         { name: 'Questions', href: '/admin/questions', icon: FileQuestion },
         { name: 'Edit Questions', href: '/admin/bulk-edit', icon: FileEdit },
+        { name: 'Image Questions', href: '/admin/image-questions', icon: ImageIcon },
         { name: 'Import/Export', href: '/admin/import-export', icon: Download },
         { name: 'Media Library', href: '/admin/media', icon: ImageIcon },
         { name: 'Activity Logs', href: '/admin/activity', icon: Activity },
