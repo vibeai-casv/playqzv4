@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Stethoscope, CheckCircle2, XCircle, AlertCircle, RefreshCw, Database, Server, Shield, HardDrive } from 'lucide-react';
+import { Stethoscope, CheckCircle2, XCircle, AlertCircle, RefreshCw, Database, Server, Shield, HardDrive, Image } from 'lucide-react';
 import { toast } from 'sonner';
 import api from '../../lib/api';
+import { getImageUrl } from '../../lib/utils';
+
 
 
 interface DiagnosticResponse {
@@ -19,10 +21,43 @@ interface DiagnosticResponse {
     };
 }
 
+interface ImageQuestion {
+    id: number;
+    question_text: string;
+    question_type: 'image_identify_person' | 'image_identify_logo';
+    image_url: string | null;
+    options: string[] | null;
+    correct_answer: string;
+    difficulty: string;
+    status: string;
+    created_at: string;
+    updated_at: string;
+}
+
+interface ImageQuestionsResponse {
+    success: boolean;
+    questions: ImageQuestion[];
+    pagination: {
+        total: number;
+        limit: number;
+        offset: number;
+        hasMore: boolean;
+    };
+    stats: {
+        personality_count: number;
+        logo_count: number;
+        with_image_count: number;
+        total_count: number;
+    };
+}
+
 export function Diagnostics() {
     const [loading, setLoading] = useState(false);
     const [diagnostics, setDiagnostics] = useState<DiagnosticResponse | null>(null);
     const [mediaTest, setMediaTest] = useState<any>(null);
+    const [imageQuestions, setImageQuestions] = useState<ImageQuestionsResponse | null>(null);
+    const [questionTypeFilter, setQuestionTypeFilter] = useState<'all' | 'personality' | 'logo'>('all');
+    const [loadingQuestions, setLoadingQuestions] = useState(false);
 
     const runDiagnostics = async () => {
         setLoading(true);
@@ -102,8 +137,24 @@ export function Diagnostics() {
         }
     };
 
+    const loadImageQuestions = async (type: 'all' | 'personality' | 'logo' = 'all') => {
+        setLoadingQuestions(true);
+        try {
+            const response = await api.get('/questions/list_image_questions.php', {
+                params: { type, limit: 20 }
+            });
+            setImageQuestions(response.data);
+        } catch (error: any) {
+            console.error('Error loading image questions:', error);
+            toast.error('Failed to load image questions');
+        } finally {
+            setLoadingQuestions(false);
+        }
+    };
+
     useEffect(() => {
         runDiagnostics();
+        loadImageQuestions();
     }, []);
 
     const getStatusIcon = (status: string) => {
@@ -327,6 +378,140 @@ export function Diagnostics() {
                             </tbody>
                         </table>
                     </div>
+                </div>
+            )}
+
+            {/* Personality & Logo Questions */}
+            {imageQuestions && (
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
+                    <div className="flex justify-between items-center mb-4">
+                        <div>
+                            <h3 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+                                <Image className="w-5 h-5 text-indigo-600" />
+                                Personality & Logo Questions
+                            </h3>
+                            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                                {imageQuestions.stats.total_count} total questions • {imageQuestions.stats.with_image_count} with images
+                            </p>
+                        </div>
+                        <div className="flex gap-2">
+                            <button
+                                onClick={() => { setQuestionTypeFilter('all'); loadImageQuestions('all'); }}
+                                className={`px-3 py-1 rounded text-sm font-medium transition-colors ${questionTypeFilter === 'all'
+                                        ? 'bg-indigo-600 text-white'
+                                        : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+                                    }`}
+                            >
+                                All ({imageQuestions.stats.total_count})
+                            </button>
+                            <button
+                                onClick={() => { setQuestionTypeFilter('personality'); loadImageQuestions('personality'); }}
+                                className={`px-3 py-1 rounded text-sm font-medium transition-colors ${questionTypeFilter === 'personality'
+                                        ? 'bg-indigo-600 text-white'
+                                        : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+                                    }`}
+                            >
+                                Personality ({imageQuestions.stats.personality_count})
+                            </button>
+                            <button
+                                onClick={() => { setQuestionTypeFilter('logo'); loadImageQuestions('logo'); }}
+                                className={`px-3 py-1 rounded text-sm font-medium transition-colors ${questionTypeFilter === 'logo'
+                                        ? 'bg-indigo-600 text-white'
+                                        : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600'
+                                    }`}
+                            >
+                                Logo ({imageQuestions.stats.logo_count})
+                            </button>
+                        </div>
+                    </div>
+
+                    {loadingQuestions ? (
+                        <div className="flex items-center justify-center py-12">
+                            <RefreshCw className="w-8 h-8 animate-spin text-indigo-600" />
+                        </div>
+                    ) : imageQuestions.questions.length === 0 ? (
+                        <div className="text-center py-12">
+                            <p className="text-gray-500 dark:text-gray-400">No questions found</p>
+                        </div>
+                    ) : (
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {imageQuestions.questions.map((question) => (
+                                <div
+                                    key={question.id}
+                                    className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
+                                >
+                                    {/* Image Preview */}
+                                    {question.image_url ? (
+                                        <div className="relative h-48 bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
+                                            <img
+                                                src={getImageUrl(question.image_url)}
+                                                alt={question.question_text}
+                                                className="max-h-full max-w-full object-contain"
+                                                onError={(e) => {
+                                                    e.currentTarget.src = '';
+                                                    e.currentTarget.style.display = 'none';
+                                                    const parent = e.currentTarget.parentElement;
+                                                    if (parent) {
+                                                        parent.innerHTML = '<div class="text-red-500 text-sm">Image not found</div>';
+                                                    }
+                                                }}
+                                            />
+                                        </div>
+                                    ) : (
+                                        <div className="h-48 bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
+                                            <p className="text-gray-400 dark:text-gray-500 text-sm">No image</p>
+                                        </div>
+                                    )}
+
+                                    {/* Question Details */}
+                                    <div className="p-4">
+                                        <div className="flex items-start justify-between gap-2 mb-2">
+                                            <span className={`px-2 py-1 rounded text-xs font-medium ${question.question_type === 'image_identify_person'
+                                                    ? 'bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200'
+                                                    : 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200'
+                                                }`}>
+                                                {question.question_type === 'image_identify_person' ? 'Personality' : 'Logo'}
+                                            </span>
+                                            <span className={`px-2 py-1 rounded text-xs font-medium ${question.status === 'active'
+                                                    ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200'
+                                                    : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300'
+                                                }`}>
+                                                {question.status}
+                                            </span>
+                                        </div>
+                                        <p className="text-sm font-medium text-gray-900 dark:text-white mb-2 line-clamp-2">
+                                            {question.question_text}
+                                        </p>
+                                        <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+                                            <span>Difficulty: {question.difficulty}</span>
+                                            <span>ID: {question.id}</span>
+                                        </div>
+                                        {question.options && question.options.length > 0 && (
+                                            <div className="mt-2 pt-2 border-t border-gray-200 dark:border-gray-700">
+                                                <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Options:</p>
+                                                <div className="flex flex-wrap gap-1">
+                                                    {question.options.slice(0, 3).map((option, idx) => (
+                                                        <span
+                                                            key={idx}
+                                                            className="px-2 py-0.5 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-xs"
+                                                        >
+                                                            {option}
+                                                        </span>
+                                                    ))}
+                                                    {question.options.length > 3 && (
+                                                        <span className="text-xs text-gray-400">+{question.options.length - 3} more</span>
+                                                    )}
+                                                </div>
+                                                <p className="text-xs text-green-600 dark:text-green-400 mt-1">
+                                                    Answer: {question.correct_answer}
+                                                </p>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
             )}
 

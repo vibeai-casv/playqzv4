@@ -63,16 +63,16 @@ export function getImageUrl(path: string | undefined | null): string {
     // If already a full URL or data URI, return as-is
     if (path.startsWith('http') || path.startsWith('data:')) return path;
 
-    // For XAMPP setup at http://projects/playqzv4/
+    // For development server at http://localhost/projects/playqzv4/
     // Database stores URLs like: /uploads/personality/filename.png
-    // We need to prepend /playqzv4/ to get: /playqzv4/uploads/personality/filename.png
+    // We need to prepend /projects/playqzv4/ to get: /projects/playqzv4/uploads/personality/filename.png
 
     // Ensure path starts with /
     let cleanPath = path.startsWith('/') ? path : `/${path}`;
 
-    // If path doesn't already include /playqzv4/, add it
-    if (!cleanPath.startsWith('/playqzv4/')) {
-        cleanPath = `/playqzv4${cleanPath}`;
+    // If path doesn't already include /projects/playqzv4/, add it
+    if (!cleanPath.startsWith('/projects/playqzv4/')) {
+        cleanPath = `/projects/playqzv4${cleanPath}`;
     }
 
     return cleanPath;
