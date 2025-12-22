@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Edit2, Save, X, Filter, Loader2 } from 'lucide-react';
 import { fetchAPI } from '../../lib/api';
+import { getImageUrl } from '../../lib/utils';
 
 
 interface Question {
@@ -14,7 +15,7 @@ interface Question {
     difficulty: string;
     points: number;
     is_active: number;
-    media_url?: string;
+    image_url?: string;
 }
 
 export function BulkEditQuestions() {
@@ -376,6 +377,41 @@ export function BulkEditQuestions() {
                                             </div>
                                         </div>
                                     )}
+
+{/* Image Display */ }
+{
+    question.image_url && (
+        <div className="mb-4 p-4 bg-muted/30 rounded-lg">
+            <p className="text-sm font-medium text-foreground mb-2">Image:</p>
+            <div className="flex gap-4 items-start">
+                <div className="w-32 h-32 bg-background border border-border rounded-lg overflow-hidden flex items-center justify-center">
+                    <img
+                        src={getImageUrl(question.image_url)}
+                        alt="Question image"
+                        className="max-w-full max-h-full object-contain"
+                        onError={(e) => {
+                            e.currentTarget.src = '';
+                            e.currentTarget.style.display = 'none';
+                            const parent = e.currentTarget.parentElement;
+                            if (parent) {
+                                parent.innerHTML = '<div class="text-red-500 text-xs">Image not found</div>';
+                            }
+                        }}
+                    />
+                </div>
+                <div className="flex-1">
+                    <p className="text-xs text-muted-foreground break-all">
+                        <span className="font-medium">URL:</span> {question.image_url}
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                        <span className="font-medium">Full Path:</span> {getImageUrl(question.image_url)}
+                    </p>
+                </div>
+            </div>
+        </div>
+    )
+}
+
 
                                     {question.explanation && (
                                         <p className="text-sm text-muted-foreground italic">
