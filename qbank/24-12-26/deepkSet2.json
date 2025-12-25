@@ -1,0 +1,534 @@
+{
+    "questions": [
+        {
+            "question_text": "Who is widely considered the father of artificial intelligence?",
+            "question_type": "text_mcq",
+            "options": ["Alan Turing", "John McCarthy", "Marvin Minsky", "Geoffrey Hinton"],
+            "correct_answer": "John McCarthy",
+            "category": "History of AI",
+            "difficulty": "easy",
+            "points": 10,
+            "explanation": "John McCarthy coined the term 'artificial intelligence' in 1956 and organized the seminal Dartmouth Conference."
+        },
+        {
+            "question_text": "Which year was the Dartmouth Summer Research Project on Artificial Intelligence held, marking the birth of AI as a field?",
+            "question_type": "text_mcq",
+            "options": ["1950", "1956", "1965", "1972"],
+            "correct_answer": "1956",
+            "category": "History of AI",
+            "difficulty": "easy",
+            "points": 10,
+            "explanation": "The 1956 Dartmouth Conference, organized by John McCarthy, is widely considered the founding event of AI as a discipline."
+        },
+        {
+            "question_text": "What was the name of the first AI program that could prove mathematical theorems, developed in 1956?",
+            "question_type": "text_mcq",
+            "options": ["General Problem Solver", "Logic Theorist", "ELIZA", "SHRDLU"],
+            "correct_answer": "Logic Theorist",
+            "category": "History of AI",
+            "difficulty": "medium",
+            "points": 15,
+            "explanation": "The Logic Theorist, developed by Allen Newell, Herbert Simon, and Cliff Shaw, is considered the first AI program, capable of proving mathematical theorems."
+        },
+        {
+            "question_text": "What is the name of the test proposed by Alan Turing to evaluate a machine's ability to exhibit intelligent behavior equivalent to a human?",
+            "question_type": "text_mcq",
+            "options": ["The Imitation Game", "The Chinese Room", "The Lovelace Test", "The Total Turing Test"],
+            "correct_answer": "The Imitation Game",
+            "category": "History of AI",
+            "difficulty": "easy",
+            "points": 10,
+            "explanation": "Alan Turing proposed the 'Imitation Game' in 1950, now commonly known as the Turing Test, as a measure of machine intelligence."
+        },
+        {
+            "question_text": "Which AI winter was primarily triggered by the 1973 Lighthill Report?",
+            "question_type": "text_mcq",
+            "options": ["The First AI Winter", "The Second AI Winter", "The Third AI Winter", "It did not trigger an AI Winter"],
+            "correct_answer": "The First AI Winter",
+            "category": "History of AI",
+            "difficulty": "hard",
+            "points": 20,
+            "explanation": "The critical Lighthill Report for the British government in 1973, which highlighted the failures of AI to meet its grandiose promises, led to severe funding cuts, starting the first AI winter."
+        },
+        {
+            "question_text": "What paradigm shift in AI, gaining prominence in the 1980s, focused on building systems that mimic the neural structure of the brain?",
+            "question_type": "text_mcq",
+            "options": ["Symbolic AI", "Expert Systems", "Connectionism", "Bayesian Networks"],
+            "correct_answer": "Connectionism",
+            "category": "Evolution of AI",
+            "difficulty": "medium",
+            "points": 15,
+            "explanation": "Connectionism, exemplified by artificial neural networks, became a major alternative to symbolic AI, focusing on learning from data through interconnected nodes."
+        },
+        {
+            "question_text": "The victory of IBM's Deep Blue over Garry Kasparov in 1997 is a landmark in what type of AI?",
+            "question_type": "text_mcq",
+            "options": ["Computer Vision", "Natural Language Processing", "Game Playing", "Robotics"],
+            "correct_answer": "Game Playing",
+            "category": "Evolution of AI",
+            "difficulty": "easy",
+            "points": 10,
+            "explanation": "Deep Blue's victory was a seminal moment for AI in strategic game playing, demonstrating brute-force computation and search techniques."
+        },
+        {
+            "question_text": "What key breakthrough in 2012, involving a convolutional neural network called AlexNet, reignited widespread interest in deep learning?",
+            "question_type": "text_mcq",
+            "options": ["Winning the Loebner Prize", "Achieving superhuman Go play", "Dramatically winning the ImageNet competition", "Powering the first self-driving car"],
+            "correct_answer": "Dramatically winning the ImageNet competition",
+            "category": "Evolution of AI",
+            "difficulty": "medium",
+            "points": 15,
+            "explanation": "AlexNet's significant error rate reduction in the 2012 ImageNet Large Scale Visual Recognition Challenge proved the power of deep convolutional neural networks for computer vision."
+        },
+        {
+            "question_text": "Which company's AI system, AlphaGo, defeated world champion Lee Sedol in 2016?",
+            "question_type": "text_mcq",
+            "options": ["OpenAI", "Google DeepMind", "Meta", "IBM"],
+            "correct_answer": "Google DeepMind",
+            "category": "Evolution of AI",
+            "difficulty": "easy",
+            "points": 10,
+            "explanation": "AlphaGo, developed by Google DeepMind, defeated Lee Sedol 4-1, marking a historic milestone for AI in the complex game of Go."
+        },
+        {
+            "question_text": "What term describes the current period where AI capabilities, especially in generative tasks, are rapidly advancing and being integrated into society?",
+            "question_type": "text_mcq",
+            "options": ["AI Spring", "AI Summer", "AI Autumn", "AI Renaissance"],
+            "correct_answer": "AI Spring",
+            "category": "Trends in AI",
+            "difficulty": "medium",
+            "points": 15,
+            "explanation": "'AI Spring' is often used to describe the current period of rapid growth, funding, and technological breakthroughs, contrasting with historical 'AI Winters'."
+        },
+        {
+            "question_text": "Which technology is a foundational component of most modern large language models like GPT-4?",
+            "question_type": "text_mcq",
+            "options": ["Recurrent Neural Networks (RNNs)", "Convolutional Neural Networks (CNNs)", "Transformer Architecture", "Rule-Based Systems"],
+            "correct_answer": "Transformer Architecture",
+            "category": "Trends in AI",
+            "difficulty": "medium",
+            "points": 15,
+            "explanation": "Introduced in the 2017 paper 'Attention Is All You Need,' the Transformer architecture, with its self-attention mechanism, is the backbone of state-of-the-art LLMs."
+        },
+        {
+            "question_text": "What is the primary goal of Explainable AI (XAI)?",
+            "question_type": "text_mcq",
+            "options": ["To make AI models faster", "To make AI models smaller", "To make AI decisions understandable to humans", "To make AI models more creative"],
+            "correct_answer": "To make AI decisions understandable to humans",
+            "category": "Trends in AI",
+            "difficulty": "medium",
+            "points": 15,
+            "explanation": "XAI aims to create AI systems whose actions and decisions can be easily understood and trusted by human users, addressing the 'black box' problem."
+        },
+        {
+            "question_text": "Which concept refers to AI systems that can perform a wide variety of tasks, similar to human general intelligence?",
+            "question_type": "text_mcq",
+            "options": ["Narrow AI", "Artificial General Intelligence (AGI)", "Superintelligence", "Machine Learning"],
+            "correct_answer": "Artificial General Intelligence (AGI)",
+            "category": "Future of AI",
+            "difficulty": "easy",
+            "points": 10,
+            "explanation": "AGI refers to a hypothetical AI with the ability to understand, learn, and apply its intelligence to solve any problem, much like a human being."
+        },
+        {
+            "question_text": "What is a commonly cited long-term risk associated with the development of Superintelligent AI?",
+            "question_type": "text_mcq",
+            "options": ["High energy consumption", "Job displacement", "Alignment Problem", "Data privacy issues"],
+            "correct_answer": "Alignment Problem",
+            "category": "Future of AI",
+            "difficulty": "hard",
+            "points": 20,
+            "explanation": "The Alignment Problem refers to the challenge of ensuring that a superintelligent AI's goals and actions are aligned with human values and intentions."
+        },
+        {
+            "question_text": "Which of these is a key focus of AI safety research?",
+            "question_type": "text_mcq",
+            "options": ["Making AI more profitable", "Preventing value misalignment and unintended consequences", "Increasing AI processing speed", "Reducing model training costs"],
+            "correct_answer": "Preventing value misalignment and unintended consequences",
+            "category": "Future of AI",
+            "difficulty": "medium",
+            "points": 15,
+            "explanation": "AI safety research proactively studies how to build powerful AI systems that are robust, controllable, and whose objectives remain aligned with human values."
+        },
+        {
+            "question_text": "Which university's AI lab is historically one of the most famous and influential, founded by John McCarthy and Marvin Minsky?",
+            "question_type": "text_mcq",
+            "options": ["MIT AI Lab", "Stanford AI Lab", "Carnegie Mellon Robotics Institute", "UC Berkeley BAIR"],
+            "correct_answer": "MIT AI Lab",
+            "category": "leading institutions in AI",
+            "difficulty": "medium",
+            "points": 15,
+            "explanation": "The MIT AI Lab, co-founded by McCarthy and Minsky, was a powerhouse of early AI research and produced many fundamental ideas."
+        },
+        {
+            "question_text": "Which research institute, founded in 2015, has the stated goal of ensuring that artificial general intelligence benefits all of humanity?",
+            "question_type": "text_mcq",
+            "options": ["OpenAI", "Allen Institute for AI", "Machine Intelligence Research Institute", "Future of Humanity Institute"],
+            "correct_answer": "OpenAI",
+            "category": "leading institutions in AI",
+            "difficulty": "easy",
+            "points": 10,
+            "explanation": "OpenAI was originally founded as a non-profit with the mission to ensure AGI benefits humanity, later restructuring to include a capped-profit arm."
+        },
+        {
+            "question_text": "Which technology company's research division, DeepMind, is renowned for breakthroughs like AlphaFold and AlphaGo?",
+            "question_type": "text_mcq",
+            "options": ["Microsoft", "Amazon", "Google", "Apple"],
+            "correct_answer": "Google",
+            "category": "leading institutions in AI",
+            "difficulty": "easy",
+            "points": 10,
+            "explanation": "Google acquired DeepMind in 2014. DeepMind remains a leading AI research lab under Alphabet, Google's parent company."
+        },
+        {
+            "question_text": "Who co-founded Google Brain and later became the Chief Scientist at OpenAI, contributing significantly to deep learning?",
+            "question_type": "text_mcq",
+            "options": ["Yann LeCun", "Andrew Ng", "Ilya Sutskever", "Fei-Fei Li"],
+            "correct_answer": "Ilya Sutskever",
+            "category": "Leaders of AI",
+            "difficulty": "hard",
+            "points": 20,
+            "explanation": "Ilya Sutskever co-founded Google Brain and is a co-founder and former Chief Scientist of OpenAI, playing a key role in the development of GPT models."
+        },
+        {
+            "question_text": "Which AI pioneer, known for his work on backpropagation and deep learning, is the Chief AI Scientist at Meta?",
+            "question_type": "text_mcq",
+            "options": ["Geoffrey Hinton", "Yoshua Bengio", "Yann LeCun", "Jurgen Schmidhuber"],
+            "correct_answer": "Yann LeCun",
+            "category": "Leaders of AI",
+            "difficulty": "medium",
+            "points": 15,
+            "explanation": "Yann LeCun, a Turing Award winner, is famous for his work on convolutional neural networks and serves as Chief AI Scientist at Meta."
+        },
+        {
+            "question_text": "Who is the computer scientist known for foundational work in neural networks and co-authored the seminal paper introducing the backpropagation algorithm?",
+            "question_type": "text_mcq",
+            "options": ["Geoffrey Hinton", "Marvin Minsky", "John Hopfield", "Frank Rosenblatt"],
+            "correct_answer": "Geoffrey Hinton",
+            "category": "Leaders of AI",
+            "difficulty": "medium",
+            "points": 15,
+            "explanation": "Geoffrey Hinton, a Turing Award winner, is a central figure in the deep learning revolution, co-authoring the 1986 paper that popularized backpropagation for training multi-layer neural networks."
+        },
+        {
+            "question_text": "What type of AI model is specifically designed to generate new content, such as text, images, or music?",
+            "question_type": "text_mcq",
+            "options": ["Discriminative Model", "Generative Model", "Reinforcement Learning Model", "Expert System"],
+            "correct_answer": "Generative Model",
+            "category": "generative AI",
+            "difficulty": "easy",
+            "points": 10,
+            "explanation": "Generative models learn the underlying patterns of data to create new, similar data instances, as opposed to discriminative models which classify or predict labels."
+        },
+        {
+            "question_text": "Which generative AI model, released by OpenAI in 2022, sparked massive public interest in conversational AI?",
+            "question_type": "text_mcq",
+            "options": ["GPT-3", "ChatGPT", "DALL-E 2", "Codex"],
+            "correct_answer": "ChatGPT",
+            "category": "generative AI",
+            "difficulty": "easy",
+            "points": 10,
+            "explanation": "ChatGPT, a chatbot based on GPT-3.5 and later GPT-4, was released in November 2022 and demonstrated remarkably fluent and capable conversation, leading to widespread adoption."
+        },
+        {
+            "question_text": "What is the name of the adversarial network architecture commonly used for generating realistic images?",
+            "question_type": "text_mcq",
+            "options": ["Variational Autoencoder (VAE)", "Generative Adversarial Network (GAN)", "Diffusion Model", "Transformer"],
+            "correct_answer": "Generative Adversarial Network (GAN)",
+            "category": "generative AI",
+            "difficulty": "medium",
+            "points": 15,
+            "explanation": "GANs, introduced by Ian Goodfellow, pit two neural networks (a generator and a discriminator) against each other to produce highly realistic synthetic data."
+        },
+        {
+            "question_text": "What does the 'GPT' in models like GPT-4 stand for?",
+            "question_type": "text_mcq",
+            "options": ["General Purpose Transformer", "Generative Pre-trained Transformer", "Global Predictive Text", "Graphical Processing Trainer"],
+            "correct_answer": "Generative Pre-trained Transformer",
+            "category": "generative AI",
+            "difficulty": "medium",
+            "points": 15,
+            "explanation": "GPT stands for Generative Pre-trained Transformer, describing its ability to generate text, its two-stage training process (pre-training and fine-tuning), and its core architecture."
+        },
+        {
+            "question_text": "Which term describes AI systems that can autonomously break down complex goals into tasks, use tools, and iteratively work towards an outcome?",
+            "question_type": "text_mcq",
+            "options": ["Reactive AI", "Generative AI", "Agentic AI", "Symbolic AI"],
+            "correct_answer": "Agentic AI",
+            "category": "agentic AI",
+            "difficulty": "medium",
+            "points": 15,
+            "explanation": "Agentic AI refers to systems that act as autonomous agents, capable of planning, taking actions (often using tools like web search or code execution), and adapting to achieve objectives."
+        },
+        {
+            "question_text": "In agentic AI, what design pattern involves an LLM creating and executing a sequence of actions to solve a problem?",
+            "question_type": "text_mcq",
+            "options": ["Chain-of-Thought", "ReAct", "Retrieval-Augmented Generation", "Fine-tuning"],
+            "correct_answer": "ReAct",
+            "category": "agentic AI",
+            "difficulty": "hard",
+            "points": 20,
+            "explanation": "ReAct (Reasoning + Acting) is a framework where an LLM interleaves reasoning traces and actions (like using a search API) to complete tasks in a dynamic environment."
+        },
+        {
+            "question_text": "What is a key capability that distinguishes an AI agent from a standard chatbot?",
+            "question_type": "text_mcq",
+            "options": ["Producing longer responses", "Having a personality", "Autonomous tool use and task completion", "Speaking multiple languages"],
+            "correct_answer": "Autonomous tool use and task completion",
+            "category": "agentic AI",
+            "difficulty": "medium",
+            "points": 15,
+            "explanation": "While chatbots primarily generate conversational responses, AI agents are defined by their ability to autonomously use tools (APIs, calculators, browsers) to plan and execute multi-step tasks."
+        },
+        {
+            "question_text": "Which of the following is a major challenge in developing reliable AI agents?",
+            "question_type": "text_mcq",
+            "options": ["Text formatting", "Color scheme selection", "Hallucination and unreliable reasoning", "Font size optimization"],
+            "correct_answer": "Hallucination and unreliable reasoning",
+            "category": "agentic AI",
+            "difficulty": "medium",
+            "points": 15,
+            "explanation": "AI agents built on LLMs can inherit problems like hallucination (generating false information) and logical errors, which become critical when the agent takes autonomous actions in the real world."
+        },
+        {
+            "question_text": "The concept of an 'AI scientist' or autonomous research agent falls under which category of AI development?",
+            "question_type": "text_mcq",
+            "options": ["Narrow AI", "Agentic AI", "Reactive AI", "Embodied AI"],
+            "correct_answer": "Agentic AI",
+            "category": "agentic AI",
+            "difficulty": "medium",
+            "points": 15,
+            "explanation": "An autonomous research agent that can form hypotheses, design experiments, and interpret results is a prime example of advanced agentic AI, capable of complex, goal-directed behavior."
+        },
+        {
+            "question_text": "What was the primary focus of the 'Cyc' project, started in 1984?",
+            "question_type": "text_mcq",
+            "options": ["Computer Vision", "Building a massive common-sense knowledge base", "Playing chess", "Speech recognition"],
+            "correct_answer": "Building a massive common-sense knowledge base",
+            "category": "History of AI",
+            "difficulty": "hard",
+            "points": 20,
+            "explanation": "The Cyc project, led by Doug Lenat, aimed to encode millions of pieces of common-sense knowledge in a form usable by AI systems, representing a major symbolic AI effort."
+        },
+        {
+            "question_text": "Which early natural language processing program, developed in the 1960s, simulated a Rogerian psychotherapist?",
+            "question_type": "text_mcq",
+            "options": ["SHRDLU", "PARRY", "ELIZA", "SAM"],
+            "correct_answer": "ELIZA",
+            "category": "History of AI",
+            "difficulty": "medium",
+            "points": 15,
+            "explanation": "ELIZA, created by Joseph Weizenbaum at MIT, used simple pattern matching to engage users in conversation, famously in its DOCTOR script which mimicked a therapist."
+        },
+        {
+            "question_text": "What term describes the phenomenon where an AI model performs well on its training data but poorly on unseen data?",
+            "question_type": "text_mcq",
+            "options": ["Underfitting", "Overfitting", "Catastrophic forgetting", "Bias"],
+            "correct_answer": "Overfitting",
+            "category": "Trends in AI",
+            "difficulty": "medium",
+            "points": 15,
+            "explanation": "Overfitting occurs when a model learns the noise and specific details of the training data to the extent that it negatively impacts its performance on new data."
+        },
+        {
+            "question_text": "Which company released the Llama series of open-source large language models?",
+            "question_type": "text_mcq",
+            "options": ["Google", "Meta", "Microsoft", "OpenAI"],
+            "correct_answer": "Meta",
+            "category": "Trends in AI",
+            "difficulty": "easy",
+            "points": 10,
+            "explanation": "Meta (formerly Facebook) has released several versions of its Llama models to the research community, significantly influencing the open-source LLM landscape."
+        },
+        {
+            "question_text": "What is a 'diffusion model' primarily used for in generative AI?",
+            "question_type": "text_mcq",
+            "options": ["Text summarization", "Image and video generation", "Time-series forecasting", "Data compression"],
+            "correct_answer": "Image and video generation",
+            "category": "generative AI",
+            "difficulty": "medium",
+            "points": 15,
+            "explanation": "Diffusion models generate data by progressively adding noise to a dataset and then learning to reverse the process, leading to high-quality image and video synthesis (e.g., DALL-E, Stable Diffusion)."
+        },
+        {
+            "question_text": "Which of these is NOT typically considered a core subfield of AI?",
+            "question_type": "text_mcq",
+            "options": ["Machine Learning", "Computer Vision", "Natural Language Processing", "Quantum Computing"],
+            "correct_answer": "Quantum Computing",
+            "category": "Evolution of AI",
+            "difficulty": "easy",
+            "points": 10,
+            "explanation": "Quantum Computing is a separate field of computing that may be used to accelerate some AI algorithms, but it is not a core subfield of AI itself like ML, CV, or NLP."
+        },
+        {
+            "question_text": "What does the term 'multimodal AI' refer to?",
+            "question_type": "text_mcq",
+            "options": ["AI that uses multiple training algorithms", "AI that can process and understand multiple types of input (text, images, audio)", "AI that runs on multiple processors", "AI designed for multiplayer games"],
+            "correct_answer": "AI that can process and understand multiple types of input (text, images, audio)",
+            "category": "Trends in AI",
+            "difficulty": "medium",
+            "points": 15,
+            "explanation": "Multimodal AI systems can accept and relate information from different modalities, such as answering questions about an image or generating an image from a text description."
+        },
+        {
+            "question_text": "The 'Stochastic Parrot' critique is primarily concerned with the limitations of what type of AI model?",
+            "question_type": "text_mcq",
+            "options": ["Expert Systems", "Large Language Models", "Computer Vision Models", "Reinforcement Learning Agents"],
+            "correct_answer": "Large Language Models",
+            "category": "Future of AI",
+            "difficulty": "hard",
+            "points": 20,
+            "explanation": "The 'stochastic parrot' argument, made by researchers like Emily Bender, suggests LLMs merely remix statistical patterns from their training data without true understanding or meaning."
+        },
+        {
+            "question_text": "Which AI ethics principle focuses on the ability to find and audit an AI system's decision-making process?",
+            "question_type": "text_mcq",
+            "options": ["Fairness", "Accountability", "Transparency", "Privacy"],
+            "correct_answer": "Transparency",
+            "category": "Trends in AI",
+            "difficulty": "medium",
+            "points": 15,
+            "explanation": "Transparency involves making an AI system's processes, data, and decisions understandable and accessible to relevant stakeholders for scrutiny and audit."
+        },
+        {
+            "question_text": "What is 'retrieval-augmented generation' (RAG) primarily used to improve in LLMs?",
+            "question_type": "text_mcq",
+            "options": ["Training speed", "Factual accuracy and reducing hallucinations", "Model size", "Color output in images"],
+            "correct_answer": "Factual accuracy and reducing hallucinations",
+            "category": "generative AI",
+            "difficulty": "medium",
+            "points": 15,
+            "explanation": "RAG enhances LLMs by retrieving relevant information from an external knowledge source and incorporating it into the generation process, leading to more factual and up-to-date responses."
+        },
+        {
+            "question_text": "Who co-invented the Transformer architecture along with others at Google?",
+            "question_type": "text_mcq",
+            "options": ["Yoshua Bengio", "Ashish Vaswani", "Demis Hassabis", "Elon Musk"],
+            "correct_answer": "Ashish Vaswani",
+            "category": "Leaders of AI",
+            "difficulty": "hard",
+            "points": 20,
+            "explanation": "Ashish Vaswani was the lead author of the 2017 paper 'Attention Is All You Need,' which introduced the Transformer architecture."
+        },
+        {
+            "question_text": "Which institution houses the 'Future of Humanity Institute', which conducts research on long-term AI risks?",
+            "question_type": "text_mcq",
+            "options": ["MIT", "Stanford University", "University of Oxford", "Carnegie Mellon University"],
+            "correct_answer": "University of Oxford",
+            "category": "leading institutions in AI",
+            "difficulty": "hard",
+            "points": 20,
+            "explanation": "The Future of Humanity Institute (FHI) at the University of Oxford is a leading interdisciplinary research centre focusing on big-picture questions for humanity, including AI safety and governance."
+        },
+        {
+            "question_text": "What does 'few-shot learning' refer to in the context of large language models?",
+            "question_type": "text_mcq",
+            "options": ["Training a model with very few parameters", "Getting a model to perform a new task with only a few examples provided in the prompt", "Learning from unlabeled data", "A model that makes very few errors"],
+            "correct_answer": "Getting a model to perform a new task with only a few examples provided in the prompt",
+            "category": "Trends in AI",
+            "difficulty": "medium",
+            "points": 15,
+            "explanation": "Few-shot learning is the ability of a model, like GPT-3, to understand and execute a task when given just a few examples (shots) within the prompt, without updating its weights."
+        },
+        {
+            "question_text": "Which of these is a primary technique for aligning LLMs with human preferences, as used in ChatGPT?",
+            "question_type": "text_mcq",
+            "options": ["Reinforcement Learning from Human Feedback (RLHF)", "Supervised Fine-Tuning only", "Backpropagation Through Time", "Evolutionary Algorithms"],
+            "correct_answer": "Reinforcement Learning from Human Feedback (RLHF)",
+            "category": "generative AI",
+            "difficulty": "hard",
+            "points": 20,
+            "explanation": "RLHF is a multi-step process where human feedback is used to train a reward model, which then guides the fine-tuning of the LLM via reinforcement learning to produce more helpful, harmless, and honest outputs."
+        },
+        {
+            "question_text": "What is the 'frame problem' in classic AI?",
+            "question_type": "text_mcq",
+            "options": ["How to represent image frames in video", "The challenge of representing what does and does not change in a dynamic world", "Choosing the right hardware frame for a robot", "The problem of slow frame rates in AI graphics"],
+            "correct_answer": "The challenge of representing what does and does not change in a dynamic world",
+            "category": "History of AI",
+            "difficulty": "hard",
+            "points": 20,
+            "explanation": "The frame problem is the logical challenge of efficiently determining which conditions (frames) remain true and which become false after an action is performed in a representation of the world."
+        },
+        {
+            "question_text": "In AI governance, what does the term 'sandbox' often refer to?",
+            "question_type": "text_mcq",
+            "options": ["A child's toy for AI", "A controlled testing environment for AI systems with regulatory oversight", "The training environment for reinforcement learning", "A type of neural network architecture"],
+            "correct_answer": "A controlled testing environment for AI systems with regulatory oversight",
+            "category": "Future of AI",
+            "difficulty": "medium",
+            "points": 15,
+            "explanation": "Regulatory sandboxes allow innovators to test AI products and services in a real-world environment under a regulator's supervision, with temporary exemptions from certain rules."
+        },
+        {
+            "question_text": "Which of the following is a key characteristic of a 'foundation model' in AI?",
+            "question_type": "text_mcq",
+            "options": ["It is trained on a narrow dataset for a specific task.", "It is trained on broad data and can be adapted to a wide range of downstream tasks.", "It requires no fine-tuning.", "It only works for text-based tasks."],
+            "correct_answer": "It is trained on broad data and can be adapted to a wide range of downstream tasks.",
+            "category": "Trends in AI",
+            "difficulty": "medium",
+            "points": 15,
+            "explanation": "Foundation models, like GPT-4 or CLIP, are large-scale models trained on vast amounts of diverse data, serving as a base that can be adapted (e.g., via fine-tuning) to many different applications."
+        },
+        {
+            "question_text": "What is 'catastrophic forgetting' a major issue for in machine learning?",
+            "question_type": "text_mcq",
+            "options": ["Neural networks when learning new tasks that overwrite old knowledge", "Data storage systems", "The loss of API keys", "Cloud computing costs"],
+            "correct_answer": "Neural networks when learning new tasks that overwrite old knowledge",
+            "category": "Evolution of AI",
+            "difficulty": "hard",
+            "points": 20,
+            "explanation": "Catastrophic forgetting occurs when a neural network trained on a new task loses performance on a previously learned task, a significant challenge for continual/lifelong learning systems."
+        },
+        {
+            "question_text": "The 'Moravec's paradox' observes that what is easy for humans is often hard for AI, and vice versa?",
+            "question_type": "text_mcq",
+            "options": ["High-level reasoning vs. sensorimotor skills", "Creativity vs. memory", "Emotion vs. logic", "Speaking vs. listening"],
+            "correct_answer": "High-level reasoning vs. sensorimotor skills",
+            "category": "History of AI",
+            "difficulty": "hard",
+            "points": 20,
+            "explanation": "Moravec's paradox states that high-level reasoning requires little computation, but low-level sensorimotor skills require enormous computational resources, contrary to early AI expectations."
+        },
+        {
+            "question_text": "What is 'synthetic data' in the context of AI training?",
+            "question_type": "text_mcq",
+            "options": ["Artificially generated data that mimics real data", "Data that is encrypted", "Outdated historical data", "Data collected from physical sensors"],
+            "correct_answer": "Artificially generated data that mimics real data",
+            "category": "Trends in AI",
+            "difficulty": "medium",
+            "points": 15,
+            "explanation": "Synthetic data is generated algorithmically (e.g., by another AI model) to supplement or replace real-world data for training machine learning models, often to address privacy, scarcity, or bias issues."
+        },
+        {
+            "question_text": "Which AI development approach involves training a model to achieve a goal through rewards and penalties from its environment?",
+            "question_type": "text_mcq",
+            "options": ["Supervised Learning", "Unsupervised Learning", "Reinforcement Learning", "Self-Supervised Learning"],
+            "correct_answer": "Reinforcement Learning",
+            "category": "Evolution of AI",
+            "difficulty": "easy",
+            "points": 10,
+            "explanation": "In Reinforcement Learning, an agent learns to make decisions by performing actions in an environment to maximize cumulative reward, famously used in game-playing AI like AlphaGo."
+        },
+        {
+            "question_text": "What does 'model distillation' aim to achieve?",
+            "question_type": "text_mcq",
+            "options": ["Make a large model smaller and faster while preserving performance", "Remove water from data centers", "Increase the model's creativity", "Clean the training dataset"],
+            "correct_answer": "Make a large model smaller and faster while preserving performance",
+            "category": "Trends in AI",
+            "difficulty": "hard",
+            "points": 20,
+            "explanation": "Knowledge distillation is a technique where a smaller 'student' model is trained to mimic the behavior of a larger, more powerful 'teacher' model, enabling deployment on resource-constrained devices."
+        },
+        {
+            "question_text": "The 'AI effect' is the tendency for people to do what?",
+            "question_type": "text_mcq",
+            "options": ["Overestimate AI capabilities", "Redefine AI as whatever hasn't been done yet, once it is accomplished", "Blame AI for all technological problems", "Prefer human interaction over AI"],
+            "correct_answer": "Redefine AI as whatever hasn't been done yet, once it is accomplished",
+            "category": "History of AI",
+            "difficulty": "medium",
+            "points": 15,
+            "explanation": "The AI effect is the observation that once an AI technique becomes operational and commonplace, it is often no longer considered 'true intelligence' but just computation."
+        }
+    ]
+}

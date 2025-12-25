@@ -3,6 +3,7 @@ import { seedQuestions } from '../../utils/seeder';
 import { toast } from 'sonner';
 import { Database, Play, AlertTriangle, Terminal, RefreshCw, CheckCircle2 } from 'lucide-react';
 import { fetchAPI } from '../../lib/api';
+import api from '../../lib/api';
 
 export function SystemTools() {
     const [seeding, setSeeding] = useState(false);
@@ -10,6 +11,8 @@ export function SystemTools() {
     const [schemaUpdating, setSchemaUpdating] = useState(false);
     const [schemaLogs, setSchemaLogs] = useState<string[]>([]);
     const [schemaResult, setSchemaResult] = useState<any>(null);
+    const [activating, setActivating] = useState(false);
+    const [activateLogs, setActivateLogs] = useState<string[]>([]);
 
     const addLog = (msg: string) => {
         setLogs(prev => [...prev, `[${new Date().toLocaleTimeString()}] ${msg}`]);
@@ -41,38 +44,7 @@ export function SystemTools() {
         setSchemaLogs([]);
         setSchemaResult(null);
 
-        // Debug: Log the API URL being used (always use path detection, ignore VITE_API_URL)
-        setSchemaLogs(prev => [...prev, '🔍 Debug Information:']);
-        setSchemaLogs(prev => [...prev, `  window.location.pathname = "${window.location.pathname}"`]);
-        setSchemaLogs(prev => [...prev, `  window.location.hostname = "${window.location.hostname}"`]);
-
-        const currentPath = window.location.pathname;
-        setSchemaLogs(prev => [...prev, `  currentPath = "${currentPath}"`]);
-        setSchemaLogs(prev => [...prev, `  currentPath.startsWith('/aiq3/') = ${currentPath.startsWith('/aiq3/')}`]);
-
-        let apiUrl;
-        let detectionMethod = '';
-
-        // Always detect from path (ignore environment variables)
-        if (currentPath.startsWith('/aiq3/')) {
-            apiUrl = '/aiq3/api';
-            detectionMethod = 'Detected /aiq3/ in path';
-        } else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-            apiUrl = 'http://localhost:8000/api';
-            detectionMethod = 'Localhost detected';
-        } else {
-            const base = window.location.pathname.split('/').slice(0, 2).join('/');
-            apiUrl = base ? `${base}/api` : '/api';
-            detectionMethod = `Fallback: base="${base}"`;
-        }
-
-        const fullUrl = `${apiUrl}/admin/update-schema.php`;
-
-        setSchemaLogs(prev => [...prev, `  Detection Method: ${detectionMethod}`]);
-        setSchemaLogs(prev => [...prev, `  Detected API URL: ${apiUrl}`]);
-        setSchemaLogs(prev => [...prev, `  Full Endpoint: ${fullUrl}`]);
-        setSchemaLogs(prev => [...prev, `  Current Location: ${window.location.href}`]);
-        setSchemaLogs(prev => [...prev, '']);
+        setSchemaLogs(prev => [...prev, 'Starting database schema update...']);
         setSchemaLogs(prev => [...prev, 'Starting database schema update...']);
 
         try {
@@ -117,13 +89,12 @@ export function SystemTools() {
                 setSchemaLogs(prev => [...prev, '']);
                 setSchemaLogs(prev => [...prev, '💡 Troubleshooting 404:']);
                 setSchemaLogs(prev => [...prev, '  1. Verify file exists on server']);
-                setSchemaLogs(prev => [...prev, `  2. Check: ${window.location.origin}/aiq2/api/admin/update-schema.php`]);
+                setSchemaLogs(prev => [...prev, `  2. Check: ${window.location.origin}/aiq3/api/admin/update-schema.php`]);
                 setSchemaLogs(prev => [...prev, '  3. Ensure .htaccess is not blocking the file']);
                 setSchemaLogs(prev => [...prev, '  4. Check file permissions (should be 644)']);
             }
 
             console.error('Schema update error:', error);
-            console.error('Full URL attempted:', fullUrl);
             toast.error('Failed to update schema - check console for details');
         } finally {
             setSchemaUpdating(false);
@@ -135,28 +106,13 @@ export function SystemTools() {
         setSchemaLogs([]);
         setSchemaLogs(prev => [...prev, '🔍 Testing API Connection...']);
 
-        // Always use path detection (ignore environment variables)
-        const currentPath = window.location.pathname;
-        let apiUrl;
-
-        if (currentPath.startsWith('/aiq3/')) {
-            apiUrl = '/aiq3/api';
-        } else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-            apiUrl = 'http://localhost:8000/api';
-        } else {
-            const base = window.location.pathname.split('/').slice(0, 2).join('/');
-            apiUrl = base ? `${base}/api` : '/api';
-        }
-
         setSchemaLogs(prev => [...prev, `Current Path: ${window.location.pathname}`]);
-        setSchemaLogs(prev => [...prev, `Detected API URL: ${apiUrl}`]);
 
         try {
-            const testUrl = `${apiUrl}/admin/test.php`;
-            setSchemaLogs(prev => [...prev, `Testing: ${testUrl}`]);
+            setSchemaLogs(prev => [...prev, 'Testing endpoint: /admin/test.php']);
 
-            const response = await fetch(testUrl);
-            const data = await response.json();
+            const response = await api.get('/admin/test.php');
+            const data = response.data;
 
             setSchemaLogs(prev => [...prev, '✅ Connection successful!']);
             setSchemaLogs(prev => [...prev, `Server Time: ${data.timestamp}`]);
@@ -173,6 +129,32 @@ export function SystemTools() {
         } catch (error: any) {
             setSchemaLogs(prev => [...prev, `❌ Connection failed: ${error.message}`]);
             toast.error('API connection test failed');
+        }
+    };
+
+    const handleBulkActivate = async (type: string) => {
+        if (!confirm(`This will activate all inactive questions of type "${type}". Continue?`)) return;
+
+        setActivating(true);
+        setActivateLogs([]);
+        try {
+            const result = await fetchAPI('/admin/bulk-activate_types.php', {
+                method: 'POST',
+                body: JSON.stringify({ type }),
+            });
+
+            if (result.success) {
+                setActivateLogs(prev => [...prev, `✅ ${result.message}`]);
+                toast.success(result.message);
+            } else {
+                setActivateLogs(prev => [...prev, `❌ Error: ${result.error}`]);
+                toast.error('Activation failed');
+            }
+        } catch (error: any) {
+            setActivateLogs(prev => [...prev, `❌ Request Failed: ${error.message}`]);
+            toast.error('Failed to communicate with API');
+        } finally {
+            setActivating(false);
         }
     };
 
@@ -323,6 +305,58 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
                         </div>
                     )
                     }
+                </div>
+
+                {/* Bulk Activate Questions */}
+                <div className="bg-card rounded-xl shadow-sm border border-border p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                        <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
+                            <CheckCircle2 className="w-6 h-6 text-green-600 dark:text-green-400" />
+                        </div>
+                        <h2 className="text-xl font-semibold text-foreground">Bulk Activate Questions</h2>
+                    </div>
+                    <p className="text-muted-foreground mb-6">
+                        Activate questions that are currently in "Draft" or "Inactive" status.
+                    </p>
+
+                    <div className="grid grid-cols-2 gap-3">
+                        <button
+                            onClick={() => handleBulkActivate('image_identify_person')}
+                            disabled={activating}
+                            className="flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-xs font-medium text-white bg-green-600 hover:bg-green-700 disabled:opacity-50"
+                        >
+                            Activate Person Questions
+                        </button>
+                        <button
+                            onClick={() => handleBulkActivate('image_identify_logo')}
+                            disabled={activating}
+                            className="flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-xs font-medium text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50"
+                        >
+                            Activate Logo Questions
+                        </button>
+                        <button
+                            onClick={() => handleBulkActivate('text_mcq')}
+                            disabled={activating}
+                            className="flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-xs font-medium text-white bg-purple-600 hover:bg-purple-700 disabled:opacity-50"
+                        >
+                            Activate MCQ Questions
+                        </button>
+                        <button
+                            onClick={() => handleBulkActivate('all')}
+                            disabled={activating}
+                            className="flex items-center justify-center px-4 py-2 border border-border rounded-md shadow-sm text-xs font-medium text-foreground bg-muted hover:bg-muted/80 disabled:opacity-50"
+                        >
+                            Activate ALL Questions
+                        </button>
+                    </div>
+
+                    {activateLogs.length > 0 && (
+                        <div className="mt-6 bg-gray-900 dark:bg-gray-950 rounded-lg p-4 font-mono text-xs text-green-400 h-24 overflow-y-auto">
+                            {activateLogs.map((log, i) => (
+                                <div key={i}>{log}</div>
+                            ))}
+                        </div>
+                    )}
                 </div>
 
             </div>

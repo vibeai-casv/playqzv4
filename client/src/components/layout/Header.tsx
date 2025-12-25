@@ -17,9 +17,11 @@ export function Header() {
                 <div className="flex justify-between items-center h-16">
                     {/* Logo */}
                     <Link to="/" className="flex items-center space-x-2">
-                        <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center shadow-lg shadow-primary/20">
-                            <span className="text-primary-foreground font-bold text-xl">Q</span>
-                        </div>
+                        <img
+                            src={`${import.meta.env.BASE_URL}aiq4.png`}
+                            className="w-10 h-10 object-contain"
+                            alt="AI Quizzer Logo"
+                        />
                         <span className="font-bold text-xl text-zinc-900 dark:text-white">AI Quizzer</span>
                     </Link>
 

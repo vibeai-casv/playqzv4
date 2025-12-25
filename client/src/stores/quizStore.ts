@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import type { Question, QuizAttempt, QuizResponse, QuizConfig } from '../types';
 import api from '../lib/api';
-import { generateUuid } from '../lib/utils';
+import { generateUuid, shuffle } from '../lib/utils';
 
 interface QuizState {
     currentAttempt: QuizAttempt | null;
@@ -36,10 +36,14 @@ export const useQuizStore = create<QuizState>((set, get) => ({
         try {
             const response = await api.post('/quiz/generate.php', config);
             const { attempt, questions } = response.data;
+            const shuffledQuestions = (questions as Question[]).map(q => ({
+                ...q,
+                options: q.options ? shuffle(q.options) : q.options
+            }));
 
             set({
                 currentAttempt: attempt as QuizAttempt,
-                questions: questions as Question[],
+                questions: shuffledQuestions,
                 responses: new Map(),
                 currentQuestionIndex: 0,
                 timeRemaining: config.timeLimit || 0,
@@ -56,10 +60,14 @@ export const useQuizStore = create<QuizState>((set, get) => ({
         try {
             const response = await api.get(`/quiz/get.php?id=${attemptId}`);
             const { attempt, questions } = response.data;
+            const shuffledQuestions = (questions as Question[]).map(q => ({
+                ...q,
+                options: q.options ? shuffle(q.options) : q.options
+            }));
 
             set({
                 currentAttempt: attempt as QuizAttempt,
-                questions: questions as Question[],
+                questions: shuffledQuestions,
                 responses: new Map(), // TODO: Fetch existing responses if resuming
                 currentQuestionIndex: 0,
                 timeRemaining: attempt.time_limit || 0, // Adjust based on elapsed time if needed
@@ -152,9 +160,14 @@ export const useQuizStore = create<QuizState>((set, get) => ({
     })),
 
     setQuiz: (attempt, questions) => {
+        const shuffledQuestions = (questions as Question[]).map(q => ({
+            ...q,
+            options: q.options ? shuffle(q.options) : q.options
+        }));
+
         set({
             currentAttempt: attempt,
-            questions: questions,
+            questions: shuffledQuestions,
             responses: new Map(),
             currentQuestionIndex: 0,
             timeRemaining: attempt.config.timeLimit || 0,

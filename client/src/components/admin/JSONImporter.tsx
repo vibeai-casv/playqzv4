@@ -46,21 +46,40 @@ export function JSONImporter({ onImportComplete, onCancel }: JSONImporterProps) 
         try {
             // Read file content
             const fileContent = await file.text();
-            const questions = JSON.parse(fileContent);
 
-            // Validate it's an array
-            if (!Array.isArray(questions)) {
-                toast.error('JSON file must contain an array of questions');
+            // 1. Clean the content (strip markdown code blocks if present)
+            let cleanedContent = fileContent.trim();
+            if (cleanedContent.startsWith('```')) {
+                cleanedContent = cleanedContent.replace(/^```(?:json)?/, '').replace(/```$/, '').trim();
+            }
+
+            // 2. Parse JSON
+            let data;
+            try {
+                data = JSON.parse(cleanedContent);
+            } catch (e: any) {
+                // Try one more time stripping common hidden characters
+                const reCleaned = cleanedContent.replace(/[\u200B-\u200D\uFEFF]/g, '');
+                data = JSON.parse(reCleaned);
+            }
+
+            // 3. Extract questions array
+            let questionsArray: any[] = [];
+            if (Array.isArray(data)) {
+                questionsArray = data;
+            } else if (data && typeof data === 'object' && Array.isArray(data.questions)) {
+                questionsArray = data.questions;
+            } else {
+                toast.error('JSON must be an array of questions or an object with a "questions" array');
                 setIsImporting(false);
                 return;
             }
 
-            // Send to API
-            // Send to API
+            // 4. Send to API
             const response = await api.post(
                 '/questions/import.php',
                 {
-                    questions,
+                    questions: questionsArray,
                     skipDuplicates
                 }
             );

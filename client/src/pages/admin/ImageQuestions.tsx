@@ -5,7 +5,7 @@ import api from '../../lib/api';
 import { getImageUrl } from '../../lib/utils';
 
 interface ImageQuestion {
-    id: number;
+    id: string;
     question_text: string;
     question_type: 'image_identify_person';
     image_url: string | null;
@@ -23,7 +23,7 @@ export function ImageQuestions() {
     const [questions, setQuestions] = useState<ImageQuestion[]>([]);
     const [loading, setLoading] = useState(true);
     const [stats, setStats] = useState<any>(null);
-    const [editingId, setEditingId] = useState<number | null>(null);
+    const [editingId, setEditingId] = useState<string | null>(null);
     const [editForm, setEditForm] = useState<Partial<ImageQuestion>>({});
 
     useEffect(() => {
@@ -63,7 +63,7 @@ export function ImageQuestions() {
         setEditForm({});
     };
 
-    const saveEdit = async (id: number) => {
+    const saveEdit = async (id: string) => {
         try {
             await api.put(`/questions/update.php?id=${id}`, editForm);
             toast.success('Question updated successfully!');

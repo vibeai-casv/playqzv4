@@ -6,7 +6,7 @@ Write-Host "  AIQ3 Production Package Builder" -ForegroundColor Green
 Write-Host "========================================`n" -ForegroundColor Cyan
 
 # Set paths
-$packageDir = "AIQ3_PRODUCTION"
+$packageDir = "AIQ3_DIST_READY"
 $clientDist = "client\dist"
 $apiDir = "api"
 
@@ -38,7 +38,7 @@ RewriteBase /aiq3/
 
 # Redirect HTTP to HTTPS
 RewriteCond %{HTTPS} off
-RewriteRule ^(.*)$ https://%{HTTP_HOST}/aiq3/$1 [L,R=301]
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/aiq3/`$1 [L,R=301]
 
 # Handle React Router - send all requests to index.html
 RewriteCond %{REQUEST_FILENAME} !-f

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CheckCircle, XCircle, Loader2, ArrowLeft, RefreshCw, Share2, X, Trophy, AlertCircle, BarChart2 } from 'lucide-react';
 import { useQuizStore } from '../../stores/quizStore';
-import { cn } from '../../lib/utils';
+import { cn, getImageUrl } from '../../lib/utils';
 import { toast } from 'sonner';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 // import confetti from 'canvas-confetti';
@@ -225,13 +225,16 @@ export function QuizResults() {
                                             {isCorrect ? <CheckCircle className="w-4 h-4" /> : <XCircle className="w-4 h-4" />}
                                         </div>
                                         <div className="flex-1">
-                                            <p className="font-medium text-slate-200 mb-3">{q.question_text}</p>
-
-                                            {q.image_url && (
-                                                <div className="mb-4">
-                                                    <img src={q.image_url} alt="Question" className="max-h-40 rounded-lg border border-white/10" />
-                                                </div>
-                                            )}
+                                            <div className="flex items-start gap-4 mb-4">
+                                                {q.image_url && (
+                                                    <img
+                                                        src={getImageUrl(q.image_url)}
+                                                        alt="Question"
+                                                        className="w-16 h-16 rounded-lg object-cover border border-white/10 shrink-0 shadow-md"
+                                                    />
+                                                )}
+                                                <p className="font-medium text-slate-200 mt-1">{q.question_text}</p>
+                                            </div>
 
                                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                                                 <div className={cn(

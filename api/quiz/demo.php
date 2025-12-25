@@ -32,6 +32,9 @@ try {
     // Parse JSON fields in questions
     foreach ($questions as &$q) {
         $q['options'] = json_decode($q['options']);
+        if (is_array($q['options'])) {
+            shuffle($q['options']);
+        }
         $q['tags'] = json_decode($q['tags']);
         // Remove correct answer from client-side response for security? 
         // For a demo, it's fine to send it if we validate on client, 

@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { XCircle, Loader2, X, ChevronLeft, ChevronRight, CheckCircle, AlertTriangle, Trophy, ArrowRight } from 'lucide-react';
-import { cn } from '../../lib/utils';
+import { cn, shuffle } from '../../lib/utils';
 import { Image } from '../../components/ui/Image';
 import api from '../../lib/api';
 import type { Question } from '../../types';
@@ -50,7 +50,11 @@ export const Demo: React.FC = () => {
         const fetchQuestions = async () => {
             try {
                 const { data } = await api.get('/quiz/demo.php');
-                setQuestions(data.questions);
+                const shuffledQuestions = (data.questions as Question[]).map(q => ({
+                    ...q,
+                    options: q.options ? shuffle(q.options) : q.options
+                }));
+                setQuestions(shuffledQuestions);
             } catch (error) {
                 console.error('Failed to load demo quiz:', error);
                 toast.error('Failed to load demo quiz. Please try again.');

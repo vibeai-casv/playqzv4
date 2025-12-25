@@ -1,0 +1,504 @@
+{
+"questions": [
+{
+"question_text": "Who is widely considered the 'father of Artificial Intelligence' for his work on the Turing Test?",
+"question_type": "text_mcq",
+"options": ["Alan Turing", "John McCarthy", "Marvin Minsky", "Geoffrey Hinton"],
+"correct_answer": "Alan Turing",
+"category": "History of AI",
+"difficulty": "easy",
+"points": 10,
+"explanation": "Alan Turing proposed the Turing Test in his 1950 paper 'Computing Machinery and Intelligence' to determine a machine's ability to exhibit intelligent behavior."
+},
+{
+"question_text": "Which year was the term 'Artificial Intelligence' coined at the Dartmouth Conference?",
+"question_type": "text_mcq",
+"options": ["1956", "1950", "1965", "1945"],
+"correct_answer": "1956",
+"category": "History of AI",
+"difficulty": "medium",
+"points": 10,
+"explanation": "John McCarthy coined the term 'Artificial Intelligence' at the seminal Dartmouth Summer Research Project on Artificial Intelligence in 1956."
+},
+{
+"question_text": "Which AI program defeated world chess champion Garry Kasparov in 1997?",
+"question_type": "text_mcq",
+"options": ["Deep Blue", "AlphaGo", "Watson", "Stockfish"],
+"correct_answer": "Deep Blue",
+"category": "Evolution of AI",
+"difficulty": "easy",
+"points": 10,
+"explanation": "IBM's Deep Blue became the first computer system to defeat a reigning world chess champion in a match under standard chess tournament time controls."
+},
+{
+"question_text": "What does 'GPT' stand for in models like ChatGPT?",
+"question_type": "text_mcq",
+"options": ["Generative Pre-trained Transformer", "General Purpose Technology", "Global Processing Tool", "Graphic Processing Transformer"],
+"correct_answer": "Generative Pre-trained Transformer",
+"category": "Generative AI",
+"difficulty": "easy",
+"points": 10,
+"explanation": "GPT stands for Generative Pre-trained Transformer, reflecting its architecture (Transformer), training method (Pre-trained), and capability (Generative)."
+},
+{
+"question_text": "Which company developed the AI system AlphaGo?",
+"question_type": "text_mcq",
+"options": ["DeepMind", "OpenAI", "IBM", "Microsoft"],
+"correct_answer": "DeepMind",
+"category": "Leading Institutions in AI",
+"difficulty": "medium",
+"points": 10,
+"explanation": "DeepMind, a UK-based company acquired by Google, developed AlphaGo, which famously defeated Lee Sedol at the game of Go."
+},
+{
+"question_text": "Who is known as one of the 'Godfathers of AI' and won a Nobel Prize in Physics in 2024?",
+"question_type": "text_mcq",
+"options": ["Geoffrey Hinton", "Yann LeCun", "Andrew Ng", "Sam Altman"],
+"correct_answer": "Geoffrey Hinton",
+"category": "Leaders of AI",
+"difficulty": "hard",
+"points": 10,
+"explanation": "Geoffrey Hinton, along with John Hopfield, was awarded the Nobel Prize in Physics in 2024 for foundational discoveries that enable machine learning with artificial neural networks."
+},
+{
+"question_text": "What is 'Agentic AI' primarily characterized by?",
+"question_type": "text_mcq",
+"options": ["Autonomy and goal-directed behavior", "Image generation only", "Passive data processing", "Manual human control"],
+"correct_answer": "Autonomy and goal-directed behavior",
+"category": "Agentic AI",
+"difficulty": "medium",
+"points": 10,
+"explanation": "Agentic AI refers to systems that can autonomously pursue complex goals with limited direct human supervision, often breaking tasks down into sub-steps."
+},
+{
+"question_text": "Which technique allows Generative AI to create realistic images from text descriptions?",
+"question_type": "text_mcq",
+"options": ["Diffusion Models", "Linear Regression", "Decision Trees", "K-Means Clustering"],
+"correct_answer": "Diffusion Models",
+"category": "Generative AI",
+"difficulty": "medium",
+"points": 10,
+"explanation": "Diffusion models, such as those used in Stable Diffusion and DALL-E, work by adding noise to an image and then learning to reverse the process to generate clear images."
+},
+{
+"question_text": "What was the name of the first AI chatbot developed by Joseph Weizenbaum in the 1960s?",
+"question_type": "text_mcq",
+"options": ["ELIZA", "ALICE", "Siri", "Alexa"],
+"correct_answer": "ELIZA",
+"category": "History of AI",
+"difficulty": "medium",
+"points": 10,
+"explanation": "ELIZA was a natural language processing program created from 1964 to 1966 at the MIT Artificial Intelligence Laboratory, famous for parodying a Rogerian psychotherapist."
+},
+{
+"question_text": "Which AI concept refers to the hypothetical future point where AI growth becomes uncontrollable and irreversible?",
+"question_type": "text_mcq",
+"options": ["The Singularity", "The Turing Point", "The Neural Horizon", "The Quantum Leap"],
+"correct_answer": "The Singularity",
+"category": "Future of AI",
+"difficulty": "medium",
+"points": 10,
+"explanation": "The Technological Singularity is a hypothetical point in time at which technological growth becomes uncontrollable and irreversible, resulting in unfathomable changes to human civilization."
+},
+{
+"question_text": "What is the primary role of a 'Discriminator' in a GAN (Generative Adversarial Network)?",
+"question_type": "text_mcq",
+"options": ["To distinguish real data from fake data", "To generate new images", "To storing training data", "To optimize the loss function only"],
+"correct_answer": "To distinguish real data from fake data",
+"category": "Generative AI",
+"difficulty": "hard",
+"points": 10,
+"explanation": "In a GAN, the Discriminator evaluates instances to decide whether they are real (from the dataset) or fake (created by the Generator)."
+},
+{
+"question_text": "Which organization created ChatGPT?",
+"question_type": "text_mcq",
+"options": ["OpenAI", "Google", "Meta", "Anthropic"],
+"correct_answer": "OpenAI",
+"category": "Leading Institutions in AI",
+"difficulty": "easy",
+"points": 10,
+"explanation": "OpenAI is the research laboratory responsible for creating the GPT series of models and the product ChatGPT."
+},
+{
+"question_text": "What is 'Hallucination' in the context of Large Language Models?",
+"question_type": "text_mcq",
+"options": ["Generating factually incorrect information confidently", "Visualizing data in 3D", "Running out of memory", "Overheating the GPU"],
+"correct_answer": "Generating factually incorrect information confidently",
+"category": "Trends in AI",
+"difficulty": "medium",
+"points": 10,
+"explanation": "Hallucination occurs when an LLM generates text that is grammatically correct and confident-sounding but is factually false or nonsensical."
+},
+{
+"question_text": "Which of the following is a key characteristic of 'Narrow AI'?",
+"question_type": "text_mcq",
+"options": ["Specialized in a single task", "Possesses human-like consciousness", "Can learn any intellectual task", "Emotionally intelligent"],
+"correct_answer": "Specialized in a single task",
+"category": "Evolution of AI",
+"difficulty": "easy",
+"points": 10,
+"explanation": "Narrow AI (or Weak AI) is designed to perform a specific task, such as facial recognition or internet searches, as opposed to General AI."
+},
+{
+"question_text": "Who is the CEO of OpenAI as of 2024?",
+"question_type": "text_mcq",
+"options": ["Sam Altman", "Elon Musk", "Sundar Pichai", "Satya Nadella"],
+"correct_answer": "Sam Altman",
+"category": "Leaders of AI",
+"difficulty": "easy",
+"points": 10,
+"explanation": "Sam Altman is the co-founder and CEO of OpenAI, the company behind ChatGPT."
+},
+{
+"question_text": "What is the 'alignment problem' in AI?",
+"question_type": "text_mcq",
+"options": ["Ensuring AI goals match human values", "Aligning text in documents", "Calibrating robot sensors", "Structuring databases correctly"],
+"correct_answer": "Ensuring AI goals match human values",
+"category": "Future of AI",
+"difficulty": "medium",
+"points": 10,
+"explanation": "The alignment problem refers to the challenge of ensuring that artificial intelligence systems behave in ways that are beneficial to humans and consistent with human values."
+},
+{
+"question_text": "Which neural network architecture introduced the 'Attention Mechanism'?",
+"question_type": "text_mcq",
+"options": ["Transformer", "RNN", "CNN", "Perceptron"],
+"correct_answer": "Transformer",
+"category": "Evolution of AI",
+"difficulty": "hard",
+"points": 10,
+"explanation": "The Transformer architecture, introduced in the paper 'Attention Is All You Need' (2017), relies entirely on the attention mechanism to draw global dependencies."
+},
+{
+"question_text": "What does RAG stand for in modern AI applications?",
+"question_type": "text_mcq",
+"options": ["Retrieval-Augmented Generation", "Random Access Generation", "Recursive Algorithm Grouping", "Rapid AI Growth"],
+"correct_answer": "Retrieval-Augmented Generation",
+"category": "Trends in AI",
+"difficulty": "medium",
+"points": 10,
+"explanation": "RAG enhances the accuracy and reliability of generative AI models with facts fetched from external sources."
+},
+{
+"question_text": "Which AI model from Google is a direct competitor to GPT-4?",
+"question_type": "text_mcq",
+"options": ["Gemini", "Bard", "Llama", "Claude"],
+"correct_answer": "Gemini",
+"category": "Trends in AI",
+"difficulty": "easy",
+"points": 10,
+"explanation": "Gemini is Google's most capable and general-purpose AI model, designed to compete directly with OpenAI's GPT-4."
+},
+{
+"question_text": "Which field of AI focuses on computers interpreting and understanding visual information?",
+"question_type": "text_mcq",
+"options": ["Computer Vision", "Natural Language Processing", "Robotics", "Expert Systems"],
+"correct_answer": "Computer Vision",
+"category": "Evolution of AI",
+"difficulty": "easy",
+"points": 10,
+"explanation": "Computer Vision is the field of AI that enables computers and systems to derive meaningful information from digital images, videos, and other visual inputs."
+},
+{
+"question_text": "Who is the Chief AI Scientist at Meta?",
+"question_type": "text_mcq",
+"options": ["Yann LeCun", "Demis Hassabis", "Fei-Fei Li", "Ray Kurzweil"],
+"correct_answer": "Yann LeCun",
+"category": "Leaders of AI",
+"difficulty": "medium",
+"points": 10,
+"explanation": "Yann LeCun is a Turing Award winner and serves as the VP and Chief AI Scientist at Meta."
+},
+{
+"question_text": "What is 'Multimodal AI'?",
+"question_type": "text_mcq",
+"options": ["AI that can process text, images, and audio", "AI that uses multiple servers", "AI with multiple personalities", "AI that runs in multiple modes"],
+"correct_answer": "AI that can process text, images, and audio",
+"category": "Trends in AI",
+"difficulty": "easy",
+"points": 10,
+"explanation": "Multimodal AI systems can understand, interpret, and generate data across multiple types of media (modalities) like text, images, and sound simultaneously."
+},
+{
+"question_text": "Which test was originally called the 'Imitation Game'?",
+"question_type": "text_mcq",
+"options": ["The Turing Test", "The Voight-Kampff Test", "The IQ Test", "The CAPTCHA Test"],
+"correct_answer": "The Turing Test",
+"category": "History of AI",
+"difficulty": "medium",
+"points": 10,
+"explanation": "Alan Turing originally called his proposed test for machine intelligence 'The Imitation Game' in his 1950 paper."
+},
+{
+"question_text": "What is the primary function of an 'AI Agent'?",
+"question_type": "text_mcq",
+"options": ["To perceive its environment and take actions to achieve goals", "To store large databases", "To display graphics", "To mine cryptocurrency"],
+"correct_answer": "To perceive its environment and take actions to achieve goals",
+"category": "Agentic AI",
+"difficulty": "medium",
+"points": 10,
+"explanation": "An AI agent is a system that perceives its environment through sensors and acts upon that environment through actuators to achieve specific goals."
+},
+{
+"question_text": "Which university is home to the CSAIL lab?",
+"question_type": "text_mcq",
+"options": ["MIT", "Stanford", "Carnegie Mellon", "Berkeley"],
+"correct_answer": "MIT",
+"category": "Leading Institutions in AI",
+"difficulty": "medium",
+"points": 10,
+"explanation": "CSAIL stands for the Computer Science and Artificial Intelligence Laboratory, which is a research institute at the Massachusetts Institute of Technology (MIT)."
+},
+{
+"question_text": "What does 'NLP' stand for in AI?",
+"question_type": "text_mcq",
+"options": ["Natural Language Processing", "Neural Language Programming", "Network Learning Protocol", "New Learning Paradigm"],
+"correct_answer": "Natural Language Processing",
+"category": "Evolution of AI",
+"difficulty": "easy",
+"points": 10,
+"explanation": "Natural Language Processing (NLP) is a branch of AI that helps computers understand, interpret, and manipulate human language."
+},
+{
+"question_text": "Which famous sci-fi author formulated the 'Three Laws of Robotics'?",
+"question_type": "text_mcq",
+"options": ["Isaac Asimov", "Arthur C. Clarke", "Philip K. Dick", "H.G. Wells"],
+"correct_answer": "Isaac Asimov",
+"category": "History of AI",
+"difficulty": "easy",
+"points": 10,
+"explanation": "Isaac Asimov introduced the Three Laws of Robotics in his 1942 short story 'Runaround'."
+},
+{
+"question_text": "What is 'Reinforcement Learning'?",
+"question_type": "text_mcq",
+"options": ["Learning through rewards and penalties", "Learning from labeled data", "Learning from unlabeled data", "Learning by reading books"],
+"correct_answer": "Learning through rewards and penalties",
+"category": "Evolution of AI",
+"difficulty": "medium",
+"points": 10,
+"explanation": "Reinforcement Learning is an area of ML where an agent learns to make decisions by performing actions and receiving feedback in the form of rewards or penalties."
+},
+{
+"question_text": "Which company created the Llama series of open-source models?",
+"question_type": "text_mcq",
+"options": ["Meta", "Google", "Amazon", "Microsoft"],
+"correct_answer": "Meta",
+"category": "Leading Institutions in AI",
+"difficulty": "medium",
+"points": 10,
+"explanation": "Meta (formerly Facebook) developed and released the Llama (Large Language Model Meta AI) series as open-source models."
+},
+{
+"question_text": "What describes 'AGI' (Artificial General Intelligence)?",
+"question_type": "text_mcq",
+"options": ["Machine intelligence comparable to a human brain across diverse tasks", "AI for playing games only", "Automated manufacturing", "Simple chatbots"],
+"correct_answer": "Machine intelligence comparable to a human brain across diverse tasks",
+"category": "Future of AI",
+"difficulty": "medium",
+"points": 10,
+"explanation": "AGI refers to a type of AI that possesses the ability to understand, learn, and apply knowledge across a wide variety of tasks, similar to human intelligence."
+},
+{
+"question_text": "What is a 'Prompt' in the context of Generative AI?",
+"question_type": "text_mcq",
+"options": ["The input text given to the model", "The speed of the processor", "The output image", "The coding language used"],
+"correct_answer": "The input text given to the model",
+"category": "Generative AI",
+"difficulty": "easy",
+"points": 10,
+"explanation": "A prompt is the natural language text input provided by a user to guide the AI model's output."
+},
+{
+"question_text": "Which AI winter occurred during the late 1980s?",
+"question_type": "text_mcq",
+"options": ["The Second AI Winter", "The First AI Winter", "The Great Freeze", "The Neural Collapse"],
+"correct_answer": "The Second AI Winter",
+"category": "History of AI",
+"difficulty": "hard",
+"points": 10,
+"explanation": "The Second AI Winter (roughly 1987–1993) was caused by the collapse of the market for specialized Lisp machines and failed expectations of expert systems."
+},
+{
+"question_text": "Who founded the Stanford Artificial Intelligence Laboratory (SAIL)?",
+"question_type": "text_mcq",
+"options": ["John McCarthy", "Alan Turing", "Herb Simon", "Frank Rosenblatt"],
+"correct_answer": "John McCarthy",
+"category": "Leading Institutions in AI",
+"difficulty": "hard",
+"points": 10,
+"explanation": "John McCarthy founded the Stanford Artificial Intelligence Laboratory (SAIL) in 1963 after moving from MIT."
+},
+{
+"question_text": "What is 'CoT' (Chain of Thought) prompting?",
+"question_type": "text_mcq",
+"options": ["Encouraging the model to explain its reasoning step-by-step", "Connecting multiple computers", "A type of blockchain AI", "Linking different databases"],
+"correct_answer": "Encouraging the model to explain its reasoning step-by-step",
+"category": "Trends in AI",
+"difficulty": "medium",
+"points": 10,
+"explanation": "Chain of Thought prompting improves the reasoning capabilities of LLMs by asking them to break down a problem into intermediate steps."
+},
+{
+"question_text": "Which famous paper introduced the concept of the 'Perceptron'?",
+"question_type": "text_mcq",
+"options": ["The Perceptron: A Probabilistic Model for Information Storage", "Computing Machinery and Intelligence", "A Logical Calculus of Ideas", "Learning Representations by Back-propagating Errors"],
+"correct_answer": "The Perceptron: A Probabilistic Model for Information Storage",
+"category": "History of AI",
+"difficulty": "hard",
+"points": 10,
+"explanation": "Frank Rosenblatt introduced the Perceptron algorithm in 1958, a pioneering binary classifier."
+},
+{
+"question_text": "What is the main concern regarding 'Deepfakes'?",
+"question_type": "text_mcq",
+"options": ["Spread of misinformation via realistic fake media", "High cost of production", "Low resolution", "Lack of audio support"],
+"correct_answer": "Spread of misinformation via realistic fake media",
+"category": "Future of AI",
+"difficulty": "easy",
+"points": 10,
+"explanation": "Deepfakes use generative AI to create hyper-realistic fake videos or audio, posing significant risks for misinformation, fraud, and reputation damage."
+},
+{
+"question_text": "Which company is associated with the 'Anthropic' AI lab?",
+"question_type": "text_mcq",
+"options": ["Amazon (major investor)", "Apple", "Netflix", "Adobe"],
+"correct_answer": "Amazon (major investor)",
+"category": "Leading Institutions in AI",
+"difficulty": "medium",
+"points": 10,
+"explanation": "Anthropic is an AI safety and research company; Amazon is a major strategic investor and partner, having invested billions."
+},
+{
+"question_text": "Who is the creator of the Python library 'Keras'?",
+"question_type": "text_mcq",
+"options": ["François Chollet", "Guido van Rossum", "Travis Oliphant", "Wes McKinney"],
+"correct_answer": "François Chollet",
+"category": "Leaders of AI",
+"difficulty": "hard",
+"points": 10,
+"explanation": "François Chollet represents a leading figure in modern AI software, having created Keras, a high-level neural networks API."
+},
+{
+"question_text": "What does 'Explainable AI' (XAI) aim to solve?",
+"question_type": "text_mcq",
+"options": ["The 'black box' problem of neural networks", "The speed of training", "The cost of hardware", "The lack of data"],
+"correct_answer": "The 'black box' problem of neural networks",
+"category": "Future of AI",
+"difficulty": "medium",
+"points": 10,
+"explanation": "XAI aims to make the decision-making processes of AI systems transparent and understandable to humans, addressing the opacity of complex models."
+},
+{
+"question_text": "Which algorithm is commonly used for supervised learning classification tasks?",
+"question_type": "text_mcq",
+"options": ["Support Vector Machine (SVM)", "K-Means", "Apriori", "Q-Learning"],
+"correct_answer": "Support Vector Machine (SVM)",
+"category": "Evolution of AI",
+"difficulty": "medium",
+"points": 10,
+"explanation": "Support Vector Machines (SVMs) are supervised learning models used for classification and regression analysis."
+},
+{
+"question_text": "What characterizes a 'Foundation Model'?",
+"question_type": "text_mcq",
+"options": ["A model trained on broad data adaptable to many tasks", "A model for construction", "A basic calculator", "A database schema"],
+"correct_answer": "A model trained on broad data adaptable to many tasks",
+"category": "Generative AI",
+"difficulty": "medium",
+"points": 10,
+"explanation": "Foundation models (like GPT-4 or BERT) are trained on vast amounts of data and can be adapted (fine-tuned) to a wide range of downstream tasks."
+},
+{
+"question_text": "Which leader is associated with the phrase 'AI is the new electricity'?",
+"question_type": "text_mcq",
+"options": ["Andrew Ng", "Elon Musk", "Bill Gates", "Mark Zuckerberg"],
+"correct_answer": "Andrew Ng",
+"category": "Leaders of AI",
+"difficulty": "easy",
+"points": 10,
+"explanation": "Andrew Ng, a prominent AI researcher and educator, famously stated 'AI is the new electricity' to describe its transformative potential."
+},
+{
+"question_text": "What is 'Few-Shot Learning'?",
+"question_type": "text_mcq",
+"options": ["Learning from a small number of examples", "Learning by shooting targets", "Learning over a few years", "Learning with low battery"],
+"correct_answer": "Learning from a small number of examples",
+"category": "Trends in AI",
+"difficulty": "medium",
+"points": 10,
+"explanation": "Few-Shot Learning is a machine learning paradigm where the model learns to perform a task given only a very small amount of training data."
+},
+{
+"question_text": "What is the name of Microsoft's AI companion integrated into Windows and Office?",
+"question_type": "text_mcq",
+"options": ["Copilot", "Clippy", "Cortana", "Bing Chat"],
+"correct_answer": "Copilot",
+"category": "Trends in AI",
+"difficulty": "easy",
+"points": 10,
+"explanation": "Microsoft rebranded and integrated its AI technologies across its ecosystem under the name 'Microsoft Copilot'."
+},
+{
+"question_text": "Which 1980s concept describes a computer system that mimics the decision-making of a human expert?",
+"question_type": "text_mcq",
+"options": ["Expert System", "Neural Network", "Genetic Algorithm", "Fuzzy Logic"],
+"correct_answer": "Expert System",
+"category": "History of AI",
+"difficulty": "medium",
+"points": 10,
+"explanation": "Expert systems were a dominant form of AI in the 1980s, designed to solve complex problems by reasoning through bodies of knowledge like a human expert."
+},
+{
+"question_text": "What distinguishes 'Agentic AI' from standard chatbots?",
+"question_type": "text_mcq",
+"options": ["Ability to execute multi-step workflows autonomously", "Better spelling", "Faster typing speed", "More colors"],
+"correct_answer": "Ability to execute multi-step workflows autonomously",
+"category": "Agentic AI",
+"difficulty": "medium",
+"points": 10,
+"explanation": "While chatbots respond to queries, agentic AI can plan, execute, and iterate on complex workflows (like coding an entire app) with minimal human intervention."
+},
+{
+"question_text": "Which Chinese tech giant developed the 'Ernie Bot'?",
+"question_type": "text_mcq",
+"options": ["Baidu", "Alibaba", "Tencent", "Xiaomi"],
+"correct_answer": "Baidu",
+"category": "Leading Institutions in AI",
+"difficulty": "medium",
+"points": 10,
+"explanation": "Baidu developed Ernie Bot (Enhanced Representation through Knowledge Integration) as a competitor to ChatGPT."
+},
+{
+"question_text": "What is the 'Token' in LLM terminology?",
+"question_type": "text_mcq",
+"options": ["A basic unit of text (part of a word)", "A cryptocurrency coin", "A login key", "A reward for the AI"],
+"correct_answer": "A basic unit of text (part of a word)",
+"category": "Generative AI",
+"difficulty": "medium",
+"points": 10,
+"explanation": "LLMs process text by breaking it down into tokens, which can be whole words or parts of words."
+},
+{
+"question_text": "Which decade saw the birth of the 'Backpropagation' algorithm's popularity in AI?",
+"question_type": "text_mcq",
+"options": ["1980s", "1950s", "2000s", "1920s"],
+"correct_answer": "1980s",
+"category": "History of AI",
+"difficulty": "hard",
+"points": 10,
+"explanation": "While the math existed earlier, the 1986 paper by Rumelhart, Hinton, and Williams popularized backpropagation, essential for training multi-layer neural networks."
+},
+{
+"question_text": "What is 'Model Collapse'?",
+"question_type": "text_mcq",
+"options": ["Degradation of AI models trained on AI-generated data", "Physical breaking of a server", "A stock market crash", "Deleting a dataset"],
+"correct_answer": "Degradation of AI models trained on AI-generated data",
+"category": "Future of AI",
+"difficulty": "hard",
+"points": 10,
+"explanation": "Model collapse refers to the theoretical degradation in quality and diversity of generative models if they are trained recursively on data generated by other AI models."
+}
+]
+}

@@ -1,0 +1,28 @@
+
+[
+   
+    {
+        "question_text": "Identify this AI pioneer.",
+        "question_type": "image_identify_person",
+        "category": "AI Personalities",
+        "difficulty": "medium",
+        "points": 10,
+        "options": ["Yann LeCun", "Andrew Ng", "Rodney Brooks", "Fei-Fei Li"],
+        "correct_answer": "Yann LeCun",
+        "explanation": "A Turing Award winner known for his foundational work on convolutional neural networks (CNNs) and computer vision.",
+        "image_url": "YannLeCun.png"
+    },
+    {
+        "question_text": "Identify this AI pioneer.",
+        "question_type": "image_identify_person",
+        "category": "AI Personalities",
+        "difficulty": "medium",
+        "points": 10,
+        "options": ["Stuart Russell", "Marvin Minsky", "Yoshua Bengio", "Judea Pearl"],
+        "correct_answer": "Yoshua Bengio",
+        "explanation": "A Turing Award winner recognized for major contributions to the development of deep learning and neural networks.",
+        "image_url": "YoshuaBengio.png"
+    }
+    
+    }
+]

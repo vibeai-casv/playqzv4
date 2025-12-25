@@ -30,9 +30,18 @@ if (!empty($categories)) {
 
 $types = $input['types'] ?? []; // Array of strings e.g. ['image_identify_person']
 if (!empty($types)) {
-    $placeholders = implode(',', array_fill(0, count($types), '?'));
+    // legacy support: if image_identify_person is requested, also allow 'personality'
+    $expandedTypes = [];
+    foreach ($types as $t) {
+        $expandedTypes[] = $t;
+        if ($t === 'image_identify_person') {
+            $expandedTypes[] = 'personality';
+        }
+    }
+    
+    $placeholders = implode(',', array_fill(0, count($expandedTypes), '?'));
     $sql .= " AND question_type IN ($placeholders)";
-    $params = array_merge($params, $types);
+    $params = array_merge($params, $expandedTypes);
 }
 
 $sql .= " ORDER BY RAND() LIMIT ?";
@@ -43,7 +52,7 @@ $stmt->execute($params);
 $questionIds = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
 if (empty($questionIds)) {
-    jsonResponse(['error' => 'No questions found matching criteria'], 404);
+    jsonResponse(['success' => false, 'error' => 'No active questions found matching your criteria. Please ensure you have activated enough questions of the selected types.'], 200);
 }
 
 // Create Attempt
@@ -75,6 +84,9 @@ try {
     // Parse JSON fields in questions
     foreach ($questions as &$q) {
         $q['options'] = json_decode($q['options']);
+        if (is_array($q['options'])) {
+            shuffle($q['options']);
+        }
         $q['tags'] = json_decode($q['tags']);
     }
 

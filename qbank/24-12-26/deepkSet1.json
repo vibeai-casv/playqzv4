@@ -1,0 +1,254 @@
+{
+  "questions": [
+    {
+      "question_text": "Which 1956 conference is widely considered the founding event of AI as a field?",
+      "question_type": "text_mcq",
+      "options": ["The Macy Conferences", "The Dartmouth Summer Research Project", "The Asilomar Conference", "The Joint Computer Conference"],
+      "correct_answer": "The Dartmouth Summer Research Project",
+      "category": "History of AI",
+      "difficulty": "easy",
+      "points": 10,
+      "explanation": "The Dartmouth Summer Research Project, organized by John McCarthy, Marvin Minsky, Nathaniel Rochester, and Claude Shannon, is credited with coining the term 'artificial intelligence' and launching the field."
+    },
+    {
+      "question_text": "What was the name of the chess program that defeated world champion Garry Kasparov in 1997?",
+      "question_type": "text_mcq",
+      "options": ["AlphaGo", "Watson", "Deep Thought", "Deep Blue"],
+      "correct_answer": "Deep Blue",
+      "category": "History of AI",
+      "difficulty": "medium",
+      "points": 15,
+      "explanation": "IBM's Deep Blue defeated Garry Kasparov in a six-game match, marking a significant milestone in AI's ability to perform complex strategic reasoning."
+    },
+    {
+      "question_text": "Which AI technique, popularized in the 2010s, involves neural networks with many layers?",
+      "question_type": "text_mcq",
+      "options": ["Expert Systems", "Genetic Algorithms", "Deep Learning", "Fuzzy Logic"],
+      "correct_answer": "Deep Learning",
+      "category": "Evolution of AI",
+      "difficulty": "medium",
+      "points": 15,
+      "explanation": "Deep learning utilizes artificial neural networks with multiple hidden layers, enabling breakthroughs in image recognition, natural language processing, and more."
+    },
+    {
+      "question_text": "What is the core function of a transformer architecture, introduced in the 2017 'Attention is All You Need' paper?",
+      "question_type": "text_mcq",
+      "options": ["Image Convolution", "Self-Attention", "Reinforcement Learning", "Symbolic Logic"],
+      "correct_answer": "Self-Attention",
+      "category": "Evolution of AI",
+      "difficulty": "hard",
+      "points": 20,
+      "explanation": "The transformer architecture relies on a self-attention mechanism to weigh the importance of different parts of the input data, revolutionizing sequence modeling, especially in NLP."
+    },
+    {
+      "question_text": "Which trend involves training a single model to perform multiple distinct tasks?",
+      "question_type": "text_mcq",
+      "options": ["Multimodal AI", "General Adversarial Networks (GANs)", "Multitask Learning", "Agentic AI"],
+      "correct_answer": "Multitask Learning",
+      "category": "Trends in AI",
+      "difficulty": "medium",
+      "points": 15,
+      "explanation": "Multitask learning aims to improve learning efficiency and generalization by training one model on several related tasks simultaneously."
+    },
+    {
+      "question_text": "Which of these is a primary concern regarding the future development of Artificial General Intelligence (AGI)?",
+      "question_type": "text_mcq",
+      "options": ["Data Storage Costs", "AI Alignment", "Quantum Decoherence", "Cloud Latency"],
+      "correct_answer": "AI Alignment",
+      "category": "Future of AI",
+      "difficulty": "hard",
+      "points": 20,
+      "explanation": "AI alignment research focuses on ensuring that advanced AI systems act in accordance with human values and intentions, a critical challenge for AGI."
+    },
+    {
+      "question_text": "Which university research lab is renowned for pioneering work in convolutional neural networks (CNNs)?",
+      "question_type": "text_mcq",
+      "options": ["Carnegie Mellon University (Robotics Institute)", "University of Toronto (Vector Institute)", "MIT (CSAIL)", "Stanford (AI Lab)"],
+      "correct_answer": "University of Toronto (Vector Institute)",
+      "category": "leading institutions in AI",
+      "difficulty": "medium",
+      "points": 15,
+      "explanation": "Researchers like Geoffrey Hinton at the University of Toronto (and later the Vector Institute) were pivotal in the development and popularization of modern deep learning and CNNs."
+    },
+    {
+      "question_text": "Who is known as a founding figure of deep learning and co-won the 2018 Turing Award?",
+      "question_type": "text_mcq",
+      "options": ["Andrew Ng", "Fei-Fei Li", "Yann LeCun", "Demis Hassabis"],
+      "correct_answer": "Yann LeCun",
+      "category": "Leaders of AI",
+      "difficulty": "medium",
+      "points": 15,
+      "explanation": "Yann LeCun, along with Yoshua Bengio and Geoffrey Hinton, received the 2018 ACM Turing Award for conceptual and engineering breakthroughs in deep learning."
+    },
+    {
+      "question_text": "Which type of generative AI model is specifically designed to create realistic images from textual descriptions?",
+      "question_type": "text_mcq",
+      "options": ["Large Language Model (LLM)", "Diffusion Model", "Recurrent Neural Network (RNN)", "Support Vector Machine (SVM)"],
+      "correct_answer": "Diffusion Model",
+      "category": "generative AI",
+      "difficulty": "medium",
+      "points": 15,
+      "explanation": "Diffusion models, such as those powering DALL-E and Stable Diffusion, generate images by iteratively denoising random noise, guided by text prompts."
+    },
+    {
+      "question_text": "What is a key characteristic of 'Agentic AI'?",
+      "question_type": "text_mcq",
+      "options": ["It only generates text.", "It operates autonomously towards a goal.", "It is exclusively used for data analysis.", "It requires no prompting."],
+      "correct_answer": "It operates autonomously towards a goal.",
+      "category": "agentic AI",
+      "difficulty": "easy",
+      "points": 10,
+      "explanation": "Agentic AI refers to systems that can perceive their environment, make decisions, and take actions autonomously to achieve defined objectives without step-by-step human direction."
+    },
+    {
+      "question_text": "The 'AI Winter' primarily refers to periods of:",
+      "question_type": "text_mcq",
+      "options": ["Increased funding for robotics", "Reduced funding and interest in AI research", "The coldest season for computer servers", "Breakthroughs in quantum computing"],
+      "correct_answer": "Reduced funding and interest in AI research",
+      "category": "History of AI",
+      "difficulty": "easy",
+      "points": 10,
+      "explanation": "AI Winters were periods in the 1970s and late 1980s when disillusionment with progress led to sharp cuts in funding and interest in artificial intelligence research."
+    },
+    {
+      "question_text": "Which breakthrough dataset, introduced in 2009, was crucial for advancing object recognition in AI?",
+      "question_type": "text_mcq",
+      "options": ["MNIST", "Common Crawl", "ImageNet", "LibriSpeech"],
+      "correct_answer": "ImageNet",
+      "category": "Evolution of AI",
+      "difficulty": "medium",
+      "points": 15,
+      "explanation": "The ImageNet dataset, with its large scale and annual competition, directly spurred the development of deep convolutional neural networks that dramatically improved image classification accuracy."
+    },
+    {
+      "question_text": "What does the term 'foundation model' refer to in modern AI trends?",
+      "question_type": "text_mcq",
+      "options": ["An open-source operating system", "A large-scale model trained on broad data that can be adapted to many tasks", "The first version of any software", "A model that requires no further training"],
+      "correct_answer": "A large-scale model trained on broad data that can be adapted to many tasks",
+      "category": "Trends in AI",
+      "difficulty": "medium",
+      "points": 15,
+      "explanation": "Foundation models, like GPT-4 or Claude, are trained on vast datasets and can be fine-tuned for a wide variety of downstream applications, from writing to coding to analysis."
+    },
+    {
+      "question_text": "The concept of a 'technological singularity' in AI futurism is most closely associated with which idea?",
+      "question_type": "text_mcq",
+      "options": ["The invention of the transistor", "The point where AI surpasses human intelligence and triggers runaway growth", "The standardization of USB ports", "The first AI to pass the Turing Test"],
+      "correct_answer": "The point where AI surpasses human intelligence and triggers runaway growth",
+      "category": "Future of AI",
+      "difficulty": "hard",
+      "points": 20,
+      "explanation": "The singularity is a hypothetical future point where technological growth, driven by an intelligent AI, becomes uncontrollable and irreversible, profoundly transforming civilization."
+    },
+    {
+      "question_text": "Which company's research lab developed the AlphaFold system, which solved a major problem in biology?",
+      "question_type": "text_mcq",
+      "options": ["OpenAI", "Meta (FAIR)", "Google DeepMind", "Microsoft Research"],
+      "correct_answer": "Google DeepMind",
+      "category": "leading institutions in AI",
+      "difficulty": "medium",
+      "points": 15,
+      "explanation": "DeepMind's AlphaFold system achieved unprecedented accuracy in predicting protein 3D structures from their amino acid sequences, a landmark achievement for science."
+    },
+    {
+      "question_text": "Which AI leader is known for her pioneering work creating the ImageNet dataset and for advocating for human-centered AI?",
+      "question_type": "text_mcq",
+      "options": ["Cynthia Breazeal", "Daphne Koller", "Fei-Fei Li", "Karen Hao"],
+      "correct_answer": "Fei-Fei Li",
+      "category": "Leaders of AI",
+      "difficulty": "medium",
+      "points": 15,
+      "explanation": "Fei-Fei Li spearheaded the creation of the ImageNet project and is a prominent voice for diversity, ethics, and human-centric design in AI."
+    },
+    {
+      "question_text": "In generative AI, what does the acronym 'LLM' stand for?",
+      "question_type": "text_mcq",
+      "options": ["Large Linguistic Matrix", "Long-Latency Memory", "Large Language Model", "Logical Learning Machine"],
+      "correct_answer": "Large Language Model",
+      "category": "generative AI",
+      "difficulty": "easy",
+      "points": 10,
+      "explanation": "LLM stands for Large Language Model, a type of AI model trained on massive amounts of text data to understand, generate, and manipulate human language."
+    },
+    {
+      "question_text": "What is a common architectural component that enables Agentic AI systems to learn from trial and error?",
+      "question_type": "text_mcq",
+      "options": ["Reinforcement Learning", "Static Databases", "Deterministic Algorithms", "Spreadsheet Functions"],
+      "correct_answer": "Reinforcement Learning",
+      "category": "agentic AI",
+      "difficulty": "medium",
+      "points": 15,
+      "explanation": "Reinforcement learning (RL) is a machine learning paradigm where an agent learns to make decisions by performing actions and receiving rewards or penalties, making it core to many agentic systems."
+    },
+    {
+      "question_text": "The 'Turing Test', proposed by Alan Turing, was designed to evaluate what?",
+      "question_type": "text_mcq",
+      "options": ["A computer's processing speed", "A machine's ability to exhibit intelligent behavior indistinguishable from a human", "The graphical fidelity of a display", "Network bandwidth"],
+      "correct_answer": "A machine's ability to exhibit intelligent behavior indistinguishable from a human",
+      "category": "History of AI",
+      "difficulty": "easy",
+      "points": 10,
+      "explanation": "In the Turing Test, a human judge converses with both a machine and a human via text. If the judge cannot reliably tell them apart, the machine is said to have passed the test."
+    },
+    {
+      "question_text": "Which era saw the rise of expert systems, which encoded human knowledge into rules?",
+      "question_type": "text_mcq",
+      "options": ["The Connectionist Boom", "The Cybernetic Era", "The Symbolic AI Era", "The Big Data Era"],
+      "correct_answer": "The Symbolic AI Era",
+      "category": "Evolution of AI",
+      "difficulty": "medium",
+      "points": 15,
+      "explanation": "The Symbolic AI era (roughly 1950s-1980s) focused on representing knowledge with symbols and rules, leading to expert systems like MYCIN for medical diagnosis."
+    },
+    {
+      "question_text": "What does 'Multimodal AI' refer to?",
+      "question_type": "text_mcq",
+      "options": ["AI that uses only one type of data", "AI that can process and integrate multiple types of data (e.g., text, images, audio)", "AI that runs on multiple processors", "AI designed for multilingual users"],
+      "correct_answer": "AI that can process and integrate multiple types of data (e.g., text, images, audio)",
+      "category": "Trends in AI",
+      "difficulty": "easy",
+      "points": 10,
+      "explanation": "Multimodal AI systems are capable of understanding, interpreting, and generating content across different data modalities, such as describing an image or creating an image from text."
+    },
+    {
+      "question_text": "Which proposed future AI capability involves AI generating novel scientific hypotheses and conducting experiments?",
+      "question_type": "text_mcq",
+      "options": ["Automated Journalism", "AI Scientists", "Predictive Maintenance", "Sentiment Analysis"],
+      "correct_answer": "AI Scientists",
+      "category": "Future of AI",
+      "difficulty": "hard",
+      "points": 20,
+      "explanation": "The concept of 'AI Scientists' envisions AI systems that can autonomously form hypotheses, design experiments, interpret results, and contribute to scientific discovery."
+    },
+    {
+      "question_text": "Which non-profit research company, founded with a $1 billion pledge, is focused on developing safe AGI?",
+      "question_type": "text_mcq",
+      "options": ["Anthropic", "Cohere", "Hugging Face", "Aleph Alpha"],
+      "correct_answer": "Anthropic",
+      "category": "leading institutions in AI",
+      "difficulty": "medium",
+      "points": 15,
+      "explanation": "Anthropic is an AI safety and research company, famously started with significant initial funding, that aims to build reliable, interpretable, and steerable AI systems."
+    },
+    {
+      "question_text": "Who co-founded OpenAI and later left to found a company focused on brain-computer interfaces?",
+      "question_type": "text_mcq",
+      "options": ["Sam Altman", "Ilya Sutskever", "Greg Brockman", "Elon Musk"],
+      "correct_answer": "Elon Musk",
+      "category": "Leaders of AI",
+      "difficulty": "easy",
+      "points": 10,
+      "explanation": "Elon Musk was a co-chairman and founding donor of OpenAI in 2015. He later departed and founded Neuralink, which develops implantable brain–machine interfaces."
+    },
+    {
+      "question_text": "What is the primary training objective of a Generative Adversarial Network (GAN)?",
+      "question_type": "text_mcq",
+      "options": ["Classification", "Two neural networks competing against each other", "Time-series forecasting", "Data compression"],
+      "correct_answer": "Two neural networks competing against each other",
+      "category": "generative AI",
+      "difficulty": "hard",
+      "points": 20,
+      "explanation": "A GAN consists of a generator (creates fake data) and a discriminator (identifies fake from real). They are trained in opposition, improving the generator's ability to create realistic outputs."
+    }
+  ]
+}

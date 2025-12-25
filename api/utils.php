@@ -25,7 +25,16 @@ function cors() {
 function jsonResponse($data, $status = 200) {
     header("Content-Type: application/json; charset=UTF-8");
     http_response_code($status);
-    echo json_encode($data);
+    
+    $success = ($status >= 200 && $status < 300);
+    
+    $response = [
+        'success' => $success,
+        'data' => $success ? $data : null,
+        'error' => !$success ? ($data['error'] ?? $data['message'] ?? 'Unknown error') : null
+    ];
+    
+    echo json_encode($response);
     exit;
 }
 

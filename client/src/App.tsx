@@ -47,8 +47,24 @@ function App() {
     initialize();
   }, [initialize]);
 
+  // Determine basename dynamically for subdirectory support
+  const getBasename = () => {
+    const baseUrl = import.meta.env.BASE_URL;
+    if (baseUrl === './' || baseUrl === '') {
+      // Determine base from window.location if deployed in subdirectory with relative base
+      const path = window.location.pathname;
+      if (path.includes('/playqzv4/aiq4/')) return '/playqzv4/aiq4';
+      if (path.includes('/aiq4/')) return '/aiq4';
+      if (path.includes('/aiq3/')) return '/aiq3';
+      if (path.includes('/playqzv4/')) return '/playqzv4';
+      return '/';
+    }
+    // Remove trailing slash for basename
+    return baseUrl.endsWith('/') && baseUrl.length > 1 ? baseUrl.slice(0, -1) : baseUrl;
+  };
+
   return (
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
+    <BrowserRouter basename={getBasename()}>
       <Toaster position="top-center" richColors />
       <ErrorBoundary>
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">

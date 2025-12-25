@@ -1,0 +1,28 @@
+<?php
+// AI Quizzer - Production Configuration Template
+// Save this as 'config.php' in your server's api folder
+
+// 1. Database Configuration
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'your_database_name');
+define('DB_USER', 'your_database_user');
+define('DB_PASS', 'your_database_password');
+
+// 2. Application Identity
+define('APP_NAME', 'AI Quizzer v4');
+define('APP_VERSION', '4.0.0');
+
+// 3. AI Provider Configuration (Gemini)
+define('GEMINI_API_KEY', 'YOUR_API_KEY_HERE');
+
+// 4. Security
+define('JWT_SECRET', 'a_very_long_random_string_here');
+define('SESSION_LIFETIME', 3600); // 1 hour
+
+// 5. Paths (Usually auto-detected, but can be forced)
+// define('BASE_URL', 'https://aiquiz.vibeai.cv/aiq4');
+
+// Error Reporting (Off for Production)
+error_reporting(0);
+ini_set('display_errors', 0);
+?>

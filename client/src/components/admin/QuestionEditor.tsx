@@ -24,7 +24,7 @@ export function QuestionEditor({ question, onSave, onCancel }: QuestionEditorPro
     // Metadata state
     const [categories, setCategories] = useState<string[]>([]);
     const [difficulties, setDifficulties] = useState<string[]>(['easy', 'medium', 'hard']);
-    const [types, setTypes] = useState<string[]>(['text_mcq', 'image_identify_logo', 'image_identify_person', 'true_false', 'short_answer']);
+    const [types, setTypes] = useState<string[]>(['text_mcq', 'image_identify_logo', 'image_identify_person', 'personality', 'true_false', 'short_answer']);
 
     useEffect(() => {
         const loadMetadata = async () => {
@@ -44,8 +44,8 @@ export function QuestionEditor({ question, onSave, onCancel }: QuestionEditorPro
             if (question?.image_url) {
                 try {
                     const { media } = await fetchMedia();
-                    const matchingMedia = media.find(m => 
-                        question.image_url?.includes(m.filename) || 
+                    const matchingMedia = media.find(m =>
+                        question.image_url?.includes(m.filename) ||
                         question.image_url?.includes(m.original_filename)
                     );
                     if (matchingMedia) {
@@ -56,7 +56,7 @@ export function QuestionEditor({ question, onSave, onCancel }: QuestionEditorPro
                 }
             }
         };
-        
+
         if (question) {
             loadOriginalFilename();
         }
@@ -138,6 +138,7 @@ export function QuestionEditor({ question, onSave, onCancel }: QuestionEditorPro
                                     'text_mcq': 'Multiple Choice',
                                     'image_identify_logo': 'Logo Identification',
                                     'image_identify_person': 'Person Identification',
+                                    'personality': 'Personality Identification',
                                     'true_false': 'True/False',
                                     'short_answer': 'Short Answer'
                                 }[t] || t.replace(/_/g, ' ')}
@@ -213,7 +214,7 @@ export function QuestionEditor({ question, onSave, onCancel }: QuestionEditorPro
                 )}
             </div>
 
-            {(questionType === 'image_identify_logo' || questionType === 'image_identify_person') && (
+            {(questionType === 'image_identify_logo' || questionType === 'image_identify_person' || questionType === 'personality') && (
                 <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Image</label>
                     <div className="flex gap-4 items-start">
@@ -267,7 +268,7 @@ export function QuestionEditor({ question, onSave, onCancel }: QuestionEditorPro
                 <MediaPicker
                     defaultType={
                         questionType === 'image_identify_logo' ? 'logo' :
-                            questionType === 'image_identify_person' ? 'personality' : 'all'
+                            (questionType === 'image_identify_person' || questionType === 'personality') ? 'personality' : 'all'
                     }
                     onSelect={(url, originalFilename) => {
                         form.setValue('image_url', url);
@@ -278,7 +279,7 @@ export function QuestionEditor({ question, onSave, onCancel }: QuestionEditorPro
                 />
             </Modal>
 
-            {(questionType === 'text_mcq' || questionType === 'image_identify_logo' || questionType === 'image_identify_person') && (
+            {(questionType === 'text_mcq' || questionType === 'image_identify_logo' || questionType === 'image_identify_person' || questionType === 'personality') && (
                 <div className="space-y-4">
                     <div className="flex justify-between items-center">
                         <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Options</label>
@@ -322,7 +323,7 @@ export function QuestionEditor({ question, onSave, onCancel }: QuestionEditorPro
                         <option value="True">True</option>
                         <option value="False">False</option>
                     </select>
-                ) : (questionType === 'text_mcq' || questionType === 'image_identify_logo' || questionType === 'image_identify_person') ? (
+                ) : (questionType === 'text_mcq' || questionType === 'image_identify_logo' || questionType === 'image_identify_person' || questionType === 'personality') ? (
                     <select
                         {...form.register('correct_answer')}
                         className="w-full p-2 border rounded-lg text-gray-900 bg-white border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white"

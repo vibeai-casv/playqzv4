@@ -36,7 +36,7 @@ export interface UserStats {
 export interface Question {
     id: string;
     question_text: string;
-    question_type: 'text_mcq' | 'image_identify_logo' | 'image_identify_person' | 'true_false' | 'short_answer';
+    question_type: 'text_mcq' | 'image_identify_logo' | 'image_identify_person' | 'personality' | 'true_false' | 'short_answer';
     options?: string[];
     correct_answer: string;
     image_url?: string;
@@ -191,7 +191,7 @@ export interface QuizGenerateForm {
 
 export interface QuestionForm {
     question_text: string;
-    question_type: 'text_mcq' | 'image_identify_logo' | 'image_identify_person' | 'true_false' | 'short_answer';
+    question_type: 'text_mcq' | 'image_identify_logo' | 'image_identify_person' | 'personality' | 'true_false' | 'short_answer';
     options?: string[];
     correct_answer: string;
     image_url?: string;

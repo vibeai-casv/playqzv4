@@ -1,0 +1,147 @@
+
+[
+  {
+    "question_text": "Identify this AI pioneer in information theory",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "medium",
+    "points": 10,
+    "options": ["AlanTuring", "NorbertWiener", "ClaudeShannon", "JohnVonNeumann"],
+    "correct_answer": "ClaudeShannon",
+    "explanation": "Claude Shannon founded information theory, which underpins modern digital communication and AI.",
+    "image_url": "ClaudeShannon.png"
+  },
+  {
+    "question_text": "Who is this AI researcher known for probabilistic models?",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "medium",
+    "points": 10,
+    "options": ["YoshuaBengio", "GeoffreyHinton", "JudeaPearl", "DaphneKoller"],
+    "correct_answer": "JudeaPearl",
+    "explanation": "Judea Pearl pioneered causal reasoning and probabilistic graphical models in AI.",
+    "image_url": "JudeaPearl.png"
+  },
+  {
+    "question_text": "Identify this AI researcher and entrepreneur",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "medium",
+    "points": 10,
+    "options": ["FeiFeiLi", "AndrewNg", "DaphneKoller", "YannLeCun"],
+    "correct_answer": "DaphneKoller",
+    "explanation": "Daphne Koller is known for her work in probabilistic AI and co-founding Coursera.",
+    "image_url": "DaphneKoller.png"
+  },
+  {
+    "question_text": "Who is this AI pioneer in cybernetics?",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "medium",
+    "points": 10,
+    "options": ["JohnVonNeumann", "ClaudeShannon", "NorbertWiener", "AlanTuring"],
+    "correct_answer": "NorbertWiener",
+    "explanation": "Norbert Wiener founded cybernetics, influencing early AI and control systems.",
+    "image_url": "NorbertWiener.png"
+  },
+  {
+    "question_text": "Identify this influential AI and robotics leader",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "medium",
+    "points": 10,
+    "options": ["RodneyBrooks", "SebastianThrun", "MarcRaibert", "PeterNorvig"],
+    "correct_answer": "SebastianThrun",
+    "explanation": "Sebastian Thrun led Google X and advanced self-driving car research.",
+    "image_url": "SebastianThrun.png"
+  },
+  {
+    "question_text": "Who is this AI researcher known for natural language processing?",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "medium",
+    "points": 10,
+    "options": ["ChristopherManning", "YoshuaBengio", "PeterNorvig", "GeoffreyHinton"],
+    "correct_answer": "ChristopherManning",
+    "explanation": "Christopher Manning is a leading researcher in natural language processing and linguistics.",
+    "image_url": "ChristopherManning.png"
+  },
+  {
+    "question_text": "Identify this influential AI author and researcher",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "medium",
+    "points": 10,
+    "options": ["StuartRussell", "PeterNorvig", "MarvinMinsky", "HerbertSimon"],
+    "correct_answer": "StuartRussell",
+    "explanation": "Stuart Russell co-authored a leading AI textbook and researches AI safety.",
+    "image_url": "StuartRussell.png"
+  },
+  {
+    "question_text": "Who is this prominent AI researcher and author?",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "medium",
+    "points": 10,
+    "options": ["AndrewNg", "StuartRussell", "PeterNorvig", "YannLeCun"],
+    "correct_answer": "PeterNorvig",
+    "explanation": "Peter Norvig co-authored a standard AI textbook and led AI research at Google.",
+    "image_url": "PeterNorvig.png"
+  },
+  {
+    "question_text": "Identify this Nobel Prize–winning AI pioneer",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "medium",
+    "points": 10,
+    "options": ["JohnMcCarthy", "HerbertSimon", "MarvinMinsky", "AllenNewell"],
+    "correct_answer": "HerbertSimon",
+    "explanation": "Herbert Simon contributed to AI, cognitive science, and decision-making theory.",
+    "image_url": "HerbertSimon.png"
+  },
+  {
+    "question_text": "Who is this AI pioneer in symbolic reasoning?",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "medium",
+    "points": 10,
+    "options": ["HerbertSimon", "JohnMcCarthy", "AllenNewell", "ClaudeShannon"],
+    "correct_answer": "AllenNewell",
+    "explanation": "Allen Newell co-developed early symbolic AI systems and cognitive architectures.",
+    "image_url": "AllenNewell.png"
+  },
+  {
+    "question_text": "Identify this modern AI safety researcher",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "medium",
+    "points": 10,
+    "options": ["StuartRussell", "NickBostrom", "GeoffreyHinton", "YoshuaBengio"],
+    "correct_answer": "NickBostrom",
+    "explanation": "Nick Bostrom is known for his work on AI risk and long-term impacts of artificial intelligence.",
+    "image_url": "NickBostrom.png"
+  },
+  {
+    "question_text": "Who is this influential AI and robotics researcher?",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "medium",
+    "points": 10,
+    "options": ["MarcRaibert", "RodneyBrooks", "SebastianThrun", "FeiFeiLi"],
+    "correct_answer": "RodneyBrooks",
+    "explanation": "Rodney Brooks pioneered behavior-based robotics and co-founded iRobot.",
+    "image_url": "RodneyBrooks.png"
+  },
+  {
+    "question_text": "Identify this AI researcher known for reinforcement learning",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "medium",
+    "points": 10,
+    "options": ["RichardSutton", "GeoffreyHinton", "YannLeCun", "DemisHassabis"],
+    "correct_answer": "RichardSutton",
+    "explanation": "Richard Sutton is a leading figure in reinforcement learning and co-author of a foundational textbook.",
+    "image_url": "RichardSutton.png"
+  }
+]
+

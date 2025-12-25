@@ -1,0 +1,168 @@
+[
+  
+  {
+    "question_text": "Who is this Chief AI Scientist at Meta and pioneer of Convolutional Neural Networks (CNNs)?",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "medium",
+    "points": 10,
+    "options": ["Andrej Karpathy", "Yoshua Bengio", "Yann LeCun", "Ilya Sutskever"],
+    "correct_answer": "Yann LeCun",
+    "explanation": "He is widely recognized for his work on the LeNet-5 architecture and the advancement of optical character recognition.",
+    "image_url": "YannLeCun.png"
+  },
+  {
+    "question_text": "Identify this deep learning researcher who won the 2018 Turing Award alongside Hinton and LeCun.",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "medium",
+    "points": 10,
+    "options": ["Yoshua Bengio", "Ian Goodfellow", "Fei-Fei Li", "Greg Brockman"],
+    "correct_answer": "Yoshua Bengio",
+    "explanation": "He is the founder of Mila and is highly cited for his work on deep learning and generative models.",
+    "image_url": "YoshuaBengio.png"
+  },
+  {
+    "question_text": "Identify the co-founder of the MIT AI Lab and author of 'The Society of Mind'.",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "hard",
+    "points": 10,
+    "options": ["Marvin Minsky", "Seymour Papert", "Ray Kurzweil", "Douglas Hofstadter"],
+    "correct_answer": "Marvin Minsky",
+    "explanation": "A pioneer of cognitive science and AI who contributed greatly to robotics and neural network theory.",
+    "image_url": "MarvinMinsky.png"
+  },
+  {
+    "question_text": "Who is the inventor of Generative Adversarial Networks (GANs)?",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "medium",
+    "points": 10,
+    "options": ["Ian Goodfellow", "Alex Krizhevsky", "Christian Szegedy", "Oriol Vinyals"],
+    "correct_answer": "Ian Goodfellow",
+    "explanation": "He introduced the concept of GANs in 2014, allowing two neural networks to compete against each other.",
+    "image_url": "IanGoodfellow.png"
+  },
+  {
+    "question_text": "Identify the CEO of NVIDIA, whose GPUs power the majority of modern AI training.",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "easy",
+    "points": 10,
+    "options": ["Lisa Su", "Pat Gelsinger", "Jensen Huang", "Tim Cook"],
+    "correct_answer": "Jensen Huang",
+    "explanation": "Under his leadership, NVIDIA shifted from gaming graphics to becoming the world's leader in AI hardware.",
+    "image_url": "JensenHuang.png"
+  },
+  {
+    "question_text": "Who is the Chief Technology Officer of OpenAI and led the release of ChatGPT and DALL-E?",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "medium",
+    "points": 10,
+    "options": ["Mira Murati", "Shivon Zilis", "Rima Qureshi", "Safra Catz"],
+    "correct_answer": "Mira Murati",
+    "explanation": "She oversees the research, product, and safety teams at OpenAI as the CTO.",
+    "image_url": "MiraMurati.png"
+  },
+  {
+    "question_text": "Identify the head of Google Research and Google Health, and co-creator of MapReduce and TensorFlow.",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "hard",
+    "points": 10,
+    "options": ["Sanjay Ghemawat", "Jeff Dean", "Urs Hölzle", "Sundar Pichai"],
+    "correct_answer": "Jeff Dean",
+    "explanation": "He has been a pivotal figure in building the large-scale systems that power Google's AI capabilities.",
+    "image_url": "JeffDean.png"
+  },
+  {
+    "question_text": "Who is the CEO and co-founder of Anthropic, a leading AI safety and research company?",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "hard",
+    "points": 10,
+    "options": ["Jack Clark", "Dario Amodei", "Aidan Gomez", "Noam Shazeer"],
+    "correct_answer": "Dario Amodei",
+    "explanation": "Formerly at OpenAI, he left to start Anthropic with a focus on building steerable and reliable AI systems.",
+    "image_url": "DarioAmodei.png"
+  },
+  {
+    "question_text": "Identify the co-founder and President of OpenAI, instrumental in the company's engineering efforts.",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "medium",
+    "points": 10,
+    "options": ["Greg Brockman", "Wojciech Zaremba", "John Schulman", "Kyle Vogt"],
+    "correct_answer": "Greg Brockman",
+    "explanation": "He was the former CTO of Stripe before helping found and lead OpenAI.",
+    "image_url": "GregBrockman.png"
+  },
+  {
+    "question_text": "Who is the Director of MIT CSAIL and a leading expert in robotics and AI?",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "hard",
+    "points": 10,
+    "options": ["Cynthia Breazeal", "Daniela Rus", "Kate Crawford", "Barbara Grosz"],
+    "correct_answer": "Daniela Rus",
+    "explanation": "She is the first female director of MIT's Computer Science and Artificial Intelligence Laboratory.",
+    "image_url": "DanielaRus.png"
+  },
+  {
+    "question_text": "Identify the IBM researcher who coined the term 'Machine Learning' in 1959.",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "hard",
+    "points": 10,
+    "options": ["Arthur Samuel", "Frank Rosenblatt", "Donald Hebb", "Norbert Wiener"],
+    "correct_answer": "Arthur Samuel",
+    "explanation": "He created one of the world's first self-learning programs, which played checkers.",
+    "image_url": "ArthurSamuel.png"
+  },
+  {
+    "question_text": "Identify the inventor of the Perceptron, the earliest form of a neural network.",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "hard",
+    "points": 10,
+    "options": ["Frank Rosenblatt", "Warren McCulloch", "Walter Pitts", "Geoffrey Hinton"],
+    "correct_answer": "Frank Rosenblatt",
+    "explanation": "He designed the Perceptron in 1957, paving the way for modern artificial neural networks.",
+    "image_url": "FrankRosenblatt.png"
+  },
+  {
+    "question_text": "Who is this researcher who co-founded DeepMind and now leads AI efforts at Microsoft (as CEO of Microsoft AI)?",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "medium",
+    "points": 10,
+    "options": ["Mustafa Suleyman", "Shane Legg", "Reid Hoffman", "Kevin Scott"],
+    "correct_answer": "Mustafa Suleyman",
+    "explanation": "A co-founder of DeepMind and Inflection AI, he joined Microsoft in 2024 to lead their consumer AI division.",
+    "image_url": "MustafaSuleyman.png"
+  },
+  {
+    "question_text": "Identify the mathematician and logician often credited with writing the first computer algorithm.",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "easy",
+    "points": 10,
+    "options": ["Grace Hopper", "Ada Lovelace", "Emmy Noether", "Marie Curie"],
+    "correct_answer": "Ada Lovelace",
+    "explanation": "She theorized that machines could go beyond mere calculation to create music or art.",
+    "image_url": "AdaLovelace.png"
+  },
+  {
+    "question_text": "Who is this researcher known for their work on the 'Transformer' architecture at Google and later co-founding Cohere?",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "hard",
+    "points": 10,
+    "options": ["Ashish Vaswani", "Aidan Gomez", "Noam Shazeer", "Jakob Uszkoreit"],
+    "correct_answer": "Aidan Gomez",
+    "explanation": "He is a co-author of the influential 'Attention Is All You Need' paper and CEO of Cohere.",
+    "image_url": "AidanGomez.png"
+  }
+]

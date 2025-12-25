@@ -1,0 +1,162 @@
+[
+  {
+    "question_text": "Identify this pioneer of computer science and AI.",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "easy",
+    "points": 10,
+    "options": [
+      "John von Neumann",
+      "Marvin Minsky",
+      "Alan Turing",
+      "Claude Shannon"
+    ],
+    "correct_answer": "Alan Turing",
+    "explanation": "Often called the father of theoretical computer science, he proposed the 'Turing Test' as a criterion for machine intelligence.",
+    "image_url": "AlanTuring.png"
+  },
+  {
+    "question_text": "Who is this Nobel laureate and 'Godfather of Deep Learning'?",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "medium",
+    "points": 10,
+    "options": [
+      "Jürgen Schmidhuber",
+      "Geoffrey Hinton",
+      "Frank Rosenblatt",
+      "Terry Sejnowski"
+    ],
+    "correct_answer": "Geoffrey Hinton",
+    "explanation": "A central figure in the deep learning revolution, he co-authored the seminal paper on backpropagation in 1986.",
+    "image_url": "GeoffreyHinton.png"
+  },
+  {
+    "question_text": "Identify this influential AI researcher and Chief AI Scientist at Meta.",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "medium",
+    "points": 10,
+    "options": [
+      "Yann LeCun",
+      "Yoshua Bengio",
+      "Jeff Dean",
+      "Ian Goodfellow"
+    ],
+    "correct_answer": "Yann LeCun",
+    "explanation": "He is best known for his work on Convolutional Neural Networks (CNNs) and their application to optical character recognition.",
+    "image_url": "YannLeCun.png"
+  },
+  {
+    "question_text": "Who is this researcher known for the creation of ImageNet?",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "medium",
+    "points": 10,
+    "options": [
+      "Timnit Gebru",
+      "Daphne Koller",
+      "Fei-Fei Li",
+      "Joy Buolamwini"
+    ],
+    "correct_answer": "Fei-Fei Li",
+    "explanation": "A Stanford professor whose ImageNet project provided the massive dataset necessary to train modern deep learning models.",
+    "image_url": "FeiFeiLi.png"
+  },
+  {
+    "question_text": "Identify this co-founder of Google Brain and Coursera.",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "easy",
+    "points": 10,
+    "options": [
+      "Sebastian Thrun",
+      "Andrew Ng",
+      "Peter Norvig",
+      "Andrej Karpathy"
+    ],
+    "correct_answer": "Andrew Ng",
+    "explanation": "A world-renowned educator who has taught millions of students about machine learning and led AI teams at Google and Baidu.",
+    "image_url": "AndrewNg.png"
+  },
+  {
+    "question_text": "Who is this co-founder and CEO of Google DeepMind?",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "medium",
+    "points": 10,
+    "options": [
+      "Mustafa Suleyman",
+      "Shane Legg",
+      "Demis Hassabis",
+      "Sergey Brin"
+    ],
+    "correct_answer": "Demis Hassabis",
+    "explanation": "A former chess prodigy who led the development of AlphaGo and AlphaFold, the latter of which solved a 50-year-old protein folding challenge.",
+    "image_url": "DemisHassabis.png"
+  },
+  {
+    "question_text": "Identify this prominent deep learning researcher based in Montreal.",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "hard",
+    "points": 10,
+    "options": [
+      "Yoshua Bengio",
+      "Yann LeCun",
+      "Hugo Larochelle",
+      "Geoffrey Hinton"
+    ],
+    "correct_answer": "Yoshua Bengio",
+    "explanation": "One of the three 'Godfathers of Deep Learning,' he is known for his work on neural machine translation and generative modeling.",
+    "image_url": "YoshuaBengio.png"
+  },
+  {
+    "question_text": "Who is this co-founder of OpenAI and Safe Superintelligence Inc.?",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "hard",
+    "points": 10,
+    "options": [
+      "Greg Brockman",
+      "Wojciech Zaremba",
+      "Ilya Sutskever",
+      "Mira Murati"
+    ],
+    "correct_answer": "Ilya Sutskever",
+    "explanation": "A highly influential researcher who co-authored the AlexNet paper and served as the Chief Scientist of OpenAI.",
+    "image_url": "IlyaSutskever.png"
+  },
+  {
+    "question_text": "Identify the current CEO of OpenAI.",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "easy",
+    "points": 10,
+    "options": [
+      "Sam Altman",
+      "Elon Musk",
+      "Satya Nadella",
+      "Dario Amodei"
+    ],
+    "correct_answer": "Sam Altman",
+    "explanation": "The former president of Y Combinator, he has become the public face of the generative AI movement through his leadership at OpenAI.",
+    "image_url": "SamAltman.png"
+  },
+  {
+    "question_text": "Who is this AI researcher known for leading Tesla's Autopilot team?",
+    "question_type": "image_identify_person",
+    "category": "AI Personalities",
+    "difficulty": "medium",
+    "points": 10,
+    "options": [
+      "Chris Lattner",
+      "George Hotz",
+      "Andrej Karpathy",
+      "Lex Fridman"
+    ],
+    "correct_answer": "Andrej Karpathy",
+    "explanation": "A founding member of OpenAI and former Director of AI at Tesla, he is widely recognized for his deep learning educational content.",
+    "image_url": "AndrejKarpathy.png"
+  }
+]

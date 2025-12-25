@@ -1,0 +1,18 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTP:Authorization} ^(.*)
+    RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+
+<Files "public_upload.php">
+    Order Allow,Deny
+    Allow from all
+    Require all granted
+</Files>
+
+<Files "public_update.php">
+    Order Allow,Deny
+    Allow from all
+    Require all granted
+</Files>
+</IfModule>
+SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1

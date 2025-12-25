@@ -1,8 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Save, X, Filter, Loader2, Upload, Image as ImageIcon } from 'lucide-react';
+import { Save, X, Filter, Loader2, Upload, Image as ImageIcon, CheckSquare, Square, Download, Package } from 'lucide-react';
+import { toast } from 'sonner';
 import { fetchAPI } from '../../lib/api';
 import { getImageUrl } from '../../lib/utils';
 import { QuestionDisplay } from '../../components/admin/QuestionDisplay';
+import { Modal } from '../../components/ui/Modal';
+import { BundleImporter } from '../../components/admin/BundleImporter';
+import { cn } from '../../lib/utils';
+import api from '../../lib/api';
 
 
 interface Question {
@@ -35,6 +40,9 @@ export function BulkEditQuestions() {
     const [loading, setLoading] = useState(false);
     const [editingId, setEditingId] = useState<string | null>(null);
     const [editForm, setEditForm] = useState<Partial<Question>>({});
+    const [selectedIds, setSelectedIds] = useState<string[]>([]);
+    const [isImportModalOpen, setIsImportModalOpen] = useState(false);
+    const [isExporting, setIsExporting] = useState(false);
 
     // Fetch unique question types
     useEffect(() => {
@@ -112,39 +120,24 @@ export function BulkEditQuestions() {
         }
 
         try {
-            const headers: Record<string, string> = {};
-            if (token) headers['Authorization'] = `Bearer ${token}`;
-
-            // Dynamic base detection to handle different deployment paths
-            const path = window.location.pathname; // e.g. /playqzv4/client/dist/...
-            const basePath = path.split('/client/')[0]; // /playqzv4
-            const apiUrl = `${basePath}/api/media/public_upload.php`;
-
-            console.log('Target API URL:', apiUrl);
-
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: headers,
-                body: formData
+            const response = await api.post('/media/public_upload.php', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
             });
 
-
-
-            if (!response.ok) {
-                const text = await response.text();
-                throw new Error(`HTTP ${response.status} at ${response.url}: ${response.statusText}\n${text.substring(0, 200)}`);
-            }
-
-            const data = await response.json();
+            const data = response.data;
 
             if (data.success) {
                 setEditForm(prev => ({ ...prev, image_url: data.media.url }));
+                toast.success('Image uploaded successfully');
             } else {
                 alert('Upload failed: ' + (data.error || 'Unknown error'));
             }
         } catch (error: any) {
             console.error('Upload error:', error);
-            alert(`Upload failed: ${error.message || error}`);
+            const errorMsg = error.response?.data?.error || error.message || 'Unknown error';
+            alert(`Upload failed: ${errorMsg}`);
         }
     };
 
@@ -169,17 +162,60 @@ export function BulkEditQuestions() {
 
     const saveEdit = async (id: string) => {
         try {
-            await fetchAPI(`/questions/public_update.php?id=${id}`, {
-                method: 'PUT',
-                body: JSON.stringify(editForm),
-            });
+            await api.put(`/questions/public_update.php?id=${id}`, editForm);
 
-            alert('Question updated successfully!');
+            toast.success('Question updated successfully!');
             setEditingId(null);
             setEditForm({});
             fetchQuestions();
         } catch (error: any) {
-            alert(error.message || 'Failed to update question');
+            toast.error(error.message || 'Failed to update question');
+        }
+    };
+
+    const toggleSelect = (id: string) => {
+        setSelectedIds(prev =>
+            prev.includes(id) ? prev.filter((i: string) => i !== id) : [...prev, id]
+        );
+    };
+
+    const toggleSelectAll = () => {
+        if (selectedIds.length === questions.length) {
+            setSelectedIds([]);
+        } else {
+            setSelectedIds(questions.map((q: Question) => q.id));
+        }
+    };
+
+    const exportSelectedBundle = async () => {
+        if (selectedIds.length === 0) {
+            toast.error('Please select questions to export');
+            return;
+        }
+
+        setIsExporting(true);
+        try {
+            const response = await api.post('/bundle/export.php', {
+                question_ids: selectedIds
+            }, {
+                responseType: 'blob'
+            });
+
+            const blob = response.data;
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `bundle_${selectedType}_${new Date().getTime()}.zip`;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+            toast.success(`Successfully exported ${selectedIds.length} questions as a bundle`);
+        } catch (error: any) {
+            toast.error('Failed to export bundle');
+            console.error(error);
+        } finally {
+            setIsExporting(false);
         }
     };
 
@@ -188,6 +224,7 @@ export function BulkEditQuestions() {
             'text_mcq': 'Multiple Choice',
             'image_identify_logo': 'Logo Identification',
             'image_identify_person': 'Personality Identification',
+            'personality': 'Personality Identification',
             'true_false': 'True/False',
             'short_answer': 'Short Answer',
         };
@@ -204,30 +241,67 @@ export function BulkEditQuestions() {
                         Edit multiple questions filtered by type
                     </p>
                 </div>
+                <div className="flex gap-3">
+                    <button
+                        onClick={() => setIsImportModalOpen(true)}
+                        className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors shadow-sm"
+                    >
+                        <Package className="w-4 h-4" />
+                        Import Bundle
+                    </button>
+                    <button
+                        onClick={exportSelectedBundle}
+                        disabled={selectedIds.length === 0 || isExporting}
+                        className="flex items-center gap-2 px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-sm"
+                    >
+                        {isExporting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
+                        Export Bundle ({selectedIds.length})
+                    </button>
+                </div>
             </div>
 
-            {/* Filter Section */}
             <div className="bg-card border border-border rounded-xl p-6">
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-6">
+                    <div className="flex items-center gap-2">
+                        <button
+                            onClick={toggleSelectAll}
+                            className="p-1 hover:bg-muted rounded transition-colors"
+                            title={selectedIds.length === questions.length ? "Deselect All" : "Select All"}
+                        >
+                            {selectedIds.length === questions.length && questions.length > 0 ? (
+                                <CheckSquare className="w-5 h-5 text-primary" />
+                            ) : (
+                                <Square className="w-5 h-5 text-muted-foreground" />
+                            )}
+                        </button>
+                    </div>
+
                     <Filter className="w-5 h-5 text-muted-foreground" />
                     <div className="flex-1">
-                        <label className="block text-sm font-medium text-foreground mb-2">
-                            Question Type
-                        </label>
                         <select
                             value={selectedType}
-                            onChange={(e) => setSelectedType(e.target.value)}
+                            onChange={(e) => {
+                                setSelectedType(e.target.value);
+                                setSelectedIds([]);
+                            }}
                             className="w-full px-4 py-2 bg-background border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                         >
-                            {questionTypes.map((type) => (
+                            {questionTypes.map((type: string) => (
                                 <option key={type} value={type}>
                                     {getTypeLabel(type)}
                                 </option>
                             ))}
                         </select>
                     </div>
-                    <div className="text-sm text-muted-foreground">
-                        {questions.length} question{questions.length !== 1 ? 's' : ''} found
+                    <div className="flex items-center gap-4 text-sm font-medium">
+                        <span className="text-muted-foreground">
+                            {questions.length} Total
+                        </span>
+                        {selectedIds.length > 0 && (
+                            <span className="text-primary bg-primary/10 px-2 py-1 rounded">
+                                {selectedIds.length} Selected
+                            </span>
+                        )}
                     </div>
                 </div>
             </div>
@@ -243,213 +317,253 @@ export function BulkEditQuestions() {
                 </div>
             ) : (
                 <div className="space-y-4">
-                    {questions.map((question) => (
+                    {questions.map((question: Question) => (
                         <div
                             key={question.id}
-                            className="bg-card border border-border rounded-xl p-6 hover:border-primary/50 transition-colors"
+                            className={cn(
+                                "relative group bg-card border rounded-xl transition-all duration-200",
+                                selectedIds.includes(question.id)
+                                    ? "border-primary ring-1 ring-primary/20 shadow-md"
+                                    : "border-border hover:border-primary/40"
+                            )}
                         >
-                            {editingId === question.id ? (
-                                /* Edit Mode */
-                                <div className="space-y-4">
-                                    {/* Question Text */}
-                                    <div>
-                                        <label className="block text-sm font-medium text-foreground mb-2">
-                                            Question Text
-                                        </label>
-                                        <textarea
-                                            value={editForm.question_text || ''}
-                                            onChange={(e) =>
-                                                setEditForm({ ...editForm, question_text: e.target.value })
-                                            }
-                                            rows={3}
-                                            className="w-full px-4 py-2 bg-background border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                                        />
-                                    </div>
+                            {/* Selection Checkbox */}
+                            <button
+                                onClick={() => toggleSelect(question.id)}
+                                className={cn(
+                                    "absolute top-4 left-4 z-10 p-1.5 rounded-lg transition-all",
+                                    selectedIds.includes(question.id)
+                                        ? "bg-primary text-primary-foreground shadow-sm"
+                                        : "bg-background/80 text-muted-foreground hover:bg-muted border border-border opacity-0 group-hover:opacity-100"
+                                )}
+                            >
+                                {selectedIds.includes(question.id) ? (
+                                    <CheckSquare className="w-4 h-4" />
+                                ) : (
+                                    <Square className="w-4 h-4" />
+                                )}
+                            </button>
 
-                                    {/* Image Upload */}
-                                    <div className="border border-border rounded-lg p-4 bg-muted/20">
-                                        <label className="block text-sm font-medium text-foreground mb-2">
-                                            Question Image
-                                        </label>
-                                        <div className="flex items-start gap-4">
-                                            {/* Preview */}
-                                            <div className="w-32 h-32 bg-background border border-border rounded-lg flex items-center justify-center overflow-hidden">
-                                                {editForm.image_url ? (
-                                                    <img
-                                                        src={getImageUrl(editForm.image_url)}
-                                                        alt="Question"
-                                                        className="w-full h-full object-contain"
-                                                    />
-                                                ) : (
-                                                    <div className="text-muted-foreground flex flex-col items-center">
-                                                        <ImageIcon className="w-8 h-8 mb-1" />
-                                                        <span className="text-xs">No image</span>
-                                                    </div>
-                                                )}
-                                            </div>
+                            <div className={cn("p-6", selectedIds.includes(question.id) ? "" : "")}>
+                                {editingId === question.id ? (
+                                    /* Edit Mode */
+                                    <div className="space-y-4 pt-2">
+                                        {/* Question Text */}
+                                        <div>
+                                            <label className="block text-sm font-medium text-foreground mb-2">
+                                                Question Text
+                                            </label>
+                                            <textarea
+                                                value={editForm.question_text || ''}
+                                                onChange={(e) =>
+                                                    setEditForm({ ...editForm, question_text: e.target.value })
+                                                }
+                                                rows={3}
+                                                className="w-full px-4 py-2 bg-background border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                                            />
+                                        </div>
 
-                                            {/* Controls */}
-                                            <div className="flex-1 space-y-3">
-                                                <div>
-                                                    <label className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 cursor-pointer w-fit transition-colors text-sm font-medium">
-                                                        <Upload className="w-4 h-4" />
-                                                        Upload Image
-                                                        <input
-                                                            type="file"
-                                                            accept="image/*"
-                                                            className="hidden"
-                                                            onChange={handleFileUpload}
+                                        {/* Image Upload */}
+                                        <div className="border border-border rounded-lg p-4 bg-muted/20">
+                                            <label className="block text-sm font-medium text-foreground mb-2">
+                                                Question Image
+                                            </label>
+                                            <div className="flex items-start gap-4">
+                                                {/* Preview */}
+                                                <div className="w-32 h-32 bg-background border border-border rounded-lg flex items-center justify-center overflow-hidden">
+                                                    {editForm.image_url ? (
+                                                        <img
+                                                            src={getImageUrl(editForm.image_url)}
+                                                            alt="Question"
+                                                            className="w-full h-full object-contain"
                                                         />
-                                                    </label>
-                                                    <p className="text-xs text-muted-foreground mt-1">
-                                                        JPG, PNG, GIF, WebP (Max 5MB)
-                                                    </p>
+                                                    ) : (
+                                                        <div className="text-muted-foreground flex flex-col items-center">
+                                                            <ImageIcon className="w-8 h-8 mb-1" />
+                                                            <span className="text-xs">No image</span>
+                                                        </div>
+                                                    )}
                                                 </div>
 
-                                                {editForm.image_url && (
+                                                {/* Controls */}
+                                                <div className="flex-1 space-y-3">
                                                     <div>
-                                                        <p className="text-xs font-medium text-foreground mb-1">Current URL:</p>
-                                                        <input
-                                                            type="text"
-                                                            value={editForm.image_url}
-                                                            readOnly
-                                                            className="w-full text-xs px-2 py-1 bg-background border border-border rounded text-muted-foreground"
-                                                        />
+                                                        <label className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 cursor-pointer w-fit transition-colors text-sm font-medium">
+                                                            <Upload className="w-4 h-4" />
+                                                            Upload Image
+                                                            <input
+                                                                type="file"
+                                                                accept="image/*"
+                                                                className="hidden"
+                                                                onChange={handleFileUpload}
+                                                            />
+                                                        </label>
+                                                        <p className="text-xs text-muted-foreground mt-1">
+                                                            JPG, PNG, GIF, WebP (Max 5MB)
+                                                        </p>
                                                     </div>
-                                                )}
+
+                                                    {editForm.image_url && (
+                                                        <div>
+                                                            <p className="text-xs font-medium text-foreground mb-1">Current URL:</p>
+                                                            <input
+                                                                type="text"
+                                                                value={editForm.image_url}
+                                                                readOnly
+                                                                className="w-full text-xs px-2 py-1 bg-background border border-border rounded text-muted-foreground"
+                                                            />
+                                                        </div>
+                                                    )}
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    {/* Options (for MCQ type) */}
-                                    {(question.question_type === 'text_mcq' ||
-                                        question.question_type === 'image_identify_logo' ||
-                                        question.question_type === 'image_identify_person') && (
+                                        {/* Options (for MCQ type) */}
+                                        {(question.question_type === 'text_mcq' ||
+                                            question.question_type === 'image_identify_logo' ||
+                                            question.question_type === 'image_identify_person') && (
+                                                <div>
+                                                    <label className="block text-sm font-medium text-foreground mb-2">
+                                                        Options
+                                                    </label>
+                                                    {editForm.options?.map((option: string, idx: number) => (
+                                                        <input
+                                                            key={idx}
+                                                            type="text"
+                                                            value={option}
+                                                            onChange={(e) => {
+                                                                const newOptions = [...(editForm.options || [])];
+                                                                newOptions[idx] = e.target.value;
+                                                                setEditForm({ ...editForm, options: newOptions });
+                                                            }}
+                                                            className="w-full px-4 py-2 mb-2 bg-background border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                                                            placeholder={`Option ${idx + 1}`}
+                                                        />
+                                                    ))}
+                                                </div>
+                                            )}
+
+                                        {/* Correct Answer */}
+                                        <div className="grid grid-cols-2 gap-4">
                                             <div>
                                                 <label className="block text-sm font-medium text-foreground mb-2">
-                                                    Options
+                                                    Correct Answer
                                                 </label>
-                                                {editForm.options?.map((option, idx) => (
-                                                    <input
-                                                        key={idx}
-                                                        type="text"
-                                                        value={option}
-                                                        onChange={(e) => {
-                                                            const newOptions = [...(editForm.options || [])];
-                                                            newOptions[idx] = e.target.value;
-                                                            setEditForm({ ...editForm, options: newOptions });
-                                                        }}
-                                                        className="w-full px-4 py-2 mb-2 bg-background border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                                                        placeholder={`Option ${idx + 1}`}
-                                                    />
-                                                ))}
+                                                <input
+                                                    type="text"
+                                                    value={editForm.correct_answer || ''}
+                                                    onChange={(e) =>
+                                                        setEditForm({ ...editForm, correct_answer: e.target.value })
+                                                    }
+                                                    className="w-full px-4 py-2 bg-background border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                                                />
                                             </div>
-                                        )}
+                                            <div>
+                                                <label className="block text-sm font-medium text-foreground mb-2">
+                                                    Points
+                                                </label>
+                                                <input
+                                                    type="number"
+                                                    value={editForm.points || 10}
+                                                    onChange={(e) =>
+                                                        setEditForm({ ...editForm, points: parseInt(e.target.value) })
+                                                    }
+                                                    className="w-full px-4 py-2 bg-background border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                                                />
+                                            </div>
+                                        </div>
 
-                                    {/* Correct Answer */}
-                                    <div className="grid grid-cols-2 gap-4">
-                                        <div>
-                                            <label className="block text-sm font-medium text-foreground mb-2">
-                                                Correct Answer
-                                            </label>
-                                            <input
-                                                type="text"
-                                                value={editForm.correct_answer || ''}
-                                                onChange={(e) =>
-                                                    setEditForm({ ...editForm, correct_answer: e.target.value })
-                                                }
-                                                className="w-full px-4 py-2 bg-background border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                                            />
+                                        {/* Category and Difficulty */}
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div>
+                                                <label className="block text-sm font-medium text-foreground mb-2">
+                                                    Category
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    value={editForm.category || ''}
+                                                    onChange={(e) =>
+                                                        setEditForm({ ...editForm, category: e.target.value })
+                                                    }
+                                                    className="w-full px-4 py-2 bg-background border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="block text-sm font-medium text-foreground mb-2">
+                                                    Difficulty
+                                                </label>
+                                                <select
+                                                    value={editForm.difficulty || 'medium'}
+                                                    onChange={(e) =>
+                                                        setEditForm({ ...editForm, difficulty: e.target.value })
+                                                    }
+                                                    className="w-full px-4 py-2 bg-background border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                                                >
+                                                    <option value="easy">Easy</option>
+                                                    <option value="medium">Medium</option>
+                                                    <option value="hard">Hard</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <label className="block text-sm font-medium text-foreground mb-2">
-                                                Points
-                                            </label>
-                                            <input
-                                                type="number"
-                                                value={editForm.points || 10}
-                                                onChange={(e) =>
-                                                    setEditForm({ ...editForm, points: parseInt(e.target.value) })
-                                                }
-                                                className="w-full px-4 py-2 bg-background border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                                            />
-                                        </div>
-                                    </div>
 
-                                    {/* Category and Difficulty */}
-                                    <div className="grid grid-cols-2 gap-4">
+                                        {/* Explanation */}
                                         <div>
                                             <label className="block text-sm font-medium text-foreground mb-2">
-                                                Category
+                                                Explanation
                                             </label>
-                                            <input
-                                                type="text"
-                                                value={editForm.category || ''}
+                                            <textarea
+                                                value={editForm.explanation || ''}
                                                 onChange={(e) =>
-                                                    setEditForm({ ...editForm, category: e.target.value })
+                                                    setEditForm({ ...editForm, explanation: e.target.value })
                                                 }
+                                                rows={2}
                                                 className="w-full px-4 py-2 bg-background border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
                                             />
                                         </div>
-                                        <div>
-                                            <label className="block text-sm font-medium text-foreground mb-2">
-                                                Difficulty
-                                            </label>
-                                            <select
-                                                value={editForm.difficulty || 'medium'}
-                                                onChange={(e) =>
-                                                    setEditForm({ ...editForm, difficulty: e.target.value })
-                                                }
-                                                className="w-full px-4 py-2 bg-background border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+
+                                        {/* Action Buttons */}
+                                        <div className="flex gap-2 justify-end">
+                                            <button
+                                                onClick={cancelEdit}
+                                                className="px-4 py-2 border border-border rounded-lg hover:bg-muted/50 transition-colors flex items-center gap-2"
                                             >
-                                                <option value="easy">Easy</option>
-                                                <option value="medium">Medium</option>
-                                                <option value="hard">Hard</option>
-                                            </select>
+                                                <X className="w-4 h-4" />
+                                                Cancel
+                                            </button>
+                                            <button
+                                                onClick={() => saveEdit(question.id)}
+                                                className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors flex items-center gap-2"
+                                            >
+                                                <Save className="w-4 h-4" />
+                                                Save Changes
+                                            </button>
                                         </div>
                                     </div>
-
-                                    {/* Explanation */}
-                                    <div>
-                                        <label className="block text-sm font-medium text-foreground mb-2">
-                                            Explanation
-                                        </label>
-                                        <textarea
-                                            value={editForm.explanation || ''}
-                                            onChange={(e) =>
-                                                setEditForm({ ...editForm, explanation: e.target.value })
-                                            }
-                                            rows={2}
-                                            className="w-full px-4 py-2 bg-background border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                                        />
-                                    </div>
-
-                                    {/* Action Buttons */}
-                                    <div className="flex gap-2 justify-end">
-                                        <button
-                                            onClick={cancelEdit}
-                                            className="px-4 py-2 border border-border rounded-lg hover:bg-muted/50 transition-colors flex items-center gap-2"
-                                        >
-                                            <X className="w-4 h-4" />
-                                            Cancel
-                                        </button>
-                                        <button
-                                            onClick={() => saveEdit(question.id)}
-                                            className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors flex items-center gap-2"
-                                        >
-                                            <Save className="w-4 h-4" />
-                                            Save Changes
-                                        </button>
-                                    </div>
-                                </div>
-                            ) : (
-                                /* View Mode */
-                                <QuestionDisplay question={question} startEdit={startEdit} />
-                            )}
+                                ) : (
+                                    /* View Mode */
+                                    <QuestionDisplay question={question} startEdit={startEdit} />
+                                )}
+                            </div>
                         </div>
                     ))}
                 </div>
             )}
+
+            {/* Import Modal */}
+            <Modal
+                open={isImportModalOpen}
+                onClose={() => setIsImportModalOpen(false)}
+                title="Import Question Bundle"
+                className="max-w-xl"
+            >
+                <BundleImporter
+                    onImportComplete={() => {
+                        setIsImportModalOpen(false);
+                        fetchQuestions();
+                    }}
+                    onCancel={() => setIsImportModalOpen(false)}
+                />
+            </Modal>
         </div>
     );
 }

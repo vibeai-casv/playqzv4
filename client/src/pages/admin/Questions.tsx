@@ -9,10 +9,11 @@ import {
 import { toast } from 'sonner';
 import { cn, getImageUrl } from '../../lib/utils';
 import { QuestionEditor } from '../../components/admin/QuestionEditor';
-import { AIGenerator } from '../../components/admin/AIGenerator';
+import { GeneratorModal } from '../../components/admin/GeneratorModal';
 import { JSONImporter } from '../../components/admin/JSONImporter';
 import { BundleImporter } from '../../components/admin/BundleImporter';
 import { Package, Download } from 'lucide-react';
+import { fetchAPI } from '../../lib/api';
 import api from '../../lib/api'; // Direct api import for export download
 
 export function Questions() {
@@ -39,6 +40,7 @@ export function Questions() {
     const [isImportOpen, setIsImportOpen] = useState(false);
     const [isBundleImportOpen, setIsBundleImportOpen] = useState(false);
     const [editingQuestion, setEditingQuestion] = useState<Question | undefined>(undefined);
+    const [categories, setCategories] = useState<string[]>([]);
 
     const loadQuestions = useCallback(async () => {
         try {
@@ -62,6 +64,18 @@ export function Questions() {
             toast.error('Failed to load questions');
         }
     }, [page, limit, search, category, difficulty, type, status, aiGenerated, sortBy, sortOrder, fetchQuestions]);
+
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const data = await fetchAPI('/questions/categories.php');
+                if (data.success) setCategories(data.categories);
+            } catch (error) {
+                console.error('Failed to fetch categories:', error);
+            }
+        };
+        fetchCategories();
+    }, []);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -221,13 +235,16 @@ export function Questions() {
                                 className="w-full pl-10 pr-4 py-2 border rounded-lg text-gray-900 bg-white border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400"
                             />
                         </div>
-                        <input
-                            type="text"
-                            placeholder="Filter by Category"
+                        <select
                             value={category}
                             onChange={(e) => setCategory(e.target.value)}
-                            className="w-full px-4 py-2 border rounded-lg text-gray-900 bg-white border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400"
-                        />
+                            className="w-full px-4 py-2 border rounded-lg text-gray-900 bg-white border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                        >
+                            <option value="">All Topics</option>
+                            {categories.map(cat => (
+                                <option key={cat} value={cat}>{cat}</option>
+                            ))}
+                        </select>
                         <select
                             value={type}
                             onChange={(e) => setType(e.target.value)}
@@ -237,6 +254,7 @@ export function Questions() {
                             <option value="text_mcq">Multiple Choice</option>
                             <option value="image_identify_logo">Logo Identification</option>
                             <option value="image_identify_person">Person Identification</option>
+                            <option value="personality">Personality Identification</option>
                             <option value="true_false">True/False</option>
                             <option value="short_answer">Short Answer</option>
                         </select>
@@ -316,7 +334,8 @@ export function Questions() {
                                         className="rounded border-gray-300"
                                     />
                                 </th>
-                                <th className="p-4 w-10"></th> {/* Image Indicator */}
+                                <th className="p-4 w-10"></th> {/* Selection */}
+                                <th className="p-4 w-20 min-w-[5rem]">Image</th> {/* Image Indicator */}
                                 <th className="p-4 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600" onClick={() => handleSort('question_text')}>
                                     <div className="flex items-center gap-2">
                                         Question <ArrowUpDown className="w-4 h-4" />
@@ -378,13 +397,15 @@ export function Questions() {
                                                 className="rounded border-gray-300"
                                             />
                                         </td>
-                                        <td className="p-4">
+                                        <td className="p-4 w-20 min-w-[5rem]">
                                             {(q.image_url) ? (
-                                                <img
-                                                    src={getImageUrl(q.image_url)}
-                                                    alt="Q"
-                                                    className="w-16 h-16 object-cover rounded border border-gray-200 dark:border-gray-700 bg-white"
-                                                />
+                                                <div className="w-16 h-16 rounded border border-gray-200 dark:border-gray-700 bg-white overflow-hidden flex items-center justify-center">
+                                                    <img
+                                                        src={getImageUrl(q.image_url)}
+                                                        alt="Q"
+                                                        className="w-full h-full object-cover"
+                                                    />
+                                                </div>
                                             ) : (q.media_id) && (
                                                 <div className="w-10 h-10 rounded bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-gray-500 dark:text-gray-400">
                                                     <FileUp className="w-5 h-5" />
@@ -430,6 +451,7 @@ export function Questions() {
                                                 'text_mcq': 'Multiple Choice',
                                                 'image_identify_logo': 'Logo Identification',
                                                 'image_identify_person': 'Person Identification',
+                                                'personality': 'Personality Identification',
                                                 'true_false': 'True/False',
                                                 'short_answer': 'Short Answer'
                                             }[q.question_type] || q.question_type.replace(/_/g, ' ')}
@@ -512,20 +534,13 @@ export function Questions() {
                 />
             </Modal>
 
-            <Modal
-                open={isGeneratorOpen}
+            <GeneratorModal
+                isOpen={isGeneratorOpen}
                 onClose={() => setIsGeneratorOpen(false)}
-                title="AI Question Generator"
-                className="max-w-2xl"
-            >
-                <AIGenerator
-                    onGenerate={async () => {
-                        setIsGeneratorOpen(false);
-                        loadQuestions();
-                    }}
-                    onCancel={() => setIsGeneratorOpen(false)}
-                />
-            </Modal>
+                onSuccess={async () => {
+                    loadQuestions();
+                }}
+            />
 
             <Modal
                 open={isImportOpen}

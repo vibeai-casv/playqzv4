@@ -72,7 +72,7 @@ function DashboardContent() {
 
     if (loading && !stats) {
         return (
-            <div className="space-y-8 p-6">
+            <div className="space-y-6 md:space-y-8 p-4 md:p-6">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                     <div>
                         <Skeleton className="h-10 w-64 mb-2 bg-slate-800" />
@@ -94,7 +94,7 @@ function DashboardContent() {
     }
 
     return (
-        <div className="space-y-8">
+        <div className="space-y-6 md:space-y-8 p-4 md:p-6 lg:p-0">
             {/* Welcome Section */}
             <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-primary via-cyan-500 to-blue-500 p-8 md:p-12 shadow-2xl shadow-primary/20">
                 <div className="absolute top-0 right-0 -mt-10 -mr-10 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-pulse" />
@@ -102,7 +102,7 @@ function DashboardContent() {
 
                 <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                     <div>
-                        <h1 className="text-3xl md:text-4xl font-bold text-white tracking-tight flex flex-wrap items-center gap-3">
+                        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white tracking-tight flex flex-wrap items-center gap-2 md:gap-3">
                             {greeting}, {user?.name || 'User'}! 🚀
                             {user?.role === 'admin' && (
                                 <span className="text-sm font-bold bg-white/20 text-white px-3 py-1 rounded-full border border-white/30 backdrop-blur-sm">
@@ -110,31 +110,33 @@ function DashboardContent() {
                                 </span>
                             )}
                         </h1>
-                        <p className="text-white/90 mt-2 text-lg whitespace-nowrap overflow-hidden text-ellipsis max-w-full">
+                        <p className="text-white/90 mt-1 md:mt-2 text-base md:text-lg">
                             Ready to expand your knowledge? Your AI learning assistant is prepped and waiting.
                         </p>
                     </div>
                     <Link
                         to="/quiz-config"
-                        className="btn-vibeai-outline bg-white/10 backdrop-blur-sm border-white hover:bg-white hover:text-primary inline-flex items-center justify-center group"
+                        className="btn-vibeai-outline bg-white/10 backdrop-blur-sm border-white hover:bg-white hover:text-primary inline-flex items-center justify-center group w-full md:w-auto py-3 text-sm md:text-base"
                     >
-                        <Play className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
+                        <Play className="w-4 h-4 md:w-5 md:h-5 mr-2 group-hover:rotate-12 transition-transform" />
                         Start New Quiz
                     </Link>
                 </div>
             </div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
+                <div className="col-span-2 lg:col-span-1">
+                    <StatCard
+                        title="Total Quizzes"
+                        value={stats?.total_attempts || 0}
+                        icon={Award}
+                        gradient="from-primary to-cyan-400"
+                        delay={0}
+                    />
+                </div>
                 <StatCard
-                    title="Total Quizzes"
-                    value={stats?.total_attempts || 0}
-                    icon={Award}
-                    gradient="from-primary to-cyan-400"
-                    delay={0}
-                />
-                <StatCard
-                    title="Average Score"
+                    title="Avg Score"
                     value={Math.round(stats?.average_score || 0)}
                     suffix="%"
                     icon={TrendingUp}
@@ -142,7 +144,7 @@ function DashboardContent() {
                     delay={100}
                 />
                 <StatCard
-                    title="Completion Rate"
+                    title="Done Rate"
                     value={Math.round(stats?.completion_rate || 0)}
                     suffix="%"
                     icon={Clock}
@@ -153,17 +155,17 @@ function DashboardContent() {
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 {/* Performance Chart */}
-                <div className="lg:col-span-2 bg-slate-900/50 backdrop-blur-sm rounded-3xl border border-white/5 p-6 md:p-8">
-                    <div className="flex items-center justify-between mb-8">
+                <div className="lg:col-span-2 bg-slate-900/50 backdrop-blur-sm rounded-3xl border border-white/5 p-5 md:p-8">
+                    <div className="flex items-center justify-between mb-6 md:mb-8">
                         <div>
-                            <h2 className="text-xl font-bold text-white">Performance Trend</h2>
-                            <p className="text-sm text-slate-400">Your score progression over time</p>
+                            <h2 className="text-lg md:text-xl font-bold text-white">Performance Trend</h2>
+                            <p className="text-xs md:text-sm text-slate-400">Your score progression over time</p>
                         </div>
                         <div className="p-2 bg-white/5 rounded-lg">
                             <TrendingUp className="w-5 h-5 text-primary" />
                         </div>
                     </div>
-                    <div className="h-80 w-full">
+                    <div className="h-64 md:h-80 w-full">
                         {performanceData.length > 0 ? (
                             <ResponsiveContainer width="100%" height="100%">
                                 <AreaChart data={performanceData}>
@@ -216,9 +218,9 @@ function DashboardContent() {
                 </div>
 
                 {/* Recent Activity / Quick Actions */}
-                <div className="bg-slate-900/50 backdrop-blur-sm rounded-3xl border border-white/5 p-6 md:p-8 flex flex-col">
-                    <h2 className="text-xl font-bold text-white mb-6">Quick Actions</h2>
-                    <div className="space-y-4 flex-1">
+                <div className="bg-slate-900/50 backdrop-blur-sm rounded-3xl border border-white/5 p-5 md:p-8 flex flex-col">
+                    <h2 className="text-lg md:text-xl font-bold text-white mb-6">Quick Actions</h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 flex-1">
                         <Link to="/profile" className="block p-4 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 hover:border-primary/30 transition-all group">
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center">
@@ -254,44 +256,47 @@ function DashboardContent() {
 
             {/* Recent History Table */}
             <div className="bg-slate-900/50 backdrop-blur-sm rounded-3xl border border-white/5 overflow-hidden">
-                <div className="p-6 md:p-8 border-b border-white/5 flex items-center justify-between">
+                <div className="p-5 md:p-8 border-b border-white/5 flex items-center justify-between">
                     <div>
-                        <h2 className="text-xl font-bold text-white">Recent Quizzes</h2>
-                        <p className="text-sm text-slate-400 mt-1">Your latest assessment sessions</p>
+                        <h2 className="text-lg md:text-xl font-bold text-white">Recent Quizzes</h2>
+                        <p className="text-xs md:text-sm text-slate-400 mt-1">Your latest assessment sessions</p>
                     </div>
-                    <Link to="/history" className="text-sm font-medium text-primary hover:text-primary/80 flex items-center transition-colors">
+                    <Link to="/history" className="text-xs md:text-sm font-medium text-primary hover:text-primary/80 flex items-center transition-colors">
                         View All <ArrowRight className="w-4 h-4 ml-1" />
                     </Link>
                 </div>
 
                 {recentAttempts.length > 0 ? (
                     <div className="overflow-x-auto">
-                        <table className="w-full text-left text-sm text-slate-400">
-                            <thead className="bg-white/5 text-xs uppercase text-slate-300 font-semibold tracking-wider">
+                        <table className="w-full text-left text-xs md:text-sm text-slate-400">
+                            <thead className="bg-white/5 text-[10px] md:text-xs uppercase text-slate-300 font-semibold tracking-wider">
                                 <tr>
-                                    <th className="px-6 py-4">Topic</th>
-                                    <th className="px-6 py-4">Date</th>
-                                    <th className="px-6 py-4">Score</th>
-                                    <th className="px-6 py-4">Time</th>
-                                    <th className="px-6 py-4 text-right">Status</th>
+                                    <th className="px-4 md:px-6 py-3 md:py-4">Topic</th>
+                                    <th className="hidden sm:table-cell px-6 py-4">Date</th>
+                                    <th className="px-4 md:px-6 py-3 md:py-4">Score</th>
+                                    <th className="hidden md:table-cell px-6 py-4">Time</th>
+                                    <th className="px-4 md:px-6 py-3 md:py-4 text-right">Status</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-white/5">
                                 {recentAttempts.map((quiz) => (
                                     <tr key={quiz.id} className="hover:bg-white/5 transition-colors">
-                                        <td className="px-6 py-4 font-medium text-white">
+                                        <td className="px-4 md:px-6 py-3 md:py-4 font-medium text-white max-w-[120px] md:max-w-none truncate">
                                             {quiz.config?.categories?.join(', ') || 'General Quiz'}
+                                            <div className="sm:hidden text-[10px] text-slate-500 mt-0.5">
+                                                {new Date(quiz.created_at).toLocaleDateString()}
+                                            </div>
                                         </td>
-                                        <td className="px-6 py-4">
+                                        <td className="hidden sm:table-cell px-6 py-4">
                                             <div className="flex items-center">
                                                 <Calendar className="w-4 h-4 mr-2 text-slate-500" />
                                                 {new Date(quiz.created_at).toLocaleDateString()}
                                             </div>
                                         </td>
-                                        <td className="px-6 py-4">
+                                        <td className="px-4 md:px-6 py-3 md:py-4">
                                             {quiz.status === 'completed' ? (
                                                 <span className={cn(
-                                                    "px-3 py-1 rounded-full text-xs font-bold",
+                                                    "px-2 md:px-3 py-0.5 md:py-1 rounded-full text-[10px] md:text-xs font-bold",
                                                     (quiz.score || 0) >= 80 ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/20" :
                                                         (quiz.score || 0) >= 60 ? "bg-yellow-500/20 text-yellow-400 border border-yellow-500/20" :
                                                             "bg-red-500/20 text-red-400 border border-red-500/20"
@@ -302,12 +307,12 @@ function DashboardContent() {
                                                 <span className="text-slate-600">-</span>
                                             )}
                                         </td>
-                                        <td className="px-6 py-4 font-mono text-slate-300">
+                                        <td className="hidden md:table-cell px-6 py-4 font-mono text-slate-300">
                                             {quiz.time_spent_seconds ? `${Math.floor(quiz.time_spent_seconds / 60)}m ${quiz.time_spent_seconds % 60}s` : '-'}
                                         </td>
-                                        <td className="px-6 py-4 text-right">
+                                        <td className="px-4 md:px-6 py-3 md:py-4 text-right">
                                             <span className={cn(
-                                                "px-3 py-1 rounded-full text-xs font-bold capitalize",
+                                                "px-2 md:px-3 py-0.5 md:py-1 rounded-full text-[10px] md:text-xs font-bold capitalize",
                                                 quiz.status === 'completed' ? "bg-blue-500/20 text-blue-400 border border-blue-500/20" : "bg-slate-700 text-slate-300"
                                             )}>
                                                 {quiz.status.replace('_', ' ')}

@@ -1,0 +1,254 @@
+{
+  "questions": [
+    {
+      "question_text": "Who is widely regarded as the father of theoretical computer science and artificial intelligence?",
+      "question_type": "text_mcq",
+      "options": ["John McCarthy", "Alan Turing", "Claude Shannon", "Marvin Minsky"],
+      "correct_answer": "Alan Turing",
+      "category": "History of AI",
+      "difficulty": "easy",
+      "points": 10,
+      "explanation": "Alan Turing's 1950 paper 'Computing Machinery and Intelligence' introduced the Turing Test and laid foundational ideas for AI."
+    },
+    {
+      "question_text": "In which year was the Dartmouth Conference held, often considered the birth of AI as a field?",
+      "question_type": "text_mcq",
+      "options": ["1950", "1956", "1960", "1965"],
+      "correct_answer": "1956",
+      "category": "History of AI",
+      "difficulty": "easy",
+      "points": 10,
+      "explanation": "The 1956 Dartmouth Summer Research Project on Artificial Intelligence, organized by John McCarthy, Marvin Minsky, Nathaniel Rochester, and Claude Shannon, marked the official founding of AI."
+    },
+    {
+      "question_text": "What was the name of the first AI program that defeated a world chess champion?",
+      "question_type": "text_mcq",
+      "options": ["AlphaGo", "Deep Blue", "Watson", "Chinook"],
+      "correct_answer": "Deep Blue",
+      "category": "Evolution of AI",
+      "difficulty": "easy",
+      "points": 10,
+      "explanation": "IBM's Deep Blue defeated Garry Kasparov in 1997, marking a milestone in symbolic AI and game-playing systems."
+    },
+    {
+      "question_text": "Which company released ChatGPT to the public in November 2022?",
+      "question_type": "text_mcq",
+      "options": ["Google", "Meta", "OpenAI", "Microsoft"],
+      "correct_answer": "OpenAI",
+      "category": "generative AI",
+      "difficulty": "easy",
+      "points": 10,
+      "explanation": "OpenAI launched ChatGPT, based on GPT-3.5, sparking widespread adoption of generative AI."
+    },
+    {
+      "question_text": "Who coined the term 'Artificial Intelligence'?",
+      "question_type": "text_mcq",
+      "options": ["Herbert Simon", "Allen Newell", "John McCarthy", "Frank Rosenblatt"],
+      "correct_answer": "John McCarthy",
+      "category": "History of AI",
+      "difficulty": "medium",
+      "points": 10,
+      "explanation": "John McCarthy proposed the term 'Artificial Intelligence' for the 1956 Dartmouth Conference."
+    },
+    {
+      "question_text": "What architectural breakthrough enabled the resurgence of neural networks in the 2010s?",
+      "question_type": "text_mcq",
+      "options": ["Transformers", "Convolutional Neural Networks", "Recurrent Neural Networks", "Generative Adversarial Networks"],
+      "correct_answer": "Transformers",
+      "category": "Evolution of AI",
+      "difficulty": "medium",
+      "points": 10,
+      "explanation": "The 2017 paper 'Attention Is All You Need' introduced the Transformer architecture, powering modern large language models."
+    },
+    {
+      "question_text": "Which organization released the Gemini family of multimodal models?",
+      "question_type": "text_mcq",
+      "options": ["OpenAI", "Anthropic", "Google DeepMind", "Meta AI"],
+      "correct_answer": "Google DeepMind",
+      "category": "Trends in AI",
+      "difficulty": "easy",
+      "points": 10,
+      "explanation": "Google DeepMind (formerly Google AI) developed and released the Gemini models starting in 2023."
+    },
+    {
+      "question_text": "What is the primary goal of agentic AI systems?",
+      "question_type": "text_mcq",
+      "options": ["Generate images", "Autonomously pursue complex goals", "Translate languages", "Play games"],
+      "correct_answer": "Autonomously pursue complex goals",
+      "category": "agentic AI",
+      "difficulty": "medium",
+      "points": 10,
+      "explanation": "Agentic AI refers to systems that can plan, reason, and take actions independently to achieve user-defined objectives."
+    },
+    {
+      "question_text": "Which AI model first demonstrated strong performance in image generation from text prompts on a large scale?",
+      "question_type": "text_mcq",
+      "options": ["DALL-E", "Stable Diffusion", "Midjourney", "Imagen"],
+      "correct_answer": "DALL-E",
+      "category": "generative AI",
+      "difficulty": "medium",
+      "points": 10,
+      "explanation": "OpenAI's DALL-E, released in 2021, was the first widely recognized text-to-image model using a Transformer-based approach."
+    },
+    {
+      "question_text": "Which university is associated with Geoffrey Hinton, Yoshua Bengio, and Yann LeCun receiving the Turing Award?",
+      "question_type": "text_mcq",
+      "options": ["MIT", "Stanford", "University of Toronto", "Carnegie Mellon"],
+      "correct_answer": "University of Toronto",
+      "category": "leading institutions in AI",
+      "difficulty": "medium",
+      "points": 10,
+      "explanation": "Geoffrey Hinton is a professor emeritus at the University of Toronto, a key hub for deep learning research."
+    },
+    {
+      "question_text": "Who is the CEO of OpenAI as of late 2025?",
+      "question_type": "text_mcq",
+      "options": ["Sam Altman", "Demis Hassabis", "Elon Musk", "Ilya Sutskever"],
+      "correct_answer": "Sam Altman",
+      "category": "Leaders of AI",
+      "difficulty": "easy",
+      "points": 10,
+      "explanation": "Sam Altman has been the CEO of OpenAI since its founding in 2015, with a brief interruption in 2023."
+    },
+    {
+      "question_text": "What does the acronym AGI stand for in AI discussions?",
+      "question_type": "text_mcq",
+      "options": ["Automated General Intelligence", "Artificial General Intelligence", "Advanced Generative Intelligence", "Agentic Goal Intelligence"],
+      "correct_answer": "Artificial General Intelligence",
+      "category": "Future of AI",
+      "difficulty": "easy",
+      "points": 10,
+      "explanation": "AGI refers to AI capable of understanding, learning, and applying intelligence across a wide range of tasks at human level or beyond."
+    },
+    {
+      "question_text": "Which company developed AlphaFold, revolutionizing protein structure prediction?",
+      "question_type": "text_mcq",
+      "options": ["OpenAI", "DeepMind", "Anthropic", "xAI"],
+      "correct_answer": "DeepMind",
+      "category": "Evolution of AI",
+      "difficulty": "easy",
+      "points": 10,
+      "explanation": "Google DeepMind's AlphaFold, released in 2020-2021, solved a 50-year grand challenge in biology."
+    },
+    {
+      "question_text": "What is a key characteristic of multimodal AI models?",
+      "question_type": "text_mcq",
+      "options": ["Processing only text", "Handling multiple data types like text, image, and audio", "Focusing solely on code generation", "Specializing in reinforcement learning"],
+      "correct_answer": "Handling multiple data types like text, image, and audio",
+      "category": "Trends in AI",
+      "difficulty": "medium",
+      "points": 10,
+      "explanation": "Multimodal models, such as GPT-4o and Gemini, integrate and reason across different modalities."
+    },
+    {
+      "question_text": "Which leader founded xAI in 2023?",
+      "question_type": "text_mcq",
+      "options": ["Sam Altman", "Elon Musk", "Mark Zuckerberg", "Sundar Pichai"],
+      "correct_answer": "Elon Musk",
+      "category": "Leaders of AI",
+      "difficulty": "easy",
+      "points": 10,
+      "explanation": "Elon Musk established xAI to advance human scientific discovery and compete in the AI race."
+    },
+    {
+      "question_text": "What is the main concern regarding superintelligent AI often discussed in alignment research?",
+      "question_type": "text_mcq",
+      "options": ["High energy consumption", "Goal misalignment with human values", "Lack of creativity", "Slow processing speed"],
+      "correct_answer": "Goal misalignment with human values",
+      "category": "Future of AI",
+      "difficulty": "hard",
+      "points": 10,
+      "explanation": "AI alignment focuses on ensuring advanced AI systems pursue goals that are beneficial to humanity."
+    },
+    {
+      "question_text": "Which institution is known for pioneering reinforcement learning through the AlphaGo program?",
+      "question_type": "text_mcq",
+      "options": ["OpenAI", "Google DeepMind", "Meta FAIR", "Stanford AI Lab"],
+      "correct_answer": "Google DeepMind",
+      "category": "leading institutions in AI",
+      "difficulty": "medium",
+      "points": 10,
+      "explanation": "DeepMind's AlphaGo defeated Lee Sedol in 2016, showcasing advances in reinforcement learning."
+    },
+    {
+      "question_text": "Who co-founded Anthropic and previously served as VP of Research at OpenAI?",
+      "question_type": "text_mcq",
+      "options": ["Dario Amodei", "Ilya Sutskever", "Greg Brockman", "Mira Murati"],
+      "correct_answer": "Dario Amodei",
+      "category": "Leaders of AI",
+      "difficulty": "medium",
+      "points": 10,
+      "explanation": "Dario Amodei left OpenAI in 2021 to found Anthropic, focusing on AI safety."
+    },
+    {
+      "question_text": "What technology enables models like Grok to access real-time information?",
+      "question_type": "text_mcq",
+      "options": ["Retrieval-Augmented Generation (RAG)", "Fine-tuning", "Pre-training only", "Rule-based systems"],
+      "correct_answer": "Retrieval-Augmented Generation (RAG)",
+      "category": "Trends in AI",
+      "difficulty": "hard",
+      "points": 10,
+      "explanation": "RAG combines information retrieval with generation to provide up-to-date responses beyond training data."
+    },
+    {
+      "question_text": "Which generative AI model is known for open-source text-to-image diffusion?",
+      "question_type": "text_mcq",
+      "options": ["DALL-E", "Stable Diffusion", "Midjourney", "Firefly"],
+      "correct_answer": "Stable Diffusion",
+      "category": "generative AI",
+      "difficulty": "medium",
+      "points": 10,
+      "explanation": "Stability AI released Stable Diffusion in 2022, democratizing high-quality image generation."
+    },
+    {
+      "question_text": "What is a primary challenge for scaling agentic AI systems?",
+      "question_type": "text_mcq",
+      "options": ["Long-term planning and reliability", "Generating short text", "Image compression", "Basic arithmetic"],
+      "correct_answer": "Long-term planning and reliability",
+      "category": "agentic AI",
+      "difficulty": "hard",
+      "points": 10,
+      "explanation": "Agentic systems struggle with maintaining coherence over extended tasks and handling errors autonomously."
+    },
+    {
+      "question_text": "Which lab developed the foundational work on LSTMs, crucial for early sequence modeling?",
+      "question_type": "text_mcq",
+      "options": ["Google Brain", "FAIR", "University of Montreal (MILA)", "DeepMind"],
+      "correct_answer": "University of Montreal (MILA)",
+      "category": "leading institutions in AI",
+      "difficulty": "hard",
+      "points": 10,
+      "explanation": "Yoshua Bengio's group at MILA contributed significantly to recurrent neural networks and LSTMs."
+    },
+    {
+      "question_text": "Who is considered one of the 'Godfathers of Deep Learning' along with Hinton and LeCun?",
+      "question_type": "text_mcq",
+      "options": ["Andrew Ng", "Yoshua Bengio", "Fei-Fei Li", "Jürgen Schmidhuber"],
+      "correct_answer": "Yoshua Bengio",
+      "category": "Leaders of AI",
+      "difficulty": "medium",
+      "points": 10,
+      "explanation": "Hinton, Bengio, and LeCun shared the 2018 Turing Award for deep neural networks."
+    },
+    {
+      "question_text": "What emerging trend involves AI systems that can use tools and browse the web autonomously?",
+      "question_type": "text_mcq",
+      "options": ["Generative pre-training", "Agentic workflows", "Diffusion modeling", "Contrastive learning"],
+      "correct_answer": "Agentic workflows",
+      "category": "agentic AI",
+      "difficulty": "medium",
+      "points": 10,
+      "explanation": "Modern agentic AI integrates tool use, planning, and external interaction for complex task completion."
+    },
+    {
+      "question_text": "Which concept describes the risk that advanced AI could lead to human extinction if not properly aligned?",
+      "question_type": "text_mcq",
+      "options": ["AI bubble", "Existential risk from AI", "Data scarcity", "Compute shortage"],
+      "correct_answer": "Existential risk from AI",
+      "category": "Future of AI",
+      "difficulty": "hard",
+      "points": 10,
+      "explanation": "Prominent AI researchers and organizations highlight existential risks as a key motivation for safety research."
+    }
+  ]
+}

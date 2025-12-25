@@ -44,16 +44,6 @@ const QUESTION_TYPES = [
 
 type QuizConfig = z.infer<typeof quizConfigSchema>;
 
-// ... (CategoryInfo interface and STYLE_MAP kept as is, skipping for brevity in replacement if possible, but replace_file_content needs contiguous block)
-// I will target specific blocks to minimize context.
-
-// Block 1: Schema
-// Block 2: Logic inside component
-
-// I'll do Block 1 (Schema) first.
-// Wait, I can't do multiple blocks in one ONE-SHOT unless using multi_replace.
-// I'll use multi_replace.
-
 interface CategoryInfo {
     name: string;
     icon: React.ReactNode;
@@ -105,7 +95,6 @@ export function QuizConfig() {
                 const response = await api.get('/questions/stats.php');
                 const counts = response.data.stats;
 
-                // Map API response to CategoryInfo
                 const categories: CategoryInfo[] = Object.entries(counts).map(([name, count]) => {
                     const style = STYLE_MAP[name] || {
                         icon: <BookOpen className="w-5 h-5" />,
@@ -119,7 +108,6 @@ export function QuizConfig() {
                     };
                 });
 
-                // Sort categories: known styles first, then alphabetical
                 categories.sort((a, b) => {
                     const aKnown = !!STYLE_MAP[a.name];
                     const bKnown = !!STYLE_MAP[b.name];
@@ -131,13 +119,12 @@ export function QuizConfig() {
                 setCategoryInfo(categories);
             } catch (e) {
                 console.error('Failed to fetch category counts', e);
-                // Fallback to default categories if API fails
                 const defaults = Object.keys(STYLE_MAP).map(name => ({
                     name,
                     available: 0,
                     ...STYLE_MAP[name]
                 }));
-                setCategoryInfo(defaults);
+                setCategoryInfo(defaults as any);
             } finally {
                 setLoadingCounts(false);
             }
@@ -152,16 +139,10 @@ export function QuizConfig() {
             try {
                 const parsed = JSON.parse(saved) as QuizConfig;
                 setValue('numQuestions', parsed.numQuestions);
-
-                // Ensure difficulty is Title Case to match schema
                 const diff = parsed.difficulty || 'Mixed';
                 const normalizedDiff = diff.charAt(0).toUpperCase() + diff.slice(1).toLowerCase();
                 setValue('difficulty', normalizedDiff as any);
-
-                // Only set categories that actually exist in the loaded info (if loaded)
-                // But since info loads async, we might just set it and let the user adjust
                 setValue('categories', parsed.categories);
-
                 if (parsed.types) {
                     setValue('types', parsed.types);
                 }
@@ -184,8 +165,9 @@ export function QuizConfig() {
             };
             await generateQuiz(config);
             navigate('/take-quiz');
-        } catch (e) {
-            setStartError(e instanceof Error ? e.message : 'Failed to generate quiz');
+        } catch (e: any) {
+            const message = e.response?.data?.error || e.message || 'Failed to generate quiz';
+            setStartError(message);
         } finally {
             setStartLoading(false);
         }
@@ -195,7 +177,6 @@ export function QuizConfig() {
     const selectedCategories = watched.categories as string[];
     const selectedTypes = (watched.types as string[]) || [];
 
-    // Calculate total available questions across ALL selected categories
     const totalAvailable = selectedCategories.length > 0
         ? selectedCategories.reduce((sum, cat) => {
             const info = categoryInfo.find((c) => c.name === cat);
@@ -204,7 +185,6 @@ export function QuizConfig() {
         : categoryInfo.reduce((sum, c) => sum + c.available, 0);
 
     const insufficient = totalAvailable < Number(watched.numQuestions);
-
     const estimatedTime = Number(watched.numQuestions) * 30; // seconds
 
     const toggleSelectAll = () => {
@@ -225,22 +205,134 @@ export function QuizConfig() {
 
     return (
         <div className="max-w-5xl mx-auto p-6 space-y-8">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div>
-                    <h1 className="text-3xl font-bold text-white tracking-tight">Configure Quiz</h1>
-                    <p className="text-slate-400 mt-2">Customize your assessment parameters</p>
+                    <h1 className="text-2xl md:text-3xl font-bold text-white tracking-tight">Configure Quiz</h1>
+                    <p className="text-slate-400 mt-1 md:mt-2 text-sm md:text-base">Customize your assessment parameters</p>
                 </div>
-                <div className="hidden md:block">
-                    <div className="p-3 bg-primary/10 rounded-xl border border-primary/20">
-                        <Zap className="w-6 h-6 text-primary" />
+                <div className="flex items-center gap-3 w-full sm:w-auto">
+                    <button
+                        type="button"
+                        disabled={!isValid || insufficient || startLoading}
+                        onClick={handleSubmit(onSubmit)}
+                        className={cn(
+                            'flex-1 sm:flex-none flex items-center justify-center px-6 py-3 text-sm font-bold rounded-xl shadow-lg transition-all duration-300 transform hover:-translate-y-0.5',
+                            !isValid || insufficient || startLoading
+                                ? 'bg-slate-800 text-slate-500 cursor-not-allowed'
+                                : 'btn-vibeai'
+                        )}
+                    >
+                        {startLoading ? (
+                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        ) : (
+                            <PlayCircle className="w-4 h-4 mr-2" />
+                        )}
+                        Start Quiz
+                    </button>
+                    <div className="hidden md:block">
+                        <div className="p-2.5 bg-primary/10 rounded-xl border border-primary/20">
+                            <Zap className="w-5 h-5 text-primary" />
+                        </div>
                     </div>
                 </div>
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    {/* Left Column: Settings */}
-                    <div className="lg:col-span-2 space-y-8">
+                <div className="flex flex-col lg:flex-row gap-8">
+                    {/* Summary Sidebar - Appears first on mobile */}
+                    <div className="lg:w-1/3 lg:order-2">
+                        <div className="sticky top-24 space-y-6">
+                            <div className="bg-slate-900/50 backdrop-blur-sm rounded-3xl border border-white/5 p-6 md:p-8">
+                                <h2 className="text-xl font-bold text-white mb-6">Summary</h2>
+
+                                <div className="space-y-4 mb-8">
+                                    <div className="flex justify-between items-center py-3 border-b border-white/5">
+                                        <span className="text-slate-400">Questions</span>
+                                        <span className="font-bold text-white">{watched.numQuestions}</span>
+                                    </div>
+                                    <div className="flex justify-between items-center py-3 border-b border-white/5">
+                                        <span className="text-slate-400">Difficulty</span>
+                                        <span className="font-bold text-white">{watched.difficulty}</span>
+                                    </div>
+                                    <div className="py-3 border-b border-white/5">
+                                        <span className="text-slate-400 block mb-2">Types</span>
+                                        <div className="flex flex-wrap gap-2">
+                                            {selectedTypes.length > 0 ? (
+                                                selectedTypes.map(typeId => {
+                                                    const type = QUESTION_TYPES.find(t => t.id === typeId);
+                                                    return (
+                                                        <span key={typeId} className="px-2 py-1 rounded-lg bg-white/5 text-xs text-slate-300 border border-white/5">
+                                                            {type?.label || typeId}
+                                                        </span>
+                                                    );
+                                                })
+                                            ) : (
+                                                <span className="text-slate-600 text-sm italic">All Types</span>
+                                            )}
+                                        </div>
+                                    </div>
+                                    <div className="py-3 border-b border-white/5">
+                                        <span className="text-slate-400 block mb-2">Topics</span>
+                                        <div className="flex flex-wrap gap-2">
+                                            {selectedCategories.length > 0 ? (
+                                                selectedCategories.map(cat => (
+                                                    <span key={cat} className="px-2 py-1 rounded-lg bg-white/5 text-xs text-slate-300 border border-white/5">
+                                                        {cat}
+                                                    </span>
+                                                ))
+                                            ) : (
+                                                <span className="text-slate-600 text-sm italic">Any Topic</span>
+                                            )}
+                                        </div>
+                                    </div>
+                                    <div className="flex justify-between items-center py-3">
+                                        <span className="text-slate-400 flex items-center">
+                                            <Clock className="w-4 h-4 mr-2" /> Est. Time
+                                        </span>
+                                        <span className="font-bold text-primary">
+                                            {Math.round(estimatedTime / 60)} min {estimatedTime % 60}s
+                                        </span>
+                                    </div>
+                                </div>
+
+                                {insufficient && (
+                                    <div className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 flex items-start">
+                                        <XCircle className="w-5 h-5 text-red-400 mr-3 shrink-0 mt-0.5" />
+                                        <p className="text-sm text-red-400">
+                                            Selected topics have {totalAvailable} questions, but you requested {watched.numQuestions}.
+                                        </p>
+                                    </div>
+                                )}
+
+                                <button
+                                    type="submit"
+                                    disabled={!isValid || insufficient || startLoading}
+                                    className={cn(
+                                        'w-full flex items-center justify-center px-8 py-4 text-base font-bold rounded-xl shadow-lg transition-all duration-300 transform hover:-translate-y-1',
+                                        !isValid || insufficient || startLoading
+                                            ? 'bg-slate-800 text-slate-500 cursor-not-allowed'
+                                            : 'btn-vibeai'
+                                    )}
+                                >
+                                    {startLoading ? (
+                                        <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                                    ) : (
+                                        <PlayCircle className="w-5 h-5 mr-2" />
+                                    )}
+                                    {startLoading ? 'Generating...' : 'Start Quiz'}
+                                </button>
+
+                                {startError && (
+                                    <p className="mt-4 text-sm text-red-400 flex items-center justify-center">
+                                        <AlertCircle className="w-4 h-4 mr-2" /> {startError}
+                                    </p>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Settings Sections - Appears after Summary on mobile */}
+                    <div className="lg:w-2/3 space-y-8 lg:order-1">
                         {/* Number of Questions */}
                         <section className="bg-slate-900/50 backdrop-blur-sm rounded-3xl border border-white/5 p-6 md:p-8">
                             <h2 className="text-xl font-bold text-white mb-6 flex items-center">
@@ -441,98 +533,6 @@ export function QuizConfig() {
                                 <p className="mt-2 text-sm text-red-400">{errors.categories.message}</p>
                             )}
                         </section>
-                    </div>
-
-                    {/* Right Column: Preview & Action */}
-                    <div className="lg:col-span-1">
-                        <div className="sticky top-8 space-y-6">
-                            <div className="bg-slate-900/50 backdrop-blur-sm rounded-3xl border border-white/5 p-6 md:p-8">
-                                <h2 className="text-xl font-bold text-white mb-6">Summary</h2>
-
-                                <div className="space-y-4 mb-8">
-                                    <div className="flex justify-between items-center py-3 border-b border-white/5">
-                                        <span className="text-slate-400">Questions</span>
-                                        <span className="font-bold text-white">{watched.numQuestions}</span>
-                                    </div>
-                                    <div className="flex justify-between items-center py-3 border-b border-white/5">
-                                        <span className="text-slate-400">Difficulty</span>
-                                        <span className="font-bold text-white">{watched.difficulty}</span>
-                                    </div>
-                                    <div className="py-3 border-b border-white/5">
-                                        <span className="text-slate-400 block mb-2">Types</span>
-                                        <div className="flex flex-wrap gap-2">
-                                            {selectedTypes.length > 0 ? (
-                                                selectedTypes.map(typeId => {
-                                                    const type = QUESTION_TYPES.find(t => t.id === typeId);
-                                                    return (
-                                                        <span key={typeId} className="px-2 py-1 rounded-lg bg-white/5 text-xs text-slate-300 border border-white/5">
-                                                            {type?.label || typeId}
-                                                        </span>
-                                                    );
-                                                })
-                                            ) : (
-                                                <span className="text-slate-600 text-sm italic">All Types</span>
-                                            )}
-                                        </div>
-                                    </div>
-                                    <div className="py-3 border-b border-white/5">
-                                        <span className="text-slate-400 block mb-2">Topics</span>
-                                        <div className="flex flex-wrap gap-2">
-                                            {selectedCategories.length > 0 ? (
-                                                selectedCategories.map(cat => (
-                                                    <span key={cat} className="px-2 py-1 rounded-lg bg-white/5 text-xs text-slate-300 border border-white/5">
-                                                        {cat}
-                                                    </span>
-                                                ))
-                                            ) : (
-                                                <span className="text-slate-600 text-sm italic">Any Topic</span>
-                                            )}
-                                        </div>
-                                    </div>
-                                    <div className="flex justify-between items-center py-3">
-                                        <span className="text-slate-400 flex items-center">
-                                            <Clock className="w-4 h-4 mr-2" /> Est. Time
-                                        </span>
-                                        <span className="font-bold text-primary">
-                                            {Math.round(estimatedTime / 60)} min {estimatedTime % 60}s
-                                        </span>
-                                    </div>
-                                </div>
-
-                                {insufficient && (
-                                    <div className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 flex items-start">
-                                        <XCircle className="w-5 h-5 text-red-400 mr-3 shrink-0 mt-0.5" />
-                                        <p className="text-sm text-red-400">
-                                            Selected topics have {totalAvailable} questions, but you requested {watched.numQuestions}.
-                                        </p>
-                                    </div>
-                                )}
-
-                                <button
-                                    type="submit"
-                                    disabled={!isValid || insufficient || startLoading}
-                                    className={cn(
-                                        'w-full flex items-center justify-center px-8 py-4 text-base font-bold rounded-xl shadow-lg transition-all duration-300 transform hover:-translate-y-1',
-                                        !isValid || insufficient || startLoading
-                                            ? 'bg-slate-800 text-slate-500 cursor-not-allowed'
-                                            : 'btn-vibeai'
-                                    )}
-                                >
-                                    {startLoading ? (
-                                        <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                                    ) : (
-                                        <PlayCircle className="w-5 h-5 mr-2" />
-                                    )}
-                                    {startLoading ? 'Generating...' : 'Start Quiz'}
-                                </button>
-
-                                {startError && (
-                                    <p className="mt-4 text-sm text-red-400 flex items-center justify-center">
-                                        <AlertCircle className="w-4 h-4 mr-2" /> {startError}
-                                    </p>
-                                )}
-                            </div>
-                        </div>
                     </div>
                 </div>
             </form>

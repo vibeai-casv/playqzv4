@@ -76,25 +76,39 @@ export function getImageUrl(path: string | undefined | null): string {
     // If already a full URL or data URI, return as-is
     if (path.startsWith('http') || path.startsWith('data:')) return path;
 
-    // For development server at http://localhost/projects/playqzv4/
-    // Database stores URLs like: /uploads/personality/filename.png
-    // We need to prepend /projects/playqzv4/ to get: /projects/playqzv4/uploads/personality/filename.png
-
     // Ensure path starts with /
-    let cleanPath = path.startsWith('/') ? path : `/${path}`;
+    const cleanPath = path.startsWith('/') ? path : `/${path}`;
 
-    // Handle 'projects' hostname specifically (http://projects/playqzv4/...)
-    if (window.location.hostname === 'projects') {
-        if (!cleanPath.startsWith('/playqzv4/')) {
-            cleanPath = `/playqzv4${cleanPath}`;
+    if (typeof window !== 'undefined') {
+        const currentPath = window.location.pathname;
+        const hostname = window.location.hostname;
+
+        // Helper to ensure path includes /uploads/ accurately
+        const formatPath = (prefix: string = '') => {
+            const pathWithUploads = cleanPath.startsWith('/uploads/') ? cleanPath : `/uploads${cleanPath}`;
+            return `${prefix}${pathWithUploads}`;
+        };
+
+        // 1. Nested Development / Subdirectory deployments
+        if (currentPath.startsWith('/playqzv4/aiq4/')) return formatPath('/playqzv4/aiq4');
+        if (currentPath.startsWith('/aiq4/')) return formatPath('/aiq4');
+        if (currentPath.startsWith('/aiq3/')) return formatPath('/aiq3');
+        if (currentPath.startsWith('/playqzv4/')) return formatPath('/playqzv4');
+
+        // 2. Local XAMPP projects hostname
+        if (hostname === 'projects' && currentPath.includes('/playqzv4/')) {
+            return formatPath('/playqzv4');
         }
-        return cleanPath;
+
+        // 3. Absolute Root Deployment (Production Root or localhost root)
+        // If it starts with /uploads/ already, just return it as a root-relative path
+        if (cleanPath.startsWith('/uploads/')) {
+            return cleanPath;
+        }
+
+        // 4. Default: prepend /uploads if missing
+        return `/uploads${cleanPath}`;
     }
 
-    // Default fallback for localhost (http://localhost/projects/playqzv4/...)
-    if (!cleanPath.startsWith('/projects/playqzv4/')) {
-        cleanPath = `/projects/playqzv4${cleanPath}`;
-    }
-
-    return cleanPath;
+    return cleanPath.startsWith('/uploads/') ? cleanPath : `/uploads${cleanPath}`;
 }

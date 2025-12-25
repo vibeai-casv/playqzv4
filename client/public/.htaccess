@@ -1,6 +1,6 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  RewriteBase /playqzv4/client/dist/
+  RewriteBase /aiq3/
   
   # Don't rewrite files or directories
   RewriteCond %{REQUEST_FILENAME} !-f

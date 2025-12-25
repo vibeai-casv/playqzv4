@@ -19,6 +19,7 @@ REQUIREMENTS:
 - Include a mix of conceptual, applied, and factual questions
 - Avoid yes/no questions
 - Options should be plausible but only one correct
+- Shuffle the options array so the correct answer is not always in the same position
 - Explanations should teach the concept, not just state the answer
 
 OUTPUT FORMAT - Return ONLY a valid JSON array with no markdown, no code blocks:
@@ -67,6 +68,7 @@ REQUIREMENTS:
 - Include people from different eras (pioneers to modern influencers)
 - Questions should describe achievements, contributions, or notable quotes
 - The correct answer should be unambiguous based on the description
+- Shuffle the options array so the correct answer is not always in the same position
 - Include diverse representation (gender, geography, specialization)
 
 PERSONALITY CATEGORIES:
@@ -131,6 +133,7 @@ REQUIREMENTS:
 - Include both established and emerging players
 - Questions should describe what the product/company does
 - Correct answer is the company/product name (must match logo filename)
+- Shuffle the options array so the correct answer is not always in the same position
 - Include diverse categories: cloud AI, frameworks, startups, research labs
 
 LOGO CATEGORIES:

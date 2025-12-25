@@ -1,0 +1,114 @@
+{
+"questions": [
+{
+"question_text": "Identify this logo",
+"question_type": "image_identify_logo",
+"options": ["OpenAI", "DeepMind", "Meta AI", "Anthropic"],
+"correct_answer": "OpenAI",
+"category": "Logos",
+"difficulty": "easy",
+"points": 10,
+"image_url": "openai_logo.png",
+"explanation": "OpenAI is the research organization responsible for creating ChatGPT and the DALL-E image generation system."
+},
+{
+"question_text": "Which company does this logo belong to?",
+"options": ["Microsoft", "Google Gemini", "Amazon Web Services", "Apple"],
+"question_type": "image_identify_logo",
+"correct_answer": "Google Gemini",
+"category": "Logos",
+"difficulty": "easy",
+"points": 10,
+"image_url": "google_gemini_logo.png",
+"explanation": "Gemini is Google's family of multimodal large language models, formerly known as Bard."
+},
+{
+"question_text": "Identify this logo",
+"options": ["Adobe Firefly", "Canva AI", "Midjourney", "DALL-E"],
+"question_type": "image_identify_logo",
+"correct_answer": "Midjourney",
+"category": "Logos",
+"difficulty": "medium",
+"points": 10,
+"image_url": "midjourney_logo.png",
+"explanation": "Midjourney is an independent research lab that produces an AI program of the same name that creates images from textual descriptions."
+},
+{
+"question_text": "Which company does this logo belong to?",
+"options": ["Mistral AI", "Anthropic", "Cohere", "Groq"],
+"question_type": "image_identify_logo",
+"correct_answer": "Anthropic",
+"category": "Logos",
+"difficulty": "medium",
+"points": 10,
+"image_url": "anthropic_logo.png",
+"explanation": "Anthropic is an AI safety and research company that created the Claude chatbot family."
+},
+{
+"question_text": "Identify this logo",
+"options": ["Stability AI", "Runway", "Pika Labs", "Leonardo AI"],
+"question_type": "image_identify_logo",
+"correct_answer": "Stability AI",
+"category": "Logos",
+"difficulty": "medium",
+"points": 10,
+"image_url": "stability_ai_logo.png",
+"explanation": "Stability AI is the company behind the popular open-source image generator, Stable Diffusion."
+},
+{
+"question_text": "Which company does this logo belong to?",
+"options": ["Aleph Alpha", "Hugging Face", "Mistral AI", "DeepL"],
+"question_type": "image_identify_logo",
+"correct_answer": "Mistral AI",
+"category": "Logos",
+"difficulty": "hard",
+"points": 10,
+"image_url": "mistral_ai_logo.png",
+"explanation": "Mistral AI is a French artificial intelligence company known for high-efficiency open-weight models."
+},
+{
+"question_text": "Identify this logo",
+"options": ["Intel", "AMD", "NVIDIA", "Qualcomm"],
+"question_type": "image_identify_logo",
+"correct_answer": "NVIDIA",
+"category": "Logos",
+"difficulty": "easy",
+"points": 10,
+"image_url": "nvidia_logo.png",
+"explanation": "NVIDIA is a leader in AI computing, producing the H100 and Blackwell GPUs that power modern AI training."
+},
+{
+"question_text": "Identify this logo",
+"options": ["GitHub", "Hugging Face", "Kaggle", "Weights & Biases"],
+"question_type": "image_identify_logo",
+"correct_answer": "Hugging Face",
+"category": "Logos",
+"difficulty": "easy",
+"points": 10,
+"image_url": "huggingface_logo.png",
+"explanation": "Hugging Face is a community and data science platform that provides tools which allow users to build, train and deploy ML models."
+},
+{
+"question_text": "Which company does this logo belong to?",
+"options": ["Brave", "Arc", "Perplexity AI", "DuckDuckGo"],
+"question_type": "image_identify_logo",
+"correct_answer": "Perplexity AI",
+"category": "Logos",
+"difficulty": "medium",
+"points": 10,
+"image_url": "perplexity_logo.png",
+"explanation": "Perplexity AI is a conversational search engine that delivers answers using LLMs with real-time citations."
+},
+{
+"question_text": "Identify this logo",
+"options": ["Cohere", "Character.ai", "Jasper", "Writer"],
+"question_type": "image_identify_logo",
+"correct_answer": "Cohere",
+"category": "Logos",
+"difficulty": "hard",
+"points": 10,
+"image_url": "cohere_logo.png",
+"explanation": "Cohere is an enterprise-focused AI platform that provides large language models for business applications."
+}
+]
+}

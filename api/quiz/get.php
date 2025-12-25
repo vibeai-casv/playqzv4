@@ -37,6 +37,9 @@ try {
         // Parse JSON in questions
         foreach ($questions as &$q) {
             $q['options'] = json_decode($q['options']);
+            if (is_array($q['options'])) {
+                shuffle($q['options']);
+            }
             $q['tags'] = json_decode($q['tags']);
         }
     } else {
